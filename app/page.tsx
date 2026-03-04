@@ -8,8 +8,18 @@ import { CaseStudySection } from "@/components/lp/case-study-section"
 import { FinalCTASection } from "@/components/lp/final-cta-section"
 import { LPFooter } from "@/components/lp/footer"
 import { MobileFABButtons } from "@/components/lp/mobile-fab-buttons"
+import { IndustryLP } from "@/components/IndustryLP"
 
-export default function LandingPage() {
+export default async function LandingPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ industry?: string }>
+}) {
+  const params = await searchParams
+  if (params.industry) {
+    return <IndustryLP industry={params.industry} />
+  }
+
   return (
     <div className="min-h-screen bg-white">
       <LPHeader />
