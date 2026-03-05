@@ -15,24 +15,21 @@ const CTA_CONTACT = "https://classmethod.jp/services/line/line-apps/#iframe-form
 const troubles = [
   {
     icon: Users,
-    report: "「友だち5万人います」",
-    boss: "「で、売上いくら上がったの？」",
-    result: "答えられない",
-    detail: "友だち数は増えた。でも売上との因果関係を示すデータが何もない。",
+    title: "友だちは増えた",
+    problem: "クーポンを送る以外にやることがない",
+    detail: "友だち登録はゴールではなくスタート。でも次の一手が見えない…",
   },
   {
     icon: MessageSquare,
-    report: "「クーポン配信しました」",
-    boss: "「ブロック率どうなった？」",
-    result: "悪化している",
-    detail: "一斉配信のたびにブロックが増加。興味のない人にはノイズでしかない。",
+    title: "全員にクーポン配信",
+    problem: "配信するたびにブロックが増える",
+    detail: "一斉配信は手軽だけど、興味のない人にはノイズでしかない",
   },
   {
     icon: TrendingUp,
-    report: "「セグメント配信したいです」",
-    boss: "「顧客データどこにあるの？」",
-    result: "ない",
-    detail: "属性も購買履歴もないから、セグメントの切りようがない。",
+    title: "誰に何を送ればいいか",
+    problem: "打ち手がないまま時間だけ過ぎる",
+    detail: "属性も購買データもないから、セグメントの切りようがない",
   },
 ]
 
@@ -321,31 +318,25 @@ export function RetailLP() {
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-              {troubles.map((item, index) => (
-                <div
-                  key={index}
-                  className="bg-[#F8F9FA] rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 border border-[#E5E7EB]"
-                >
-                  {/* 担当者の報告 */}
-                  <div className="bg-white rounded-lg p-3 sm:p-4 mb-2 sm:mb-3 border border-[#E5E7EB]">
-                    <p className="text-xs sm:text-sm text-[#6B7280] mb-1">担当者</p>
-                    <p className="text-sm sm:text-base font-bold text-[#1F2937]">{item.report}</p>
+              {troubles.map((item, index) => {
+                const Icon = item.icon
+                return (
+                  <div
+                    key={index}
+                    className="bg-[#F8F9FA] rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 border border-[#E5E7EB]"
+                  >
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#FB923C]/10 rounded-xl flex items-center justify-center mb-3 sm:mb-4">
+                      <Icon size={20} className="sm:w-6 sm:h-6 text-[#FB923C]" />
+                    </div>
+                    <h3 className="text-base sm:text-lg font-bold text-[#1F2937] mb-1.5 sm:mb-2">{item.title}</h3>
+                    <div className="flex items-center gap-1.5 mb-2 sm:mb-3">
+                      <ArrowRight size={14} className="text-[#FB923C] shrink-0" />
+                      <p className="text-sm sm:text-base font-semibold text-[#FB923C]">{item.problem}</p>
+                    </div>
+                    <p className="text-xs sm:text-sm text-[#6B7280] leading-relaxed">{item.detail}</p>
                   </div>
-                  {/* 上司の質問 */}
-                  <div className="flex items-center gap-1.5 mb-2 sm:mb-3">
-                    <ArrowRight size={14} className="text-[#6B7280] shrink-0" />
-                  </div>
-                  <div className="bg-white rounded-lg p-3 sm:p-4 mb-2 sm:mb-3 border border-[#E5E7EB]">
-                    <p className="text-xs sm:text-sm text-[#6B7280] mb-1">上司</p>
-                    <p className="text-sm sm:text-base font-bold text-[#1F2937]">{item.boss}</p>
-                  </div>
-                  {/* 結果 */}
-                  <div className="bg-[#FB923C]/10 rounded-lg p-3 sm:p-4 mt-3 sm:mt-4 border border-[#FB923C]/30">
-                    <p className="text-sm sm:text-base font-bold text-[#FB923C] text-center">{item.result}</p>
-                  </div>
-                  <p className="text-xs sm:text-sm text-[#6B7280] leading-relaxed mt-3 sm:mt-4">{item.detail}</p>
-                </div>
-              ))}
+                )
+              })}
             </div>
 
             {/* Bottom message */}
