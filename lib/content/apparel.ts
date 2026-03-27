@@ -12,14 +12,14 @@ export const apparel: IndustryContent = {
       "PAL CLOSETが50ブランド統合で会員数3倍・EC売上5倍。アパレル特化のLINEミニアプリ開発",
   },
   hero: {
-    h1: "50ブランド、1,078店舗の会員基盤をLINEで統合する",
+    h1: "EC会員と店舗会員、まだバラバラに管理していませんか？",
     subCopy:
-      "EC会員・店舗会員・LINE友だち——バラバラだった顧客データを、LINEミニアプリで一つに。PAL CLOSETは新規会員数3倍、EC売上5倍を実現した。",
+      "店舗POS・EC・LINE——散在する顧客データをLINEミニアプリで統合。アプリDL不要、5秒で会員登録完了。アパレルに特化した会員証・1to1接客・クーポン配信を最短3ヶ月で構築できます。",
     visualVariant: "typography",
     displayStats: [
-      { value: "50", label: "ブランド統合" },
-      { value: "1,078", label: "店舗" },
-      { value: "3x", label: "会員数" },
+      { value: "3ヶ月", label: "最短開発期間" },
+      { value: "500万〜", label: "会員証の導入費用" },
+      { value: "5秒", label: "会員登録完了" },
     ],
   },
   problems: [
