@@ -14,11 +14,6 @@ export function TrustSignalSection() {
             <Cloud size={16} className="text-[#FB923C] shrink-0" />
             <span>AWS Premier Tier パートナー</span>
           </div>
-          <div className="hidden sm:block w-px h-4 bg-neutral-200" />
-          <div className="flex items-center gap-1.5 sm:gap-2">
-            <span className="text-[#1F2937] font-bold">50</span>
-            <span>ブランド導入実績</span>
-          </div>
         </div>
       </div>
     </section>
