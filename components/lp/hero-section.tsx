@@ -1,16 +1,152 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { track } from "@vercel/analytics"
 import { Download, MessageCircle, ChevronDown } from "lucide-react"
+import type { HeroContent, IndustryId } from "@/lib/content"
 
-export function HeroSection() {
+interface HeroSectionProps {
+  content: HeroContent
+  industry: IndustryId
+}
+
+export function HeroSection({ content, industry }: HeroSectionProps) {
   const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
-    // Trigger animations after component mounts
     setIsLoaded(true)
   }, [])
 
+  if (industry !== "generic" && content.visualVariant === "typography") {
+    return <ApparelHero content={content} isLoaded={isLoaded} />
+  }
+
+  return <GenericHero isLoaded={isLoaded} />
+}
+
+function ApparelHero({
+  content,
+  isLoaded,
+}: {
+  content: HeroContent
+  isLoaded: boolean
+}) {
+  return (
+    <section
+      className="relative pt-16 md:pt-[72px] min-h-[600px] md:min-h-[700px] bg-[#0a0a0a] text-white overflow-hidden"
+      aria-labelledby="hero-heading"
+    >
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 py-16 sm:py-20 md:py-28 lg:py-32">
+        <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+          {/* Text Content - Left */}
+          <div className="flex-[1.2]">
+            {/* Industry Label */}
+            <p
+              className={`text-xs sm:text-sm tracking-[0.2em] uppercase text-[#06C755] mb-6 sm:mb-8 ${
+                isLoaded ? "animate-fade-in" : "opacity-0"
+              }`}
+            >
+              for Apparel &amp; Fashion
+            </p>
+
+            {/* H1 */}
+            <h1
+              id="hero-heading"
+              className={`text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] font-extrabold leading-[1.15] tracking-tight mb-6 sm:mb-8 ${
+                isLoaded ? "animate-fade-in-up" : "opacity-0"
+              }`}
+            >
+              {content.h1}
+            </h1>
+
+            {/* Sub Copy */}
+            <p
+              className={`text-sm sm:text-base md:text-lg text-neutral-400 leading-[1.8] mb-10 sm:mb-12 max-w-[540px] ${
+                isLoaded ? "animate-fade-in animation-delay-200" : "opacity-0"
+              }`}
+            >
+              {content.subCopy}
+            </p>
+
+            {/* Display Stats */}
+            {content.displayStats && (
+              <div
+                className={`flex flex-wrap gap-6 sm:gap-10 md:gap-12 mb-10 sm:mb-12 ${
+                  isLoaded ? "animate-fade-in animation-delay-400" : "opacity-0"
+                }`}
+              >
+                {content.displayStats.map((stat, i) => (
+                  <div key={i}>
+                    <span className="block text-[32px] sm:text-[40px] md:text-[48px] font-extrabold leading-none tracking-tight font-['Roboto']">
+                      {stat.value}
+                    </span>
+                    <span className="block text-xs sm:text-sm text-neutral-500 mt-1 sm:mt-2">
+                      {stat.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* CTA */}
+            <div
+              className={`flex flex-col sm:flex-row gap-3 sm:gap-4 ${
+                isLoaded ? "animate-fade-in animation-delay-600" : "opacity-0"
+              }`}
+            >
+              <a
+                href="https://classmethod.jp/download/line-mini-app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 bg-[#06C755] text-white font-bold text-sm sm:text-base rounded-lg hover:bg-[#05A847] transition-all duration-300"
+                onClick={() => track("cta_download", { location: "hero", industry: "apparel" })}
+              >
+                <Download size={18} strokeWidth={2.5} />
+                資料ダウンロード（無料）
+              </a>
+              <a
+                href="https://classmethod.jp/services/line/line-apps/#iframe-form"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 text-white font-bold text-sm sm:text-base border border-neutral-600 rounded-lg hover:bg-white/5 transition-all duration-300"
+                onClick={() => track("cta_contact", { location: "hero", industry: "apparel" })}
+              >
+                <MessageCircle size={18} strokeWidth={2.5} />
+                お問い合わせ
+              </a>
+            </div>
+          </div>
+
+          {/* Visual - Right: PAL CLOSET ミニアプリ画面 */}
+          <div
+            className={`flex-1 hidden lg:flex items-center justify-center ${
+              isLoaded ? "animate-slide-in-right animation-delay-200" : "opacity-0"
+            }`}
+          >
+            <div className="relative w-full max-w-[440px]">
+              <img
+                src="/images/apparel-hero.png"
+                alt="アパレル店舗でLINEミニアプリの会員証を提示するお客様"
+                className="w-full h-auto rounded-2xl shadow-2xl border border-neutral-800"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Subtle accent line */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#06C755]/30 to-transparent" />
+
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+        <span className="text-xs text-neutral-600 tracking-wider">Scroll</span>
+        <ChevronDown size={24} className="text-[#06C755] animate-bounce-slow" aria-hidden="true" />
+      </div>
+    </section>
+  )
+}
+
+function GenericHero({ isLoaded }: { isLoaded: boolean }) {
   return (
     <section
       className="relative pt-16 md:pt-[72px] min-h-[500px] sm:min-h-[600px] md:min-h-[700px] bg-gradient-to-b from-[#E8F8F0] to-white overflow-hidden"
@@ -20,7 +156,6 @@ export function HeroSection() {
         <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-10 lg:gap-16">
           {/* Text Content - Left 55% */}
           <div className="flex-[1.2] text-center lg:text-left">
-            {/* H1 Catch Copy */}
             <h1
               id="hero-heading"
               className={`text-[26px] sm:text-[32px] md:text-[44px] lg:text-[52px] font-extrabold text-[#1F2937] leading-[1.3] mb-4 sm:mb-6 ${
@@ -32,7 +167,6 @@ export function HeroSection() {
               持っているだけになっていませんか？
             </h1>
 
-            {/* Sub Copy */}
             <p
               className={`text-sm sm:text-base md:text-lg lg:text-xl text-[#6B7280] leading-[1.75] mb-6 sm:mb-8 md:mb-10 max-w-xl mx-auto lg:mx-0 ${
                 isLoaded ? "animate-fade-in animation-delay-200" : "opacity-0"
@@ -46,13 +180,11 @@ export function HeroSection() {
               のLINEミニアプリ開発
             </p>
 
-            {/* CTA Buttons */}
             <div
               className={`flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-2.5 sm:gap-4 ${
                 isLoaded ? "animate-fade-in animation-delay-400" : "opacity-0"
               }`}
             >
-              {/* Primary CTA - 資料ダウンロード */}
               <a
                 href="https://classmethod.jp/download/line-mini-app/"
                 target="_blank"
@@ -64,7 +196,6 @@ export function HeroSection() {
                 資料ダウンロード（無料）
               </a>
 
-              {/* Secondary CTA - お問い合わせ */}
               <a
                 href="https://classmethod.jp/services/line/line-apps/#iframe-form"
                 target="_blank"
@@ -77,7 +208,6 @@ export function HeroSection() {
               </a>
             </div>
 
-            {/* Note Text */}
             <p
               className={`text-xs sm:text-sm text-[#9CA3AF] mt-3 sm:mt-4 text-center lg:text-left ${
                 isLoaded ? "animate-fade-in animation-delay-600" : "opacity-0"
@@ -92,17 +222,12 @@ export function HeroSection() {
             }`}
           >
             <div className="relative w-full aspect-square">
-              {/* Background gradient circle */}
               <div className="absolute inset-0 bg-gradient-to-br from-[#06C755]/15 via-[#39D275]/10 to-[#E8F8F0] rounded-full scale-110" />
 
-              {/* Main phone mockup */}
               <div className="absolute inset-3 sm:inset-4 lg:inset-6 bg-white rounded-[24px] sm:rounded-[32px] shadow-2xl overflow-hidden border border-[#E5E7EB]">
-                {/* Phone notch */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 sm:w-20 md:w-24 h-4 sm:h-5 md:h-6 bg-[#1F2937] rounded-b-xl sm:rounded-b-2xl" />
 
-                {/* LINE App Screen */}
                 <div className="pt-6 sm:pt-8 md:pt-10 px-2.5 sm:px-3 md:px-4 pb-2.5 sm:pb-3 md:pb-4 h-full flex flex-col">
-                  {/* LINE Header */}
                   <div className="flex items-center gap-1.5 sm:gap-2 mb-2.5 sm:mb-3 md:mb-4">
                     <div className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 bg-[#06C755] rounded-lg sm:rounded-xl flex items-center justify-center">
                       <svg viewBox="0 0 24 24" className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white" fill="currentColor">
@@ -115,9 +240,7 @@ export function HeroSection() {
                     </div>
                   </div>
 
-                  {/* Feature Cards */}
                   <div className="space-y-1.5 sm:space-y-2 md:space-y-2.5 flex-1">
-                    {/* Member Card */}
                     <div className="bg-gradient-to-r from-[#06C755] to-[#39D275] rounded-lg sm:rounded-xl p-2 sm:p-2.5 md:p-3 text-white">
                       <div className="flex items-center justify-between mb-1 sm:mb-2">
                         <span className="text-[10px] sm:text-xs font-bold">会員証</span>
@@ -127,7 +250,6 @@ export function HeroSection() {
                       <p className="text-[8px] sm:text-[10px] opacity-80 mt-0.5 sm:mt-1">山田 太郎 様</p>
                     </div>
 
-                    {/* Coupon */}
                     <div className="bg-[#FCD34D]/20 border border-[#FCD34D] rounded-lg sm:rounded-xl p-2 sm:p-2.5 md:p-3">
                       <div className="flex items-center gap-1.5 sm:gap-2">
                         <span className="text-base sm:text-lg md:text-xl">🎁</span>
@@ -138,7 +260,6 @@ export function HeroSection() {
                       </div>
                     </div>
 
-                    {/* Stamp Card */}
                     <div className="bg-[#F8F9FA] rounded-lg sm:rounded-xl p-2 sm:p-2.5 md:p-3">
                       <p className="text-[10px] sm:text-xs font-bold text-[#1F2937] mb-1 sm:mb-2">スタンプカード</p>
                       <div className="flex gap-1 sm:gap-1.5">
@@ -158,7 +279,6 @@ export function HeroSection() {
                 </div>
               </div>
 
-              {/* Decorative elements */}
               <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 w-10 h-10 sm:w-14 sm:h-14 lg:w-20 lg:h-20 bg-[#FCD34D] rounded-full opacity-70 blur-sm" />
               <div className="absolute -bottom-2 -left-2 sm:-bottom-4 sm:-left-4 w-8 h-8 sm:w-10 sm:h-10 lg:w-16 lg:h-16 bg-[#3B82F6] rounded-full opacity-50 blur-sm" />
               <div className="absolute top-1/4 -left-3 sm:-left-6 w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 bg-[#06C755] rounded-full opacity-60" />
