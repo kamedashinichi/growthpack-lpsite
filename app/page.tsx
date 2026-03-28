@@ -16,6 +16,7 @@ import { InlineCTA } from "@/components/lp/inline-cta"
 import { FinalCTASection } from "@/components/lp/final-cta-section"
 import { LPFooter } from "@/components/lp/footer"
 import { MobileFABButtons } from "@/components/lp/mobile-fab-buttons"
+import { WPDownloadForm } from "@/components/lp/wp-download-form"
 
 type Props = {
   searchParams: Promise<{ industry?: string }>
@@ -80,7 +81,10 @@ export default async function LandingPage({ searchParams }: Props) {
           {/* 3. Problem */}
           <ProblemSection problems={content.problems} industry={industry} />
 
-          {/* 4. Case Study（繰り上げ） */}
+          {/* 3.5 WP Download Form */}
+          <WPDownloadForm />
+
+          {/* 4. Case Study（繰り上げ�� */}
           <CaseStudySection caseStudies={content.caseStudies} industry={industry} />
 
           {/* 5. インラインCTA① */}

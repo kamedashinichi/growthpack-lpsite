@@ -90,29 +90,26 @@ function ApparelHero({
 
             {/* CTA */}
             <div
-              className={`flex flex-col sm:flex-row gap-3 sm:gap-4 ${
+              className={`flex flex-col sm:flex-row items-start gap-3 sm:gap-4 ${
                 isLoaded ? "animate-fade-in animation-delay-600" : "opacity-0"
               }`}
             >
               <a
-                href="https://classmethod.jp/download/line-mini-app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 bg-[#06C755] text-white font-bold text-sm sm:text-base rounded-lg hover:bg-[#05A847] transition-all duration-300"
-                onClick={() => track("cta_download", { location: "hero", industry: "apparel" })}
-              >
-                <Download size={18} strokeWidth={2.5} />
-                資料ダウンロード（無料）
-              </a>
-              <a
                 href="https://classmethod.jp/services/line/line-apps/#iframe-form"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 text-white font-bold text-sm sm:text-base border border-neutral-600 rounded-lg hover:bg-white/5 transition-all duration-300"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 bg-[#06C755] text-white font-bold text-sm sm:text-base rounded-lg hover:bg-[#05A847] transition-all duration-300"
                 onClick={() => track("cta_contact", { location: "hero", industry: "apparel" })}
               >
                 <MessageCircle size={18} strokeWidth={2.5} />
                 お問い合わせ
+              </a>
+              <a
+                href="#wp-download"
+                className="text-sm sm:text-base text-[#06C755] hover:text-[#05A847] underline underline-offset-4 transition-colors duration-200 py-2"
+                onClick={() => track("cta_wp_download", { location: "hero", industry: "apparel" })}
+              >
+                調査レポートを無料ダウンロード ↓
               </a>
             </div>
           </div>

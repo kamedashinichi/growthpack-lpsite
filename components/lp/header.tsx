@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Download, MessageCircle } from "lucide-react"
+import { MessageCircle } from "lucide-react"
 
 export function LPHeader() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -30,24 +30,11 @@ export function LPHeader() {
 
         {/* Desktop CTAs */}
         <div className="hidden md:flex items-center gap-3">
-          {/* Primary CTA - 資料ダウンロード */}
-          <a
-            href="https://classmethod.jp/download/line-mini-app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-6 py-2.5 bg-[#06C755] text-white font-bold rounded-lg shadow-[0_2px_8px_rgba(6,199,85,0.25)] hover:bg-[#05A847] hover:shadow-[0_4px_12px_rgba(6,199,85,0.35)] hover:-translate-y-0.5 transition-all duration-300"
-            aria-label="資料ダウンロード（無料）を申し込む"
-          >
-            <Download size={18} strokeWidth={2.5} />
-            <span>資料ダウンロード</span>
-          </a>
-
-          {/* Secondary CTA - お問い合わせ */}
           <a
             href="https://classmethod.jp/services/line/line-apps/#iframe-form"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-6 py-2.5 bg-white text-[#06C755] font-bold border-2 border-[#06C755] rounded-lg hover:bg-[#E8F8F0] hover:-translate-y-0.5 transition-all duration-300"
+            className="flex items-center gap-2 px-6 py-2.5 bg-[#06C755] text-white font-bold rounded-lg shadow-[0_2px_8px_rgba(6,199,85,0.25)] hover:bg-[#05A847] hover:shadow-[0_4px_12px_rgba(6,199,85,0.35)] hover:-translate-y-0.5 transition-all duration-300"
             aria-label="お問い合わせフォームを開く"
           >
             <MessageCircle size={18} strokeWidth={2.5} />
