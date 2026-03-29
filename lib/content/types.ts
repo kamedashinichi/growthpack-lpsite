@@ -16,10 +16,17 @@ export interface Problem {
   stat?: { value: string; label: string }
 }
 
+export interface SolutionSubStep {
+  title: string
+  description: string
+}
+
 export interface SolutionStep {
   label: string
   description: string
   featureId: string
+  subSteps?: SolutionSubStep[]
+  scenarios?: string[]
 }
 
 export interface SolutionStory {
@@ -33,6 +40,8 @@ export interface FeatureHighlight {
   name: string
   industryContext: string
   proof?: string
+  isNew?: boolean
+  category?: string
 }
 
 export interface CaseStudy {
