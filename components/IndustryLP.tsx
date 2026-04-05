@@ -306,7 +306,12 @@ function IndustryFeaturesSection({ data }: { data: IndustryLPData }) {
                 <h3 className="text-sm sm:text-base md:text-lg font-bold text-[#1F2937] mb-1.5 sm:mb-2">
                   {feature.name}
                 </h3>
-                <p className="text-xs sm:text-sm text-[#6B7280]">{feature.description}</p>
+                <p className="text-xs sm:text-sm text-[#6B7280] mb-2 sm:mb-3">{feature.description}</p>
+                {feature.url && (
+                  <a href={feature.url} className="text-[#06C755] text-xs sm:text-sm font-semibold hover:text-[#05A847] transition-colors">
+                    詳しく見る →
+                  </a>
+                )}
               </div>
             </div>
           ))}

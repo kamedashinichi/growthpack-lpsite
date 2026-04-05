@@ -45,6 +45,7 @@ export type FeatureItem = {
   image: string
   name: string
   description: string
+  url?: string
 }
 
 export type StepColorInfo = {
