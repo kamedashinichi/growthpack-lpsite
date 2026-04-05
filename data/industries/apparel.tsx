@@ -1,4 +1,4 @@
-import { Users, TrendingUp, Zap, MessageSquare } from "lucide-react"
+import { Users, TrendingUp, Zap, MessageSquare, Smartphone } from "lucide-react"
 import type { IndustryLPData } from "@/data/types"
 import { commonComparisonItems } from "@/data/shared"
 
@@ -8,53 +8,60 @@ export const apparelData: IndustryLPData = {
   hero: {
     headline: (
       <>
-        <span className="text-[#06C755]">50</span>ブランド、
+        「アプリを入れてもらえない」時代の
         <br />
-        1つの<span className="text-[#FB923C]">会員証</span>。
+        <span className="text-[#06C755]">会員DX</span>、答えが出ました。
       </>
     ),
     subheadline: (
       <>
-        EC×店舗の会員データを統合し、ブランドを横断した
+        ポイントカード離れ・アプリ疲れが進む今、
         <br className="hidden sm:block" />
-        顧客体験を<span className="text-[#06C755] font-bold">LINEミニアプリ</span>で実現。
+        アパレル大手が会員数を3倍にした方法は
+        <br className="hidden sm:block" />
+        「インストール不要の<span className="text-[#06C755] font-bold">LINEミニアプリ</span>」でした。
       </>
     ),
   },
   metrics: [
-    { value: "3", unit: "倍", label: "会員数増加" },
+    { value: "3", unit: "倍", label: "会員数増加（PAL様）" },
     { value: "5", unit: "秒", label: "で会員登録完了" },
     { value: "10", unit: "万人", label: "友だち増加（1ヶ月）" },
-    { value: "5", unit: "倍", label: "EC売上" },
   ],
   problem: {
-    heading: "こんなお悩み、ありませんか？",
-    subtitle: "アパレル業界の「あるある」",
+    heading: "アパレル業界のDX担当者が「限界だ」と感じる、4つの壁",
+    subtitle: "ポイントカード離れ・アプリ疲れ・データ分断が重なっている",
     items: [
       {
         icon: Users,
-        title: "EC×店舗の会員分断",
-        problem: "同じお客様が別人として管理されている",
-        detail: "ECと店舗で会員基盤が別々。ポイント・購買履歴が統合されず、最適な提案ができない",
+        title: "会員証DX",
+        problem: "「ポイントカード忘れました」の連続",
+        detail: "レジで手書き記入→途中離脱→会員化できない。アプリDLを促しても「後で」と断られる",
       },
       {
-        icon: MessageSquare,
-        title: "担当が替わると顧客が離れる",
-        problem: "個人LINEでの接客が属人化している",
-        detail: "スタッフの退職や異動で、築いた顧客関係がリセットされてしまう",
+        icon: Smartphone,
+        title: "アプリ疲れ",
+        problem: "DL数が伸び悩み、起動率は10〜20%",
+        detail: "スマートフォンの画面はすでに満員。インストールを頼む施策は、もう限界",
       },
       {
         icon: TrendingUp,
-        title: "SaaSでは対応できない",
-        problem: "マルチブランドの会員統合ができない",
-        detail: "複数ブランドを展開するアパレル企業に対応できるSaaS型ツールがない",
+        title: "データ分断",
+        problem: "同じ顧客が「3人」に見える",
+        detail: "店舗購買・ECカート・LINE友だちの3つのIDが別管理。パーソナライズできない",
+      },
+      {
+        icon: MessageSquare,
+        title: "休眠会員",
+        problem: "会員の6〜7割が年1回未満の来店",
+        detail: "セグメント配信できず一斉DM。費用は増えるのに効果は薄れていく",
       },
     ],
     bottomMessage: (
       <p className="text-base sm:text-lg md:text-xl font-bold text-white leading-relaxed">
         原因はシンプル。
         <br />
-        ブランドごとに顧客データが<span className="text-[#FB923C]">バラバラ</span>のまま。
+        顧客データが<span className="text-[#FB923C]">バラバラのまま</span>蓄積されている。
       </p>
     ),
   },
