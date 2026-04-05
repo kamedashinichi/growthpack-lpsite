@@ -62,17 +62,19 @@ export default async function LandingPage({ searchParams }: Props) {
     return <IndustryLP industry={params.industry} />
   }
 
+  const content = getIndustryContent(undefined)
+
   // ジェネリックLP
   return (
     <div className="min-h-screen bg-white">
       <LPHeader />
       <main className="pb-20 md:pb-0">
-        <HeroSection />
+        <HeroSection content={content.hero} industry="generic" />
         <ProblemSection />
         <SolutionSection />
         <StrengthSection />
         <FeaturesSection />
-        <CaseStudySection />
+        <CaseStudySection industry="generic" />
         <FinalCTASection />
       </main>
       <LPFooter />
