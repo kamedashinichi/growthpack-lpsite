@@ -5,6 +5,7 @@ import { Download, MessageCircle, ChevronDown, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import { retailData } from "@/data/industries/retail"
 import { apparelData } from "@/data/industries/apparel"
+import { foodData } from "@/data/industries/food"
 import type { IndustryLPData } from "@/data/types"
 import { CTA_DOWNLOAD, CTA_CONTACT } from "@/data/shared"
 import { LandingPageLayout } from "@/components/LandingPageLayout"
@@ -18,6 +19,7 @@ import { FinalCTASection } from "@/components/lp/final-cta-section"
 const industryMap: Record<string, IndustryLPData> = {
   retail: retailData,
   apparel: apparelData,
+  food: foodData,
 }
 
 export function IndustryLP({ industry }: { industry: string }) {
@@ -27,9 +29,8 @@ export function IndustryLP({ industry }: { industry: string }) {
   return (
     <LandingPageLayout>
       <IndustryHeroSection data={data} />
-      {data.metrics && <MetricsBar metrics={data.metrics} />}
       <IndustryProblemSection data={data} />
-      <IndustryCaseStudySection data={data} />
+      {data.caseStudies.length > 0 && <IndustryCaseStudySection data={data} />}
       {data.comparison && (
         <ComparisonSection items={data.comparison} highlight={data.comparisonHighlight} />
       )}
@@ -278,7 +279,7 @@ function IndustryCaseStudySection({ data }: { data: IndustryLPData }) {
 // ─── Features Section (industry-specific with STEP color coding) ─────────
 
 function IndustryFeaturesSection({ data }: { data: IndustryLPData }) {
-  const { heading, subtitle, items, stepColorMap } = data.featureSection
+  const { heading, subtitle, items } = data.featureSection
 
   return (
     <section className="py-12 sm:py-16 md:py-20 bg-white">
@@ -291,39 +292,29 @@ function IndustryFeaturesSection({ data }: { data: IndustryLPData }) {
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
-          {items.map((feature, index) => {
-            const stepInfo = stepColorMap?.[feature.name]
-            return (
-              <div
-                key={index}
-                className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden hover:shadow-lg hover:border-[#06C755] hover:-translate-y-1 transition-all duration-300"
-              >
-                {/* STEP color bar */}
-                {stepInfo && (
-                  <div className="h-1" style={{ backgroundColor: stepInfo.color }} />
-                )}
-                <div className="p-4 sm:p-5 md:p-6">
-                  <div className="flex items-start justify-between mb-2 sm:mb-3">
-                    <div className="relative w-10 h-10 sm:w-12 sm:h-12">
-                      <Image src={feature.image} alt={feature.name} fill className="object-contain" />
-                    </div>
-                    {stepInfo && (
-                      <span
-                        className="text-[10px] sm:text-xs font-bold px-2 py-0.5 rounded-full text-white"
-                        style={{ backgroundColor: stepInfo.color }}
-                      >
-                        {stepInfo.label}
-                      </span>
-                    )}
+          {items.map((feature, index) => (
+            <div
+              key={index}
+              className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden hover:shadow-lg hover:border-[#06C755] hover:-translate-y-1 transition-all duration-300"
+            >
+              <div className="p-4 sm:p-5 md:p-6">
+                <div className="mb-2 sm:mb-3">
+                  <div className="relative w-10 h-10 sm:w-12 sm:h-12">
+                    <Image src={feature.image} alt={feature.name} fill className="object-contain" />
                   </div>
-                  <h3 className="text-sm sm:text-base md:text-lg font-bold text-[#1F2937] mb-1.5 sm:mb-2">
-                    {feature.name}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#6B7280]">{feature.description}</p>
                 </div>
+                <h3 className="text-sm sm:text-base md:text-lg font-bold text-[#1F2937] mb-1.5 sm:mb-2">
+                  {feature.name}
+                </h3>
+                <p className="text-xs sm:text-sm text-[#6B7280] mb-2 sm:mb-3">{feature.description}</p>
+                {feature.url && (
+                  <a href={feature.url} className="text-[#06C755] text-xs sm:text-sm font-semibold hover:text-[#05A847] transition-colors">
+                    詳しく見る →
+                  </a>
+                )}
               </div>
-            )
-          })}
+            </div>
+          ))}
         </div>
 
         <div className="text-center mt-8 sm:mt-10 md:mt-12">

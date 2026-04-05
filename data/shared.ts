@@ -18,9 +18,9 @@ export const flowSteps: FlowStep[] = [
 ]
 
 export const commonComparisonItems = [
-  { label: "友だち追加", official: true as const, mini: true },
-  { label: "会員登録（同時）", official: false as const, mini: true, highlight: true },
-  { label: "属性情報の取得", official: false as const, mini: true },
-  { label: "購買データ連携", official: false as const, mini: true },
-  { label: "セグメント配信", official: "partial" as const, mini: true },
+  { label: "友だち追加", official: true as const, saas: false as const, mini: true },
+  { label: "会員登録（同時）", official: false as const, saas: "partial" as const, mini: true, highlight: true },
+  { label: "属性情報の取得", official: false as const, saas: "partial" as const, mini: true },
+  { label: "購買データ連携", official: false as const, saas: false as const, mini: true },
+  { label: "セグメント配信", official: "partial" as const, saas: "partial" as const, mini: true },
 ]

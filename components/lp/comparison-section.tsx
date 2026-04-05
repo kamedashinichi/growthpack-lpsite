@@ -19,11 +19,15 @@ export function ComparisonSection({ items, highlight }: ComparisonSectionProps) 
 
         <div className="max-w-3xl mx-auto">
           {/* Table Header */}
-          <div className="grid grid-cols-3 gap-0 mb-0">
+          <div className="grid grid-cols-4 gap-0 mb-0">
             <div className="p-3 sm:p-4" />
             <div className="p-3 sm:p-4 text-center bg-gray-100 rounded-t-xl border-b-2 border-gray-300">
               <p className="text-xs sm:text-sm font-bold text-[#6B7280]">LINE公式</p>
               <p className="text-xs sm:text-sm font-bold text-[#6B7280]">アカウント</p>
+            </div>
+            <div className="p-3 sm:p-4 text-center bg-gray-100 rounded-t-xl border-b-2 border-gray-300">
+              <p className="text-xs sm:text-sm font-bold text-[#6B7280]">SaaS</p>
+              <p className="text-xs sm:text-sm font-bold text-[#6B7280]">ツール</p>
             </div>
             <div className="p-3 sm:p-4 text-center bg-[#E8F8F0] rounded-t-xl border-b-2 border-[#06C755]">
               <p className="text-xs sm:text-sm font-bold text-[#06C755]">LINE</p>
@@ -35,7 +39,7 @@ export function ComparisonSection({ items, highlight }: ComparisonSectionProps) 
           {items.map((item, index) => (
             <div
               key={index}
-              className={`grid grid-cols-3 gap-0 ${
+              className={`grid grid-cols-4 gap-0 ${
                 item.highlight ? "bg-[#FFF7ED]" : index % 2 === 0 ? "bg-white" : "bg-gray-50"
               } ${index === items.length - 1 ? "rounded-b-xl" : ""}`}
             >
@@ -48,6 +52,15 @@ export function ComparisonSection({ items, highlight }: ComparisonSectionProps) 
                 {item.official === true ? (
                   <span className="text-lg sm:text-xl text-[#06C755]">○</span>
                 ) : item.official === "partial" ? (
+                  <span className="text-lg sm:text-xl text-[#FB923C]">△</span>
+                ) : (
+                  <span className="text-lg sm:text-xl text-[#D1D5DB]">✕</span>
+                )}
+              </div>
+              <div className="p-3 sm:p-4 text-center border-b border-gray-200 flex items-center justify-center">
+                {item.saas === true ? (
+                  <span className="text-lg sm:text-xl text-[#06C755]">○</span>
+                ) : item.saas === "partial" ? (
                   <span className="text-lg sm:text-xl text-[#FB923C]">△</span>
                 ) : (
                   <span className="text-lg sm:text-xl text-[#D1D5DB]">✕</span>

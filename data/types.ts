@@ -25,6 +25,7 @@ export type CaseStudyItem = {
 export type ComparisonItem = {
   label: string
   official: boolean | "partial"
+  saas: boolean | "partial"
   mini: boolean
   highlight?: boolean
 }
@@ -44,6 +45,7 @@ export type FeatureItem = {
   image: string
   name: string
   description: string
+  url?: string
 }
 
 export type StepColorInfo = {
