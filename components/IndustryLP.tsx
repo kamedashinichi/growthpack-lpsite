@@ -5,6 +5,7 @@ import { Download, MessageCircle, ChevronDown, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import { retailData } from "@/data/industries/retail"
 import { apparelData } from "@/data/industries/apparel"
+import { foodData } from "@/data/industries/food"
 import type { IndustryLPData } from "@/data/types"
 import { CTA_DOWNLOAD, CTA_CONTACT } from "@/data/shared"
 import { LandingPageLayout } from "@/components/LandingPageLayout"
@@ -18,6 +19,7 @@ import { FinalCTASection } from "@/components/lp/final-cta-section"
 const industryMap: Record<string, IndustryLPData> = {
   retail: retailData,
   apparel: apparelData,
+  food: foodData,
 }
 
 export function IndustryLP({ industry }: { industry: string }) {
