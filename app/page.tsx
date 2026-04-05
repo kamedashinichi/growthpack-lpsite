@@ -2,21 +2,15 @@ import type { Metadata } from "next"
 import { getIndustryContent } from "@/lib/content"
 import { LPHeader } from "@/components/lp/header"
 import { HeroSection } from "@/components/lp/hero-section"
-import { TrustSignalSection } from "@/components/lp/trust-signal-section"
 import { ProblemSection } from "@/components/lp/problem-section"
 import { SolutionSection } from "@/components/lp/solution-section"
-import { SolutionStorySection } from "@/components/lp/solution-story-section"
-import { FeatureHighlightSection } from "@/components/lp/feature-highlight-section"
-import { ComparisonSection } from "@/components/lp/comparison-section"
 import { StrengthSection } from "@/components/lp/strength-section"
 import { FeaturesSection } from "@/components/lp/features-section"
 import { CaseStudySection } from "@/components/lp/case-study-section"
-import { FAQSection } from "@/components/lp/faq-section"
-import { InlineCTA } from "@/components/lp/inline-cta"
 import { FinalCTASection } from "@/components/lp/final-cta-section"
 import { LPFooter } from "@/components/lp/footer"
 import { MobileFABButtons } from "@/components/lp/mobile-fab-buttons"
-import { WPDownloadForm } from "@/components/lp/wp-download-form"
+import { IndustryLP } from "@/components/IndustryLP"
 
 type Props = {
   searchParams: Promise<{ industry?: string }>
@@ -63,66 +57,22 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
 
 export default async function LandingPage({ searchParams }: Props) {
   const params = await searchParams
-  const content = getIndustryContent(params?.industry)
-  const industry = content.id
-  const isIndustry = industry !== "generic"
 
-  if (isIndustry) {
-    return (
-      <div className="min-h-screen bg-white">
-        <LPHeader />
-        <main className="pb-20 md:pb-0">
-          {/* 1. Hero */}
-          <HeroSection content={content.hero} industry={industry} />
-
-          {/* 2. 信頼シグナル帯 */}
-          <TrustSignalSection />
-
-          {/* 3. Problem */}
-          <ProblemSection problems={content.problems} industry={industry} />
-
-          {/* 3.5 WP Download Form */}
-          <WPDownloadForm />
-
-          {/* 4. Case Study（繰り上げ） */}
-          <CaseStudySection caseStudies={content.caseStudies} industry={industry} />
-
-          {/* 5. Solution Story */}
-          {content.solutionStory && (
-            <SolutionStorySection story={content.solutionStory} />
-          )}
-
-          {/* 7. Feature Highlight */}
-          {content.featureHighlights.length > 0 && (
-            <FeatureHighlightSection highlights={content.featureHighlights} />
-          )}
-
-          {/* 8. Comparison */}
-          <ComparisonSection />
-
-          {/* 9. FAQ */}
-          <FAQSection />
-
-          {/* 12. Final CTA */}
-          <FinalCTASection content={content.cta} />
-        </main>
-        <LPFooter />
-        <MobileFABButtons />
-      </div>
-    )
+  if (params.industry) {
+    return <IndustryLP industry={params.industry} />
   }
 
-  // ジェネリックLP（既存と同一構造）
+  // ジェネリックLP
   return (
     <div className="min-h-screen bg-white">
       <LPHeader />
       <main className="pb-20 md:pb-0">
-        <HeroSection content={content.hero} industry={industry} />
-        <ProblemSection industry={industry} />
+        <HeroSection />
+        <ProblemSection />
         <SolutionSection />
         <StrengthSection />
         <FeaturesSection />
-        <CaseStudySection industry={industry} />
+        <CaseStudySection />
         <FinalCTASection />
       </main>
       <LPFooter />
