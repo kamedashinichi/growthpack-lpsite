@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/apparel",
+      "destination": "/?industry=apparel",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/memberscard/:path*",
