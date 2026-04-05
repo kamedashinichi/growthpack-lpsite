@@ -1,4 +1,4 @@
-export type IndustryId = "generic" | "apparel"
+export type IndustryId = "generic" | "apparel" | "food" | "drugstore" | "department" | "supermarket" | "ec" | "sports"
 
 export interface HeroContent {
   h1: string
