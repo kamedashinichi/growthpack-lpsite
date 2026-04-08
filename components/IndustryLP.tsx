@@ -11,6 +11,7 @@ import { departmentData } from "@/data/industries/department"
 import { supermarketData } from "@/data/industries/supermarket"
 import { ecData } from "@/data/industries/ec"
 import { sportsData } from "@/data/industries/sports"
+import { hotelData } from "@/data/industries/hotel"
 import type { IndustryLPData } from "@/data/types"
 import { CTA_DOWNLOAD, CTA_CONTACT } from "@/data/shared"
 import { LandingPageLayout } from "@/components/LandingPageLayout"
@@ -31,6 +32,7 @@ const industryMap: Record<string, IndustryLPData> = {
   supermarket: supermarketData,
   ec: ecData,
   sports: sportsData,
+  hotel: hotelData,
 }
 
 export function IndustryLP({ industry }: { industry: string }) {
