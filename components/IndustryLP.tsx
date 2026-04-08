@@ -49,7 +49,6 @@ export function IndustryLP({ industry }: { industry: string }) {
       <IndustryFeaturesSection data={data} />
       {industry === "apparel" && <WPDownloadForm />}
       <SecuritySection />
-      <FlowSection />
       <FinalCTASection withDocumentPreview />
     </LandingPageLayout>
   )
