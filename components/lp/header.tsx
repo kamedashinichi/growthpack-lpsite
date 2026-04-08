@@ -31,6 +31,7 @@ export function LPHeader() {
         {/* Desktop Nav + CTAs */}
         <div className="hidden md:flex items-center gap-6">
           <nav className="flex items-center gap-5">
+            <a href="/" className="text-sm text-[#4B5563] hover:text-[#06C755] transition-colors">トップ</a>
             <a href="/features" className="text-sm text-[#4B5563] hover:text-[#06C755] transition-colors">機能を探す</a>
             <a href="/usecases" className="text-sm text-[#4B5563] hover:text-[#06C755] transition-colors">課題から逆引き</a>
           </nav>
