@@ -103,7 +103,7 @@ export const supermarketData: IndustryLPData = {
   ],
   featureSection: {
     heading: "食品スーパー・ホームセンターに必要な機能、すべて揃っています",
-    subtitle: "会員証デジタル化からチラシDXまで、最短1ヶ月で導入",
+    subtitle: "会員証デジタル化からチラシDXまで、アセットベースでスピード導入",
     items: [
       { image: "/images/会員証.png", name: "デジタル会員証", description: "QRで5秒会員化。シニアでもアプリDL不要", url: "/memberscard" },
       { image: "/images/クーポン.png", name: "クーポン配信", description: "週次チラシ代替。開封・来店・購買を計測", url: "/coupon" },

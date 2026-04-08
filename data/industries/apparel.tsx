@@ -123,7 +123,7 @@ export const apparelData: IndustryLPData = {
   ],
   featureSection: {
     heading: "アパレルに必要な機能、すべて揃っています",
-    subtitle: "ブランド横断の顧客体験を、最短3ヶ月で構築",
+    subtitle: "ブランド横断の顧客体験を、アセットベースでスピード構築",
     items: [
       { image: "/images/会員証.png", name: "LINE会員証", description: "全ブランド共通の会員証で5秒登録。アプリDL不要", url: "/memberscard" },
       { image: "/images/スタンプカード.png", name: "スタンプカード", description: "来店・購買でスタンプ付与。来店頻度の向上に直結", url: "/stampcard" },

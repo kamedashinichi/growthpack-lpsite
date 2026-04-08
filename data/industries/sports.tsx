@@ -19,7 +19,7 @@ export const sportsData: IndustryLPData = {
         <br className="hidden sm:block" />
         ファンクラブ先行抽選・デジタル会員証・入場QR管理をLINEに統合。
         <br className="hidden sm:block" />
-        スタッフがファン対応に集中できる環境を、<span className="text-[#06C755] font-bold">最短1ヶ月</span>で。
+        スタッフがファン対応に集中できる環境を、<span className="text-[#06C755] font-bold">アセットベース</span>でスピード構築。
       </>
     ),
     heroImage: "/images/sports-hero.png",
@@ -103,7 +103,7 @@ export const sportsData: IndustryLPData = {
   ],
   featureSection: {
     heading: "スポーツ・エンタメ施設に必要な機能、すべて揃っています",
-    subtitle: "チケット管理から会員リテンションまで、最短1ヶ月で導入",
+    subtitle: "チケット管理から会員リテンションまで、アセットベースでスピード導入",
     items: [
       { image: "/images/チケット.png", name: "チケット・パス発行", description: "ファンクラブ先行販売から入場管理までLINEで完結", url: "/ticket" },
       { image: "/images/抽選.png", name: "抽選", description: "公平・透明なデジタル抽選で手作業工数を解消", url: "/lottery" },

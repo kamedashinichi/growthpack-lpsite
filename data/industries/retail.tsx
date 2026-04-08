@@ -126,7 +126,7 @@ export const retailData: IndustryLPData = {
   ],
   featureSection: {
     heading: "店舗に必要な機能、すべて揃っています",
-    subtitle: "必要な機能を選択して、最短3ヶ月でLINEミニアプリを構築",
+    subtitle: "必要な機能を選択して、アセットベースでLINEミニアプリをスピード構築",
     items: [
       { image: "/images/会員証.png", name: "LINE会員証", description: "5秒で会員化、アプリDL不要", url: "/memberscard" },
       { image: "/images/順番待ち.png", name: "順番待ち", description: "待ち時間を可視化", url: "/waiting" },
