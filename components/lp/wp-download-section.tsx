@@ -2,6 +2,7 @@
 
 import { track } from "@vercel/analytics"
 import { Download } from "lucide-react"
+import { trackGA4 } from "@/lib/ga4"
 
 const PDF_PATH = "/downloads/whitepaper-apparel-2026.pdf"
 
@@ -46,7 +47,10 @@ export function WPDownloadSection() {
               <a
                 href={PDF_PATH}
                 download
-                onClick={() => track("wp_download", { location: "apparel_lp", document: "apparel-2026" })}
+                onClick={() => {
+                  track("wp_download", { location: "apparel_lp", document: "apparel-2026" })
+                  trackGA4("wp_download", { location: "apparel_lp", document: "apparel-2026" })
+                }}
                 className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-[#06C755] text-white font-bold text-sm sm:text-base rounded-lg shadow-[0_2px_8px_rgba(6,199,85,0.25)] hover:bg-[#05A847] hover:shadow-[0_4px_12px_rgba(6,199,85,0.35)] transition-all duration-300"
               >
                 <Download size={18} strokeWidth={2.5} />

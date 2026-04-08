@@ -2,6 +2,7 @@
 
 import { track } from "@vercel/analytics"
 import { Download, MessageCircle } from "lucide-react"
+import { trackGA4 } from "@/lib/ga4"
 import type { CTAContent } from "@/lib/content"
 
 interface FinalCTASectionProps {
@@ -30,7 +31,7 @@ export function FinalCTASection({ content }: FinalCTASectionProps) {
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 sm:px-6 md:px-10 py-3.5 sm:py-4 md:py-5 bg-[#06C755] text-white font-bold text-base sm:text-lg md:text-xl rounded-lg shadow-xl hover:bg-[#05A847] hover:-translate-y-0.5 transition-all duration-300"
-            onClick={() => track("cta_download", { location: "final_cta" })}
+            onClick={() => { track("cta_download", { location: "final_cta" }); trackGA4("generate_lead", { form_type: "download", cta_position: "final_cta" }) }}
           >
             <Download size={18} className="sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" />
             資料ダウンロード（無料）
@@ -40,7 +41,7 @@ export function FinalCTASection({ content }: FinalCTASectionProps) {
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 sm:px-6 md:px-10 py-3.5 sm:py-4 md:py-5 bg-white text-[#06C755] font-bold text-base sm:text-lg md:text-xl border-2 border-[#06C755] rounded-lg hover:bg-[#E8F8F0] transition-all duration-300"
-            onClick={() => track("cta_contact", { location: "final_cta" })}
+            onClick={() => { track("cta_contact", { location: "final_cta" }); trackGA4("generate_lead", { form_type: "inquiry", cta_position: "final_cta" }) }}
           >
             <MessageCircle size={18} className="sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" />
             直接相談したい方はこちら
