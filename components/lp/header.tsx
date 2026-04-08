@@ -32,8 +32,9 @@ export function LPHeader() {
         <div className="hidden md:flex items-center gap-6">
           <nav className="flex items-center gap-5">
             <a href="/" className="text-sm text-[#4B5563] hover:text-[#06C755] transition-colors">トップ</a>
-            <a href="/features" className="text-sm text-[#4B5563] hover:text-[#06C755] transition-colors">機能を探す</a>
-            <a href="/usecases" className="text-sm text-[#4B5563] hover:text-[#06C755] transition-colors">課題から逆引き</a>
+            <a href="/?industry=apparel" className="text-sm text-[#4B5563] hover:text-[#06C755] transition-colors">アパレル</a>
+            <a href="/?industry=drugstore" className="text-sm text-[#4B5563] hover:text-[#06C755] transition-colors">ドラッグストア</a>
+            <a href="/?industry=department" className="text-sm text-[#4B5563] hover:text-[#06C755] transition-colors">百貨店</a>
           </nav>
           <a
             href="https://classmethod.jp/services/line/line-apps/#iframe-form"
