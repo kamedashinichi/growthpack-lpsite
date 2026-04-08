@@ -29,7 +29,7 @@ export const departmentData: IndustryLPData = {
     { value: "5", unit: "秒", label: "で会員登録完了" },
   ],
   problem: {
-    heading: "百貨店・商業施設のDX担当者が抱える、5つの課題",
+    heading: "百貨店・商業施設のDX担当者が抱える、3つの課題",
     subtitle: "外商属人化・催事管理・データ分断——百貨店固有の構造課題",
     items: [
       {
