@@ -259,22 +259,18 @@ function IndustryCaseStudySection({ data }: { data: IndustryLPData }) {
           友だちを「顧客」に変えた企業の実績
         </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+        <div className={`grid gap-4 sm:gap-6 md:gap-8 ${data.caseStudies.length === 1 ? 'max-w-2xl mx-auto' : 'grid-cols-1 lg:grid-cols-2'}`}>
           {data.caseStudies.map((study, index) => (
             <div key={index} className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg">
-              <div className="mb-4 sm:mb-6">
+              <div className="mb-4 sm:mb-6 text-center">
                 <h3 className="text-xl sm:text-2xl font-bold text-[#1F2937] mb-1 sm:mb-2">{study.company}</h3>
                 <p className="text-xs sm:text-sm text-[#6B7280]">
                   {study.industry}
                   {study.scale && ` / ${study.scale}`}
                 </p>
-                {study.timeline && (
-                  <span className="inline-block mt-1.5 sm:mt-2 px-2.5 py-0.5 bg-[#E8F8F0] text-[#06C755] text-xs sm:text-sm font-semibold rounded-full">
-                    {study.timeline}
-                  </span>
-                )}
               </div>
-              <div className="grid grid-cols-3 gap-2 sm:gap-4">
+
+              <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-4 sm:mb-6">
                 {study.metrics.map((metric, mIndex) => (
                   <div key={mIndex} className="text-center">
                     <div className="text-lg sm:text-2xl md:text-3xl font-bold text-[#FB923C] mb-0.5 sm:mb-1">
@@ -285,6 +281,12 @@ function IndustryCaseStudySection({ data }: { data: IndustryLPData }) {
                   </div>
                 ))}
               </div>
+
+              {study.quote && (
+                <blockquote className="border-l-3 sm:border-l-4 border-[#06C755] pl-3 sm:pl-4">
+                  <p className="text-xs sm:text-sm md:text-base text-[#6B7280] italic leading-relaxed">「{study.quote}」</p>
+                </blockquote>
+              )}
             </div>
           ))}
         </div>

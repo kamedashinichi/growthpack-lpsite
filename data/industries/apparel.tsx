@@ -69,13 +69,14 @@ export const apparelData: IndustryLPData = {
   caseStudies: [
     {
       company: "PAL様",
-      industry: "アパレル・雑貨",
+      industry: "アパレル・小売業（約900店舗）",
       scale: "約900店舗・50ブランド",
-      timeline: "導入後6ヶ月",
+      timeline: undefined,
+      quote: "Native appはアプリDLが必要な為、ライトユーザーや操作に不慣れなお客様に導入が進まず、スタッフ/ユーザー双方に課題感があった。LINE Mini appはライトユーザーへのリーチ＆会員化という棲み分けができた",
       metrics: [
-        { value: "3", unit: "倍", label: "会員数増加" },
-        { value: "5", unit: "秒", label: "で会員登録完了" },
-        { value: "10", unit: "万人", label: "友だち増加（1ヶ月）" },
+        { value: "約3", unit: "倍", label: "会員数増加" },
+        { value: "10", unit: "万人", label: "友だち数増加（1ヶ月）" },
+        { value: "5", unit: "秒", label: "会員登録時間" },
       ],
     },
   ],
