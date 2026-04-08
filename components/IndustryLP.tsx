@@ -20,7 +20,7 @@ import { StepsSection } from "@/components/lp/steps-section"
 import { SecuritySection } from "@/components/lp/security-section"
 import { FlowSection } from "@/components/lp/flow-section"
 import { FinalCTASection } from "@/components/lp/final-cta-section"
-import { WPDownloadForm } from "@/components/lp/wp-download-form"
+import { WPDownloadSection } from "@/components/lp/wp-download-section"
 
 const industryMap: Record<string, IndustryLPData> = {
   retail: retailData,
@@ -47,7 +47,7 @@ export function IndustryLP({ industry }: { industry: string }) {
       )}
       {data.steps && <StepsSection steps={data.steps} />}
       <IndustryFeaturesSection data={data} />
-      {industry === "apparel" && <WPDownloadForm />}
+      {industry === "apparel" && <WPDownloadSection />}
       <SecuritySection />
       <FinalCTASection withDocumentPreview />
     </LandingPageLayout>
