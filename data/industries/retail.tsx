@@ -23,10 +23,8 @@ export const retailData: IndustryLPData = {
     ),
   },
   metrics: [
-    { value: "3", unit: "倍", label: "会員数増加" },
     { value: "5", unit: "秒", label: "で会員登録完了" },
-    { value: "15", unit: "万人", label: "友だち増加" },
-    { value: "5", unit: "倍以上", label: "会員証提示率" },
+    { value: "5", unit: "倍以上", label: "会員証提示率（月間）" },
   ],
   problem: {
     heading: "こんなお悩み、ありませんか？",
@@ -77,9 +75,7 @@ export const retailData: IndustryLPData = {
       scale: "63店舗",
       timeline: "導入後1年",
       metrics: [
-        { value: "15", unit: "万人", label: "友だち増加" },
-        { value: "11", unit: "万人", label: "会員数増加" },
-        { value: "5", unit: "倍以上", label: "会員証提示率" },
+        { value: "5", unit: "倍以上", label: "会員証提示率（月間）" },
       ],
     },
   ],

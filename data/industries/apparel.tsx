@@ -25,9 +25,9 @@ export const apparelData: IndustryLPData = {
     heroImage: "/images/apparel-hero.png",
   },
   metrics: [
-    { value: "3", unit: "倍", label: "会員数増加（PAL様）" },
+    { value: "3", unit: "倍", label: "会員数増加（PAL様 3COINS）" },
     { value: "5", unit: "秒", label: "で会員登録完了" },
-    { value: "10", unit: "万人", label: "友だち増加（1ヶ月）" },
+    { value: "約3", unit: "倍", label: "友だち数増加（1ヶ月）" },
   ],
   problem: {
     heading: "アパレル業界のDX担当者が「限界だ」と感じる、4つの壁",
@@ -74,8 +74,8 @@ export const apparelData: IndustryLPData = {
       timeline: undefined,
       quote: "Native appはアプリDLが必要な為、ライトユーザーや操作に不慣れなお客様に導入が進まず、スタッフ/ユーザー双方に課題感があった。LINE Mini appはライトユーザーへのリーチ＆会員化という棲み分けができた",
       metrics: [
-        { value: "約3", unit: "倍", label: "会員数増加" },
-        { value: "10", unit: "万人", label: "友だち数増加（1ヶ月）" },
+        { value: "約3", unit: "倍", label: "会員数増加（3COINS）" },
+        { value: "約3", unit: "倍", label: "友だち数増加（1ヶ月）" },
         { value: "5", unit: "秒", label: "会員登録時間" },
       ],
     },
