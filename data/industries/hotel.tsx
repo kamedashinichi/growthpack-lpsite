@@ -24,7 +24,6 @@ export const hotelData: IndustryLPData = {
     ),
   },
   metrics: [
-    { value: "1", unit: "ヶ月", label: "最短導入期間" },
     { value: "5", unit: "秒", label: "で会員登録完了" },
   ],
   problem: {
