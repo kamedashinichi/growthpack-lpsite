@@ -22,6 +22,7 @@ export const hotelData: IndustryLPData = {
         フロントスタッフがゲスト対応に集中できる環境を、<span className="text-[#06C755] font-bold">アセットベース</span>でスピード構築。
       </>
     ),
+    heroImage: "/images/hotel-hero.png",
   },
   metrics: [
     { value: "5", unit: "秒", label: "で会員登録完了" },

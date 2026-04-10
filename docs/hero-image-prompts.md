@@ -64,6 +64,14 @@ A vibrant Japanese baseball or soccer stadium scene during a daytime game, wide 
 
 ---
 
+## ホテル・宿泊
+
+```
+A Japanese female hotel front desk staff member in her late 20s wearing a clean formal uniform with a name tag, smiling warmly while welcoming a female guest in her 30s at the check-in counter of a modern upscale hotel. The guest looks relaxed, holding a small travel bag. The lobby behind them is bright and spacious with high ceilings, warm wooden interior accents, indoor plants, and soft natural light streaming through large windows. The atmosphere feels welcoming, calm, and refined. Vertical portrait orientation, 3:4 aspect ratio, photorealistic, natural soft lighting, Japanese setting, warm color tones, no text overlays, no logos, no UI elements, shallow depth of field, shot with 85mm lens
+```
+
+---
+
 ## 生成後のファイル命名規則
 
 | 業界 | ファイル名 |
@@ -75,5 +83,6 @@ A vibrant Japanese baseball or soccer stadium scene during a daytime game, wide 
 | スーパー・HC | `supermarket-hero.png` |
 | EC | `ec-hero.png` |
 | スポーツ | `sports-hero.png` |
+| ホテル・宿泊 | `hotel-hero.png` |
 
 生成した画像は `/public/images/` に配置してください。
