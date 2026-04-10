@@ -59,7 +59,7 @@ A Japanese woman in her late 20s sitting comfortably on a sofa at home, smiling 
 ## スポーツ・エンタメ
 
 ```
-A vibrant Japanese baseball or soccer stadium scene during a daytime game, wide shot showing rows of enthusiastic fans in colorful team colors, cheering and waving flags. The stadium is filled to capacity, bright sunlight illuminating the crowd. A few fans in the foreground are clearly excited, some holding up foam hands or banners. The energy is festive and electric. Vertical portrait orientation, 3:4 aspect ratio, photorealistic, natural soft lighting, Japanese setting, warm color tones, no text overlays, no logos, no UI elements, shallow depth of field, shot with 85mm lens
+A Japanese stadium or arena entrance gate scene. A male staff member in his 30s wearing a uniform and lanyard is checking paper tickets and physical membership cards from a small line of fans waiting to enter. One fan in the foreground is searching through their bag looking slightly troubled, perhaps unable to find their card. Another fan is showing a paper ticket. The staff is professional but visibly busy with manual handling. Background shows the entrance gate with simple signage and fans in casual sports attire. The atmosphere conveys the inefficiency of analog operations at a busy venue. Vertical portrait orientation, 3:4 aspect ratio, photorealistic, natural soft lighting, Japanese setting, warm color tones, no text overlays, no logos, no UI elements, shallow depth of field, shot with 85mm lens
 ```
 
 ---
