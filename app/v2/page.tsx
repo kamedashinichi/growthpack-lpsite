@@ -229,7 +229,7 @@ export default function V2TopPage() {
             <a href="#faq" className="hover:text-[#05A847] transition-colors">FAQ</a>
           </nav>
           <Button variant="primary" size="sm" asChild>
-            <a href="#contact">お問い合わせ</a>
+            <a href="https://classmethod.jp/services/line/line-apps/#iframe-form" target="_blank" rel="noopener noreferrer">お問い合わせ</a>
           </Button>
         </div>
       </header>
@@ -269,7 +269,11 @@ export default function V2TopPage() {
               {/* CTA — ヒーロー内（1箇所目） */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
                 <Button variant="primary" size="lg" asChild>
-                  <a href="#contact">
+                  <a
+                    href="https://classmethod.jp/services/line/line-apps/#iframe-form"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     無料で相談する
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </a>
@@ -280,7 +284,13 @@ export default function V2TopPage() {
                   asChild
                   className="border-white/60 text-white hover:bg-white/10 hover:border-white"
                 >
-                  <a href="#features">機能一覧を見る</a>
+                  <a
+                    href="https://classmethod.jp/download/line-mini-app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    資料をダウンロード
+                  </a>
                 </Button>
               </div>
 
@@ -494,7 +504,11 @@ export default function V2TopPage() {
                 asChild
                 className="bg-white text-[#05A847] hover:bg-white/90 font-bold"
               >
-                <a href="#contact">
+                <a
+                  href="https://classmethod.jp/services/line/line-apps/#iframe-form"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   無料で相談する
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </a>
@@ -715,7 +729,11 @@ export default function V2TopPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4">
             <Button variant="primary" size="lg" asChild>
-              <a href="mailto:growthpack@classmethod.jp">
+              <a
+                href="https://classmethod.jp/services/line/line-apps/#iframe-form"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 無料で相談する
                 <ArrowRight className="w-5 h-5 ml-2" />
               </a>
@@ -726,7 +744,13 @@ export default function V2TopPage() {
               asChild
               className="border-white/50 text-white hover:bg-white/10 hover:border-white"
             >
-              <a href="#features">資料をダウンロード</a>
+              <a
+                href="https://classmethod.jp/download/line-mini-app/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                資料をダウンロード
+              </a>
             </Button>
           </div>
           <div className="text-xs text-white/50 pt-2">
@@ -780,7 +804,26 @@ export default function V2TopPage() {
             <div>
               <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">CONTACT</div>
               <ul className="space-y-2 text-sm text-white/60">
-                <li><a href="#contact" className="hover:text-white transition-colors">無料相談はこちら</a></li>
+                <li>
+                  <a
+                    href="https://classmethod.jp/services/line/line-apps/#iframe-form"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors"
+                  >
+                    無料相談はこちら
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://classmethod.jp/download/line-mini-app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors"
+                  >
+                    資料ダウンロード
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
