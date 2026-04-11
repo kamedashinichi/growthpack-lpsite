@@ -191,12 +191,75 @@ const FAQS = [
 ];
 
 /* ------------------------------------------------------------------ */
+/* JSON-LD (structured data for SEO)                                     */
+/* ------------------------------------------------------------------ */
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQS.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: f.a,
+    },
+  })),
+};
+
+const serviceJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: 'LINEミニアプリ開発サービス',
+  name: 'グロースパック for LINE',
+  description:
+    'SaaSの速さとフルスクラッチの柔軟性を両立する、ハーフスクラッチ開発のLINEミニアプリ開発サービス。会員証・予約・クーポンなど10の機能アセットから必要なものを選び、最短3ヶ月で立ち上げます。',
+  provider: {
+    '@type': 'Organization',
+    name: 'クラスメソッド株式会社',
+    url: 'https://classmethod.jp',
+  },
+  areaServed: {
+    '@type': 'Country',
+    name: 'Japan',
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'グロースパック for LINE 機能アセット',
+    itemListElement: [
+      'デジタル会員証',
+      '順番待ち',
+      '予約',
+      'スタンプカード',
+      'クーポン配信',
+      'チケット・パス',
+      '抽選',
+      'セグメント配信',
+      '1to1コミュニケーション',
+      'ギフト',
+    ].map((name) => ({
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name },
+    })),
+  },
+};
+
+/* ------------------------------------------------------------------ */
 /* PAGE                                                                  */
 /* ------------------------------------------------------------------ */
 
 export default function V2TopPage() {
   return (
     <main className="min-h-screen bg-white text-[#1F2937]">
+      {/* 構造化データ */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
 
       {/* ============================================================ */}
       {/* Header                                                         */}
