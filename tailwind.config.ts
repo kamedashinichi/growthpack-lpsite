@@ -26,7 +26,12 @@ const config: Config = {
       },
 
       colors: {
+        // LINE Green brand palette
+        // 500 = #06C755 (色面単独・focus ring・装飾)
+        // 700 = #05A847 (CTA/link 本体・AA確保)
+        // 900 = #048838 (hover)
         primary: {
+          50: colors.primary.lighter,
           100: colors.primary.lighter,
           200: colors.primary.lighter,
           300: colors.primary.light,
@@ -36,7 +41,9 @@ const config: Config = {
           700: colors.primary.dark,
           800: colors.primary.dark,
           900: colors.primary.darker,
+          DEFAULT: colors.primary.main,
         },
+        // Dark CTA / footer
         secondary: {
           100: colors.secondary.lighter,
           200: colors.secondary.lighter,
@@ -47,6 +54,20 @@ const config: Config = {
           700: colors.secondary.dark,
           800: colors.secondary.dark,
           900: colors.secondary.darker,
+          DEFAULT: colors.secondary.main,
+        },
+        // Neutral (text / border / bg)
+        neutral: {
+          50: colors.neutral.lighter,
+          100: colors.neutral.lighter,
+          200: colors.neutral.light,
+          300: colors.neutral.light,
+          400: colors.neutral.main,
+          500: colors.neutral.main,
+          600: colors.neutral.dark,
+          700: colors.neutral.dark,
+          800: colors.neutral.darker,
+          900: colors.neutral.darker,
         },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

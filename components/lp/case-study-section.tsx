@@ -107,7 +107,7 @@ function GenericCaseStudy() {
   ]
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 bg-[#F0FDF4]">
+    <section className="py-12 sm:py-16 md:py-20 bg-[#E8F8F0]">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-[#1F2937] mb-8 sm:mb-12 md:mb-16">導入企業の声</h2>
 

@@ -34,7 +34,7 @@ export function CategoryTabs({ categories, features }: CategoryTabsProps) {
       </div>
 
       {currentCategory && (
-        <div className="mb-8 p-6 bg-[#E7F8ED] rounded-2xl border border-green-100">
+        <div className="mb-8 p-6 bg-[#E8F8F0] rounded-2xl border border-green-100">
           <p className="text-lg font-bold text-gray-900 mb-2">{currentCategory.lead_copy}</p>
           <p className="text-sm text-gray-600">{currentCategory.sub_copy}</p>
         </div>

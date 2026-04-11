@@ -60,7 +60,7 @@ export function UseCaseSection({ useCases, features }: UseCaseSectionProps) {
                         return feat ? (
                           <span
                             key={fid}
-                            className="text-xs bg-[#E7F8ED] text-[#05A847] font-medium px-3 py-1 rounded-full border border-green-100"
+                            className="text-xs bg-[#E8F8F0] text-[#05A847] font-medium px-3 py-1 rounded-full border border-green-100"
                           >
                             {feat.name}
                           </span>

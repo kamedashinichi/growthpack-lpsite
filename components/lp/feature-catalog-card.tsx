@@ -3,7 +3,7 @@ import type { Feature } from '@/types/features-catalog'
 const MATURITY_LABEL: Record<string, { label: string; color: string }> = {
   L1: { label: '企画中', color: 'bg-gray-100 text-gray-500' },
   L2: { label: '開発中', color: 'bg-orange-100 text-orange-600' },
-  L3: { label: 'リリース済', color: 'bg-[#E7F8ED] text-[#05A847]' },
+  L3: { label: 'リリース済', color: 'bg-[#E8F8F0] text-[#05A847]' },
   L4: { label: '実績多数', color: 'bg-[#06C755] text-white' },
 }
 

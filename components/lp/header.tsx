@@ -87,7 +87,7 @@ export function LPHeader() {
                     <a
                       key={item.href}
                       href={item.href}
-                      className="block px-4 py-2.5 text-sm text-[#4B5563] hover:text-[#06C755] hover:bg-[#F0FDF4] transition-colors"
+                      className="block px-4 py-2.5 text-sm text-[#4B5563] hover:text-[#06C755] hover:bg-[#E8F8F0] transition-colors"
                       onClick={() => setIsDropdownOpen(false)}
                     >
                       {item.label}
