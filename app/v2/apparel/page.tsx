@@ -28,79 +28,54 @@ import {
 import { Button } from '@/components/shared/ui/button';
 import { Section } from '@/components/shared/ui/section';
 import { Card } from '@/components/shared/ui/card';
+import { WPDownloadButton } from './wp-download-button';
 
 /* ------------------------------------------------------------------ */
 /* DATA                                                                  */
 /* ------------------------------------------------------------------ */
 
+// アパレル業界で実際に効く6機能に絞り込み
+// 除外: 順番待ち / 予約 / チケット・パス / 抽選（他業種向け）
 const FEATURES = [
   {
     image: '/images/会員証.png',
     name: 'デジタル会員証',
-    tagline: '50ブランド横断で使える統合会員証。店頭で5秒つながる、アプリDL不要の会員体験。',
+    tagline: 'ブランド横断の統合会員証。アプリDL不要、5秒で会員化。',
     phase: 'Phase 1',
     id: 'membership',
   },
   {
-    image: '/images/順番待ち.png',
-    name: '順番待ち',
-    tagline: 'レジ待ちの時間を会員化のチャンスへ。混雑状況もLINEで配信。',
-    phase: 'Phase 1',
-    id: 'queue',
-  },
-  {
-    image: '/images/予約.png',
-    name: '予約',
-    tagline: '試着予約から来店後フォローまで、LINEで一貫した顧客体験を設計。',
-    phase: 'Phase 1',
-    id: 'reservation',
+    image: '/images/1to1.png',
+    name: '1to1コミュニケーション',
+    tagline: '接客履歴・好み・サイズを蓄積。異動後も品質を引き継げる。',
+    phase: 'Phase 2',
+    id: 'one-to-one',
   },
   {
     image: '/images/スタンプカード.png',
     name: 'スタンプカード',
-    tagline: '来店履歴が見える、育つ。紛失ゼロのデジタルスタンプで再来店を促進。',
+    tagline: '紛失ゼロのデジタル台紙で、再来店を設計する。',
     phase: 'Phase 2',
     id: 'stamp-card',
   },
   {
     image: '/images/クーポン.png',
     name: 'クーポン配信',
-    tagline: '購買履歴と来店頻度に応じた配信。休眠会員の掘り起こしに最適。',
+    tagline: '来店頻度と購買履歴に応じた配信。休眠会員の掘り起こしに。',
     phase: 'Phase 2',
     id: 'coupon',
   },
   {
-    image: '/images/チケット.png',
-    name: 'チケット・パス',
-    tagline: 'ポップアップイベントや先行セールの入場管理をLINEで完結。',
-    phase: 'Phase 2',
-    id: 'ticket',
-  },
-  {
-    image: '/images/抽選.png',
-    name: '抽選',
-    tagline: '限定商品の抽選体験でエンゲージメントを加速。来店動機に変える。',
-    phase: 'Phase 2',
-    id: 'lottery',
-  },
-  {
     image: '/images/セグメント配信.png',
     name: 'セグメント配信',
-    tagline: '購買履歴・ブランド嗜好・来店チャネルに連動した動的セグメント配信。',
+    tagline: 'ブランド嗜好・購買帯・来店チャネルで動的に配信を出し分け。',
     phase: 'Phase 3',
     id: 'segment-delivery',
   },
   {
-    image: '/images/1to1.png',
-    name: '1to1コミュニケーション',
-    tagline: 'スタッフ異動後も引き継げる顧客カルテ。接客履歴・好み・サイズをLINEに統合。',
-    phase: 'Phase 3',
-    id: 'one-to-one',
-  },
-  {
     image: '/images/ギフト.png',
     name: 'ギフト',
-    tagline: '既存会員が友人にギフトを贈ることで、広告費をかけずに新規顧客を獲得。',
+    tagline: 'ロイヤル顧客経由の紹介で、広告費ゼロの新規獲得へ。',
     phase: 'Phase 3',
     id: 'gift',
   },
@@ -108,24 +83,24 @@ const FEATURES = [
 
 const PROBLEMS = [
   {
-    title: '会員証DX：ポイントカードが財布を占拠し、顧客が持ち歩かない',
-    body: 'ネイティブアプリはDLの手間が障壁となり、ライトユーザーへのリーチが進みません。LINEミニアプリなら、アプリDL不要で5秒の会員登録が完了します。業界横断の法則として、会員化率は3〜5倍になる事例が報告されています。',
+    title: '会員証DX：ポイントカードを持ち歩かない',
+    body: 'アプリDLは障壁。LINEミニアプリなら5秒で会員化、会員化率3〜5倍が業界の標準値です。',
   },
   {
-    title: 'アプリ疲れ：ネイティブアプリのDL数と起動率が伸び悩む',
-    body: 'スマートフォン上のアプリ数が増え、ブランドごとのアプリは削除される傾向が強まっています。LINEを基盤にすることで、日常的に開くLINEの中に顧客接点を作り、起動率の課題を回避できます。',
+    title: 'アプリ疲れ：DL数も起動率も伸びない',
+    body: 'ブランド単独アプリは削除される時代。LINEの中に接点を作れば、起動率の課題は消えます。',
   },
   {
-    title: 'OMO課題：店舗会員とEC会員のデータが分断している',
-    body: '店舗POSとECサイトと LINE公式アカウントに、それぞれ会員データが散在しています。同じ顧客が複数IDを持ち、購買行動の全体像が見えないため、パーソナライズ施策が機能しません。',
+    title: 'OMO課題：店舗とECで顧客が別人扱い',
+    body: '店舗POS・EC・LINEに会員IDが散在。購買履歴が統合できず、パーソナライズが機能しません。',
   },
   {
-    title: '休眠会員：会員の6〜7割が年1回未満しか来店しない',
-    body: '会員数は増えても、活性率が低いままでは投資が回収できません。誕生日・季節・離脱直後のトリガーに合わせた自動メッセージで、休眠会員の再来店を促進します。',
+    title: '休眠会員：6〜7割が年1回未満来店',
+    body: '誕生日・離脱直後・季節の自動トリガーで、眠っている会員を起こす仕組みが必要です。',
   },
   {
-    title: 'サイズ不安：EC返品率30〜40%がEC収益性を直撃している',
-    body: '試着できないECではサイズ不安が返品につながり、物流コストを圧迫します。LINEミニアプリの1to1機能でスタッフがサイズ相談に対応することで、返品率の削減とEC収益性の改善が期待できます。',
+    title: 'サイズ不安：EC返品率30〜40%',
+    body: '試着できないECの返品が物流コストを圧迫。1to1のサイズ相談で返品を減らせます。',
   },
 ];
 
@@ -133,19 +108,19 @@ const APPEAL_STEPS = [
   {
     step: 'Step 1',
     title: '店頭商品シェア',
-    description: 'スタッフが顧客にその場でコーディネートや商品をLINEで共有。来店中の離脱を防ぎ、後日EC購入への導線も作ります。「見た目は好きだけど迷っている」顧客を確実につなぎ止める、最初の接点設計です。',
+    description: 'スタッフが接客中に商品やコーディネートをLINEで送付。来店中の離脱を防ぎ、後日EC購入への導線も作ります。',
     icon: '🛍',
   },
   {
     step: 'Step 2',
     title: '自動フォロー',
-    description: '離脱直後・誕生日・一定期間来店がない休眠タイミングに、自動メッセージを配信。スタッフの工数をかけずに、顧客ライフサイクルに合わせた接触を仕組み化します。',
+    description: '離脱直後・誕生日・休眠タイミングに自動メッセージを配信。スタッフ工数をかけずに顧客ライフサイクルへ伴走します。',
     icon: '📨',
   },
   {
     step: 'Step 3',
     title: '顧客カルテ',
-    description: '好み・サイズ・接客履歴をLINEに蓄積。スタッフが異動しても、次の担当者が同じ品質の接客を引き継げます。属人的だった接客知識を、ブランドの資産に変えます。',
+    description: '好み・サイズ・接客履歴をLINEに蓄積。スタッフ異動後も次の担当が同じ品質の接客を引き継げます。',
     icon: '📋',
   },
 ];
@@ -154,20 +129,20 @@ const PHASES = [
   {
     phase: 'Phase 1',
     label: '顧客接点の創出',
-    features: ['デジタル会員証', '順番待ち', '予約'],
-    description: 'まず「つながる」土台を作ります。統合IDを持つ会員基盤を構築し、店舗・EC・LINEを一つのIDで管理します。',
+    features: ['デジタル会員証'],
+    description: 'まず「つながる」土台を作ります。店舗・EC・LINEを一つのIDで統合します。',
   },
   {
     phase: 'Phase 2',
     label: '接客品質の向上',
-    features: ['1to1コミュニケーション', 'クーポン配信', 'スタンプカード', '抽選'],
-    description: '店頭商品シェア・自動フォロー・顧客カルテを実装。スタッフの接客知識をブランドの資産に変えます。',
+    features: ['1to1コミュニケーション', 'スタンプカード', 'クーポン配信'],
+    description: '店頭商品シェア・自動フォロー・顧客カルテを実装。属人的だった接客をブランド資産にします。',
   },
   {
     phase: 'Phase 3',
     label: '関係性の深化',
-    features: ['セグメント配信', 'ギフト', 'チケット・パス'],
-    description: '統合された会員データをもとに、購買頻度・ブランド嗜好・来店チャネルでセグメントを切り、再来店と紹介を循環させます。',
+    features: ['セグメント配信', 'ギフト'],
+    description: '購買頻度・ブランド嗜好でセグメントを切り、再来店と紹介を循環させます。',
   },
 ];
 
@@ -201,23 +176,23 @@ const STATS = [
 const FAQS = [
   {
     q: '導入にはどのくらいの期間がかかりますか？',
-    a: '会員証を含む標準的なフェーズ1構成で最短3ヶ月が目安です。複数ブランドの統合や既存ECとの連携が必要な場合は4〜6ヶ月を想定してください。機能範囲と外部システム連携の有無によって変動します。詳細はヒアリング後にお伝えします。',
+    a: '会員証を含む標準構成で最短3ヶ月。複数ブランド統合や既存EC連携が必要な場合は4〜6ヶ月が目安です。',
   },
   {
     q: '複数ブランドで一つのLINEミニアプリを運用できますか？',
-    a: 'はい、対応しています。単一のLINE IDで複数ブランドを横断して利用できる統合会員証の設計が可能です。月額制SaaSでは技術的に対応が難しいマルチブランド管理は、ハーフスクラッチ開発の強みの一つです。',
+    a: '対応可能です。単一のLINE IDでブランド横断の統合会員証を設計できます。マルチブランド管理はハーフスクラッチの強みです。',
   },
   {
     q: '既存のECや基幹システムと連携できますか？',
-    a: 'はい、カスタマイズ領域として対応しています。Shopify・ecbeing・自社EC・基幹POS等との連携実績があります。連携方式はお客様の既存システムに合わせて設計します。',
+    a: '対応します。Shopify・ecbeing・自社EC・基幹POS等と連携実績があり、既存構成に合わせて設計します。',
   },
   {
     q: '既存のポイントや会員データはそのまま移行できますか？',
-    a: '既存ポイントシステムとの連携・移行も対応範囲です。移行方式はデータ構造とボリュームによって異なります。まずは現状のシステム構成をお聞きして、最適な連携方法をご提案します。',
+    a: '連携・移行とも対応範囲です。データ構造とボリュームによって方式が変わるため、まずはヒアリングさせてください。',
   },
   {
     q: 'SPAブランドとセレクトショップで提案内容は変わりますか？',
-    a: 'はい、提案の重点が異なります。SPA型（製造小売）はセグメント配信・アップセル施策が主軸になります。セレクト型はマルチブランド統合IDと新規顧客獲得（ギフト・紹介）が主軸です。いずれも共通の機能アセットから構成を選べますので、まずはビジネスモデルをお聞きして最適な組み合わせをご提案します。',
+    a: '変わります。SPA型はセグメント配信とアップセル、セレクト型は統合IDと紹介獲得が主軸です。',
   },
 ];
 
@@ -312,6 +287,7 @@ export default function ApparelPage() {
             <a href="#appeal" className="hover:text-[#05A847] transition-colors">訴求</a>
             <a href="#features" className="hover:text-[#05A847] transition-colors">機能</a>
             <a href="#phases" className="hover:text-[#05A847] transition-colors">導入ステップ</a>
+            <a href="#wp-download" className="hover:text-[#05A847] transition-colors">調査レポート</a>
             <a href="#faq" className="hover:text-[#05A847] transition-colors">FAQ</a>
           </nav>
           <Button variant="primary" size="sm" asChild>
@@ -324,17 +300,22 @@ export default function ApparelPage() {
       {/* Hero — ダーク放射型（§7-1）                                      */}
       {/* ============================================================ */}
       <div className="relative min-h-[560px] md:min-h-[700px] flex items-center bg-[#0a0a0a] overflow-hidden">
-        {/* 背景グラデ */}
+        {/* 背景: アパレル実務シーン写真 */}
+        <div
+          className="absolute inset-0 bg-center bg-cover"
+          style={{ backgroundImage: "url('/images/apparel-hero.png')" }}
+        />
+        {/* ダークオーバーレイ（左濃→右薄） */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(ellipse 80% 60% at 80% 100%, rgba(6,199,85,0.22) 0%, rgba(6,199,85,0.06) 40%, transparent 70%), linear-gradient(135deg, #0a0a0a 0%, #1a1d21 60%, #0a0a0a 100%)',
+              'linear-gradient(to right, rgba(10,10,10,0.90) 0%, rgba(10,10,10,0.70) 45%, rgba(10,10,10,0.35) 85%, rgba(10,10,10,0.15) 100%), radial-gradient(ellipse 60% 60% at 85% 100%, rgba(6,199,85,0.18) 0%, transparent 70%)',
           }}
         />
         {/* 背景グリッド */}
         <div
-          className="absolute inset-0 opacity-[0.07]"
+          className="absolute inset-0 opacity-[0.05]"
           style={{
             backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)',
             backgroundSize: '28px 28px',
@@ -355,7 +336,7 @@ export default function ApparelPage() {
                 LINEで<span className="text-[#06C755]">ひらく。</span>
               </h1>
 
-              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">会員証DX・OMO課題・休眠会員・アプリ疲れ・EC返品率。アパレル業界が抱える5つの壁を、LINEミニアプリのハーフスクラッチ開発で解決します。マルチブランド対応の統合会員証を、<span className="font-bold text-white">最短3ヶ月</span>で立ち上げます。</p>
+              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">アプリ疲れ・OMO・休眠会員・EC返品率。アパレルの5つの壁を、マルチブランド対応の統合会員証で解きます。<span className="font-bold text-white">最短3ヶ月</span>で立ち上げ。</p>
 
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
@@ -562,7 +543,7 @@ export default function ApparelPage() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             アパレル業界のDX担当者が「限界だ」と感じる、5つの壁。
           </h2>
-          <p className="text-base text-[#4B5563]">アパレル業界では、デジタル化が進む一方で次の構造的な課題が繰り返し発生しています。個別ツールの導入では解決できない根本的な問題です。</p>
+          <p className="text-base text-[#4B5563]">個別ツールでは解決できない、アパレル業界の構造的な課題です。</p>
         </div>
         <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
           {PROBLEMS.map((p) => (
@@ -585,7 +566,7 @@ export default function ApparelPage() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             3つのステップで、顧客との関係を積み上げる。
           </h2>
-          <p className="text-base text-[#4B5563]">アパレル業界のヒアリングで判明した、刺さる訴求の順序があります。店頭での接点づくりから始め、仕組みで関係を深め、データで接客を引き継ぐ。この順序が現場に受け入れられやすい導入設計です。</p>
+          <p className="text-base text-[#4B5563]">店頭での接点づくりから始め、仕組みで関係を深め、データで接客を引き継ぐ。現場に受け入れられやすい導入順序です。</p>
         </div>
         <div className="grid md:grid-cols-3 gap-4 md:gap-5">
           {APPEAL_STEPS.map((s, i) => (
@@ -616,7 +597,7 @@ export default function ApparelPage() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             SaaSとスクラッチ、その中間に。
           </h2>
-          <p className="text-base text-[#4B5563]">SaaSは速く安いが、マルチブランド対応・既存EC連携・大規模トラフィックに限界があります。フルスクラッチは自由度が高いが、期間とコストが膨らみます。グロースパックは<span className="font-bold text-[#1F2937]">速さ・柔軟性・マルチブランド対応</span>を同時に実現するハーフスクラッチ開発です。</p>
+          <p className="text-base text-[#4B5563]">SaaSはマルチブランドや既存EC連携で詰まり、フルスクラッチは期間とコストが膨らむ。グロースパックは<span className="font-bold text-[#1F2937]">速さ・柔軟性・マルチブランド対応</span>を同時に提供するハーフスクラッチ開発です。</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-4 md:gap-5">
@@ -698,7 +679,7 @@ export default function ApparelPage() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             10の機能アセットから、アパレル向けに選んで組み合わせる。
           </h2>
-          <p className="text-base text-[#4B5563]">全機能を導入する必要はありません。ビジネスの優先度に合わせて必要なものだけを選び、フェーズを追って拡張できます。</p>
+          <p className="text-base text-[#4B5563]">アパレル業界で特に効く6機能。必要なものだけを選び、フェーズを追って拡張できます。</p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {FEATURES.map((f) => {
@@ -742,7 +723,7 @@ export default function ApparelPage() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             3フェーズで段階的に育てる。
           </h2>
-          <p className="text-base text-[#4B5563]">一度にすべてを導入するのではなく、まず統合IDの基盤を作り、接客品質を向上させ、関係を深化させます。各フェーズが次のフェーズのデータ基盤になります。</p>
+          <p className="text-base text-[#4B5563]">統合IDの基盤→接客品質の向上→関係の深化。各フェーズが次のデータ基盤になります。</p>
         </div>
 
         <div className="relative">
@@ -770,6 +751,44 @@ export default function ApparelPage() {
                 </div>
               </Card>
             ))}
+          </div>
+        </div>
+      </Section>
+
+      {/* ============================================================ */}
+      {/* WP（ホワイトペーパー）ダウンロード                                   */}
+      {/* ============================================================ */}
+      <Section id="wp-download" spacing="sm" container="default" background="muted">
+        <div className="bg-white rounded-2xl overflow-hidden border border-[#E5E7EB] shadow-sm">
+          <div className="flex flex-col md:flex-row">
+            {/* 左: WP概要（ダーク） */}
+            <div className="bg-[#0a0a0a] text-white p-6 sm:p-8 md:p-10 flex flex-col justify-center md:w-2/5">
+              <span className="text-xs tracking-[0.15em] uppercase font-semibold text-[#06C755] mb-3">
+                無料ダウンロード
+              </span>
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold leading-tight mb-3">
+                アパレル店舗スタッフ<br />業務実態調査 2026
+              </h3>
+              <p className="text-sm text-white/60 leading-relaxed">193名調査で見えた、現場の「見えない非効率」と「届かない声」。</p>
+            </div>
+            {/* 右: 内容+CTA */}
+            <div className="p-6 sm:p-8 md:p-10 flex flex-col justify-center md:w-3/5">
+              <ul className="text-sm text-[#4B5563] space-y-2 mb-6">
+                <li className="flex items-start gap-2">
+                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
+                  50.8%が業務時間の4割以上を接客以外に消費
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
+                  最大課題は「EC連携」ではなく「手作業オペ」
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
+                  改善意見を持つスタッフの82%が「声が届いていない」
+                </li>
+              </ul>
+              <WPDownloadButton />
+            </div>
           </div>
         </div>
       </Section>
@@ -811,7 +830,7 @@ export default function ApparelPage() {
             アパレルの顧客接点DXについて、<br />
             <span className="text-[#06C755]">一度ご相談ください。</span>
           </h2>
-          <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">ブランド数・現在の会員システム・EC構成をお聞きして、最適な機能の組み合わせとフェーズ計画をご提案します。初回相談は無料です。</p>
+          <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">ブランド数・会員システム・EC構成をお聞きして、最適な構成をご提案します。初回相談は無料です。</p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4">
             <Button variant="primary" size="lg" asChild>
               <a
@@ -860,7 +879,7 @@ export default function ApparelPage() {
                   <span className="text-base font-bold text-[#06C755]">LINE</span>
                 </div>
               </div>
-              <p className="text-xs text-white/50 leading-relaxed">クラスメソッド株式会社が提供するLINEミニアプリ開発サービス。アパレル業界のOMO・会員証DX・マルチブランド統合に対応したハーフスクラッチ開発です。</p>
+              <p className="text-xs text-white/50 leading-relaxed">クラスメソッド株式会社が提供する LINE ミニアプリ開発サービス。アパレル業界のOMO・会員証DX・マルチブランド統合に対応します。</p>
             </div>
 
             {/* サービス */}
@@ -921,7 +940,7 @@ export default function ApparelPage() {
           </div>
 
           <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
-            <p>© Classmethod, Inc. All rights reserved.</p>
+            <p>© Classmethod, Inc.</p>
             <div className="flex items-center gap-4">
               <a
                 href="https://classmethod.jp/privacy/"
