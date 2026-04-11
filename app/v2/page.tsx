@@ -15,9 +15,6 @@ import Image from 'next/image';
 import {
   ArrowRight,
   Check,
-  Stamp,
-  Ticket,
-  Gift,
   Users,
   ShieldCheck,
   Award,
@@ -232,15 +229,24 @@ export default function V2TopPage() {
       {/* ============================================================ */}
       {/* Hero — 写真背景 + ダークオーバーレイ + 白テキスト                  */}
       {/* ============================================================ */}
-      <div
-        className="relative min-h-[560px] md:min-h-[640px] flex items-center bg-[#1a1d21]"
-        style={{
-          backgroundImage:
-            'linear-gradient(to right, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.65) 60%, rgba(10,10,10,0.45) 100%), url("https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&q=80")',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
+      <div className="relative min-h-[560px] md:min-h-[700px] flex items-center bg-[#0a0a0a] overflow-hidden">
+        {/* 背景グラデ（LINE Green の光を右下から） */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(ellipse 80% 60% at 80% 100%, rgba(6,199,85,0.22) 0%, rgba(6,199,85,0.06) 40%, transparent 70%), linear-gradient(135deg, #0a0a0a 0%, #1a1d21 60%, #0a0a0a 100%)',
+          }}
+        />
+        {/* 背景グリッド（細かいドット） */}
+        <div
+          className="absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle, #ffffff 1px, transparent 1px)',
+            backgroundSize: '28px 28px',
+          }}
+        />
         <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 py-20 sm:py-24 md:py-28">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             {/* 左カラム */}
@@ -300,55 +306,102 @@ export default function V2TopPage() {
               </div>
             </div>
 
-            {/* 右カラム — LINEミニアプリ画面モックアップ */}
+            {/* 右カラム — スマホ中心に顧客接点が放射状に広がる視覚表現 */}
             <div className="lg:col-span-5 hidden lg:block">
-              <div className="relative max-w-[320px] mx-auto">
-                {/* スマホ外枠 */}
-                <div className="bg-[#111] rounded-[32px] p-2 shadow-2xl border border-white/10">
-                  <div className="bg-white rounded-[26px] overflow-hidden">
-                    {/* LINEミニアプリ ヘッダー */}
-                    <div className="h-12 bg-[#06C755] flex items-center px-5 gap-2">
-                      <div className="w-7 h-7 rounded-lg bg-white/20 flex items-center justify-center text-white font-bold text-xs">G</div>
-                      <span className="text-white text-sm font-bold">グロースパック ストア</span>
-                    </div>
-                    {/* コンテンツエリア */}
-                    <div className="p-4 space-y-3 bg-[#F8F9FA]">
-                      {/* 会員証カード */}
-                      <div className="bg-white rounded-xl p-4 border border-[#E5E7EB] shadow-sm">
-                        <div className="text-[10px] text-[#05A847] font-bold mb-1 uppercase tracking-wider">MEMBERSHIP</div>
-                        <div className="font-bold text-[#1F2937] text-sm mb-3">デジタル会員証</div>
-                        <div className="h-16 bg-[#F8F9FA] rounded-lg border border-dashed border-[#06C755]/40 flex items-center justify-center text-xs text-[#9CA3AF]">
-                          QRコード
-                        </div>
-                        <div className="mt-3 flex items-center justify-between text-[10px] text-[#6B7280]">
-                          <span>ゴールド会員</span>
-                          <span className="text-[#05A847] font-semibold">1,240pt</span>
-                        </div>
+              <div className="relative h-[560px] w-full">
+                {/* 放射する接続線（SVG） */}
+                <svg
+                  className="absolute inset-0 w-full h-full"
+                  viewBox="0 0 500 560"
+                  preserveAspectRatio="xMidYMid meet"
+                  aria-hidden="true"
+                >
+                  <defs>
+                    <radialGradient id="lineFade" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stopColor="#06C755" stopOpacity="0.6" />
+                      <stop offset="100%" stopColor="#06C755" stopOpacity="0" />
+                    </radialGradient>
+                  </defs>
+                  {/* 中心から6方向へ */}
+                  {[
+                    { x: 90, y: 100 },
+                    { x: 410, y: 100 },
+                    { x: 50, y: 280 },
+                    { x: 450, y: 280 },
+                    { x: 90, y: 460 },
+                    { x: 410, y: 460 },
+                  ].map((p, i) => (
+                    <line
+                      key={i}
+                      x1="250"
+                      y1="280"
+                      x2={p.x}
+                      y2={p.y}
+                      stroke="#06C755"
+                      strokeWidth="1"
+                      strokeDasharray="4 6"
+                      opacity="0.35"
+                    />
+                  ))}
+                  {/* 中心のグロー */}
+                  <circle cx="250" cy="280" r="140" fill="url(#lineFade)" />
+                </svg>
+
+                {/* 中心のスマホ */}
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px]">
+                  <div className="bg-[#111] rounded-[28px] p-1.5 shadow-[0_20px_60px_rgba(6,199,85,0.25)] border border-white/10">
+                    <div className="bg-white rounded-[22px] overflow-hidden">
+                      <div className="h-10 bg-[#06C755] flex items-center px-4 gap-2">
+                        <div className="w-6 h-6 rounded-md bg-white/20 flex items-center justify-center text-white font-bold text-[10px]">G</div>
+                        <span className="text-white text-xs font-bold">グロースパック</span>
                       </div>
-                      {/* 機能グリッド */}
-                      <div className="grid grid-cols-3 gap-2">
-                        {[
-                          { icon: Stamp, label: 'スタンプ' },
-                          { icon: Ticket, label: 'クーポン' },
-                          { icon: Gift, label: 'ギフト' },
-                        ].map(({ icon: Icon, label }) => (
-                          <div key={label} className="bg-white rounded-lg p-2.5 border border-[#E5E7EB] text-center shadow-sm">
-                            <Icon className="w-4 h-4 text-[#05A847] mx-auto mb-1" />
-                            <div className="text-[10px] font-semibold text-[#1F2937]">{label}</div>
+                      <div className="p-3 space-y-2.5 bg-[#F8F9FA]">
+                        <div className="bg-white rounded-lg p-3 border border-[#E5E7EB] shadow-sm">
+                          <div className="text-[9px] text-[#05A847] font-bold mb-1 uppercase tracking-wider">MEMBERSHIP</div>
+                          <div className="font-bold text-[#1F2937] text-xs mb-2">デジタル会員証</div>
+                          <div className="h-10 bg-[#F8F9FA] rounded border border-dashed border-[#06C755]/40 flex items-center justify-center text-[9px] text-[#9CA3AF]">
+                            QR
                           </div>
-                        ))}
-                      </div>
-                      {/* お知らせ */}
-                      <div className="bg-[#E8F8F0] rounded-lg px-3 py-2 border border-[#06C755]/20">
-                        <div className="text-[10px] text-[#05A847] font-bold">新着クーポン</div>
-                        <div className="text-xs text-[#1F2937] mt-0.5">期間限定 10%OFF</div>
+                        </div>
+                        <div className="bg-[#E8F8F0] rounded-md px-2 py-1.5 border border-[#06C755]/20">
+                          <div className="text-[9px] text-[#05A847] font-bold">新着</div>
+                          <div className="text-[10px] text-[#1F2937]">期間限定クーポン</div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                {/* 装飾 */}
-                <div className="absolute -top-4 -right-4 w-20 h-20 bg-[#06C755] rounded-full opacity-20 blur-xl" />
-                <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-[#FCD34D] rounded-full opacity-20 blur-xl" />
+
+                {/* 6つの接点カード — スマホから放射状に配置 */}
+                {[
+                  { top: '10%', left: '5%', image: '/images/会員証.png', label: '会員証', delay: '0s' },
+                  { top: '10%', right: '5%', image: '/images/スタンプカード.png', label: 'スタンプ', delay: '0.1s' },
+                  { top: '45%', left: '0%', image: '/images/予約.png', label: '予約', delay: '0.2s' },
+                  { top: '45%', right: '0%', image: '/images/クーポン.png', label: 'クーポン', delay: '0.3s' },
+                  { bottom: '10%', left: '5%', image: '/images/1to1.png', label: '1to1', delay: '0.4s' },
+                  { bottom: '10%', right: '5%', image: '/images/ギフト.png', label: 'ギフト', delay: '0.5s' },
+                ].map((card) => (
+                  <div
+                    key={card.label}
+                    className="absolute bg-white/95 backdrop-blur rounded-xl border border-white/30 shadow-[0_8px_24px_rgba(0,0,0,0.3)] p-3 w-[110px] flex flex-col items-center gap-1 animate-fade-in"
+                    style={{
+                      top: card.top,
+                      bottom: card.bottom,
+                      left: card.left,
+                      right: card.right,
+                      animationDelay: card.delay,
+                    }}
+                  >
+                    <div className="relative w-8 h-8">
+                      <Image src={card.image} alt={card.label} fill className="object-contain" />
+                    </div>
+                    <div className="text-[11px] font-bold text-[#1F2937]">{card.label}</div>
+                  </div>
+                ))}
+
+                {/* 装飾グロー */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#06C755] rounded-full opacity-10 blur-3xl pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-24 h-24 bg-[#06C755] rounded-full opacity-10 blur-3xl pointer-events-none" />
               </div>
             </div>
           </div>
