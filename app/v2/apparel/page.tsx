@@ -29,6 +29,8 @@ import { Button } from '@/components/shared/ui/button';
 import { Section } from '@/components/shared/ui/section';
 import { Card } from '@/components/shared/ui/card';
 import { WPDownloadButton } from './wp-download-button';
+import { TrackedExternalLink } from './tracking';
+import { ScrollTracker } from './scroll-tracker';
 
 /* ------------------------------------------------------------------ */
 /* DATA                                                                  */
@@ -250,6 +252,25 @@ const serviceJsonLd = {
   },
 };
 
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'グロースパック for LINE',
+      item: 'https://lp.growthpackforline.classmethod.net/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'アパレル業界',
+      item: 'https://lp.growthpackforline.classmethod.net/v2/apparel',
+    },
+  ],
+};
+
 /* ------------------------------------------------------------------ */
 /* PAGE                                                                  */
 /* ------------------------------------------------------------------ */
@@ -266,6 +287,11 @@ export default function ApparelPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <ScrollTracker />
 
       {/* ============================================================ */}
       {/* Header                                                         */}
@@ -291,7 +317,7 @@ export default function ApparelPage() {
             <a href="#faq" className="hover:text-[#05A847] transition-colors">FAQ</a>
           </nav>
           <Button variant="primary" size="sm" asChild>
-            <a href="https://classmethod.jp/services/line/line-apps/#iframe-form" target="_blank" rel="noopener noreferrer">お問い合わせ</a>
+            <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="header" destination="contact">お問い合わせ</TrackedExternalLink>
           </Button>
         </div>
       </header>
@@ -341,14 +367,10 @@ export default function ApparelPage() {
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
                 <Button variant="primary" size="lg" asChild>
-                  <a
-                    href="https://classmethod.jp/services/line/line-apps/#iframe-form"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="hero_primary" destination="contact">
                     無料で相談する
                     <ArrowRight className="w-5 h-5 ml-2" />
-                  </a>
+                  </TrackedExternalLink>
                 </Button>
                 <Button
                   variant="outline"
@@ -356,13 +378,9 @@ export default function ApparelPage() {
                   asChild
                   className="border-white/60 text-white hover:bg-white/10 hover:border-white"
                 >
-                  <a
-                    href="https://classmethod.jp/download/line-mini-app/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <TrackedExternalLink href="https://classmethod.jp/download/line-mini-app/" location="hero_secondary" destination="download">
                     資料をダウンロード
-                  </a>
+                  </TrackedExternalLink>
                 </Button>
               </div>
 
@@ -654,14 +672,10 @@ export default function ApparelPage() {
                 asChild
                 className="bg-white text-[#05A847] hover:bg-white/90 font-bold"
               >
-                <a
-                  href="https://classmethod.jp/services/line/line-apps/#iframe-form"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="midband" destination="contact">
                   無料で相談する
                   <ArrowRight className="w-5 h-5 ml-2" />
-                </a>
+                </TrackedExternalLink>
               </Button>
             </div>
           </div>
@@ -833,14 +847,10 @@ export default function ApparelPage() {
           <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">ブランド数・会員システム・EC構成をお聞きして、最適な構成をご提案します。初回相談は無料です。</p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4">
             <Button variant="primary" size="lg" asChild>
-              <a
-                href="https://classmethod.jp/services/line/line-apps/#iframe-form"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="final_primary" destination="contact">
                 無料で相談する
                 <ArrowRight className="w-5 h-5 ml-2" />
-              </a>
+              </TrackedExternalLink>
             </Button>
             <Button
               variant="outline"
@@ -848,13 +858,9 @@ export default function ApparelPage() {
               asChild
               className="border-white/50 text-white hover:bg-white/10 hover:border-white"
             >
-              <a
-                href="https://classmethod.jp/download/line-mini-app/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <TrackedExternalLink href="https://classmethod.jp/download/line-mini-app/" location="final_secondary" destination="download">
                 資料をダウンロード
-              </a>
+              </TrackedExternalLink>
             </Button>
           </div>
           <div className="text-xs text-white/50 pt-2">

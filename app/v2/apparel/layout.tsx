@@ -27,6 +27,9 @@ export const metadata: Metadata = {
       noimageindex: true,
     },
   },
+  alternates: {
+    canonical: 'https://lp.growthpackforline.classmethod.net/v2/apparel',
+  },
   openGraph: {
     type: 'website',
     locale: 'ja_JP',
@@ -35,6 +38,14 @@ export const metadata: Metadata = {
     description:
       'マルチブランド対応の統合会員証・店頭商品シェア・自動フォローをLINEミニアプリで実現。最短3ヶ月で立ち上げます。',
     siteName: 'グロースパック for LINE',
+    images: [
+      {
+        url: '/images/apparel-hero.png',
+        width: 1376,
+        height: 768,
+        alt: 'アパレル業界向けLINEミニアプリ開発サービス グロースパック for LINE',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
@@ -42,6 +53,7 @@ export const metadata: Metadata = {
       'アパレル業界のLINEミニアプリ開発｜ハーフスクラッチで作る会員証・OMO｜グロースパック for LINE',
     description:
       'マルチブランド対応の統合会員証・店頭商品シェア・自動フォローをLINEミニアプリで実現。最短3ヶ月で立ち上げます。',
+    images: ['/images/apparel-hero.png'],
   },
 };
 
