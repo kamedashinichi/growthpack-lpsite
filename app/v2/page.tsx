@@ -11,19 +11,14 @@
  * - 価格の具体額は一切記載しない
  */
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   ArrowRight,
   Check,
-  CreditCard,
-  Clock,
-  Calendar,
   Stamp,
   Ticket,
   Gift,
-  MessageCircle,
   Users,
-  Send,
-  Sparkles,
   ShieldCheck,
   Award,
   Zap,
@@ -38,70 +33,70 @@ import { Card } from '@/components/shared/ui/card';
 
 const FEATURES = [
   {
-    icon: CreditCard,
+    image: '/images/会員証.png',
     name: 'デジタル会員証',
     tagline: 'アプリDL不要。QRコードで5秒つながる次世代会員体験。',
     phase: 'Phase 1',
     id: 'membership',
   },
   {
-    icon: Clock,
+    image: '/images/順番待ち.png',
     name: '順番待ち',
     tagline: '待ち時間を会員化のチャンスへ。混雑状況もLINEで配信。',
     phase: 'Phase 1',
     id: 'queue',
   },
   {
-    icon: Calendar,
+    image: '/images/予約.png',
     name: '予約',
     tagline: '予約完了から来店後まで、LINEで一貫した顧客体験を設計。',
     phase: 'Phase 1',
     id: 'reservation',
   },
   {
-    icon: Stamp,
+    image: '/images/スタンプカード.png',
     name: 'スタンプカード',
     tagline: '来店履歴が見える、育つ。紛失ゼロのデジタルスタンプ。',
     phase: 'Phase 2',
     id: 'stamp-card',
   },
   {
-    icon: Ticket,
+    image: '/images/クーポン.png',
     name: 'クーポン配信',
     tagline: 'LINE公式の配信制限を超えた、属性連動のクーポン発行。',
     phase: 'Phase 2',
     id: 'coupon',
   },
   {
-    icon: Ticket,
+    image: '/images/チケット.png',
     name: 'チケット・パス',
     tagline: 'LINEで入場管理まで完結。CRM側で利用状況を可視化。',
     phase: 'Phase 2',
     id: 'ticket',
   },
   {
-    icon: Sparkles,
+    image: '/images/抽選.png',
     name: '抽選',
     tagline: '当選体験でエンゲージメントを加速。来店動機に変える。',
     phase: 'Phase 2',
     id: 'lottery',
   },
   {
-    icon: Send,
+    image: '/images/セグメント配信.png',
     name: 'セグメント配信',
     tagline: '属性・購買履歴に連動した動的リッチメニュー対応配信。',
     phase: 'Phase 3',
     id: 'segment-delivery',
   },
   {
-    icon: MessageCircle,
+    image: '/images/1to1.png',
     name: '1to1コミュニケーション',
     tagline: 'オペレーター対応をLINEに統合。接客以上の価値を提供。',
     phase: 'Phase 3',
     id: 'one-to-one',
   },
   {
-    icon: Gift,
+    image: '/images/ギフト.png',
     name: 'ギフト',
     tagline: 'ソーシャルギフト機能で、顧客が顧客を呼ぶ循環を作る。',
     phase: 'Phase 3',
@@ -535,7 +530,6 @@ export default function V2TopPage() {
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {FEATURES.map((f) => {
-            const Icon = f.icon;
             const phaseColor =
               f.phase === 'Phase 1'
                 ? 'bg-[#E8F8F0] text-[#05A847]'
@@ -545,8 +539,13 @@ export default function V2TopPage() {
             return (
               <Card key={f.id} padding="md">
                 <div className="flex items-start gap-4 mb-3">
-                  <div className="shrink-0 w-11 h-11 rounded-lg bg-[#E8F8F0] flex items-center justify-center">
-                    <Icon className="w-5 h-5 text-[#05A847]" />
+                  <div className="shrink-0 relative w-11 h-11">
+                    <Image
+                      src={f.image}
+                      alt={f.name}
+                      fill
+                      className="object-contain"
+                    />
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">
@@ -796,7 +795,16 @@ export default function V2TopPage() {
               <ul className="space-y-2 text-sm text-white/60">
                 <li><a href="#" className="hover:text-white transition-colors">業種別導入事例</a></li>
                 <li><a href="#faq" className="hover:text-white transition-colors">よくあるご質問</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">技術ブログ</a></li>
+                <li>
+                  <a
+                    href="https://dev.classmethod.jp/tags/line/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors"
+                  >
+                    技術ブログ
+                  </a>
+                </li>
               </ul>
             </div>
 
@@ -831,11 +839,25 @@ export default function V2TopPage() {
           {/* コピーライト */}
           <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
             <p className="text-xs text-white/40">
-              © クラスメソッド株式会社 All rights reserved.
+              © Classmethod, Inc.
             </p>
             <div className="flex items-center gap-4 text-xs text-white/40">
-              <a href="#" className="hover:text-white/70 transition-colors">プライバシーポリシー</a>
-              <a href="#" className="hover:text-white/70 transition-colors">利用規約</a>
+              <a
+                href="https://classmethod.jp/privacy/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white/70 transition-colors"
+              >
+                プライバシーポリシー
+              </a>
+              <a
+                href="https://classmethod.jp/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white/70 transition-colors"
+              >
+                会社情報
+              </a>
             </div>
           </div>
         </div>
