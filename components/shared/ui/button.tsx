@@ -1,3 +1,19 @@
+/**
+ * Button primitive aligned with docs/DESIGN.md §4 "コンポーネント > ボタン"
+ *
+ * Variants:
+ * - primary  : LINE Green dark (#05A847) — CTA本体、AA可読性確保
+ * - secondary: #32373c ダークボタン — 資料DL等のサブCTA
+ * - outline  : LINE Green dark 枠線 — ghost的CTA
+ * - ghost    : 背景なしテキストのみ — ナビ補助
+ * - link     : 下線付きリンクスタイル — 本文内リンク用
+ *
+ * Sizes:
+ * - default: px-6 py-3 (標準CTA)
+ * - sm     : px-4 py-2 (コンパクト)
+ * - lg     : px-8 py-4 (ヒーローCTA)
+ * - icon   : 正方形 (アイコンボタン)
+ */
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -5,41 +21,32 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center rounded-md font-semibold transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06C755] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
-        default:
-          'bg-primary-300/70 text-primary-foreground hover:bg-primary-300/90 dark:bg-primary-700 dark:hover:bg-primary-700/90',
-        destructive:
-          'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-        outline:
-          'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
-        outlinePrimary:
-          'border border-primary-300 dark:border-primary-900 hover:bg-primary-100/50 dark:hover:bg-primary-900',
-        outlineSecondary:
-          'border border-secondary-300 dark:border-secondary-900  hover:bg-secondary-100/50 dark:hover:bg-secondary-900',
-        outlineDestructive:
-          'border border-red-500 bg-background hover:bg-red-500',
         primary:
-          'bg-primary-300/70 text-primary-foreground hover:bg-primary-300/90 dark:bg-primary-700 dark:hover:bg-primary-700/90',
+          'bg-[#05A847] text-white hover:bg-[#048838] active:bg-[#048838]',
         secondary:
-          'bg-secondary-300/70 text-secondary-foreground hover:bg-secondary-300/90 dark:bg-secondary-700 dark:hover:bg-secondary-700/90',
-        ghost: 'hover:bg-accent hover:text-accent-foreground',
-        link: 'text-primary underline-offset-4 hover:underline',
-        unstyled: '',
+          'bg-[#32373c] text-white hover:bg-[#1a1d21] active:bg-[#1a1d21]',
+        outline:
+          'border-2 border-[#05A847] text-[#05A847] bg-transparent hover:bg-[#05A847] hover:text-white',
+        ghost:
+          'text-[#1F2937] hover:bg-[#E8F8F0] hover:text-[#05A847]',
+        link:
+          'text-[#05A847] underline underline-offset-2 hover:text-[#048838] p-0 h-auto',
+        destructive:
+          'bg-[#EF4444] text-white hover:bg-[#DC2626]',
       },
       size: {
-        default: 'h-10 px-4 py-2',
-        sm: 'h-9 rounded-md px-3',
-        lg: 'h-11 rounded-md px-8',
-        xl: 'h-12 rounded-md px-6 text-md',
+        default: 'px-6 py-3 text-base min-w-[160px]',
+        sm: 'px-4 py-2 text-sm min-w-[120px]',
+        lg: 'px-8 py-4 text-lg min-w-[200px]',
         icon: 'h-10 w-10',
-        unsized: '',
       },
     },
     defaultVariants: {
-      variant: 'default',
+      variant: 'primary',
       size: 'default',
     },
   },
