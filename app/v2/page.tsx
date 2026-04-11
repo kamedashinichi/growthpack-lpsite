@@ -263,9 +263,7 @@ export default function V2TopPage() {
               </h1>
 
               <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">
-                ハーフスクラッチ開発で、SaaSの速さとフルスクラッチの柔軟性を両立。
-                会員証・予約・クーポンなど10機能のアセットから必要なものだけを選び、
-                <span className="font-bold text-white">最短1ヶ月</span>で立ち上げます。
+                ハーフスクラッチ開発で、SaaSの速さとフルスクラッチの柔軟性を両立。会員証・予約・クーポンなど10機能のアセットから必要なものだけを選び、<span className="font-bold text-white">最短1ヶ月</span>で立ち上げます。
               </p>
 
               {/* CTA — ヒーロー内（1箇所目） */}
@@ -403,8 +401,7 @@ export default function V2TopPage() {
             こんな課題、ありませんか。
           </h2>
           <p className="text-base text-[#4B5563]">
-            リテール・サービス業の現場では、顧客接点のデジタル化が進む一方で、
-            次のような構造的な課題が繰り返し発生しています。
+            リテール・サービス業の現場では、顧客接点のデジタル化が進む一方で、次のような構造的な課題が繰り返し発生しています。
           </p>
         </div>
         <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
@@ -433,10 +430,7 @@ export default function V2TopPage() {
             SaaSとスクラッチ、その中間に。
           </h2>
           <p className="text-base text-[#4B5563]">
-            SaaSは速く安いが、拡張と連携に制約があります。フルスクラッチは自由度が高いが、
-            期間とコストが膨らみます。グロースパックは
-            <span className="font-bold text-[#1F2937]">速さ・柔軟性・サポート品質</span>を
-            同時に提供するハーフスクラッチ開発です。
+            SaaSは速く安いが、拡張と連携に制約があります。フルスクラッチは自由度が高いが、期間とコストが膨らみます。グロースパックは<span className="font-bold text-[#1F2937]">速さ・柔軟性・サポート品質</span>を同時に提供するハーフスクラッチ開発です。
           </p>
         </div>
 
@@ -533,8 +527,7 @@ export default function V2TopPage() {
             10の機能アセットから、選んで組み合わせる。
           </h2>
           <p className="text-base text-[#4B5563]">
-            全機能を導入する必要はありません。ビジネスの優先度に合わせて
-            必要なものだけを選び、フェーズを追って拡張できます。
+            全機能を導入する必要はありません。ビジネスの優先度に合わせて必要なものだけを選び、フェーズを追って拡張できます。
           </p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
@@ -585,8 +578,7 @@ export default function V2TopPage() {
             3フェーズで段階的に育てる。
           </h2>
           <p className="text-base text-[#4B5563]">
-            一度にすべてを導入するのではなく、まず基盤を作り、施策を重ねて、
-            関係を深化させます。各フェーズが次のフェーズのデータ基盤になります。
+            一度にすべてを導入するのではなく、まず基盤を作り、施策を重ねて、関係を深化させます。各フェーズが次のフェーズのデータ基盤になります。
           </p>
         </div>
 
@@ -635,8 +627,7 @@ export default function V2TopPage() {
             業種を問わず、導入が進んでいます。
           </h2>
           <p className="text-base text-[#4B5563]">
-            アパレル・飲食・小売・百貨店・ホテルなど、LINEユーザーと接点を持つ
-            さまざまな業種でご活用いただいています。
+            アパレル・飲食・小売・百貨店・ホテルなど、LINEユーザーと接点を持つさまざまな業種でご活用いただいています。
           </p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
@@ -731,9 +722,7 @@ export default function V2TopPage() {
             <span className="text-[#06C755]">一度ご相談ください。</span>
           </h2>
           <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">
-            業種・規模・現状のシステム構成をお聞きしたうえで、
-            最適な機能の組み合わせとフェーズ計画をご提案します。
-            初回相談は無料です。
+            業種・規模・現状のシステム構成をお聞きしたうえで、最適な機能の組み合わせとフェーズ計画をご提案します。初回相談は無料です。
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4">
             <Button variant="primary" size="lg" asChild>
@@ -774,8 +763,7 @@ export default function V2TopPage() {
                 </div>
               </div>
               <p className="text-xs text-white/50 leading-relaxed">
-                クラスメソッド株式会社が提供する LINEミニアプリ開発サービス。
-                ハーフスクラッチ開発で、速さと柔軟性を両立します。
+                クラスメソッド株式会社が提供する LINE ミニアプリ開発サービス。ハーフスクラッチ開発で、速さと柔軟性を両立します。
               </p>
             </div>
 
