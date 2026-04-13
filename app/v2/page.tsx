@@ -35,6 +35,7 @@ const FEATURES = [
     tagline: 'アプリDL不要。バーコード提示で5秒つながる次世代会員体験。',
     phase: 'Phase 1',
     id: 'membership',
+    url: '/memberscard',
   },
   {
     image: '/images/順番待ち.png',
@@ -42,6 +43,7 @@ const FEATURES = [
     tagline: '待ち時間を会員化のチャンスへ。混雑状況もLINEで配信。',
     phase: 'Phase 1',
     id: 'queue',
+    url: '/queue',
   },
   {
     image: '/images/予約.png',
@@ -49,6 +51,7 @@ const FEATURES = [
     tagline: '予約完了から来店後まで、LINEで一貫した顧客体験を設計。',
     phase: 'Phase 1',
     id: 'reservation',
+    url: '/reservation',
   },
   {
     image: '/images/スタンプカード.png',
@@ -56,6 +59,7 @@ const FEATURES = [
     tagline: '来店履歴が見える、育つ。紛失ゼロのデジタルスタンプ。',
     phase: 'Phase 2',
     id: 'stamp-card',
+    url: '/stampcard',
   },
   {
     image: '/images/クーポン.png',
@@ -63,6 +67,7 @@ const FEATURES = [
     tagline: 'LINE公式の配信制限を超えた、属性連動のクーポン発行。',
     phase: 'Phase 2',
     id: 'coupon',
+    url: '/coupon',
   },
   {
     image: '/images/チケット.png',
@@ -70,6 +75,7 @@ const FEATURES = [
     tagline: 'LINEで入場管理まで完結。CRM側で利用状況を可視化。',
     phase: 'Phase 2',
     id: 'ticket',
+    url: '/ticket',
   },
   {
     image: '/images/抽選.png',
@@ -77,6 +83,7 @@ const FEATURES = [
     tagline: '当選体験でエンゲージメントを加速。来店動機に変える。',
     phase: 'Phase 2',
     id: 'lottery',
+    url: '/lottery',
   },
   {
     image: '/images/セグメント配信.png',
@@ -84,6 +91,7 @@ const FEATURES = [
     tagline: '属性・購買履歴に連動した動的リッチメニュー対応配信。',
     phase: 'Phase 3',
     id: 'segment-delivery',
+    url: '/segment',
   },
   {
     image: '/images/1to1.png',
@@ -91,6 +99,7 @@ const FEATURES = [
     tagline: 'オペレーター対応をLINEに統合。接客以上の価値を提供。',
     phase: 'Phase 3',
     id: 'one-to-one',
+    url: '/1to1',
   },
   {
     image: '/images/ギフト.png',
@@ -98,6 +107,7 @@ const FEATURES = [
     tagline: 'ソーシャルギフト機能で、顧客が顧客を呼ぶ循環を作る。',
     phase: 'Phase 3',
     id: 'gift',
+    url: '/gift',
   },
 ];
 
@@ -672,29 +682,31 @@ export default function V2TopPage() {
                 ? 'bg-[#FEF3C7] text-[#B45309]'
                 : 'bg-[#EDE9FE] text-[#6D28D9]';
             return (
-              <Card key={f.id} padding="md">
-                <div className="flex items-start gap-4 mb-3">
-                  <div className="shrink-0 relative w-11 h-11">
-                    <Image
-                      src={f.image}
-                      alt={f.name}
-                      fill
-                      className="object-contain"
-                    />
+              <Link key={f.id} href={f.url} className="block hover:shadow-lg transition-shadow rounded-xl">
+                <Card padding="md">
+                  <div className="flex items-start gap-4 mb-3">
+                    <div className="shrink-0 relative w-11 h-11">
+                      <Image
+                        src={f.image}
+                        alt={f.name}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">
+                        {f.name}
+                      </h3>
+                      <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full mt-1 ${phaseColor}`}>
+                        {f.phase}
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">
-                      {f.name}
-                    </h3>
-                    <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full mt-1 ${phaseColor}`}>
-                      {f.phase}
-                    </span>
-                  </div>
-                </div>
-                <p className="text-sm text-[#4B5563] leading-relaxed">
-                  {f.tagline}
-                </p>
-              </Card>
+                  <p className="text-sm text-[#4B5563] leading-relaxed">
+                    {f.tagline}
+                  </p>
+                </Card>
+              </Link>
             );
           })}
         </div>
