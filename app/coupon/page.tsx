@@ -41,7 +41,7 @@ const FEATURE_GROUPS = [
         name: 'クーポンの作成・管理',
         challenge: '紙クーポンの印刷・配布コストがかさむ一方で、誰が使ったか・利用率は何%か、まったく把握できていない',
         solution: 'クーポン種別・割引内容・有効期限を管理画面で設定。印刷コストゼロで、利用状況をリアルタイム把握。',
-        demo_url: 'https://lp-coupon-function.vercel.app',
+        demo_url: 'https://prototype-coupon-function.vercel.app/demo',
       },
       {
         icon: Users,
@@ -235,7 +235,7 @@ export default function CouponPage() {
                 className="border-white/60 text-white hover:bg-white/10 hover:border-white"
               >
                 <TrackedExternalLink
-                  href="https://lp-coupon-function.vercel.app"
+                  href="https://prototype-coupon-function.vercel.app/demo"
                   location="hero"
                   destination="demo"
                 >
