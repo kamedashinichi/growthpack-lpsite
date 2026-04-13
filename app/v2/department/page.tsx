@@ -165,7 +165,7 @@ const STATS = [
   {
     value: '最短',
     unit: '3ヶ月',
-    label: 'Phase1立ち上げ期間',
+    label: 'Step 1立ち上げ期間',
     sub: 'デジタル会員証を含む標準構成。複数館は4〜6ヶ月が目安',
   },
 ];
