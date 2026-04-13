@@ -150,10 +150,10 @@ const STATS = [
     sub: 'イー・エージェンシー2022年850サイト調査',
   },
   {
-    value: '3〜5',
-    unit: '倍',
-    label: '会員化率向上の目安',
-    sub: 'LINE ID連携による業界横断の法則',
+    value: 'アプリ',
+    unit: 'DL不要',
+    label: 'LINEだけで会員化が完結',
+    sub: 'インストール不要。友だち追加の延長線で会員化',
   },
   {
     value: 'CAC',
@@ -510,7 +510,6 @@ export default function EcPage() {
               { icon: Award, label: 'AWS Premier Tier Services Partner', color: '#FF9900' },
               { icon: ShieldCheck, label: 'ISO 27001 取得（クラスメソッド）', color: '#3B82F6' },
               { icon: Users, label: 'EC業界 複数社 導入実績', color: '#05A847' },
-              { icon: Zap, label: '最短3ヶ月導入', color: '#05A847' },
             ].map(({ icon: Icon, label, color }) => (
               <div key={label} className="flex items-center gap-2 text-sm font-semibold text-[#1F2937] whitespace-nowrap">
                 <Icon className="w-4 h-4 shrink-0" style={{ color }} />

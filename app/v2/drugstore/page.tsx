@@ -89,7 +89,7 @@ const FEATURES = [
 const PROBLEMS = [
   {
     title: 'ポイントカード離脱：アプリ疲れと紙カードの携帯率低下',
-    body: '独自アプリはDLされず、紙カードは財布に入らない。LINEミニアプリなら5秒で会員化でき、会員化率3〜5倍が業界横断の標準値です。',
+    body: '独自アプリはDLされず、紙カードは財布に入らない。LINEミニアプリならアプリDL不要で5秒会員化が完了し、会員化のハードルを大幅に下げられます。',
   },
   {
     title: '調剤の待ち時間：20〜40分の死角',
@@ -151,10 +151,10 @@ const PHASES = [
 
 const STATS = [
   {
-    value: '3〜5',
-    unit: '倍',
-    label: '会員化率向上の目安',
-    sub: 'アプリDL障壁撤廃による業界横断の法則（DS実績ゾーン 8〜12%→25〜30%）',
+    value: 'アプリ',
+    unit: 'DL不要',
+    label: 'LINEだけで会員化が完結',
+    sub: 'インストール不要。レジ前5秒で会員証が手に入る',
   },
   {
     value: '2.5〜7',
@@ -163,10 +163,10 @@ const STATS = [
     sub: 'LINE公式アカウント単体20〜30%比。業界指標として報告されている参考値',
   },
   {
-    value: '30〜50',
-    unit: '%',
-    label: '意思決定の高速化',
-    sub: 'アプリ未成熟・デジタル空白大手は既存アプリ保有企業より早く決まる傾向',
+    value: '5',
+    unit: '秒',
+    label: '会員登録完了時間',
+    sub: 'QRコードから友だち追加と会員化が同時完了',
   },
   {
     value: '最短',
@@ -362,7 +362,7 @@ export default function DrugstorePage() {
                 LINEで<span className="text-[#06C755]">つなげる。</span>
               </h1>
 
-              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">ポイントカード・調剤待ち時間・一斉配信。ドラッグストアの3つの壁を、会員化率3〜5倍の業界法則で解きます。<span className="font-bold text-white">最短3ヶ月</span>で立ち上げ。</p>
+              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">ポイントカード・調剤待ち時間・一斉配信。ドラッグストアの3つの壁を、アプリDL不要のLINEミニアプリで解きます。<span className="font-bold text-white">最短3ヶ月</span>で立ち上げ。</p>
 
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
@@ -521,7 +521,6 @@ export default function DrugstorePage() {
               { icon: Award, label: 'AWS Premier Tier Services Partner', color: '#FF9900' },
               { icon: ShieldCheck, label: 'ISO 27001 取得（クラスメソッド）', color: '#3B82F6' },
               { icon: Users, label: 'ドラッグストア業界 12社以上調査実績', color: '#05A847' },
-              { icon: Zap, label: '最短3ヶ月導入', color: '#05A847' },
             ].map(({ icon: Icon, label, color }) => (
               <div key={label} className="flex items-center gap-2 text-sm font-semibold text-[#1F2937] whitespace-nowrap">
                 <Icon className="w-4 h-4 shrink-0" style={{ color }} />

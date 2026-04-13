@@ -163,10 +163,10 @@ const PHASES = [
 
 const STATS = [
   {
-    value: '3〜5',
-    unit: '倍',
-    label: '会員化率向上の目安',
-    sub: 'アプリDL障壁撤廃による業界横断の法則',
+    value: 'アプリ',
+    unit: 'DL不要',
+    label: 'LINEだけで会員化が完結',
+    sub: 'インストール不要。館内共通IDとして機能',
   },
   {
     value: '館内',
@@ -536,7 +536,7 @@ export default function DepartmentPage() {
               { icon: Award, label: 'AWS Premier Tier Services Partner', color: '#FF9900' },
               { icon: ShieldCheck, label: 'ISO 27001 取得（クラスメソッド）', color: '#3B82F6' },
               { icon: Users, label: '外商・一般顧客の二層設計に対応', color: '#05A847' },
-              { icon: Zap, label: '最短3ヶ月導入', color: '#05A847' },
+              { icon: Users, label: 'ハーフスクラッチで柔軟対応', color: '#05A847' },
             ].map(({ icon: Icon, label, color }) => (
               <div key={label} className="flex items-center gap-2 text-sm font-semibold text-[#1F2937] whitespace-nowrap">
                 <Icon className="w-4 h-4 shrink-0" style={{ color }} />

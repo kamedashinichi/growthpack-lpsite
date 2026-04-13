@@ -148,10 +148,10 @@ const PHASES = [
 
 const STATS = [
   {
-    value: '3〜5',
-    unit: '倍',
-    label: '会員化率向上の目安',
-    sub: 'アプリDL障壁撤廃による業界横断の法則',
+    value: 'アプリ',
+    unit: 'DL不要',
+    label: 'LINEでライト層を即データ化',
+    sub: 'インストール不要。QRから会員登録が完了',
   },
   {
     value: 'ほぼ',
@@ -523,7 +523,7 @@ export default function SportsPage() {
               { icon: Award, label: 'AWS Premier Tier Services Partner', color: '#FF9900' },
               { icon: ShieldCheck, label: 'ISO 27001 取得（クラスメソッド）', color: '#3B82F6' },
               { icon: Users, label: 'スポーツ・エンタメ 15社以上 業界調査実績', color: '#05A847' },
-              { icon: Zap, label: '最短3ヶ月導入', color: '#05A847' },
+              { icon: Users, label: 'ハーフスクラッチで柔軟対応', color: '#05A847' },
             ].map(({ icon: Icon, label, color }) => (
               <div key={label} className="flex items-center gap-2 text-sm font-semibold text-[#1F2937] whitespace-nowrap">
                 <Icon className="w-4 h-4 shrink-0" style={{ color }} />

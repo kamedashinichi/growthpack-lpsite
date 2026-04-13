@@ -157,22 +157,22 @@ const PHASES = [
 
 const STATS = [
   {
-    value: '3〜5',
-    unit: '倍',
-    label: '会員化率向上の目安',
-    sub: 'アプリDL障壁撤廃による業界横断の推定値（飲食は20%→50%を推定）',
+    value: 'アプリ',
+    unit: 'DL不要',
+    label: 'LINEだけで会員化が完結',
+    sub: 'インストール不要。マルチブランドを1つのIDで統合',
   },
   {
-    value: '+8〜12',
-    unit: 'pt',
-    label: '顧客ロイヤルティ改善',
-    sub: '待ち時間可視化パターンの業種横断推定値',
+    value: '5',
+    unit: '秒',
+    label: '会員登録完了時間',
+    sub: 'QRコードから友だち追加と会員化が同時完了',
   },
   {
-    value: '30〜50',
-    unit: '%',
-    label: '商談決定の加速（デジタル空白大手）',
-    sub: '比較不要・移行コストゼロ企業における推定値',
+    value: 'スタッフ',
+    unit: '手作業0件',
+    label: '自動フォローで再来店を設計',
+    sub: '来店間隔が空いた顧客への自動クーポン配信',
   },
   {
     value: '最短',
@@ -528,7 +528,6 @@ export default function FoodPage() {
               { icon: Award, label: 'AWS Premier Tier Services Partner', color: '#FF9900' },
               { icon: ShieldCheck, label: 'ISO 27001 取得（クラスメソッド）', color: '#3B82F6' },
               { icon: Users, label: '飲食チェーン 業界調査実績', color: '#05A847' },
-              { icon: Zap, label: '最短3ヶ月導入', color: '#05A847' },
             ].map(({ icon: Icon, label, color }) => (
               <div key={label} className="flex items-center gap-2 text-sm font-semibold text-[#1F2937] whitespace-nowrap">
                 <Icon className="w-4 h-4 shrink-0" style={{ color }} />
@@ -554,7 +553,7 @@ export default function FoodPage() {
             </div>
           ))}
         </div>
-        <p className="text-xs text-[#9CA3AF] text-center mt-4">※ 業界横断の推定値です。導入効果は企業規模・既存システム・施策設計によって異なります。</p>
+        <p className="text-xs text-[#9CA3AF] text-center mt-4">※ 導入効果は企業規模・既存システム・施策設計によって異なります。</p>
       </Section>
 
       {/* ============================================================ */}

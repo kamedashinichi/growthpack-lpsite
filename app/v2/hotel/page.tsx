@@ -102,7 +102,7 @@ const PROBLEMS = [
   },
   {
     title: 'アプリDL障壁',
-    body: '宿泊施設の単独アプリはDLされない時代。LINEミニアプリなら5秒で会員化でき、アプリ疲れの課題が消えます。',
+    body: '宿泊施設の単独アプリはDL率が伸びにくく、アプリ疲れが課題に。LINEミニアプリならアプリDL不要で5秒会員化が完了し、接点を確立しやすくなります。',
   },
 ];
 
@@ -162,10 +162,10 @@ const STATS = [
     sub: '7割はOTA経由。直販チャネル強化の根拠',
   },
   {
-    value: '3〜5',
-    unit: '倍',
-    label: '会員化率向上の目安',
-    sub: 'LINEミニアプリによる業界横断の改善値',
+    value: 'アプリ',
+    unit: 'DL不要',
+    label: 'LINEだけで会員化が完結',
+    sub: 'インストール不要。友だち追加と同時に会員化',
   },
   {
     value: '最短',
@@ -517,7 +517,6 @@ export default function HotelPage() {
               { icon: Award, label: 'AWS Premier Tier Services Partner', color: '#FF9900' },
               { icon: ShieldCheck, label: 'ISO 27001 取得（クラスメソッド）', color: '#3B82F6' },
               { icon: Users, label: 'OTA手数料削減・直予約率向上に特化', color: '#05A847' },
-              { icon: Zap, label: '最短3ヶ月導入', color: '#05A847' },
             ].map(({ icon: Icon, label, color }) => (
               <div key={label} className="flex items-center gap-2 text-sm font-semibold text-[#1F2937] whitespace-nowrap">
                 <Icon className="w-4 h-4 shrink-0" style={{ color }} />
