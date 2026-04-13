@@ -781,11 +781,9 @@ export default function FoodPage() {
             <div className="md:col-span-1">
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-8 h-8 rounded-lg bg-[#06C755] flex items-center justify-center text-white font-bold text-sm">G</div>
-                <div className="flex items-center gap-1">
-                  <span className="text-base font-bold text-white">グロースパック</span>
-                  <span className="text-sm text-white/50"> for </span>
-                  <span className="text-base font-bold text-[#06C755]">LINE</span>
-                </div>
+                <a href="https://classmethod.jp/services/line/" target="_blank" rel="noopener noreferrer" className="text-base font-bold text-white hover:text-[#06C755] transition-colors">
+                  LINE総合支援サービス
+                </a>
               </div>
               <p className="text-xs text-white/50 leading-relaxed">クラスメソッド株式会社が提供するLINEミニアプリ開発サービス。飲食業界の順番待ちデジタル化・マルチブランド統合に対応します。</p>
             </div>
