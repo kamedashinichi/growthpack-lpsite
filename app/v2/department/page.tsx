@@ -238,7 +238,7 @@ const serviceJsonLd = {
   serviceType: '百貨店・商業施設向けLINEミニアプリ開発サービス',
   name: 'グロースパック for LINE（百貨店・商業施設向け）',
   description:
-    '外商顧客の関係を組織資産として継承し、一般顧客にはデジタル会員証とセグメント配信を。百貨店の外商と一般顧客の二層設計を最短3ヶ月で立ち上げます。',
+    '外商の関係継承と一般会員DXを二層設計で同時解決。最短3ヶ月で立ち上げます。',
   provider: {
     '@type': 'Organization',
     name: 'クラスメソッド株式会社',
@@ -377,7 +377,7 @@ export default function DepartmentPage() {
                 外商顧客は<span className="text-[#06C755]">離れない。</span>
               </h1>
 
-              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">外商顧客の関係を組織資産として継承し、一般顧客にはデジタル会員証とセグメント配信を。百貨店の顧客接点課題を二層設計で解きます。<span className="font-bold text-white">最短3ヶ月</span>で立ち上げ。</p>
+              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">外商の関係継承と一般会員DXを、二層設計で同時に解決。<span className="font-bold text-white">最短3ヶ月</span>で立ち上げます。</p>
 
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
@@ -576,7 +576,7 @@ export default function DepartmentPage() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             外商の属人化から催事管理まで、百貨店の顧客接点が抱える構造的な課題。
           </h2>
-          <p className="text-base text-[#4B5563]">外商顧客（関係性継承）と一般顧客（デジタル会員化）、それぞれに異なる課題があります。二層設計でどちらも解きます。</p>
+          <p className="text-base text-[#4B5563]">外商の属人化・催事のアナログ管理・一斉配信依存。百貨店特有の課題を二層設計で解きます。</p>
         </div>
         <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
           {PROBLEMS.map((p) => (
@@ -599,7 +599,7 @@ export default function DepartmentPage() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             一般顧客のデジタル化から始め、外商の関係性を組織資産に変える3ステップ。
           </h2>
-          <p className="text-base text-[#4B5563]">一般会員の接点整備→催事のデジタル化→外商関係の組織化。百貨店の顧客構造に合わせた現場受け入れやすい導入順序です。</p>
+          <p className="text-base text-[#4B5563]">一般会員整備→催事DX→外商組織化の順で、百貨店の顧客構造に合わせて段階導入できます。</p>
         </div>
         <div className="grid md:grid-cols-3 gap-4 md:gap-5">
           {APPEAL_STEPS.map((s, i) => (
@@ -633,7 +633,7 @@ export default function DepartmentPage() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             SaaSとスクラッチ、その中間に。
           </h2>
-          <p className="text-base text-[#4B5563]">SaaSは外商二層設計や既存基幹連携で詰まり、フルスクラッチは期間とコストが膨らむ。グロースパックは<span className="font-bold text-[#1F2937]">速さ・柔軟性・外商設計への対応</span>を同時に提供するハーフスクラッチ開発です。</p>
+          <p className="text-base text-[#4B5563]">SaaSは外商二層設計で詰まり、フルスクラッチはコスト・期間が膨らむ。グロースパックは<span className="font-bold text-[#1F2937]">速さ・柔軟性・外商対応</span>を同時に提供します。</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-4 md:gap-5">
@@ -766,7 +766,7 @@ export default function DepartmentPage() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             一般会員の統合から始め、外商の関係性継承まで3フェーズで育てる。
           </h2>
-          <p className="text-base text-[#4B5563]">一般会員接点の整備→催事デジタル化→外商関係の組織化。二層設計を段階的に完成させます。</p>
+          <p className="text-base text-[#4B5563]">3フェーズで外商二層設計を段階的に完成。無理なく現場に定着させます。</p>
         </div>
 
         <div className="relative">
@@ -874,7 +874,7 @@ export default function DepartmentPage() {
             外商顧客の関係継承と一般会員DXについて、<br />
             <span className="text-[#06C755]">一度ご相談ください。</span>
           </h2>
-          <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">外商顧客の規模・催事頻度・既存システムをお聞きして、二層設計の最適な構成をご提案します。初回相談は無料です。</p>
+          <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">外商規模・催事頻度・既存CRMをお聞きして最適な構成をご提案します。初回相談は無料です。</p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4">
             <Button variant="primary" size="lg" asChild>
               <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="final_primary" destination="contact">
