@@ -273,7 +273,7 @@ export default function QueuePage() {
       <Section id="features" spacing="md" container="wide" background="white">
         <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
           <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">FEATURES</div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">順番待いでできること</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">順番待ちでできること</h2>
           <p className="text-base text-[#4B5563]">紙の番号札と「あと何分？」の問い合わせをなくし、お客様とスタッフ双方の体験を改善します。</p>
         </div>
         <div className="space-y-12 md:space-y-16">
@@ -316,7 +316,7 @@ export default function QueuePage() {
         <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
           <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">INTEGRATIONS</div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">他の機能と組み合わせる</h2>
-          <p className="text-base text-[#4B5563]">順番待いで蓄積したデータを他機能と連携することで、待ち時間が顧客獲得と来店促進の機会に変わります。</p>
+          <p className="text-base text-[#4B5563]">順番待ちで蓄積したデータを他機能と連携することで、待ち時間が顧客獲得と来店促進の機会に変わります。</p>
         </div>
         <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
           {COMBINATIONS.map((c) => {
@@ -367,7 +367,7 @@ export default function QueuePage() {
         <div className="text-center space-y-6 md:space-y-8">
           <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#06C755] mb-2">CONTACT</div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
-            順番待いの導入について、<br />
+            順番待ちの導入について、<br />
             <span className="text-[#06C755]">一度ご相談ください。</span>
           </h2>
           <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">業種・現在の列管理方法・複数窓口の有無をお聞きして、最適な構成をご提案します。初回相談は無料です。</p>
