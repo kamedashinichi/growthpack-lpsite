@@ -761,7 +761,7 @@ export default function V2TopPage() {
             業種を問わず、導入が進んでいます。
           </h2>
           <p className="text-base text-[#4B5563]">
-            アパレル・飲食・小売・百貨店・ホテルなど、LINEユーザーと接点を持つさまざまな業種でご活用いただいています。
+            各業界の詳細ページで、業界固有の課題と解決策をご覧いただけます。
           </p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
@@ -770,45 +770,65 @@ export default function V2TopPage() {
               industry: 'アパレル・ファッション',
               use: 'デジタル会員証 + セグメント配信',
               result: '会員化率の向上と来店頻度アップを実現',
+              href: '/v2/apparel',
             },
             {
               industry: '飲食・カフェ',
               use: 'スタンプカード + 順番待ち',
               result: 'ペーパーレス化と再来店促進を同時に達成',
-            },
-            {
-              industry: '小売・量販店',
-              use: 'クーポン配信 + 1to1コミュニケーション',
-              result: '配信精度の向上でブロック率を低減',
+              href: '/v2/food',
             },
             {
               industry: '百貨店・商業施設',
               use: 'デジタル会員証 + チケット・パス',
               result: 'イベント動員数の可視化と集客効率化',
+              href: '/v2/department',
+            },
+            {
+              industry: 'ドラッグストア・薬局',
+              use: 'デジタル会員証 + 調剤完了通知',
+              result: '会員化と待ち時間ストレスの同時解消',
+              href: '/v2/drugstore',
+            },
+            {
+              industry: 'EC・D2C',
+              use: 'LINE ID連携 + カゴ落ちレスキュー',
+              result: 'カート放棄後の自動フォローで購買転換',
+              href: '/v2/ec',
             },
             {
               industry: 'ホテル・旅館',
-              use: '予約 + ギフト',
-              result: '再予約促進と法人ギフト需要の取り込み',
+              use: '予約 + セグメント配信',
+              result: '直予約率の向上とリピーター育成',
+              href: '/v2/hotel',
             },
             {
-              industry: 'サービス業全般',
-              use: '抽選 + セグメント配信',
-              result: 'エンゲージメント向上施策の効率的な展開',
+              industry: 'スポーツ・エンタメ',
+              use: 'デジタル会員証 + チケット・パス',
+              result: 'ライト層のデータ化とファン育成',
+              href: '/v2/sports',
             },
-          ].map(({ industry, use, result }) => (
-            <Card key={industry} padding="md">
-              <div className="text-xs font-semibold text-[#05A847] uppercase tracking-wider mb-2">INDUSTRY</div>
-              <h3 className="text-base font-bold text-[#1F2937] mb-2">{industry}</h3>
-              <div className="text-xs text-[#9CA3AF] mb-1">主な活用機能</div>
-              <p className="text-sm text-[#4B5563] mb-3">{use}</p>
-              <div className="pt-3 border-t border-[#E5E7EB]">
-                <div className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-[#06C755] shrink-0 mt-0.5" />
-                  <p className="text-sm font-semibold text-[#1F2937]">{result}</p>
+            {
+              industry: 'スーパー・ホームセンター',
+              use: 'デジタル会員証 + クーポン配信',
+              result: 'プラスチックカードからの移行と来店促進',
+              href: '/v2/supermarket',
+            },
+          ].map(({ industry, use, result, href }) => (
+            <Link key={industry} href={href} className="block hover:shadow-lg transition-shadow rounded-xl">
+              <Card key={industry} padding="md">
+                <div className="text-xs font-semibold text-[#05A847] uppercase tracking-wider mb-2">INDUSTRY</div>
+                <h3 className="text-base font-bold text-[#1F2937] mb-2">{industry}</h3>
+                <div className="text-xs text-[#9CA3AF] mb-1">主な活用機能</div>
+                <p className="text-sm text-[#4B5563] mb-3">{use}</p>
+                <div className="pt-3 border-t border-[#E5E7EB]">
+                  <div className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-[#06C755] shrink-0 mt-0.5" />
+                    <p className="text-sm font-semibold text-[#1F2937]">{result}</p>
+                  </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </Link>
           ))}
         </div>
         <p className="text-xs text-[#9CA3AF] text-center mt-6">
