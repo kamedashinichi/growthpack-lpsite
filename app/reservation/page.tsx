@@ -3,6 +3,7 @@
  *
  * docs/DESIGN-FEATURE-PAGE.md に厳密に従う。
  */
+import Image from 'next/image';
 import Link from 'next/link';
 import {
   ArrowRight,
@@ -214,49 +215,61 @@ export default function ReservationPage() {
         <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 80% 60% at 80% 100%, rgba(6,199,85,0.22), transparent 70%), linear-gradient(135deg, #0a0a0a 0%, #1a1d21 60%, #0a0a0a 100%)' }} />
         <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
         <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 py-20 sm:py-24 md:py-28">
-          <div className="max-w-[720px] space-y-6 md:space-y-7">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#06C755]/20 border border-[#06C755]/50 rounded-full text-xs sm:text-sm font-semibold text-[#06C755]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#06C755] shrink-0" />
-              予約機能
-            </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.15] tracking-tight text-white">
-              電話と紙をやめたら、<br />
-              予約が<span className="text-[#06C755]">顧客データ蓄積</span>の<br className="hidden sm:block" />
-              起点になる。
-            </h1>
-            <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">LINEで予約受付・リマインド・来店管理・事後配信を一気通貫で実現。24時間受付と自動リマインドで、取りこぼしと確認電話の工数をなくします。</p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
-              <Button variant="primary" size="lg" asChild>
-                <TrackedExternalLink
-                  href="https://classmethod.jp/services/line/line-apps/#iframe-form"
-                  location="hero"
-                  destination="contact"
+          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+            <div className="flex-1 max-w-[600px] space-y-6 md:space-y-7">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#06C755]/20 border border-[#06C755]/50 rounded-full text-xs sm:text-sm font-semibold text-[#06C755]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#06C755] shrink-0" />
+                予約機能
+              </div>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.15] tracking-tight text-white">
+                電話と紙をやめたら、<br />
+                予約が<span className="text-[#06C755]">顧客データ蓄積</span>の<br className="hidden sm:block" />
+                起点になる。
+              </h1>
+              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">LINEで予約受付・リマインド・来店管理・事後配信を一気通貫で実現。24時間受付と自動リマインドで、取りこぼしと確認電話の工数をなくします。</p>
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
+                <Button variant="primary" size="lg" asChild>
+                  <TrackedExternalLink
+                    href="https://classmethod.jp/services/line/line-apps/#iframe-form"
+                    location="hero"
+                    destination="contact"
+                  >
+                    無料で相談する
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </TrackedExternalLink>
+                </Button>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  asChild
+                  className="border-white/60 text-white hover:bg-white/10 hover:border-white"
                 >
-                  無料で相談する
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </TrackedExternalLink>
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                asChild
-                className="border-white/60 text-white hover:bg-white/10 hover:border-white"
-              >
-                <TrackedExternalLink
-                  href="https://growthpack-reservation-demo.vercel.app/demo/reserve"
-                  location="hero"
-                  destination="demo"
-                >
-                  デモを試す</TrackedExternalLink>
-              </Button>
+                  <TrackedExternalLink
+                    href="https://growthpack-reservation-demo.vercel.app/demo/reserve"
+                    location="hero"
+                    destination="demo"
+                  >
+                    デモを試す</TrackedExternalLink>
+                </Button>
+              </div>
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
+                {['24時間受付', '自動リマインド', '取りこぼしゼロ'].map((t) => (
+                  <div key={t} className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-[#06C755]" />
+                    {t}
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
-              {['24時間受付', '自動リマインド', '取りこぼしゼロ'].map((t) => (
-                <div key={t} className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-[#06C755]" />
-                  {t}
-                </div>
-              ))}
+            <div className="hidden md:flex flex-1 justify-center">
+              <Image
+                src="/images/reservation.png"
+                alt="予約機能のデモ画面"
+                width={300}
+                height={600}
+                className="drop-shadow-2xl"
+                priority
+              />
             </div>
           </div>
         </div>
