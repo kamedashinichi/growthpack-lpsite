@@ -29,7 +29,7 @@ export const departmentData: IndustryLPData = {
     { value: "5", unit: "秒", label: "で会員登録完了" },
   ],
   problem: {
-    heading: "百貨店・商業施設のDX担当者が抱える、5つの課題",
+    heading: "百貨店・商業施設のDX担当者が抱える、3つの課題",
     subtitle: "外商属人化・催事管理・データ分断——百貨店固有の構造課題",
     items: [
       {
@@ -103,7 +103,7 @@ export const departmentData: IndustryLPData = {
   ],
   featureSection: {
     heading: "百貨店・商業施設に必要な機能、すべて揃っています",
-    subtitle: "外商顧客から一般顧客まで、最短1ヶ月で顧客接点を変える",
+    subtitle: "外商顧客から一般顧客まで、アセットベースで顧客接点をスピード変革",
     items: [
       { image: "/images/会員証.png", name: "デジタル会員証", description: "売場横断の単一IDで全購買履歴を統合", url: "/memberscard" },
       { image: "/images/チケット.png", name: "チケット・パス発行", description: "催事招待・入場管理をLINEで完結", url: "/ticket" },

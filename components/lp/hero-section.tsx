@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { track } from "@vercel/analytics"
 import { Download, MessageCircle, ChevronDown } from "lucide-react"
 import type { HeroContent, IndustryId } from "@/lib/content"
+import { LandingGridPatternCtaBg } from "@/components/landing/cta-backgrounds/LandingGridPatternCtaBg"
 
 interface HeroSectionProps {
   content: HeroContent
@@ -149,6 +150,11 @@ function GenericHero({ isLoaded }: { isLoaded: boolean }) {
       className="relative pt-16 md:pt-[72px] min-h-[500px] sm:min-h-[600px] md:min-h-[700px] bg-gradient-to-b from-[#E8F8F0] to-white overflow-hidden"
       aria-labelledby="hero-heading"
     >
+      <LandingGridPatternCtaBg
+        className="absolute inset-0 opacity-30"
+        variant="primary"
+        gridSize="large"
+      />
       <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 py-12 sm:py-16 md:py-24 lg:py-[100px]">
         <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-10 lg:gap-16">
           {/* Text Content - Left 55% */}
@@ -219,7 +225,7 @@ function GenericHero({ isLoaded }: { isLoaded: boolean }) {
             }`}
           >
             <div className="relative w-full aspect-square">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#06C755]/15 via-[#39D275]/10 to-[#E8F8F0] rounded-full scale-110" />
+              <div className="absolute inset-0 bg-gradient-to-br from-[#06C755]/15 via-[#06C755]/10 to-[#E8F8F0] rounded-full scale-110" />
 
               <div className="absolute inset-3 sm:inset-4 lg:inset-6 bg-white rounded-[24px] sm:rounded-[32px] shadow-2xl overflow-hidden border border-[#E5E7EB]">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 sm:w-20 md:w-24 h-4 sm:h-5 md:h-6 bg-[#1F2937] rounded-b-xl sm:rounded-b-2xl" />
@@ -238,7 +244,7 @@ function GenericHero({ isLoaded }: { isLoaded: boolean }) {
                   </div>
 
                   <div className="space-y-1.5 sm:space-y-2 md:space-y-2.5 flex-1">
-                    <div className="bg-gradient-to-r from-[#06C755] to-[#39D275] rounded-lg sm:rounded-xl p-2 sm:p-2.5 md:p-3 text-white">
+                    <div className="bg-gradient-to-r from-[#06C755] to-[#05A847] rounded-lg sm:rounded-xl p-2 sm:p-2.5 md:p-3 text-white">
                       <div className="flex items-center justify-between mb-1 sm:mb-2">
                         <span className="text-[10px] sm:text-xs font-bold">会員証</span>
                         <span className="text-[8px] sm:text-[10px] bg-white/20 px-1.5 sm:px-2 py-0.5 rounded-full">Gold</span>
@@ -277,7 +283,7 @@ function GenericHero({ isLoaded }: { isLoaded: boolean }) {
               </div>
 
               <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 w-10 h-10 sm:w-14 sm:h-14 lg:w-20 lg:h-20 bg-[#FCD34D] rounded-full opacity-70 blur-sm" />
-              <div className="absolute -bottom-2 -left-2 sm:-bottom-4 sm:-left-4 w-8 h-8 sm:w-10 sm:h-10 lg:w-16 lg:h-16 bg-[#3B82F6] rounded-full opacity-50 blur-sm" />
+              <div className="absolute -bottom-2 -left-2 sm:-bottom-4 sm:-left-4 w-8 h-8 sm:w-10 sm:h-10 lg:w-16 lg:h-16 bg-[#06C755] rounded-full opacity-40 blur-sm" />
               <div className="absolute top-1/4 -left-3 sm:-left-6 w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 bg-[#06C755] rounded-full opacity-60" />
             </div>
           </div>

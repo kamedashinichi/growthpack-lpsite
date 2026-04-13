@@ -42,7 +42,7 @@ export const ecData: IndustryLPData = {
         icon: ShoppingCart,
         title: "カゴ落ち自動フォローの欠如",
         problem: "カゴ落ちをメールでフォローしているが、開封されない",
-        detail: "業界平均カゴ落ち率は約70%。メール開封率は約20%にとどまり、カゴ落ちが発生してもタイムリーな自動フォローができない",
+        detail: "国内ECのカゴ落ち率は約65%（イー・エージェンシー調査・850サイト・2022年）。メール開封率は約20%にとどまり、カゴ落ちが発生してもタイムリーな自動フォローができない",
       },
       {
         icon: TrendingUp,
@@ -103,7 +103,7 @@ export const ecData: IndustryLPData = {
   ],
   featureSection: {
     heading: "EC・D2C事業者に必要な機能、すべて揃っています",
-    subtitle: "LINE ID連携からギフトDXまで、最短1ヶ月でLINEをECの再購入エンジンに",
+    subtitle: "LINE ID連携からギフトDXまで、アセットベースでLINEをECの再購入エンジンに",
     items: [
       { image: "/images/会員証.png", name: "デジタル会員証（LINE ID連携）", description: "EC会員IDとLINE IDを統合。セグメント配信を解禁", url: "/memberscard" },
       { image: "/images/セグメント配信.png", name: "セグメント配信", description: "購買履歴・閲覧行動に基づく精緻な配信でブロック率低減", url: "/segment" },

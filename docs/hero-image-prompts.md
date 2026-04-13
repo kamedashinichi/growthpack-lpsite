@@ -59,7 +59,15 @@ A Japanese woman in her late 20s sitting comfortably on a sofa at home, smiling 
 ## スポーツ・エンタメ
 
 ```
-A vibrant Japanese baseball or soccer stadium scene during a daytime game, wide shot showing rows of enthusiastic fans in colorful team colors, cheering and waving flags. The stadium is filled to capacity, bright sunlight illuminating the crowd. A few fans in the foreground are clearly excited, some holding up foam hands or banners. The energy is festive and electric. Vertical portrait orientation, 3:4 aspect ratio, photorealistic, natural soft lighting, Japanese setting, warm color tones, no text overlays, no logos, no UI elements, shallow depth of field, shot with 85mm lens
+A Japanese stadium or arena entrance gate scene. A male staff member in his 30s wearing a uniform and lanyard is checking paper tickets and physical membership cards from a small line of fans waiting to enter. One fan in the foreground is searching through their bag looking slightly troubled, perhaps unable to find their card. Another fan is showing a paper ticket. The staff is professional but visibly busy with manual handling. Background shows the entrance gate with simple signage and fans in casual sports attire. The atmosphere conveys the inefficiency of analog operations at a busy venue. Vertical portrait orientation, 3:4 aspect ratio, photorealistic, natural soft lighting, Japanese setting, warm color tones, no text overlays, no logos, no UI elements, shallow depth of field, shot with 85mm lens
+```
+
+---
+
+## ホテル・宿泊
+
+```
+A Japanese female hotel front desk staff member in her late 20s wearing a clean formal uniform with a name tag, smiling warmly while welcoming a female guest in her 30s at the check-in counter of a modern upscale hotel. The guest looks relaxed, holding a small travel bag. The lobby behind them is bright and spacious with high ceilings, warm wooden interior accents, indoor plants, and soft natural light streaming through large windows. The atmosphere feels welcoming, calm, and refined. Vertical portrait orientation, 3:4 aspect ratio, photorealistic, natural soft lighting, Japanese setting, warm color tones, no text overlays, no logos, no UI elements, shallow depth of field, shot with 85mm lens
 ```
 
 ---
@@ -75,5 +83,6 @@ A vibrant Japanese baseball or soccer stadium scene during a daytime game, wide 
 | スーパー・HC | `supermarket-hero.png` |
 | EC | `ec-hero.png` |
 | スポーツ | `sports-hero.png` |
+| ホテル・宿泊 | `hotel-hero.png` |
 
 生成した画像は `/public/images/` に配置してください。

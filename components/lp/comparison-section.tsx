@@ -8,8 +8,8 @@ export function ComparisonSection() {
         <h2 className="text-2xl sm:text-3xl md:text-[40px] font-bold text-[#1F2937] leading-tight mb-4 sm:mb-6">
           開発アプローチの選び方
         </h2>
-        <p className="text-sm sm:text-base text-neutral-500 leading-[1.8] mb-10 sm:mb-14 max-w-[640px]">
-          月額制SaaSは手軽に始められますが、マルチブランド管理や既存システム連携が必要な場合は対応できません。フルスクラッチは自由度が高い反面、開発期間とコストが膨らみます。ハーフスクラッチは、開発済みの機能アセットをベースにすることで、両者の課題を解決します。
+        <p className="text-sm sm:text-base text-neutral-500 leading-[1.8] mb-10 sm:mb-14">
+          月額制SaaSは手軽ですが拡張性に限界があります。フルスクラッチは自由度が高い反面、期間とコストが膨らみます。ハーフスクラッチは開発済みアセットをベースに、両者の課題を解決します。
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 md:gap-6">

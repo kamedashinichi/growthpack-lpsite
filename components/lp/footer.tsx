@@ -13,7 +13,7 @@ export function LPFooter() {
             <div className="flex items-center justify-center md:justify-start gap-1 mb-1.5 sm:mb-2">
               <span className="text-lg sm:text-xl font-bold">グロースパック</span>
               <span className="text-lg sm:text-xl text-[#64748b]"> for </span>
-              <span className="text-lg sm:text-xl font-bold text-[#00C300]">LINE</span>
+              <span className="text-lg sm:text-xl font-bold text-[#06C755]">LINE</span>
             </div>
             <p className="text-xs sm:text-sm text-gray-400">スピード×柔軟性のLINEミニアプリ開発</p>
           </div>

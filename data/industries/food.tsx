@@ -19,7 +19,7 @@ export const foodData: IndustryLPData = {
         <br className="hidden sm:block" />
         LINEだけで解決する<span className="text-[#06C755] font-bold">ハーフスクラッチ型LINEミニアプリ</span>です。
         <br className="hidden sm:block" />
-        順番待ち・スタンプ・クーポン・予約、必要な機能を選んで最短1ヶ月で導入。
+        順番待ち・スタンプ・クーポン・予約、必要な機能を選んでアセットベースでスピード導入。
       </>
     ),
     heroImage: "/images/food-hero.png",
@@ -109,7 +109,7 @@ export const foodData: IndustryLPData = {
   ],
   featureSection: {
     heading: "飲食チェーンに選ばれる、4つのコア機能",
-    subtitle: "行列管理からリピーター育成まで、必要な機能を最短1ヶ月で導入",
+    subtitle: "行列管理からリピーター育成まで、必要な機能をアセットベースでスピード導入",
     items: [
       {
         image: "/images/順番待ち.png",

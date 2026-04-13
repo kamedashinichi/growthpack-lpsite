@@ -1,0 +1,380 @@
+{
+  "version": "1.0.0",
+  "updated_at": "2026-04-04T00:00:00+09:00",
+  "categories": [
+    {
+      "id": "CAT-A",
+      "name": "顧客を知る",
+      "tagline": "来ているのは誰か。データとして把握する",
+      "lead_copy": "来てくれているのに、誰が来ているか分からない。",
+      "sub_copy": "紙カード・アプリDL不要。LINE友だち追加だけで顧客IDを取得し、来店・購買・行動を自動蓄積します。"
+    },
+    {
+      "id": "CAT-B",
+      "name": "来店を促す",
+      "tagline": "また来る理由を、仕組みで作る",
+      "lead_copy": "また来てほしいのに、「また来る理由」を作れていない。",
+      "sub_copy": "スタンプゴール・クーポン・抽選を連動させ、「もう1回行こう」という動機を仕組みとして設計します。"
+    },
+    {
+      "id": "CAT-C",
+      "name": "体験を変える",
+      "tagline": "電話と紙をやめ、顧客接点をデジタル化する",
+      "lead_copy": "電話・紙・口頭対応がなくならず、顧客データも残らない。",
+      "sub_copy": "予約・順番待ち・チャットをLINEに集約。オペレーションを効率化しながら、顧客データを自動で蓄積します。"
+    },
+    {
+      "id": "CAT-D",
+      "name": "つながりを広げる",
+      "tagline": "一度の接点を、継続リーチの起点に変える",
+      "lead_copy": "接点を作っても、一回限りで終わってしまう。",
+      "sub_copy": "ギフトで既存顧客から紹介を生み、チケットでイベント来場者を継続リーチの起点に変えます。"
+    }
+  ],
+  "features": [
+    {
+      "id": "membership",
+      "name": "デジタル会員証",
+      "catchcopy": "友だち追加だけで、顧客を\"個客\"として覚える",
+      "description": "LINE友だち追加だけで即時会員化。来店回数・ランク・購買履歴をIDに自動蓄積し、紙カード不要の顧客管理を実現します。",
+      "points": [
+        "LINE友だち追加で即時会員化。紙記入・アプリDL不要",
+        "来店回数・ランク・購買履歴をIDに自動蓄積",
+        "担当が替わっても、顧客情報はリセットされない"
+      ],
+      "maturity": "L4",
+      "backlog_count": { "base": 12, "custom": 8 },
+      "category_id": "CAT-A",
+      "demo_url": "https://asepro-membership-demo.vercel.app",
+      "detail_path": "/features/membership",
+      "industries": ["apparel", "food", "beauty", "drugstore", "car_dealer", "all"],
+      "updated_at": "2026-04-04"
+    },
+    {
+      "id": "segment_manager",
+      "name": "セグメントマネージャー",
+      "catchcopy": "「誰が」「いつ」「何をしたか」を管理画面で把握する",
+      "description": "LINE友だちの来店・購買・行動を一覧で可視化。条件を組み合わせてセグメントを作成し、配信まで一気通貫で実行します。",
+      "points": [
+        "LINE友だちの来店・購買・行動を一覧で可視化",
+        "条件を組み合わせてセグメントを作成、配信まで実行",
+        "各機能のデータが自動集約。CRMが自然に育つ"
+      ],
+      "maturity": "L3",
+      "backlog_count": { "base": 8, "custom": 12 },
+      "category_id": "CAT-A",
+      "demo_url": null,
+      "detail_path": "/features/segment-manager",
+      "industries": ["apparel", "food", "beauty", "department_store", "drugstore", "car_dealer"],
+      "updated_at": "2026-04-04"
+    },
+    {
+      "id": "coupon",
+      "name": "クーポン配信",
+      "catchcopy": "紙クーポンをゼロにし、効果をリアルタイムで測る",
+      "description": "離脱しそうな顧客に、ちょうどいいタイミングで自動配信。QRコード消込で二重利用を防止し、利用率を即時計測します。",
+      "points": [
+        "離脱しそうな顧客に、ちょうどいいタイミングで自動配信",
+        "QRコード消込で二重利用を防止。利用率を即時計測",
+        "顧客ランク・来店回数でクーポンを自動で出し分け"
+      ],
+      "maturity": "L4",
+      "backlog_count": { "base": 10, "custom": 10 },
+      "category_id": "CAT-B",
+      "demo_url": "https://asepro-coupon-demo.vercel.app",
+      "detail_path": "/features/coupon",
+      "industries": ["food", "beauty", "drugstore", "apparel", "all"],
+      "updated_at": "2026-04-04"
+    },
+    {
+      "id": "stamp_card",
+      "name": "スタンプカード",
+      "catchcopy": "「あと1回で特典」を、自動で届ける",
+      "description": "QRスキャンでデジタルスタンプ付与。来店が途絶えたら自動検知し、呼び戻し配信を発火。ゴール達成→クーポン自動発行まで自動化。",
+      "points": [
+        "QRスキャンでデジタルスタンプ付与。全店舗統一管理",
+        "来店が途絶えたら自動検知し、呼び戻し配信を発火",
+        "ゴール達成→クーポン自動発行のパイプラインを設定"
+      ],
+      "maturity": "L4",
+      "backlog_count": { "base": 8, "custom": 6 },
+      "category_id": "CAT-B",
+      "demo_url": null,
+      "detail_path": "/features/stamp-card",
+      "industries": ["food", "beauty", "drugstore", "apparel"],
+      "updated_at": "2026-04-04"
+    },
+    {
+      "id": "lottery",
+      "name": "抽選",
+      "catchcopy": "当たらなかった人にも、「また来る理由」を渡す",
+      "description": "LINE上で完結する抽選。当選→クーポン自動配布。落選者にも参加賞を自動配布し、離脱ゼロ設計を実現します。",
+      "points": [
+        "LINE上で完結する抽選。当選通知→クーポン自動配布",
+        "落選者にも参加賞クーポンを自動配布。離脱ゼロ設計",
+        "会員属性で参加資格・当選確率を制御。VIP向け特別抽選も対応"
+      ],
+      "maturity": "L3",
+      "backlog_count": { "base": 6, "custom": 8 },
+      "category_id": "CAT-B",
+      "demo_url": null,
+      "detail_path": "/features/lottery",
+      "industries": ["apparel", "department_store", "sports_leisure", "food"],
+      "updated_at": "2026-04-04"
+    },
+    {
+      "id": "reservation",
+      "name": "予約",
+      "catchcopy": "電話予約を廃止し、顧客データを蓄積する起点に変える",
+      "description": "LINEリッチメニューから24時間受付。前日確認の電話が不要になる自動リマインド配信と、来店周期トリガーの案内配信を実現。",
+      "points": [
+        "LINEリッチメニューから24時間受付。電話・紙台帳を不要に",
+        "前日確認の電話が不要になる自動リマインド配信",
+        "来店周期を検知して、車検・定期点検の案内を自動送信"
+      ],
+      "maturity": "L4",
+      "backlog_count": { "base": 10, "custom": 8 },
+      "category_id": "CAT-C",
+      "demo_url": "https://growthpack-reservation-demo.vercel.app",
+      "detail_path": "/features/reservation",
+      "industries": ["food", "beauty", "car_dealer"],
+      "updated_at": "2026-04-04"
+    },
+    {
+      "id": "queue",
+      "name": "順番待ち",
+      "catchcopy": "行列をなくし、待ち時間を顧客データに変える",
+      "description": "LINE整理券でその場を離れられる。「あと3組」で通知。整理券取得と同時に会員化し、匿名の行列を顧客IDに変換します。",
+      "points": [
+        "LINE整理券でその場を離れられる。「あと3組」で通知",
+        "予約客と飛び込み客を同一画面で統合管理",
+        "整理券取得と同時に会員化。匿名の行列を顧客IDに変換"
+      ],
+      "maturity": "L3",
+      "backlog_count": { "base": 8, "custom": 6 },
+      "category_id": "CAT-C",
+      "demo_url": null,
+      "detail_path": "/features/queue",
+      "industries": ["food", "beauty", "department_store", "sports_leisure"],
+      "updated_at": "2026-04-04"
+    },
+    {
+      "id": "one_to_one",
+      "name": "1to1コミュニケーション",
+      "catchcopy": "担当が替わっても、対話の歴史は組織に残る",
+      "description": "スタッフ⇔顧客のチャットを公式アカウントに集約。好み・タグ・対話履歴をスタッフ間で共有・引き継ぎし、属人化を解消します。",
+      "points": [
+        "スタッフ⇔顧客のチャットを公式アカウントに集約",
+        "好み・タグ・対話履歴をスタッフ間で共有・引き継ぎ",
+        "営業時間外は自動応答。翌日に担当へ通知"
+      ],
+      "maturity": "L3",
+      "backlog_count": { "base": 8, "custom": 10 },
+      "category_id": "CAT-C",
+      "demo_url": null,
+      "detail_path": "/features/one-to-one",
+      "industries": ["apparel", "beauty", "car_dealer"],
+      "updated_at": "2026-04-04"
+    },
+    {
+      "id": "gift",
+      "name": "ギフト",
+      "catchcopy": "「贈る体験」で既存顧客を新規獲得の入口にする",
+      "description": "住所不要でLINEからデジタルギフトを送付。受取人がサイズ・カラーを自分で選択し、ギフト受取→友だち追加→新規会員化の自動導線を構築。",
+      "points": [
+        "住所不要でLINEからデジタルギフトを送付できる",
+        "受取人がサイズ・カラーを自分で選択。返品リスクを低減",
+        "ギフト受取→友だち追加→新規会員化の自動導線"
+      ],
+      "maturity": "L3",
+      "backlog_count": { "base": 8, "custom": 8 },
+      "category_id": "CAT-D",
+      "demo_url": null,
+      "detail_path": "/features/gift",
+      "industries": ["apparel", "department_store", "beauty"],
+      "updated_at": "2026-04-04"
+    },
+    {
+      "id": "ticket",
+      "name": "チケット・パス発行",
+      "catchcopy": "一夜限りのイベントを、継続リーチの起点に変える",
+      "description": "デジタルチケット発行と同時にLINE友だち追加でIDを取得。QRスキャンで入場チェックし、転売・偽造・二重入場を防止します。",
+      "points": [
+        "デジタルチケット発行と同時にLINE友だち追加でIDを取得",
+        "QRスキャンで入場チェック。転売・偽造・二重入場を防止",
+        "時間枠・定員を管理し、物理行列を解消"
+      ],
+      "maturity": "L3",
+      "backlog_count": { "base": 8, "custom": 6 },
+      "category_id": "CAT-D",
+      "demo_url": null,
+      "detail_path": "/features/ticket",
+      "industries": ["department_store", "apparel", "sports_leisure"],
+      "updated_at": "2026-04-04"
+    },
+    {
+      "id": "line_id_link",
+      "name": "LINE ID連携",
+      "catchcopy": "既存の顧客DBとLINEを安全につなぎ、施策の精度を上げる",
+      "description": "既存のCRM・会員システムとLINE IDを連携。保有データを活用したセグメント配信と、チャネルをまたいだ顧客行動の統合分析を実現します。",
+      "points": [
+        "既存CRM・会員システムのIDとLINEを安全に紐付け",
+        "保有顧客データを活用したセグメント配信が可能に",
+        "オンライン・店頭・LINEの行動を統合して顧客理解を深化"
+      ],
+      "maturity": "L3",
+      "backlog_count": { "base": 6, "custom": 10 },
+      "category_id": "CAT-A",
+      "demo_url": null,
+      "detail_path": "/features/line-id-link",
+      "industries": ["apparel", "department_store", "drugstore", "car_dealer"],
+      "updated_at": "2026-04-04"
+    }
+  ],
+  "use_cases": [
+    {
+      "id": "uc-a-01",
+      "category_id": "CAT-A",
+      "challenge": "来店客のデータが取れていない（紙・アプリ未導入）",
+      "feature_ids": ["membership"],
+      "combination_reason": "LINE友だち追加だけで会員化。登録ハードル最低",
+      "industries": ["food", "apparel", "beauty"]
+    },
+    {
+      "id": "uc-a-02",
+      "category_id": "CAT-A",
+      "challenge": "誰がどれくらいの頻度で来ているか可視化したい",
+      "feature_ids": ["membership", "segment_manager"],
+      "combination_reason": "会員証がデータ蓄積、セグメントマネージャーが管理画面で可視化",
+      "industries": ["food", "beauty"]
+    },
+    {
+      "id": "uc-a-03",
+      "category_id": "CAT-A",
+      "challenge": "優良客に個別で施策を打ちたいが絞り込めない",
+      "feature_ids": ["segment_manager"],
+      "combination_reason": "セグメントビルダーで属性・来店回数条件を設定",
+      "industries": ["apparel", "department_store"]
+    },
+    {
+      "id": "uc-a-04",
+      "category_id": "CAT-A",
+      "challenge": "担当スタッフが退職すると顧客情報が消える",
+      "feature_ids": ["membership", "one_to_one"],
+      "combination_reason": "IDに対話履歴・好みが紐付き、担当交代でもリセットされない",
+      "industries": ["beauty", "apparel"]
+    },
+    {
+      "id": "uc-b-01",
+      "category_id": "CAT-B",
+      "challenge": "紙クーポンの印刷・配布コストをなくしたい",
+      "feature_ids": ["coupon"],
+      "combination_reason": "デジタル配布でコストゼロ、利用率もリアルタイムで計測",
+      "industries": ["food", "apparel"]
+    },
+    {
+      "id": "uc-b-02",
+      "category_id": "CAT-B",
+      "challenge": "クーポンの効果（来店につながったか）が測定できない",
+      "feature_ids": ["coupon", "segment_manager"],
+      "combination_reason": "配信→クーポン利用→来店の転換率を自動計測",
+      "industries": ["food", "drugstore"]
+    },
+    {
+      "id": "uc-b-03",
+      "category_id": "CAT-B",
+      "challenge": "紙スタンプカードをデジタル化したい",
+      "feature_ids": ["stamp_card"],
+      "combination_reason": "QRスキャンで付与。全店舗統一管理",
+      "industries": ["food", "beauty"]
+    },
+    {
+      "id": "uc-b-04",
+      "category_id": "CAT-B",
+      "challenge": "「もう1回来る理由」を自動で作りたい",
+      "feature_ids": ["stamp_card", "coupon"],
+      "combination_reason": "ゴール達成→クーポン自動配布のパイプライン",
+      "industries": ["food", "beauty"]
+    },
+    {
+      "id": "uc-b-05",
+      "category_id": "CAT-B",
+      "challenge": "イベントやセールで集客したいが、その後の接点がない",
+      "feature_ids": ["lottery", "ticket"],
+      "combination_reason": "チケットでID取得→抽選でエンゲージ→クーポンで来店動機",
+      "industries": ["department_store", "apparel"]
+    },
+    {
+      "id": "uc-c-01",
+      "category_id": "CAT-C",
+      "challenge": "電話予約が無くならず、ダブルブッキングが起きる",
+      "feature_ids": ["reservation"],
+      "combination_reason": "LINE上で予約受付、確認・リマインド自動配信",
+      "industries": ["food", "beauty"]
+    },
+    {
+      "id": "uc-c-02",
+      "category_id": "CAT-C",
+      "challenge": "車検・定期点検の告知が届かず他社に流出する",
+      "feature_ids": ["reservation"],
+      "combination_reason": "利用周期トリガーで時期ベースのリマインド自動配信",
+      "industries": ["car_dealer"]
+    },
+    {
+      "id": "uc-c-03",
+      "category_id": "CAT-C",
+      "challenge": "行列ができて顧客が帰ってしまう",
+      "feature_ids": ["queue"],
+      "combination_reason": "LINE整理券発行→順番接近通知で物理行列を解消",
+      "industries": ["food", "department_store"]
+    },
+    {
+      "id": "uc-c-04",
+      "category_id": "CAT-C",
+      "challenge": "予約客と飛び込み客を別々に管理していて混乱する",
+      "feature_ids": ["reservation", "queue"],
+      "combination_reason": "同一画面で統合管理、列の優先制御",
+      "industries": ["food", "beauty"]
+    },
+    {
+      "id": "uc-c-05",
+      "category_id": "CAT-C",
+      "challenge": "担当スタッフが替わると「また最初から」になる",
+      "feature_ids": ["one_to_one"],
+      "combination_reason": "対話履歴・好み・タグが組織に残り、誰でも引き継げる",
+      "industries": ["apparel", "beauty"]
+    },
+    {
+      "id": "uc-c-06",
+      "category_id": "CAT-C",
+      "challenge": "個人LINEで顧客対応しているが管理できていない",
+      "feature_ids": ["one_to_one"],
+      "combination_reason": "公式アカウントに集約。スタッフ間共有・引き継ぎ対応",
+      "industries": ["beauty", "apparel", "food"]
+    },
+    {
+      "id": "uc-d-01",
+      "category_id": "CAT-D",
+      "challenge": "既存顧客からの紹介を仕組みにしたい",
+      "feature_ids": ["gift"],
+      "combination_reason": "LINEで友人にギフト送付→受取人が新規会員化",
+      "industries": ["apparel", "food", "beauty"]
+    },
+    {
+      "id": "uc-d-02",
+      "category_id": "CAT-D",
+      "challenge": "イベント来場者に事後コミュニケーションができない",
+      "feature_ids": ["ticket"],
+      "combination_reason": "チケット発行と同時にLINE友だち追加でIDを取得",
+      "industries": ["department_store", "apparel"]
+    },
+    {
+      "id": "uc-d-03",
+      "category_id": "CAT-D",
+      "challenge": "セールやポップアップで集めた接点を継続化したい",
+      "feature_ids": ["ticket", "lottery", "membership"],
+      "combination_reason": "接点創出→ID取得→抽選でエンゲージ→配信で継続",
+      "industries": ["apparel", "department_store"]
+    }
+  ]
+}

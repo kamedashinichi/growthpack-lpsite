@@ -23,10 +23,8 @@ export const retailData: IndustryLPData = {
     ),
   },
   metrics: [
-    { value: "3", unit: "倍", label: "会員数増加" },
     { value: "5", unit: "秒", label: "で会員登録完了" },
-    { value: "15", unit: "万人", label: "友だち増加" },
-    { value: "5", unit: "倍以上", label: "会員証提示率" },
+    { value: "5", unit: "倍以上", label: "会員証提示率（月間）" },
   ],
   problem: {
     heading: "こんなお悩み、ありませんか？",
@@ -77,9 +75,7 @@ export const retailData: IndustryLPData = {
       scale: "63店舗",
       timeline: "導入後1年",
       metrics: [
-        { value: "15", unit: "万人", label: "友だち増加" },
-        { value: "11", unit: "万人", label: "会員数増加" },
-        { value: "5", unit: "倍以上", label: "会員証提示率" },
+        { value: "5", unit: "倍以上", label: "会員証提示率（月間）" },
       ],
     },
   ],
@@ -126,7 +122,7 @@ export const retailData: IndustryLPData = {
   ],
   featureSection: {
     heading: "店舗に必要な機能、すべて揃っています",
-    subtitle: "必要な機能を選択して、最短3ヶ月でLINEミニアプリを構築",
+    subtitle: "必要な機能を選択して、アセットベースでLINEミニアプリをスピード構築",
     items: [
       { image: "/images/会員証.png", name: "LINE会員証", description: "5秒で会員化、アプリDL不要", url: "/memberscard" },
       { image: "/images/順番待ち.png", name: "順番待ち", description: "待ち時間を可視化", url: "/waiting" },

@@ -7,7 +7,7 @@ export const CTA_CONTACT = "https://classmethod.jp/services/line/line-apps/#ifra
 export const securityItems: SecurityItem[] = [
   { icon: ShieldCheck, title: "LINE公認テクノロジーパートナー", description: "LINE社から技術力を認定されたパートナー企業として、高品質な開発を提供" },
   { icon: Cloud, title: "AWS上のセキュアな基盤", description: "AWS Premierパートナーとして、堅牢なインフラ環境で運用" },
-  { icon: Award, title: "200社以上の導入実績", description: "小売・飲食・サービス業を中心に、幅広い業種での実績" },
+  { icon: Award, title: "小売・飲食・サービス業の導入実績", description: "幅広い業種での開発・運用ノウハウを蓄積" },
 ]
 
 export const flowSteps: FlowStep[] = [

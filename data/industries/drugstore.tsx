@@ -19,13 +19,12 @@ export const drugstoreData: IndustryLPData = {
         <br className="hidden sm:block" />
         来店客全員を会員化し、購買属性でセグメント配信する。
         <br className="hidden sm:block" />
-        ドラッグストア・薬局のための顧客接点DXを、<span className="text-[#06C755] font-bold">最短1ヶ月</span>で。
+        ドラッグストア・薬局のための顧客接点DXを、<span className="text-[#06C755] font-bold">アセットベース</span>でスピード構築。
       </>
     ),
     heroImage: "/images/drugstore-hero.png",
   },
   metrics: [
-    { value: "1", unit: "ヶ月", label: "最短導入期間" },
     { value: "5", unit: "秒", label: "で会員登録完了" },
   ],
   problem: {
@@ -96,14 +95,14 @@ export const drugstoreData: IndustryLPData = {
       colorLight: "#F5F3FF",
       title: "調剤連携で来店体験を向上する",
       subtitle: "STEP 3",
-      description: "調剤完了をLINEで通知。待ち時間中に関連OTC薬のクーポンを配信して買い回りを促進。",
+      description: "調剤完了をLINEで通知。待ち時間中に関連商品のクーポンを配信して買い回りを促進。",
       features: ["1to1コミュニケーション", "セグメント配信"],
       icon: Smartphone,
     },
   ],
   featureSection: {
     heading: "ドラッグストア・薬局に必要な機能、すべて揃っています",
-    subtitle: "プラカード廃止から調剤連携まで、最短1ヶ月で導入",
+    subtitle: "プラカード廃止から調剤連携まで、アセットベースでスピード導入",
     items: [
       { image: "/images/会員証.png", name: "デジタル会員証", description: "レジQRで5秒会員化。アプリDL不要", url: "/memberscard" },
       { image: "/images/クーポン.png", name: "クーポン配信", description: "不正利用ゼロ。ユニークIDで1回限り制御", url: "/coupon" },
