@@ -39,6 +39,7 @@ import { ScrollTracker } from './scroll-tracker';
 // 飲食業界で特に効く7機能に絞り込み（DESIGN §7-6 推奨: 会員証/順番待ち/スタンプ/クーポン/セグメント配信/予約）
 // 1to1は飲食では優先度低めだが、マルチブランドCRM文脈で追加
 const FEATURES = [
+  // Phase 1
   {
     image: '/images/会員証.png',
     name: 'デジタル会員証',
@@ -53,6 +54,7 @@ const FEATURES = [
     phase: 'Phase 1',
     id: 'queue',
   },
+  // Phase 2
   {
     image: '/images/スタンプカード.png',
     name: 'スタンプカード',
@@ -68,18 +70,19 @@ const FEATURES = [
     id: 'coupon',
   },
   {
-    image: '/images/セグメント配信.png',
-    name: 'セグメント配信',
-    tagline: '来店間隔・業態・注文パターンで配信を出し分け。休眠会員の掘り起こしに。',
-    phase: 'Phase 3',
-    id: 'segment-delivery',
-  },
-  {
     image: '/images/予約.png',
     name: '予約',
     tagline: '電話不要のLINE予約で機会損失を防止。ピーク時の着席率を改善。',
     phase: 'Phase 2',
     id: 'reservation',
+  },
+  // Phase 3
+  {
+    image: '/images/セグメント配信.png',
+    name: 'セグメント配信',
+    tagline: '来店間隔・業態・注文パターンで配信を出し分け。休眠会員の掘り起こしに。',
+    phase: 'Phase 3',
+    id: 'segment-delivery',
   },
   {
     image: '/images/1to1.png',

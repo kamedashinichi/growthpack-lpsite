@@ -37,6 +37,7 @@ import { ScrollTracker } from './scroll-tracker';
 
 // スポーツ・エンタメ業界で特に効く6機能（QR+ポイント統合を先頭に）
 const FEATURES = [
+  // Phase 1
   {
     image: '/images/会員証.png',
     name: 'デジタル会員証',
@@ -51,6 +52,7 @@ const FEATURES = [
     phase: 'Phase 1',
     id: 'ticket',
   },
+  // Phase 2
   {
     image: '/images/抽選.png',
     name: '抽選',
@@ -72,6 +74,7 @@ const FEATURES = [
     phase: 'Phase 2',
     id: 'coupon',
   },
+  // Phase 3
   {
     image: '/images/セグメント配信.png',
     name: 'セグメント配信',

@@ -39,6 +39,7 @@ import { ScrollTracker } from './scroll-tracker';
 // アパレル業界で実際に効く6機能に絞り込み
 // 除外: 順番待ち / 予約 / チケット・パス / 抽選（他業種向け）
 const FEATURES = [
+  // Phase 1
   {
     image: '/images/会員証.png',
     name: 'デジタル会員証',
@@ -46,6 +47,7 @@ const FEATURES = [
     phase: 'Phase 1',
     id: 'membership',
   },
+  // Phase 2
   {
     image: '/images/1to1.png',
     name: '1to1コミュニケーション',
@@ -67,6 +69,7 @@ const FEATURES = [
     phase: 'Phase 2',
     id: 'coupon',
   },
+  // Phase 3
   {
     image: '/images/セグメント配信.png',
     name: 'セグメント配信',

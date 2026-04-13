@@ -39,6 +39,7 @@ import { ScrollTracker } from './scroll-tracker';
 // ホテル・旅館業界で効く6機能に絞り込み
 // 除外: 順番待ち / チケット・パス / 抽選 / スタンプカード（他業種向け）
 const FEATURES = [
+  // Phase 1
   {
     image: '/images/予約.png',
     name: '予約',
@@ -53,6 +54,7 @@ const FEATURES = [
     phase: 'Phase 1',
     id: 'membership',
   },
+  // Phase 2
   {
     image: '/images/クーポン.png',
     name: 'クーポン配信',
@@ -67,6 +69,7 @@ const FEATURES = [
     phase: 'Phase 2',
     id: 'one-to-one',
   },
+  // Phase 3
   {
     image: '/images/セグメント配信.png',
     name: 'セグメント配信',

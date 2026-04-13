@@ -43,6 +43,7 @@ import { ScrollTracker } from './scroll-tracker';
 // SM・HC業界で実際に効く6機能に絞り込み
 // 除外: 予約 / チケット・パス / 1to1コミュニケーション
 const FEATURES = [
+  // Phase 1
   {
     image: '/images/会員証.png',
     name: 'デジタル会員証',
@@ -57,6 +58,7 @@ const FEATURES = [
     phase: 'Phase 1',
     id: 'stamp-card',
   },
+  // Phase 2
   {
     image: '/images/クーポン.png',
     name: 'クーポン配信',
@@ -78,6 +80,7 @@ const FEATURES = [
     phase: 'Phase 2',
     id: 'lottery',
   },
+  // Phase 3
   {
     image: '/images/ギフト.png',
     name: 'ギフト',

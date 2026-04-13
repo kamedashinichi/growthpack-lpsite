@@ -42,6 +42,7 @@ import { ScrollTracker } from './scroll-tracker';
 // ドラッグストア業界で実際に効く6機能に絞り込み（DESIGN §7-6 DS推奨）
 // 除外: 順番待ち / 予約 / チケット・パス / 抽選（他業種向け）
 const FEATURES = [
+  // Phase 1
   {
     image: '/images/会員証.png',
     name: 'デジタル会員証',
@@ -49,6 +50,7 @@ const FEATURES = [
     phase: 'Phase 1',
     id: 'membership',
   },
+  // Phase 2
   {
     image: '/images/スタンプカード.png',
     name: 'スタンプカード',
@@ -70,6 +72,7 @@ const FEATURES = [
     phase: 'Phase 2',
     id: 'one-to-one',
   },
+  // Phase 3
   {
     image: '/images/セグメント配信.png',
     name: 'セグメント配信',

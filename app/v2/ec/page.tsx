@@ -40,6 +40,7 @@ import { ScrollTracker } from './scroll-tracker';
 // 除外: 順番待ち / 予約 / チケット・パス / 抽選（他業種向け）
 // 「デジタル会員証」表現は避け「LINE ID連携会員証」を使用
 const FEATURES = [
+  // Phase 1
   {
     image: '/images/会員証.png',
     name: 'LINE ID連携会員証',
@@ -47,6 +48,7 @@ const FEATURES = [
     phase: 'Phase 1',
     id: 'id-linkage',
   },
+  // Phase 2
   {
     image: '/images/セグメント配信.png',
     name: 'セグメント配信',
@@ -62,18 +64,19 @@ const FEATURES = [
     id: 'coupon',
   },
   {
-    image: '/images/ギフト.png',
-    name: 'ソーシャルギフト',
-    tagline: '受取人の即時会員化・住所不要・CAC≒0の新規獲得モデル。ロイヤル顧客が自社の営業マンになる。',
-    phase: 'Phase 3',
-    id: 'social-gift',
-  },
-  {
     image: '/images/1to1.png',
     name: '1to1コミュニケーション',
     tagline: '再入荷通知・購買周期リマインドを自動配信。個別接点でLTVを最大化。',
     phase: 'Phase 2',
     id: 'one-to-one',
+  },
+  // Phase 3
+  {
+    image: '/images/ギフト.png',
+    name: 'ソーシャルギフト',
+    tagline: '受取人の即時会員化・住所不要・CAC≒0の新規獲得モデル。ロイヤル顧客が自社の営業マンになる。',
+    phase: 'Phase 3',
+    id: 'social-gift',
   },
 ];
 
