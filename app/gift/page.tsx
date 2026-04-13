@@ -39,6 +39,7 @@ const FEATURE_GROUPS = [
         name: 'URL共有でギフト送信',
         challenge: '住所を聞くのが気まずくて、贈りたいのに購入を諦めているお客様が一定数いる',
         solution: 'URLをLINEで送るだけでギフト送信完結。住所不要・配送手配不要で贈る体験のハードルを下げる。',
+        demo_url: 'https://gift-demo-one.vercel.app/demo/gift-top',
       },
       {
         icon: Palette,
@@ -220,6 +221,11 @@ export default function GiftPage() {
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </a>
               </Button>
+              <Button variant="outline" size="lg" asChild className="border-white/60 text-white hover:bg-white/10 hover:border-white">
+                <a href="https://gift-demo-one.vercel.app/demo/gift-top" target="_blank" rel="noopener noreferrer">
+                  デモを試す
+                </a>
+              </Button>
             </div>
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
               {['住所不要', '受取人が自分で選ぶ', '受取と同時に会員化'].map((t) => (
@@ -278,6 +284,12 @@ export default function GiftPage() {
                       </div>
                       <p className="text-sm text-[#9CA3AF] mb-2">「{f.challenge}」</p>
                       <p className="text-sm text-[#4B5563] leading-relaxed">{f.solution}</p>
+                      {f.demo_url && (
+                        <a href={f.demo_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm font-semibold text-[#05A847] mt-3 hover:text-[#048838] transition-colors">
+                          デモを試す
+                          <ArrowRight className="w-4 h-4" />
+                        </a>
+                      )}
                     </Card>
                   );
                 })}

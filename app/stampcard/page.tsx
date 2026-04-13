@@ -40,6 +40,7 @@ const FEATURE_GROUPS = [
         name: 'QRスキャンでスタンプ付与',
         challenge: '紙のスタンプカードを忘れてきたお客様に毎回記録できず、来店履歴がまったく残っていない',
         solution: 'スタッフがQRをスキャンするだけでデジタルスタンプを付与。カード不要でどの来店も記録。',
+        demo_url: 'https://prototype-stampcard-function.vercel.app/demo/home',
       },
       {
         icon: Bell,
@@ -233,6 +234,11 @@ export default function StampCardPage() {
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </a>
               </Button>
+              <Button variant="outline" size="lg" asChild className="border-white/60 text-white hover:bg-white/10 hover:border-white">
+                <a href="https://prototype-stampcard-function.vercel.app/demo/home" target="_blank" rel="noopener noreferrer">
+                  デモを試す
+                </a>
+              </Button>
             </div>
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
               {['離脱の事前検知', 'ゴール接近通知', '全店舗一元管理'].map((t) => (
@@ -291,6 +297,12 @@ export default function StampCardPage() {
                       </div>
                       <p className="text-sm text-[#9CA3AF] mb-2">「{f.challenge}」</p>
                       <p className="text-sm text-[#4B5563] leading-relaxed">{f.solution}</p>
+                      {f.demo_url && (
+                        <a href={f.demo_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm font-semibold text-[#05A847] mt-3 hover:text-[#048838] transition-colors">
+                          デモを試す
+                          <ArrowRight className="w-4 h-4" />
+                        </a>
+                      )}
                     </Card>
                   );
                 })}
