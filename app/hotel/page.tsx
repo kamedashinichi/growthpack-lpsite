@@ -1,18 +1,19 @@
 /**
- * /v2/sports — グロースパック for LINE スポーツ・エンタメ業界向けLP
+ * /hotel — グロースパック for LINE ホテル・旅館業界向けLP
  *
  * docs/DESIGN.md v2.1 に厳密に従う。
- * app/v2/apparel/page.tsx をベースに、スポーツ・エンタメ業界固有のコンテンツへ差し替え。
+ * app/apparel/page.tsx を雛形として、ホテル業界固有のコンテンツに差し替え。
  *
- * 訴求軸（15社調査・Issue #38/#50/#84/#85 確定）:
- *   コアファン vs ライト層の対比を中心に構成。
- *   ライト層（年1-2回来場）の接点創出・育成フローが業界共通の未解決課題。
+ * 訴求軸（project_hotel_industry.md 確定）:
+ *   OTA手数料削減・直予約率向上を経営層（CFO/社長）に直接フック。
+ *   チェックインDXは旅館業法制約があるため Hero では扱わない。
  *
  * - 価格の具体額は一切記載しない
  * - 和文段落は1行にまとめる（§12 和文改行禁止）
  * - 機能アイコンは /public/images/<機能名>.png を <Image> で表示
  * - CTA リンクは §10 正規 URL
- * - 独自アプリを否定しない。LINEとの補完レイヤーとして位置付ける
+ * - GP事例ゼロのため caseStudies は空。STATS は「業界水準」として提示
+ * - RET-166 は本 LP 非掲載
  */
 import Link from 'next/link';
 import Image from 'next/image';
@@ -34,107 +35,102 @@ import { ScrollTracker } from './scroll-tracker';
 /* DATA                                                                  */
 /* ------------------------------------------------------------------ */
 
-// スポーツ・エンタメ業界で特に効く6機能（QR+ポイント統合を先頭に）
+// ホテル・旅館業界で効く6機能に絞り込み
+// 除外: 順番待ち / チケット・パス / 抽選 / スタンプカード（他業種向け）
 const FEATURES = [
   // Phase 1
   {
+    image: '/images/予約.png',
+    name: '予約',
+    tagline: 'LINE上で宿泊予約を受け、OTA経由を直予約に巻き取る。予約完了後の会員登録も自動化します。',
+    phase: 'Step 1',
+    id: 'reservation',
+  },
+  {
     image: '/images/会員証.png',
     name: 'デジタル会員証',
-    tagline: 'QRコード対応のデジタル会員証。アプリDL不要でライト層を即座にデータ化できます。',
+    tagline: '友だち追加と同時に会員化。アプリDL不要、5秒で会員登録。再来訪時の本人特定も容易に。',
     phase: 'Step 1',
     id: 'membership',
   },
-  {
-    image: '/images/チケット.png',
-    name: 'チケット・パス',
-    tagline: 'チケット先行販売・試合当日パスをLINEで完結。ライト層の来場ハードルを下げます。',
-    phase: 'Step 1',
-    id: 'ticket',
-  },
   // Phase 2
-  {
-    image: '/images/抽選.png',
-    name: '抽選',
-    tagline: '限定グッズ・先行チケットの公平な電子抽選。手作業の属人化を解消します。',
-    phase: 'Step 2',
-    id: 'lottery',
-  },
-  {
-    image: '/images/スタンプカード.png',
-    name: 'スタンプカード',
-    tagline: '来場スタンプで次の来場動機を設計。試合・公演日以外の接点を作ります。',
-    phase: 'Step 2',
-    id: 'stamp-card',
-  },
   {
     image: '/images/クーポン.png',
     name: 'クーポン配信',
-    tagline: '来場頻度・会員ランク別の特典配信。ライト層とコアファンで施策を出し分けます。',
+    tagline: '館内レストラン・スパ・売店・次回宿泊のクーポンをLINEで配信。チェックイン後の消費を引き上げます。',
     phase: 'Step 2',
     id: 'coupon',
+  },
+  {
+    image: '/images/1to1.png',
+    name: '1to1コミュニケーション',
+    tagline: 'コンシェルジュ的な個別応対をLINEに集約。要望・アレルギー・好みを蓄積して次回滞在へ引き継ぎます。',
+    phase: 'Step 2',
+    id: 'one-to-one',
   },
   // Phase 3
   {
     image: '/images/セグメント配信.png',
     name: 'セグメント配信',
-    tagline: '払っているが来ない会員（幽霊会員）を再活性化するセグメント別メッセージ配信。',
+    tagline: '宿泊履歴・季節・プランタイプで配信を出し分け。半年未来訪ゲストの呼び戻しに。PMS連携なしでもCSV取込で対応可能です。',
     phase: 'Step 3',
     id: 'segment-delivery',
+  },
+  {
+    image: '/images/ギフト.png',
+    name: 'ギフト',
+    tagline: 'ロイヤル顧客経由の紹介・贈答利用を促進。広告費をかけない新規獲得の仕組みを作ります。',
+    phase: 'Step 3',
+    id: 'gift',
   },
 ];
 
 const PROBLEMS = [
   {
-    title: 'コアファンは整備済み、ライト層への接点がゼロ',
-    body: '年1-2回来場のライト層はデジタルデータがほぼ存在しない。既存アプリはコアファン向けで、ライト層はDLすら起きていません。',
+    title: 'OTA依存による粗利圧迫',
+    body: 'OTA手数料15〜25%が恒常的にP/Lを削る。業界の直予約率は約30%で頭打ちであり、自社チャネル強化が急務です。',
   },
   {
-    title: '独自アプリとLINE公式が並立し、顧客データが分散',
-    body: '12社中12社が独自アプリを保有しながらLINEも運用。会員IDが分散して本部管理コストが増大しています。',
+    title: 'リピーターの取りこぼし',
+    body: '宿泊後の接点が消え、紙のダイレクトメールしか残らない。退館後に再来訪を設計する仕組みがありません。',
   },
   {
-    title: '払っているが来ない会員の離脱をメール・DMで止められない',
-    body: 'フィットネス・スポーツクラブ共通の構造課題。解約のタイミングを捉えた自動フォローが機能していません。',
+    title: '館内消費の未取り込み',
+    body: 'レストラン・スパ・売店の利用促進がフロントの声かけだけに依存。付帯収益を組織的に伸ばせていません。',
   },
   {
-    title: 'チケット先行抽選・限定グッズ配布が手作業で属人化',
-    body: '公平性の担保と当選通知がスプレッドシートと人力で回っている。ミスやクレームが発生しやすい状態です。',
+    title: 'ゲストデータの分断',
+    body: 'PMS・予約サイト・口コミサイトにデータが散在し、顧客像が統合されない。パーソナライズが機能しません。',
   },
   {
-    title: '試合・公演当日以外にファンとの接点がなく、来場動機を作れない',
-    body: 'オフシーズンや公演間のコミュニケーションが途切れる。来場スタンプや先行情報で日常的な接点が必要です。',
+    title: 'アプリDL障壁',
+    body: '宿泊施設の単独アプリはDL率が伸びにくく、アプリ疲れが課題に。LINEミニアプリならアプリDL不要で5秒会員化が完了し、接点を確立しやすくなります。',
   },
 ];
 
 const APPEAL_STEPS = [
   {
     step: 'Step 1',
-    title: 'ライト層をLINEで捕まえる',
-    description: '会員証とチケット・パスで、これまでデータがなかったライト層（年1-2回来場）をLINE IDに紐づけます。独自アプリを持っているファンはそのまま継続利用、ライト層はLINEが窓口になります。',
-    icon: '📱',
+    title: '直予約チャネルを作る',
+    description: 'LINE予約とデジタル会員証で「OTA経由→LINE直予約」への導線を確立。OTA手数料の発生点そのものを削減します。',
+    icon: '🏨',
   },
   {
     step: 'Step 2',
-    title: '来場動機を設計する',
-    description: 'チケット先行抽選・限定グッズ配布・来場スタンプを組み合わせ、次の来場理由を継続的に作ります。試合・公演日以外にもLINEで接点を持ち続けることがライト層育成の核心です。',
-    icon: '🎫',
+    title: '滞在中の館内消費を拾う',
+    description: 'クーポンと1to1でチェックイン後の接点を維持し、レストラン・スパ・売店の付帯収益を引き上げます。',
+    icon: '🍽',
   },
   {
     step: 'Step 3',
-    title: '払っているが来ない会員を再活性化する',
-    description: 'セグメント配信で幽霊会員を検知し、自動フォローで解約前に介入します。解約1件を阻止するコストは新規獲得よりはるかに小さく、フィットネス業界では最も即効性の高い施策です。',
-    icon: '🔄',
+    title: '退館後にリピートを設計する',
+    description: 'セグメント配信で半年未来訪・季節・プラン別に呼び戻し。紙DMからLINEへ置き換え、直予約の継続ループを作ります。',
+    icon: '🔁',
   },
 ];
 
 
 const STATS = [
-  {
-    value: 'DL不要',
-    unit: '',
-    label: 'LINEでライト層を即データ化',
-    sub: 'インストール不要。QRから会員登録が完了',
-  },
   {
     value: '5',
     unit: '秒',
@@ -142,43 +138,45 @@ const STATS = [
     sub: 'QRコードから友だち追加と会員化が同時完了',
   },
   {
-    value: '最短',
-    unit: '3ヶ月',
-    label: 'Step 1立ち上げ期間',
-    sub: '会員証＋チケット・パスを含む標準構成',
+    value: '0',
+    unit: '件',
+    label: 'スタッフの手作業（予約リマインド）',
+    sub: '予約前日のリマインドから季節配信まで全自動',
   },
   {
-    value: '独自アプリ',
-    unit: '併用対応',
-    label: '既存アプリとの並行運用サポート',
-    sub: 'LINEはライト層向け補完レイヤーとして機能',
+    value: 'DL不要',
+    unit: '',
+    label: 'LINEだけで会員化が完結',
+    sub: 'インストール不要。友だち追加と同時に会員化',
+  },
+  {
+    value: '最短',
+    unit: '3ヶ月',
+    label: 'フェーズ1の立ち上げ期間',
+    sub: '直予約基盤（予約+会員証）の標準構成',
   },
 ];
 
 const FAQS = [
   {
-    q: '独自アプリを既に持っているが、LINE併用は必要か？',
-    a: '独自アプリはコアファン向けに維持しつつ、ライト層（年1-2回来場）の接点としてLINEを補完レイヤーとして使う構成を推奨しています。DL不要のLINEはライト層の会員化率が大幅に改善するため、両立することで全体の顧客基盤が広がります。',
+    q: '導入にはどのくらいの期間がかかりますか？',
+    a: '最短3ヶ月（Step 1標準構成）。既存PMSや予約エンジンとの連携有無によって前後します。まずはヒアリングで確認させてください。',
   },
   {
-    q: '払っているが来ない会員（幽霊会員）の離脱率を下げる仕組みはどう作るのか？',
-    a: '来場データと在籍期間をもとに離脱リスクの高い会員をセグメント化し、自動フォローメッセージを送る仕組みを設計します。解約1件を阻止するコストは新規獲得よりも小さく、フィットネス業界では特に即効性の高い施策です。',
+    q: '既存のPMS（宿泊管理システム）と連携できますか？',
+    a: '対応します。PMSベンダーのAPI公開状況によって連携方式が変わるため、初期ヒアリングで確認させてください。API非公開の場合はCSV取込などの代替方式を提案します。',
   },
   {
-    q: 'チケット先行抽選の公平性はどう担保するのか？',
-    a: '電子抽選機能で当選ロジックをシステム化し、手作業の介在を排除します。当選通知から受け取りまでLINEで完結するため、クレームリスクと運用工数を同時に削減できます。',
+    q: 'LINEミニアプリでチェックイン手続きまで完結できますか？',
+    a: '旅館業法の本人確認義務があり、フロント対面確認の代替要件は施設・自治体により異なります。法務確認の後に実装範囲を決める前提で進めます。本LPで主に提案しているのは、チェックインDXではなく直予約率向上と滞在中の顧客接点強化です。',
   },
   {
-    q: 'フィットネス・プロスポーツ・エンタメで提案内容は変わるのか？',
-    a: '変わります。フィットネスは幽霊会員の解約防止が主軸、プロスポーツはチケット先行・来場スタンプによるライト層育成、エンタメはグッズ抽選・公演当日パスが有効です。業態・会員構成に合わせてフェーズ設計を調整します。',
+    q: '会員データや宿泊履歴がまだPMSに集約されていませんが、セグメント配信は使えますか？',
+    a: '使えます。PMS連携なしでも、宿泊後のCSV取込でリピーター判定・再来訪セグメント作成が可能です。まずはCSV取込で始め、段階的にPMS連携へ移行することもできます。',
   },
   {
-    q: '既存のチケッティングシステム・会員管理システムとの連携は可能か？',
-    a: '対応します。既存の会員管理・チケッティング・ポイント管理システムとのAPI連携を設計します。システム構成と連携方式はヒアリング後に個別でご提案します。',
-  },
-  {
-    q: '実装期間と立ち上げ後の運用体制について教えてほしい。',
-    a: 'Step 1（会員証＋チケット・パス）は最短3ヶ月が目安です。立ち上げ後の運用はクラスメソッドがサポート体制を提供します。セグメント配信等の設定変更はダッシュボードから自社で運用できる構成を基本とします。',
+    q: '国内旅行客向けとインバウンド向けで提案内容は変わりますか？',
+    a: '変わります。国内客は直予約率向上とリピーター育成、インバウンドは多言語配信と館内消費促進を主軸にします。ターゲット比率に応じて最適な構成をご提案します。',
   },
 ];
 
@@ -202,10 +200,10 @@ const faqJsonLd = {
 const serviceJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  serviceType: 'スポーツ・エンタメ業界向けLINEミニアプリ開発サービス',
-  name: 'グロースパック for LINE（スポーツ・エンタメ業界向け）',
+  serviceType: 'ホテル・旅館業界向けLINEミニアプリ開発サービス',
+  name: 'グロースパック for LINE（ホテル・旅館業界向け）',
   description:
-    'コアファンは整備済み、ライト層はゼロ。年1-2回来場のファンを育てる接点インフラをLINEで構築。チケット先行抽選・来場スタンプ・幽霊会員再活性化をハーフスクラッチで実現し、最短3ヶ月で立ち上げます。',
+    'OTA手数料削減・直予約率向上を軸に、宿泊施設の顧客接点をLINEで統合。会員証・セグメント配信・館内クーポンを最短3ヶ月で立ち上げます。',
   provider: {
     '@type': 'Organization',
     name: 'クラスメソッド株式会社',
@@ -220,14 +218,10 @@ const serviceJsonLd = {
     name: 'グロースパック for LINE 機能アセット',
     itemListElement: [
       'デジタル会員証',
-      '順番待ち',
       '予約',
-      'スタンプカード',
       'クーポン配信',
-      'チケット・パス',
-      '抽選',
-      'セグメント配信',
       '1to1コミュニケーション',
+      'セグメント配信',
       'ギフト',
     ].map((name) => ({
       '@type': 'Offer',
@@ -249,8 +243,8 @@ const breadcrumbJsonLd = {
     {
       '@type': 'ListItem',
       position: 2,
-      name: 'スポーツ・エンタメ業界',
-      item: 'https://lp.growthpackforline.classmethod.net/v2/sports',
+      name: 'ホテル・旅館業界',
+      item: 'https://lp.growthpackforline.classmethod.net/hotel',
     },
   ],
 };
@@ -259,7 +253,7 @@ const breadcrumbJsonLd = {
 /* PAGE                                                                  */
 /* ------------------------------------------------------------------ */
 
-export default function SportsPage() {
+export default function HotelPage() {
   return (
     <main className="min-h-screen bg-white text-[#1F2937]">
       {/* 構造化データ */}
@@ -282,7 +276,7 @@ export default function SportsPage() {
       {/* ============================================================ */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-[#E5E7EB]">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 h-16 md:h-20 flex items-center justify-between">
-          <Link href="/v2" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <div className="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-[#06C755] flex items-center justify-center text-white font-bold text-sm">
               G
             </div>
@@ -305,13 +299,13 @@ export default function SportsPage() {
       </header>
 
       {/* ============================================================ */}
-      {/* Hero — ダーク放射型（§7-1）                                      */}
+      {/* Hero — 写真背景バリエーション（§7-1b）                           */}
       {/* ============================================================ */}
       <div className="relative min-h-[560px] md:min-h-[700px] flex items-center bg-[#0a0a0a] overflow-hidden">
-        {/* 背景: スポーツ・エンタメシーン写真 */}
+        {/* 背景: ホテル実務シーン写真 */}
         <div
           className="absolute inset-0 bg-center bg-cover"
-          style={{ backgroundImage: "url('/images/sports-hero.png')" }}
+          style={{ backgroundImage: "url('/images/hotel-hero.png')" }}
         />
         {/* ダークオーバーレイ（左濃→右薄） */}
         <div
@@ -336,15 +330,15 @@ export default function SportsPage() {
               {/* 認定バッジ pill */}
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#06C755]/20 border border-[#06C755]/50 rounded-full text-xs sm:text-sm font-semibold text-[#06C755]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#06C755] shrink-0" />
-                LINEヤフー Technology Partner × スポーツ・エンタメ業界
+                LINEヤフー Technology Partner × ホテル・旅館業界向け
               </div>
 
               <h1 className="text-4xl md:text-5xl font-bold leading-[1.2] tracking-tight text-white">
-                コアファンは整備済み。<br />
-                ライト層を<span className="text-[#06C755]">育てる。</span>
+                OTA手数料を、<br />
+                直予約に<span className="text-[#06C755]">置き換える。</span>
               </h1>
 
-              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">年1-2回来場のファンが、デジタルデータとして存在しない。チケット先行・来場スタンプ・幽霊会員再活性化を組み合わせたライト層育成インフラを、<span className="font-bold text-white">最短3ヶ月</span>で立ち上げます。</p>
+              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">LINEで作る宿泊施設の直販チャネル。OTA依存の粗利圧迫・リピーターの取りこぼし・館内消費の未取り込み。3つの課題を、<span className="font-bold text-white">最短3ヶ月</span>で解きます。</p>
 
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
@@ -368,7 +362,7 @@ export default function SportsPage() {
 
               {/* ミニチェックリスト */}
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
-                {['ライト層育成フロー設計', '独自アプリとの併用対応'].map((t) => (
+                {['OTA手数料削減', '直予約率向上'].map((t) => (
                   <div key={t} className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-[#06C755]" />
                     {t}
@@ -388,7 +382,7 @@ export default function SportsPage() {
                   aria-hidden="true"
                 >
                   <defs>
-                    <radialGradient id="lineFadeSports" cx="50%" cy="50%" r="50%">
+                    <radialGradient id="lineFadeHotel" cx="50%" cy="50%" r="50%">
                       <stop offset="0%" stopColor="#06C755" stopOpacity="0.6" />
                       <stop offset="100%" stopColor="#06C755" stopOpacity="0" />
                     </radialGradient>
@@ -413,7 +407,7 @@ export default function SportsPage() {
                       opacity="0.35"
                     />
                   ))}
-                  <circle cx="250" cy="280" r="140" fill="url(#lineFadeSports)" />
+                  <circle cx="250" cy="280" r="140" fill="url(#lineFadeHotel)" />
                 </svg>
 
                 {/* 中心スマホ */}
@@ -449,8 +443,8 @@ export default function SportsPage() {
                           </div>
                         </div>
                         <div className="bg-[#E8F8F0] rounded-md px-2 py-1.5 border border-[#06C755]/20">
-                          <div className="text-[9px] text-[#05A847] font-bold">チケット先行</div>
-                          <div className="text-[10px] text-[#1F2937]">抽選エントリー受付中</div>
+                          <div className="text-[9px] text-[#05A847] font-bold">新着</div>
+                          <div className="text-[10px] text-[#1F2937]">館内レストランクーポン</div>
                         </div>
                       </div>
                     </div>
@@ -459,12 +453,12 @@ export default function SportsPage() {
 
                 {/* 6つの接点カード */}
                 {[
-                  { top: '10%', left: '5%', image: '/images/会員証.png', label: '会員証', delay: '0s' },
-                  { top: '10%', right: '5%', image: '/images/チケット.png', label: 'チケット', delay: '0.1s' },
-                  { top: '45%', left: '-10%', image: '/images/抽選.png', label: '抽選', delay: '0.2s' },
-                  { top: '45%', right: '-10%', image: '/images/クーポン.png', label: 'クーポン', delay: '0.3s' },
-                  { bottom: '10%', left: '5%', image: '/images/スタンプカード.png', label: 'スタンプ', delay: '0.4s' },
-                  { bottom: '10%', right: '5%', image: '/images/セグメント配信.png', label: '配信', delay: '0.5s' },
+                  { top: '10%', left: '5%', image: '/images/予約.png', label: '予約', delay: '0s' },
+                  { top: '10%', right: '5%', image: '/images/会員証.png', label: '会員証', delay: '0.1s' },
+                  { top: '45%', left: '-10%', image: '/images/クーポン.png', label: 'クーポン', delay: '0.2s' },
+                  { top: '45%', right: '-10%', image: '/images/1to1.png', label: '1to1', delay: '0.3s' },
+                  { bottom: '10%', left: '5%', image: '/images/セグメント配信.png', label: 'セグメント', delay: '0.4s' },
+                  { bottom: '10%', right: '5%', image: '/images/ギフト.png', label: 'ギフト', delay: '0.5s' },
                 ].map((card) => (
                   <div
                     key={card.label}
@@ -502,7 +496,7 @@ export default function SportsPage() {
               { icon: ShieldCheck, label: 'LINEヤフー Technology Partner', color: '#06C755' },
               { icon: Award, label: 'AWS Premier Tier Services Partner', color: '#FF9900' },
               { icon: ShieldCheck, label: 'ISO 27001 取得（クラスメソッド）', color: '#3B82F6' },
-              { icon: Users, label: 'ハーフスクラッチで柔軟対応', color: '#05A847' },
+              { icon: Users, label: 'OTA手数料削減・直予約率向上に特化', color: '#05A847' },
             ].map(({ icon: Icon, label, color }) => (
               <div key={label} className="flex items-center gap-2 text-sm font-semibold text-[#1F2937] whitespace-nowrap">
                 <Icon className="w-4 h-4 shrink-0" style={{ color }} />
@@ -514,7 +508,7 @@ export default function SportsPage() {
       </div>
 
       {/* ============================================================ */}
-      {/* 実績数字セクション（§7-3、スポーツ・エンタメ特化）                    */}
+      {/* 実績数字セクション（§7-3、ホテル特化）                              */}
       {/* ============================================================ */}
       <Section spacing="sm" container="wide" background="white">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E7EB] border border-[#E5E7EB] rounded-xl overflow-hidden">
@@ -531,7 +525,7 @@ export default function SportsPage() {
       </Section>
 
       {/* ============================================================ */}
-      {/* 課題セクション（§7-4）                                           */}
+      {/* 課題セクション（§7-4、ホテル 5点セット）                          */}
       {/* ============================================================ */}
       <Section id="problems" spacing="sm" container="wide" background="muted">
         <div className="max-w-[720px] mb-10 md:mb-12">
@@ -539,9 +533,9 @@ export default function SportsPage() {
             CHALLENGES
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            スポーツ・エンタメのDX担当者が「限界だ」と感じる、5つの壁。
+            ホテル・旅館の経営層が「限界だ」と感じる、5つの壁。
           </h2>
-          <p className="text-base text-[#4B5563]">個別ツールでは解決できない、スポーツ・エンタメ業界の構造的な課題です。</p>
+          <p className="text-base text-[#4B5563]">個別ツールでは解決できない、宿泊業界の構造的な課題です。</p>
         </div>
         <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
           {PROBLEMS.map((p) => (
@@ -554,7 +548,7 @@ export default function SportsPage() {
       </Section>
 
       {/* ============================================================ */}
-      {/* 訴求セクション（3ステップ: ライト層育成フロー）                      */}
+      {/* 訴求セクション（ホテル固有 3ステップ、経営層訴求の骨格）              */}
       {/* ============================================================ */}
       <Section id="appeal" spacing="md" container="wide" background="white">
         <div className="max-w-[720px] mb-10 md:mb-12">
@@ -562,9 +556,9 @@ export default function SportsPage() {
             HOW IT WORKS
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            3つのステップで、ライト層を育てる。
+            3つのステップで、直予約の好循環を作る。
           </h2>
-          <p className="text-base text-[#4B5563]">LINEで捕まえる→来場動機を設計する→幽霊会員を再活性化する。コアファン施策とは独立したライト層育成フローです。</p>
+          <p className="text-base text-[#4B5563]">直販チャネルを作り、館内消費を最大化し、退館後の再来訪を設計する。OTA依存を段階的に解消するロードマップです。</p>
         </div>
         <div className="grid md:grid-cols-3 gap-4 md:gap-5">
           {APPEAL_STEPS.map((s, i) => (
@@ -595,7 +589,7 @@ export default function SportsPage() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             SaaSとスクラッチ、その中間に。
           </h2>
-          <p className="text-base text-[#4B5563]">SaaSは独自アプリとの連携やセグメント設計で詰まり、フルスクラッチは期間とコストが膨らむ。グロースパックは<span className="font-bold text-[#1F2937]">速さ・柔軟性・既存システム連携</span>を同時に提供するハーフスクラッチ開発です。</p>
+          <p className="text-base text-[#4B5563]">SaaSはPMS連携や宿泊施設固有の要件で詰まり、フルスクラッチは期間とコストが膨らむ。グロースパックは<span className="font-bold text-[#1F2937]">速さ・柔軟性・既存PMS対応</span>を同時に提供するハーフスクラッチ開発です。</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-4 md:gap-5">
@@ -605,7 +599,7 @@ export default function SportsPage() {
             <h3 className="text-base font-bold mb-4">SaaS<br /><span className="text-sm font-normal text-[#6B7280]">パッケージ型</span></h3>
             <ul className="text-sm text-[#6B7280] space-y-2">
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />初期コスト: 低</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />既存システム連携: △</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />PMS連携: △</li>
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />拡張性: △</li>
             </ul>
           </Card>
@@ -619,7 +613,7 @@ export default function SportsPage() {
             <h3 className="text-base font-bold mb-4">ハーフスクラッチ<br /><span className="text-sm font-normal text-[#05A847]">開発</span></h3>
             <ul className="text-sm text-[#1F2937] space-y-2 font-medium">
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />初期コスト: 中</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />既存システム連携: ◎</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />PMS連携: ◎</li>
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />拡張性: ○ / サポート: ○</li>
             </ul>
           </Card>
@@ -630,7 +624,7 @@ export default function SportsPage() {
             <h3 className="text-base font-bold mb-4">スクラッチ<br /><span className="text-sm font-normal text-[#6B7280]">開発</span></h3>
             <ul className="text-sm text-[#6B7280] space-y-2">
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#EF4444] shrink-0" />初期コスト: 高</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />既存システム連携: ◎</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />PMS連携: ◎</li>
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />拡張性: ◎</li>
             </ul>
           </Card>
@@ -642,8 +636,8 @@ export default function SportsPage() {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
-              <p className="text-white font-bold text-lg sm:text-xl">ライト層育成の構成について、まずご相談ください。</p>
-              <p className="text-white/80 text-sm mt-1">業態・会員構成・既存システムをお聞きして最適な構成をご提案します。</p>
+              <p className="text-white font-bold text-lg sm:text-xl">どの構成が宿泊施設に合うか、まずご相談ください。</p>
+              <p className="text-white/80 text-sm mt-1">施設規模・PMS・既存予約エンジンをお聞きして最適な構成をご提案します。</p>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0">
               <Button
@@ -663,7 +657,7 @@ export default function SportsPage() {
       </div>
 
       {/* ============================================================ */}
-      {/* 機能グリッド（§7-6、スポーツ・エンタメ向けタグライン）               */}
+      {/* 機能グリッド（§7-6、ホテル向けタグライン）                         */}
       {/* ============================================================ */}
       <Section id="features" spacing="md" container="wide" background="white">
         <div className="max-w-[720px] mb-10 md:mb-12">
@@ -671,9 +665,9 @@ export default function SportsPage() {
             FEATURES
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            10の機能アセットから、スポーツ・エンタメ向けに選んで組み合わせる。
+            10の機能アセットから、ホテル向けに選んで組み合わせる。
           </h2>
-          <p className="text-base text-[#4B5563]">スポーツ・エンタメ業界で特に効く6機能。必要なものだけを選び、フェーズを追って拡張できます。</p>
+          <p className="text-base text-[#4B5563]">宿泊業界で特に効く6機能。必要なものだけを選び、フェーズを追って拡張できます。</p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {FEATURES.map((f) => {
@@ -737,10 +731,10 @@ export default function SportsPage() {
             CONTACT
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
-            ライト層育成の仕組みについて、<br />
+            宿泊施設の直予約チャネル構築について、<br />
             <span className="text-[#06C755]">一度ご相談ください。</span>
           </h2>
-          <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">業態・会員構成・既存システムをお聞きして、最適な構成をご提案します。初回相談は無料です。</p>
+          <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">施設規模・PMS・既存予約エンジンをお聞きして、最適な構成をご提案します。初回相談は無料です。</p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4">
             <Button variant="primary" size="lg" asChild>
               <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="final_primary" destination="contact">
@@ -781,7 +775,7 @@ export default function SportsPage() {
                   <span className="text-base font-bold text-[#06C755]">LINE</span>
                 </div>
               </div>
-              <p className="text-xs text-white/50 leading-relaxed">クラスメソッド株式会社が提供するLINEミニアプリ開発サービス。スポーツ・エンタメ業界のライト層育成・チケット先行・幽霊会員再活性化に対応します。</p>
+              <p className="text-xs text-white/50 leading-relaxed">クラスメソッド株式会社が提供するLINEミニアプリ開発サービス。ホテル・旅館業界のOTA手数料削減・直予約率向上・リピーター育成に対応します。</p>
             </div>
 
             {/* サービス */}
@@ -796,7 +790,7 @@ export default function SportsPage() {
             <div>
               <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">RESOURCES</div>
               <ul className="space-y-2 text-sm text-white/60">
-                <li><a href="#problems" className="hover:text-white transition-colors">スポーツ・エンタメ業界の課題</a></li>
+                <li><a href="#problems" className="hover:text-white transition-colors">ホテル業界の課題</a></li>
                 <li><a href="#faq" className="hover:text-white transition-colors">よくあるご質問</a></li>
                 <li>
                   <a

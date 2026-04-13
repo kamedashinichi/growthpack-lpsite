@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * 飲食業界LP (/v2/food) 用 WP ダウンロードボタン。
+ * 飲食業界LP (/food) 用 WP ダウンロードボタン。
  * 飲食版ホワイトペーパーは現在準備中のため、disabled 状態で表示する。
  * PDF 配置後は disabled を外し、href と DOC_ID を設定する。
  */

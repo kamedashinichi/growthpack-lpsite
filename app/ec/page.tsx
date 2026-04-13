@@ -1,15 +1,15 @@
 /**
- * /v2/food — グロースパック for LINE 飲食業界向けLP
+ * /ec — グロースパック for LINE EC・D2C業界向けLP
  *
  * docs/DESIGN.md v2.1 に厳密に従う。
- * app/v2/apparel/page.tsx を雛形として、飲食業界固有のコンテンツに差し替え。
  *
- * 訴求3軸: 行列（時間）× リピート（頻度）× テイクアウト（チャネル）
+ * 訴求順序（EC事業 3段シーケンス）:
+ *   1. LINE ID連携（入口） → 2. セグメント配信（育成） → 3. ソーシャルギフト（新規獲得）
  *
- * 課題セクション（飲食5点セット）:
- *   1. 行列×人手不足  2. 紙スタンプの限界  3. テイクアウト手数料
- *   4. 複数ブランド分断  5. 幽霊会員・休眠会員
+ * 課題セクション（EC 5点セット）:
+ *   1. LINE友だちとEC会員の分断  2. カゴ落ち  3. 一斉配信ブロック  4. CAC上昇  5. 定期購買機会損失
  *
+ * - 「店舗なしEC=LINE ID連携」「店舗ありEC=デジタル会員証」の使い分けを一貫させる
  * - 価格の具体額は一切記載しない
  * - 和文段落は1行にまとめる（§12 和文改行禁止）
  * - 機能アイコンは /public/images/<機能名>.png を <Image> で表示
@@ -20,9 +20,9 @@ import Image from 'next/image';
 import {
   ArrowRight,
   Check,
-  Users,
   ShieldCheck,
   Award,
+  Users,
   Zap,
 } from 'lucide-react';
 import { Button } from '@/components/shared/ui/button';
@@ -35,104 +35,91 @@ import { ScrollTracker } from './scroll-tracker';
 /* DATA                                                                  */
 /* ------------------------------------------------------------------ */
 
-// 飲食業界で特に効く7機能に絞り込み（DESIGN §7-6 推奨: 会員証/順番待ち/スタンプ/クーポン/セグメント配信/予約）
-// 1to1は飲食では優先度低めだが、マルチブランドCRM文脈で追加
+// EC業界で実際に効く5機能に絞り込み
+// 除外: 順番待ち / 予約 / チケット・パス / 抽選（他業種向け）
+// 「デジタル会員証」表現は避け「LINE ID連携会員証」を使用
 const FEATURES = [
   // Phase 1
   {
     image: '/images/会員証.png',
-    name: 'デジタル会員証',
-    tagline: 'アプリDL不要、5秒で会員化。マルチブランドを1つのIDで統合。',
+    name: 'LINE ID連携会員証',
+    tagline: 'EC会員IDとLINE IDを統合。アプリDL不要、友だち追加の延長線で会員化。',
     phase: 'Step 1',
-    id: 'membership',
-  },
-  {
-    image: '/images/順番待ち.png',
-    name: '順番待ち',
-    tagline: '行列をLINE通知に変換。「並ばなくていい体験」でロイヤルティ向上。',
-    phase: 'Step 1',
-    id: 'queue',
+    id: 'id-linkage',
   },
   // Phase 2
   {
-    image: '/images/スタンプカード.png',
-    name: 'スタンプカード',
-    tagline: '紙カード紛失ゼロ。来店データが蓄積され再来店サイクルを設計できる。',
+    image: '/images/セグメント配信.png',
+    name: 'セグメント配信',
+    tagline: '購買回数・カテゴリ・最終購入日・閲覧履歴で動的にセグメントを切り、精度の高い配信を実現。',
     phase: 'Step 2',
-    id: 'stamp-card',
+    id: 'segment-delivery',
   },
   {
     image: '/images/クーポン.png',
     name: 'クーポン配信',
-    tagline: '来店頻度と購買履歴に応じた配信。テイクアウト誘導にも活用。',
+    tagline: 'カゴ落ち回収・休眠掘り起こし・購買周期リマインドの3用途で活用。',
     phase: 'Step 2',
     id: 'coupon',
   },
   {
-    image: '/images/予約.png',
-    name: '予約',
-    tagline: '電話不要のLINE予約で機会損失を防止。ピーク時の着席率を改善。',
+    image: '/images/1to1.png',
+    name: '1to1コミュニケーション',
+    tagline: '再入荷通知・購買周期リマインドを自動配信。個別接点でLTVを最大化。',
     phase: 'Step 2',
-    id: 'reservation',
+    id: 'one-to-one',
   },
   // Phase 3
   {
-    image: '/images/セグメント配信.png',
-    name: 'セグメント配信',
-    tagline: '来店間隔・業態・注文パターンで配信を出し分け。休眠会員の掘り起こしに。',
+    image: '/images/ギフト.png',
+    name: 'ソーシャルギフト',
+    tagline: '受取人の即時会員化・住所不要・CAC≒0の新規獲得モデル。ロイヤル顧客が自社の営業マンになる。',
     phase: 'Step 3',
-    id: 'segment-delivery',
-  },
-  {
-    image: '/images/1to1.png',
-    name: '1to1コミュニケーション',
-    tagline: 'マルチブランドのCRM基盤として、複数業態にまたがる顧客データを一元管理。',
-    phase: 'Step 3',
-    id: 'one-to-one',
+    id: 'social-gift',
   },
 ];
 
 const PROBLEMS = [
   {
-    title: '行列×人手不足：繁忙時間の客離れに手が打てない',
-    body: '混雑のピーク時に行列が伸びるほど客が離れるが、デジタルで解消する手段がない。LINEの順番待ち通知で「並ばなくていい体験」を提供できます。',
+    title: 'LINE友だちとEC会員の分断',
+    body: 'LINEで配信はできても「誰が買うか」がわからない。LINE ID連携で友だちとEC会員を結びつけることで、初めて購買データを使った配信が可能になります。',
   },
   {
-    title: '紙スタンプの限界：顧客データが蓄積されない',
-    body: '紙スタンプカードは紛失・不正・来店確認不可の三重苦。デジタル化すれば来店履歴・頻度・好みが蓄積され、次の施策に活用できます。',
+    title: 'カゴ落ちの自動フォロー不足',
+    body: '国内ECのカゴ落ち率は約65%（イー・エージェンシー2022年850サイト調査）。カゴに入れた商品のリマインドを自動送信するだけで回収率は大きく改善します。',
   },
   {
-    title: 'テイクアウト・デリバリー手数料：マージンが圧迫される',
-    body: 'デリバリープラットフォーム依存で手数料が経営を圧迫。LINEを起点にした自社テイクアウト導線を整備し、プラットフォーム手数料依存から脱却できます。',
+    title: '一斉配信によるブロック率の増加',
+    body: '全員に同じメッセージを送るとブロックが積み重なる。購買履歴・閲覧履歴・休眠期間でセグメントを切れば、配信効率もブロック率も同時に改善します。',
   },
   {
-    title: '複数ブランドのLINE乱立：管理コストが膨張する',
-    body: 'グループ内の複数ブランドでLINE公式アカウントが乱立し、会員基盤が分断。ハーフスクラッチなら1つのLINE会員基盤でブランドを横断管理できます。',
+    title: '新規獲得の広告費高騰とCAC上昇',
+    body: '広告CPAが年々上昇し、新規獲得の費用対効果が悪化している。ソーシャルギフト経由なら受取人が会員化するため、CAC≒0の新規獲得チャネルを設計できます。',
   },
   {
-    title: '幽霊会員・休眠会員：登録後に来店しない顧客を可視化できない',
-    body: '登録だけして来店しない顧客の割合が見えず、育成施策が打てない。セグメント配信で「来店間隔が空いた顧客」だけに特別クーポンを自動配信できます。',
+    title: '定期購買・再入荷機会の取りこぼし',
+    body: '購買周期が近いタイミングや再入荷時に通知できず、競合他社への流出を招いている。1to1の自動リマインドで機会損失を防ぎます。',
   },
 ];
 
 const APPEAL_STEPS = [
   {
     step: 'Step 1',
-    title: '待ち時間の可視化',
-    description: '順番待ちLINE通知で「並ばなくていい体験」を実現。行列をデジタルの接点に変換し、顧客ロイヤルティの改善につなげます。',
-    icon: '⏱',
+    title: 'LINE ID連携（入口）',
+    description: 'LINE友だちとEC会員IDをひもづけ。既存EC基盤に合わせてAPI連携するため、顧客に余計な操作を求めません。',
+    icon: '🔗',
   },
   {
     step: 'Step 2',
-    title: '再来店の設計',
-    description: 'スタンプカード＋クーポン配信で「また行きたい」サイクルを仕組みで回します。来店間隔が空いた顧客への自動フォローも設計できます。',
-    icon: '🔄',
+    title: 'セグメント配信（育成）',
+    description: '購買履歴・閲覧行動・休眠期間を組み合わせてセグメントを自動生成。精度の高いメッセージで再購入を促します。',
+    icon: '📊',
   },
   {
     step: 'Step 3',
-    title: 'テイクアウト自社化',
-    description: 'LINEを起点にしたテイクアウト・予約導線を整備。デリバリープラットフォームへの手数料依存を減らし、自社の顧客接点を強化します。',
-    icon: '📦',
+    title: 'ソーシャルギフト（新規獲得）',
+    description: 'ロイヤル顧客がギフトを贈ることで受取人が即時会員化。広告費をかけずに優良顧客の輪を広げます。',
+    icon: '🎁',
   },
 ];
 
@@ -141,49 +128,49 @@ const STATS = [
   {
     value: 'DL不要',
     unit: '',
-    label: 'LINEだけで会員化が完結',
-    sub: 'インストール不要。マルチブランドを1つのIDで統合',
+    label: 'LINEだけでID連携が完結',
+    sub: 'インストール不要。友だち追加の延長線でEC会員化',
   },
   {
     value: '5',
     unit: '秒',
     label: '会員登録完了時間',
-    sub: 'QRコードから友だち追加と会員化が同時完了',
+    sub: 'QRコードから友だち追加とEC会員化が同時完了',
   },
   {
     value: '0',
     unit: '件',
-    label: 'スタッフの手作業（自動フォロー）',
-    sub: '来店間隔が空いた顧客への自動クーポン配信',
+    label: 'スタッフの手作業（カゴ落ちレスキュー）',
+    sub: 'シナリオ配信は事前設定。カート放棄後の自動フォロー',
   },
   {
     value: '最短',
     unit: '3ヶ月',
-    label: 'Step 1の立ち上げ期間',
-    sub: '会員証＋順番待ちの標準構成。マルチブランドは4〜6ヶ月',
+    label: 'フェーズ1の立ち上げ期間',
+    sub: 'LINE ID連携を含む標準構成',
   },
 ];
 
 const FAQS = [
   {
-    q: '導入期間はどのくらいかかりますか？',
-    a: 'Step 1（会員証＋順番待ち）は最短3ヶ月から。スコープや既存システム連携の有無によって異なります。まずはヒアリングしてご提案します。',
+    q: '導入にはどのくらいの期間がかかりますか？',
+    a: 'LINE ID連携を含むStep 1標準構成で最短3ヶ月が目安です。既存EC基盤との連携範囲やカスタマイズによって変わりますので、まずはヒアリングさせてください。',
   },
   {
-    q: '複数ブランドをまとめて管理できますか？',
-    a: '1つのLINE会員基盤でブランドを横断管理できるのがグロースパック for LINEの強みです。SaaS系競合では技術的に対応できないケースが多いため、マルチブランド展開の飲食グループに特に適しています。',
+    q: '実店舗も運営しています。EC向けLPと店舗ありアパレルLPの違いは何ですか？',
+    a: '店舗のないECには「LINE ID連携会員証」が最適です。店舗があるアパレルには「デジタル会員証（店舗QR読み取り型）」をお勧めしています。両方を運営する場合は、EC側はID連携・実店舗側は会員証という構成で統合設計します。',
   },
   {
-    q: '既存POSやモバイルオーダーシステムと連携できますか？',
-    a: 'ハーフスクラッチ構造のため柔軟に対応できます。事前にシステム構成をヒアリングし、連携方式を設計します。まずは現在の構成をお聞かせください。',
+    q: '既存EC基盤（Shopify / ecbeing / futureshop / EC-CUBE等）と連携できますか？',
+    a: '対応しています。各プラットフォームのAPI・Webhook・CSV連携など、既存構成に合わせて設計します。まず現状のEC基盤をお聞かせください。',
   },
   {
-    q: '業態によって提案内容は変わりますか？',
-    a: 'はい。「デリバリー手数料削減型（テイクアウト最適化）」「テーブルオーダー省力化型（ホール人件費削減）」「CRM統合型（マルチブランド顧客統合）」の3パターンで業態に合わせた提案をします。',
+    q: 'ソーシャルギフトは実店舗なしでも使えますか？',
+    a: '実店舗がなくても問題ありません。受取人が自宅等で受け取れるデジタル商品や発送型商品であればギフト設計が可能です。',
   },
   {
-    q: '休眠会員の掘り起こしはできますか？',
-    a: 'セグメント配信機能で「来店間隔が空いた顧客」だけに特別クーポンを自動配信できます。配信条件や頻度は運用に合わせて設計します。',
+    q: 'カゴ落ちレスキューのROIはどれくらい期待できますか？',
+    a: 'カゴ落ち率・単価・リマインド配信の反応率によって変わります。国内ECの平均カゴ落ち率が約65%であることを踏まえると、回収できる余地は大きい施策です。具体的な試算はヒアリング後にご提示します。',
   },
 ];
 
@@ -207,10 +194,10 @@ const faqJsonLd = {
 const serviceJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  serviceType: '飲食業界向けLINEミニアプリ開発サービス',
-  name: 'グロースパック for LINE（飲食業界向け）',
+  serviceType: 'EC・D2C向けLINEミニアプリ開発サービス',
+  name: 'グロースパック for LINE（EC・D2C向け）',
   description:
-    '行列×リピート×テイクアウトの3軸で、飲食チェーンの顧客接点をLINEミニアプリで実現。順番待ち・スタンプカード・マルチブランド統合に対応するハーフスクラッチ開発で、最短3ヶ月で立ち上げます。',
+    'LINE ID連携で友だちとEC会員を統合。カゴ落ちレスキュー・再入荷通知・ソーシャルギフトでリピートと新規獲得を最大化。SaaSの速さとフルスクラッチの柔軟性を両立するハーフスクラッチ開発で、最短3ヶ月で立ち上げます。',
   provider: {
     '@type': 'Organization',
     name: 'クラスメソッド株式会社',
@@ -224,16 +211,11 @@ const serviceJsonLd = {
     '@type': 'OfferCatalog',
     name: 'グロースパック for LINE 機能アセット',
     itemListElement: [
-      'デジタル会員証',
-      '順番待ち',
-      '予約',
-      'スタンプカード',
-      'クーポン配信',
-      'チケット・パス',
-      '抽選',
+      'LINE ID連携会員証',
       'セグメント配信',
+      'クーポン配信',
+      'ソーシャルギフト',
       '1to1コミュニケーション',
-      'ギフト',
     ].map((name) => ({
       '@type': 'Offer',
       itemOffered: { '@type': 'Service', name },
@@ -254,8 +236,8 @@ const breadcrumbJsonLd = {
     {
       '@type': 'ListItem',
       position: 2,
-      name: '飲食業界',
-      item: 'https://lp.growthpackforline.classmethod.net/v2/food',
+      name: 'EC・D2C業界',
+      item: 'https://lp.growthpackforline.classmethod.net/ec',
     },
   ],
 };
@@ -264,7 +246,7 @@ const breadcrumbJsonLd = {
 /* PAGE                                                                  */
 /* ------------------------------------------------------------------ */
 
-export default function FoodPage() {
+export default function EcPage() {
   return (
     <main className="min-h-screen bg-white text-[#1F2937]">
       {/* 構造化データ */}
@@ -287,7 +269,7 @@ export default function FoodPage() {
       {/* ============================================================ */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-[#E5E7EB]">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 h-16 md:h-20 flex items-center justify-between">
-          <Link href="/v2" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <div className="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-[#06C755] flex items-center justify-center text-white font-bold text-sm">
               G
             </div>
@@ -304,19 +286,19 @@ export default function FoodPage() {
             <a href="#faq" className="hover:text-[#05A847] transition-colors">FAQ</a>
           </nav>
           <Button variant="primary" size="sm" asChild>
-            <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="header" destination="contact">お問い合わせ</TrackedExternalLink>
+            <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="v2_ec_lp_header" destination="contact">お問い合わせ</TrackedExternalLink>
           </Button>
         </div>
       </header>
 
       {/* ============================================================ */}
-      {/* Hero — 写真背景バリエーション（§7-1b）                            */}
+      {/* Hero — 写真背景バリエーション（§7-1b、ec-hero.png あり）          */}
       {/* ============================================================ */}
       <div className="relative min-h-[560px] md:min-h-[700px] flex items-center bg-[#0a0a0a] overflow-hidden">
-        {/* 背景: 飲食実務シーン写真 */}
+        {/* 背景: EC実務シーン写真 */}
         <div
           className="absolute inset-0 bg-center bg-cover"
-          style={{ backgroundImage: "url('/images/food-hero.png')" }}
+          style={{ backgroundImage: "url('/images/ec-hero.png')" }}
         />
         {/* ダークオーバーレイ（左濃→右薄） */}
         <div
@@ -334,7 +316,6 @@ export default function FoodPage() {
             backgroundSize: '28px 28px',
           }}
         />
-
         <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 py-20 sm:py-24 md:py-28">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             {/* 左カラム */}
@@ -342,20 +323,20 @@ export default function FoodPage() {
               {/* 認定バッジ pill */}
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#06C755]/20 border border-[#06C755]/50 rounded-full text-xs sm:text-sm font-semibold text-[#06C755]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#06C755] shrink-0" />
-                LINEヤフー Technology Partner × 飲食チェーン向け
+                LINEヤフー Technology Partner × EC・D2C業界向け
               </div>
 
               <h1 className="text-4xl md:text-5xl font-bold leading-[1.2] tracking-tight text-white">
-                行列、リピート、テイクアウト。<br />
-                飲食の顧客接点を<span className="text-[#06C755]">LINEで設計する。</span>
+                ECのカゴ落ちと<br />
+                離脱を、<span className="text-[#06C755]">LINEで止める。</span>
               </h1>
 
-              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">順番待ちのデジタル化からマルチブランドのCRM統合まで。飲食チェーンの3つの課題軸を、ハーフスクラッチの柔軟性で解きます。<span className="font-bold text-white">最短3ヶ月</span>で立ち上げ。</p>
+              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">LINE ID連携で友だちとEC会員を統合。カゴ落ちレスキュー・セグメント配信・ソーシャルギフトで、リピートと新規獲得を同時に最大化します。<span className="font-bold text-white">最短3ヶ月</span>で立ち上げ。</p>
 
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
                 <Button variant="primary" size="lg" asChild>
-                  <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="hero_primary" destination="contact">
+                  <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="v2_ec_lp_hero_primary" destination="contact">
                     無料で相談する
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </TrackedExternalLink>
@@ -366,7 +347,7 @@ export default function FoodPage() {
                   asChild
                   className="border-white/60 text-white hover:bg-white/10 hover:border-white"
                 >
-                  <TrackedExternalLink href="https://classmethod.jp/download/line-mini-app/" location="hero_secondary" destination="download">
+                  <TrackedExternalLink href="https://classmethod.jp/download/line-mini-app/" location="v2_ec_lp_hero_secondary" destination="download">
                     資料をダウンロード
                   </TrackedExternalLink>
                 </Button>
@@ -374,7 +355,7 @@ export default function FoodPage() {
 
               {/* ミニチェックリスト */}
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
-                {['行列×リピート×テイクアウトに対応', 'マルチブランド統合'].map((t) => (
+                {['LINE ID連携対応', 'カゴ落ち自動フォロー'].map((t) => (
                   <div key={t} className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-[#06C755]" />
                     {t}
@@ -394,7 +375,7 @@ export default function FoodPage() {
                   aria-hidden="true"
                 >
                   <defs>
-                    <radialGradient id="lineFadeFood" cx="50%" cy="50%" r="50%">
+                    <radialGradient id="lineFadeEc" cx="50%" cy="50%" r="50%">
                       <stop offset="0%" stopColor="#06C755" stopOpacity="0.6" />
                       <stop offset="100%" stopColor="#06C755" stopOpacity="0" />
                     </radialGradient>
@@ -419,7 +400,7 @@ export default function FoodPage() {
                       opacity="0.35"
                     />
                   ))}
-                  <circle cx="250" cy="280" r="140" fill="url(#lineFadeFood)" />
+                  <circle cx="250" cy="280" r="140" fill="url(#lineFadeEc)" />
                 </svg>
 
                 {/* 中心スマホ */}
@@ -432,8 +413,8 @@ export default function FoodPage() {
                       </div>
                       <div className="p-3 space-y-2.5 bg-[#F8F9FA]">
                         <div className="bg-white rounded-lg p-3 border border-[#E5E7EB] shadow-sm">
-                          <div className="text-[9px] text-[#05A847] font-bold mb-1 uppercase tracking-wider">MEMBERSHIP</div>
-                          <div className="font-bold text-[#1F2937] text-xs mb-2">デジタル会員証</div>
+                          <div className="text-[9px] text-[#05A847] font-bold mb-1 uppercase tracking-wider">EC MEMBER</div>
+                          <div className="font-bold text-[#1F2937] text-xs mb-2">LINE ID連携会員証</div>
                           <div className="h-10 bg-white rounded border border-[#E5E7EB] flex flex-col items-center justify-center gap-0.5 px-2">
                             <svg
                               viewBox="0 0 100 20"
@@ -455,8 +436,8 @@ export default function FoodPage() {
                           </div>
                         </div>
                         <div className="bg-[#E8F8F0] rounded-md px-2 py-1.5 border border-[#06C755]/20">
-                          <div className="text-[9px] text-[#05A847] font-bold">新着</div>
-                          <div className="text-[10px] text-[#1F2937]">スタンプ獲得</div>
+                          <div className="text-[9px] text-[#05A847] font-bold">カゴ落ちアラート</div>
+                          <div className="text-[10px] text-[#1F2937]">カートに商品が残っています</div>
                         </div>
                       </div>
                     </div>
@@ -465,12 +446,12 @@ export default function FoodPage() {
 
                 {/* 6つの接点カード */}
                 {[
-                  { top: '10%', left: '5%', image: '/images/会員証.png', label: '会員証', delay: '0s' },
-                  { top: '10%', right: '5%', image: '/images/順番待ち.png', label: '順番待ち', delay: '0.1s' },
-                  { top: '45%', left: '-10%', image: '/images/予約.png', label: '予約', delay: '0.2s' },
-                  { top: '45%', right: '-10%', image: '/images/クーポン.png', label: 'クーポン', delay: '0.3s' },
-                  { bottom: '10%', left: '5%', image: '/images/スタンプカード.png', label: 'スタンプ', delay: '0.4s' },
-                  { bottom: '10%', right: '5%', image: '/images/セグメント配信.png', label: 'セグメント', delay: '0.5s' },
+                  { top: '10%', left: '5%', image: '/images/会員証.png', label: 'ID連携', delay: '0s' },
+                  { top: '10%', right: '5%', image: '/images/セグメント配信.png', label: 'セグメント', delay: '0.1s' },
+                  { top: '45%', left: '-10%', image: '/images/クーポン.png', label: 'クーポン', delay: '0.2s' },
+                  { top: '45%', right: '-10%', image: '/images/ギフト.png', label: 'ギフト', delay: '0.3s' },
+                  { bottom: '10%', left: '5%', image: '/images/1to1.png', label: '1to1', delay: '0.4s' },
+                  { bottom: '10%', right: '5%', image: '/images/スタンプカード.png', label: 'スタンプ', delay: '0.5s' },
                 ].map((card) => (
                   <div
                     key={card.label}
@@ -508,6 +489,7 @@ export default function FoodPage() {
               { icon: ShieldCheck, label: 'LINEヤフー Technology Partner', color: '#06C755' },
               { icon: Award, label: 'AWS Premier Tier Services Partner', color: '#FF9900' },
               { icon: ShieldCheck, label: 'ISO 27001 取得（クラスメソッド）', color: '#3B82F6' },
+              { icon: Users, label: 'EC業界 複数社 導入実績', color: '#05A847' },
             ].map(({ icon: Icon, label, color }) => (
               <div key={label} className="flex items-center gap-2 text-sm font-semibold text-[#1F2937] whitespace-nowrap">
                 <Icon className="w-4 h-4 shrink-0" style={{ color }} />
@@ -519,7 +501,7 @@ export default function FoodPage() {
       </div>
 
       {/* ============================================================ */}
-      {/* 実績数字セクション（§7-3、飲食特化）                               */}
+      {/* 実績数字セクション（§7-3、EC特化）                                */}
       {/* ============================================================ */}
       <Section spacing="sm" container="wide" background="white">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E7EB] border border-[#E5E7EB] rounded-xl overflow-hidden">
@@ -533,11 +515,10 @@ export default function FoodPage() {
             </div>
           ))}
         </div>
-        <p className="text-xs text-[#9CA3AF] text-center mt-4">※ 導入効果は企業規模・既存システム・施策設計によって異なります。</p>
       </Section>
 
       {/* ============================================================ */}
-      {/* 課題セクション（§7-4、飲食5点セット）                             */}
+      {/* 課題セクション（§7-4、EC 5点セット）                             */}
       {/* ============================================================ */}
       <Section id="problems" spacing="sm" container="wide" background="muted">
         <div className="max-w-[720px] mb-10 md:mb-12">
@@ -545,9 +526,9 @@ export default function FoodPage() {
             CHALLENGES
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            飲食チェーンのDX担当者が直面する、5つの構造課題。
+            EC担当者が「手を打てていない」と感じる、5つの壁。
           </h2>
-          <p className="text-base text-[#4B5563]">個別ツールでは解決できない、飲食業界の構造的な課題です。</p>
+          <p className="text-base text-[#4B5563]">ツールを足すだけでは解決できない、ECビジネスの構造的な課題です。</p>
         </div>
         <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
           {PROBLEMS.map((p) => (
@@ -560,7 +541,7 @@ export default function FoodPage() {
       </Section>
 
       {/* ============================================================ */}
-      {/* 訴求セクション（飲食固有 3ステップ訴求）                            */}
+      {/* 訴求セクション（EC 3段シーケンス）                                */}
       {/* ============================================================ */}
       <Section id="appeal" spacing="md" container="wide" background="white">
         <div className="max-w-[720px] mb-10 md:mb-12">
@@ -568,9 +549,9 @@ export default function FoodPage() {
             HOW IT WORKS
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            行列・リピート・テイクアウトの3軸で、顧客接点を設計する。
+            3つのステップで、ECのLTVを積み上げる。
           </h2>
-          <p className="text-base text-[#4B5563]">デジタルの接点から始め、再来店を仕組みで回し、自社の収益基盤を強化する。飲食チェーンに合わせた導入順序です。</p>
+          <p className="text-base text-[#4B5563]">LINE ID連携で入口を作り、セグメント配信でリピートを育て、ソーシャルギフトで新規獲得へ。ECのフルファネルをLINEで完結させます。</p>
         </div>
         <div className="grid md:grid-cols-3 gap-4 md:gap-5">
           {APPEAL_STEPS.map((s, i) => (
@@ -601,7 +582,7 @@ export default function FoodPage() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             SaaSとスクラッチ、その中間に。
           </h2>
-          <p className="text-base text-[#4B5563]">SaaSはマルチブランドや既存POSとの連携で詰まり、フルスクラッチは期間とコストが膨らむ。グロースパックは<span className="font-bold text-[#1F2937]">速さ・柔軟性・マルチブランド対応</span>を同時に提供するハーフスクラッチ開発です。</p>
+          <p className="text-base text-[#4B5563]">SaaSは既存EC基盤との連携で詰まり、フルスクラッチは期間とコストが膨らむ。グロースパックは<span className="font-bold text-[#1F2937]">速さ・柔軟性・既存基盤への適応力</span>を同時に提供するハーフスクラッチ開発です。</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-4 md:gap-5">
@@ -611,8 +592,8 @@ export default function FoodPage() {
             <h3 className="text-base font-bold mb-4">SaaS<br /><span className="text-sm font-normal text-[#6B7280]">パッケージ型</span></h3>
             <ul className="text-sm text-[#6B7280] space-y-2">
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />初期コスト: 低</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />マルチブランド: △</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />POS連携: △</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />EC連携柔軟性: △</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />拡張性: △</li>
             </ul>
           </Card>
 
@@ -625,8 +606,8 @@ export default function FoodPage() {
             <h3 className="text-base font-bold mb-4">ハーフスクラッチ<br /><span className="text-sm font-normal text-[#05A847]">開発</span></h3>
             <ul className="text-sm text-[#1F2937] space-y-2 font-medium">
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />初期コスト: 中</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />マルチブランド: ◎</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />POS連携: ○ / 拡張性: ○</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />EC連携柔軟性: ◎</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />拡張性: ○ / サポート: ○</li>
             </ul>
           </Card>
 
@@ -636,7 +617,7 @@ export default function FoodPage() {
             <h3 className="text-base font-bold mb-4">スクラッチ<br /><span className="text-sm font-normal text-[#6B7280]">開発</span></h3>
             <ul className="text-sm text-[#6B7280] space-y-2">
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#EF4444] shrink-0" />初期コスト: 高</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />マルチブランド: ◎</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />EC連携柔軟性: ◎</li>
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />拡張性: ◎</li>
             </ul>
           </Card>
@@ -648,8 +629,8 @@ export default function FoodPage() {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
-              <p className="text-white font-bold text-lg sm:text-xl">飲食チェーンのシステム構成に合わせて最適な構成をご提案します。</p>
-              <p className="text-white/80 text-sm mt-1">業態・ブランド数・既存POSをお聞きして、導入スコープを一緒に設計します。</p>
+              <p className="text-white font-bold text-lg sm:text-xl">どの構成がEC事業に合うか、まずご相談ください。</p>
+              <p className="text-white/80 text-sm mt-1">既存EC基盤・会員数・現在の課題をお聞きして最適な構成をご提案します。</p>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0">
               <Button
@@ -658,7 +639,7 @@ export default function FoodPage() {
                 asChild
                 className="bg-white text-[#05A847] hover:bg-white/90 font-bold"
               >
-                <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="midband" destination="contact">
+                <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="v2_ec_lp_midband" destination="contact">
                   無料で相談する
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </TrackedExternalLink>
@@ -669,7 +650,7 @@ export default function FoodPage() {
       </div>
 
       {/* ============================================================ */}
-      {/* 機能グリッド（§7-6、飲食向けタグライン）                            */}
+      {/* 機能グリッド（§7-6、EC向けタグライン）                            */}
       {/* ============================================================ */}
       <Section id="features" spacing="md" container="wide" background="white">
         <div className="max-w-[720px] mb-10 md:mb-12">
@@ -677,9 +658,9 @@ export default function FoodPage() {
             FEATURES
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            10の機能アセットから、飲食チェーン向けに選んで組み合わせる。
+            EC事業に効く5機能を、必要な順番で導入する。
           </h2>
-          <p className="text-base text-[#4B5563]">飲食業界で特に効く7機能。必要なものだけを選び、フェーズを追って拡張できます。</p>
+          <p className="text-base text-[#4B5563]">予約・順番待ち・抽選は除外。EC固有の課題に直結する機能だけを選んで組み合わせます。</p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {FEATURES.map((f) => {
@@ -743,13 +724,13 @@ export default function FoodPage() {
             CONTACT
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
-            飲食チェーンの顧客接点設計について、<br />
+            ECのカゴ落ちとLTV課題について、<br />
             <span className="text-[#06C755]">一度ご相談ください。</span>
           </h2>
-          <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">業態・ブランド数・既存POSをお聞きして、最適な構成をご提案します。初回相談は無料です。</p>
+          <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">既存EC基盤・会員データの状態・目指すKPIをお聞きして、最適な構成をご提案します。初回相談は無料です。</p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4">
             <Button variant="primary" size="lg" asChild>
-              <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="final_primary" destination="contact">
+              <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="v2_ec_lp_final_primary" destination="contact">
                 無料で相談する
                 <ArrowRight className="w-5 h-5 ml-2" />
               </TrackedExternalLink>
@@ -760,7 +741,7 @@ export default function FoodPage() {
               asChild
               className="border-white/50 text-white hover:bg-white/10 hover:border-white"
             >
-              <TrackedExternalLink href="https://classmethod.jp/download/line-mini-app/" location="final_secondary" destination="download">
+              <TrackedExternalLink href="https://classmethod.jp/download/line-mini-app/" location="v2_ec_lp_final_secondary" destination="download">
                 資料をダウンロード
               </TrackedExternalLink>
             </Button>
@@ -787,7 +768,7 @@ export default function FoodPage() {
                   <span className="text-base font-bold text-[#06C755]">LINE</span>
                 </div>
               </div>
-              <p className="text-xs text-white/50 leading-relaxed">クラスメソッド株式会社が提供するLINEミニアプリ開発サービス。飲食業界の順番待ちデジタル化・マルチブランド統合に対応します。</p>
+              <p className="text-xs text-white/50 leading-relaxed">クラスメソッド株式会社が提供するLINEミニアプリ開発サービス。EC・D2C業界のLINE ID連携・カゴ落ち対策・ソーシャルギフト施策に対応します。</p>
             </div>
 
             {/* サービス */}
@@ -802,7 +783,7 @@ export default function FoodPage() {
             <div>
               <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">RESOURCES</div>
               <ul className="space-y-2 text-sm text-white/60">
-                <li><a href="#problems" className="hover:text-white transition-colors">飲食業界の課題</a></li>
+                <li><a href="#problems" className="hover:text-white transition-colors">EC業界の課題</a></li>
                 <li><a href="#faq" className="hover:text-white transition-colors">よくあるご質問</a></li>
                 <li>
                   <a

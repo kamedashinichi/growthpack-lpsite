@@ -20,17 +20,8 @@ export const metadata: Metadata = {
     '折込チラシ削減',
     'クラスメソッド',
   ],
-  robots: {
-    index: false,
-    follow: false,
-    googleBot: {
-      index: false,
-      follow: false,
-      noimageindex: true,
-    },
-  },
   alternates: {
-    canonical: 'https://lp.growthpackforline.classmethod.net/v2/supermarket',
+    canonical: 'https://lp.growthpackforline.classmethod.net/supermarket',
   },
   openGraph: {
     type: 'website',

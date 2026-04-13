@@ -1,19 +1,22 @@
 /**
- * /v2/apparel — グロースパック for LINE アパレル業界向けLP
+ * /drugstore — グロースパック for LINE ドラッグストア業界向けLP
  *
- * docs/DESIGN.md v2.0 に厳密に従う。
- * app/v2/page.tsx を雛形として、アパレル業界固有のコンテンツ・訴求順序に差し替え。
+ * docs/DESIGN.md v2.1 に厳密に従う。
+ * app/apparel/page.tsx を雛形として、ドラッグストア業界固有のコンテンツに差し替え。
  *
- * 訴求順序（LY 4/8ヒアリング確定）:
- *   1. 店頭商品シェア → 2. 自動フォロー → 3. 顧客カルテ
+ * 訴求順序:
+ *   1. ポイントカード離脱撤廃 → 2. 調剤連携3層 → 3. セグメント配信
  *
- * 課題セクション（DX 5点セット）:
- *   1. 会員証DX  2. アプリ疲れ  3. OMO課題  4. 休眠会員  5. サイズ不安
+ * 調剤連携3層（APPEAL_STEPS の核）:
+ *   1. 調剤完了通知  2. 待ち時間クーポン配信  3. 事前受付（受付確認用途）
  *
  * - 価格の具体額は一切記載しない
  * - 和文段落は1行にまとめる（§12 和文改行禁止）
  * - 機能アイコンは /public/images/<機能名>.png を <Image> で表示
  * - CTA リンクは §10 正規 URL
+ * - 「最短1ヶ月」は使わない。「最短3ヶ月」が正
+ * - 薬機法ガードレール（処方内容の直接参照なし）をFAQで明示
+ * - 健診データ活用は訴求しない
  */
 import Link from 'next/link';
 import Image from 'next/image';
@@ -28,7 +31,6 @@ import {
 import { Button } from '@/components/shared/ui/button';
 import { Section } from '@/components/shared/ui/section';
 import { Card } from '@/components/shared/ui/card';
-import { WPDownloadButton } from './wp-download-button';
 import { TrackedExternalLink } from './tracking';
 import { ScrollTracker } from './scroll-tracker';
 
@@ -36,51 +38,51 @@ import { ScrollTracker } from './scroll-tracker';
 /* DATA                                                                  */
 /* ------------------------------------------------------------------ */
 
-// アパレル業界で実際に効く6機能に絞り込み
+// ドラッグストア業界で実際に効く6機能に絞り込み（DESIGN §7-6 DS推奨）
 // 除外: 順番待ち / 予約 / チケット・パス / 抽選（他業種向け）
 const FEATURES = [
   // Phase 1
   {
     image: '/images/会員証.png',
     name: 'デジタル会員証',
-    tagline: 'ブランド横断の統合会員証。アプリDL不要、5秒で会員化。',
+    tagline: 'レジ前5秒でLINE会員化。ポイントカード携帯率の低下を一気に解消します。',
     phase: 'Step 1',
     id: 'membership',
   },
   // Phase 2
   {
-    image: '/images/1to1.png',
-    name: '1to1コミュニケーション',
-    tagline: '接客履歴・好み・サイズを蓄積。異動後も品質を引き継げる。',
-    phase: 'Step 2',
-    id: 'one-to-one',
-  },
-  {
     image: '/images/スタンプカード.png',
     name: 'スタンプカード',
-    tagline: '紛失ゼロのデジタル台紙で、再来店を設計する。',
+    tagline: '紙カード不要のデジタル台紙で、再来店を設計する。',
     phase: 'Step 2',
     id: 'stamp-card',
   },
   {
     image: '/images/クーポン.png',
     name: 'クーポン配信',
-    tagline: '来店頻度と購買履歴に応じた配信。休眠会員の掘り起こしに。',
+    tagline: '調剤完了後の待ち時間に配信。滞在中の購買機会を収益に変えます。',
     phase: 'Step 2',
     id: 'coupon',
+  },
+  {
+    image: '/images/1to1.png',
+    name: '1to1コミュニケーション',
+    tagline: '調剤完了通知・受付案内を個別に届け、待ち時間ストレスを低減します。',
+    phase: 'Step 2',
+    id: 'one-to-one',
   },
   // Phase 3
   {
     image: '/images/セグメント配信.png',
     name: 'セグメント配信',
-    tagline: 'ブランド嗜好・購買帯・来店チャネルで動的に配信を出し分け。',
+    tagline: 'POSデータ×購買属性で配信を出し分け。一斉配信によるブロック率を抑制します。',
     phase: 'Step 3',
     id: 'segment-delivery',
   },
   {
     image: '/images/ギフト.png',
     name: 'ギフト',
-    tagline: 'ロイヤル顧客経由の紹介で、広告費ゼロの新規獲得へ。',
+    tagline: 'ロイヤル顧客からの紹介で、広告費ゼロの新規会員獲得へ。',
     phase: 'Step 3',
     id: 'gift',
   },
@@ -88,45 +90,43 @@ const FEATURES = [
 
 const PROBLEMS = [
   {
-    title: '会員証DX：ポイントカードを持ち歩かない',
-    body: 'アプリDLは障壁。LINEミニアプリなら5秒で会員化が完了。インストール不要のため、店頭での会員化率が大幅に向上します。',
+    title: 'ポイントカード離脱：アプリ疲れと紙カードの携帯率低下',
+    body: '独自アプリはDLされず、紙カードは財布に入らない。LINEミニアプリならアプリDL不要で5秒会員化が完了し、会員化のハードルを大幅に下げられます。',
   },
   {
-    title: 'アプリ疲れ：DL数も起動率も伸びない',
-    body: 'ネイティブアプリとLINEの併用が主流に。LINEの中に接点を作ることで、アプリ未DLの顧客層にもリーチできます。',
+    title: '調剤の待ち時間：20〜40分の死角',
+    body: '「呼ばれるまで待つ」構造が患者満足度とスタッフ負荷を同時に悪化させます。完了通知と事前受付で、この死角を接点に変えられます。',
   },
   {
-    title: 'OMO課題：店舗とECで顧客が別人扱い',
-    body: '店舗POS・EC・LINEに会員IDが散在。購買履歴が統合できず、パーソナライズが機能しません。',
+    title: '一斉配信によるブロック率と開封率の低迷',
+    body: '全会員に同じメッセージを送る一斉配信はブロックにつながりやすい。調剤完了通知のように顧客が必要とするタイミングで届ける配信設計が求められています。',
   },
   {
-    title: '休眠会員：6〜7割が年1回未満来店',
-    body: '誕生日・離脱直後・季節の自動トリガーで、眠っている会員を起こす仕組みが必要です。',
+    title: 'マルチブランド・フォーマット分断：HC併設・食品強化・調剤高比率の3型',
+    body: 'ドラッグストアはブランドごとに顧客IDが分断されがちです。LINEミニアプリで統一会員基盤を構築すれば、傘下チェーンをまとめて管理できます。',
   },
   {
-    title: '接客の属人化：スタッフ異動で顧客が離れる',
-    body: '顧客の好み・サイズ・試着履歴が担当スタッフの記憶に依存。異動・退職で関係が切れ、リピート率が低下します。',
+    title: 'POS連携不足：購買属性セグメントの不在',
+    body: 'POSデータが活用できていないため、配信は一律になりがちです。購買頻度・カテゴリ嗜好でセグメントを切ることで、配信精度を上げられます。',
   },
 ];
 
+// 調剤連携3層をAPPEAL_STEPSの核に配置
 const APPEAL_STEPS = [
   {
     step: 'Step 1',
-    title: '店頭の検討層をLINE友だちにする',
-    description: '試着・検討中のお客様にQRコードを提示。スタッフはQRを見せるだけで、複雑な説明トークは不要です。5秒で友だち追加と会員登録が同時に完了します。',
-    icon: '🛍',
+    title: '調剤完了通知',
+    description: '処方箋受付後、調剤が完了したタイミングでLINEに通知を送信。「呼ばれるまで待つ」ストレスを解消し、顧客が必要とするタイミングでの接点を構築します。',
   },
   {
     step: 'Step 2',
-    title: '退店後に自動フォローで購買転換する',
-    description: '試着3日後の在庫確認、再入荷時の即時通知など、検討状況に応じたメッセージを自動配信。スタッフの手作業はゼロで、シナリオは事前設定です。',
-    icon: '📨',
+    title: '待ち時間クーポン配信',
+    description: '完了通知と同時に、店内商品のクーポンや季節提案を配信。調剤待ちの20〜40分を購買機会に転換し、1回あたりの客単価向上につなげます。',
   },
   {
     step: 'Step 3',
-    title: '接客品質を継続的に高めてリピート化する',
-    description: '購買・試着・接客の履歴を蓄積し、次回来店時の接客精度を向上。担当が替わっても対話履歴が引き継がれ、顧客との関係が店舗の資産になります。',
-    icon: '📋',
+    title: '事前受付（受付確認用途）',
+    description: '来店前にLINEから受付番号を取得できる事前受付機能を提供します。処方箋内容の直接参照は行わず、受付確認用途に特化した設計で薬機法ガードレールを守ります。',
   },
 ];
 
@@ -136,7 +136,13 @@ const STATS = [
     value: 'DL不要',
     unit: '',
     label: 'LINEだけで会員化が完結',
-    sub: 'インストール不要。お客様のスマホにLINEがあればOK',
+    sub: 'インストール不要。レジ前5秒で会員証が手に入る',
+  },
+  {
+    value: '0',
+    unit: '件',
+    label: 'スタッフの手作業（調剤完了通知）',
+    sub: '通知配信は全自動。スタッフは調剤業務に集中できる',
   },
   {
     value: '5',
@@ -145,39 +151,37 @@ const STATS = [
     sub: 'QRコードから友だち追加と会員化が同時完了',
   },
   {
-    value: '0',
-    unit: '件',
-    label: 'スタッフの手作業（自動フォロー）',
-    sub: 'シナリオ配信は事前設定。退店後のフォローは全自動',
-  },
-  {
     value: '最短',
     unit: '3ヶ月',
     label: 'フェーズ1の立ち上げ期間',
-    sub: '会員証を含む標準構成。マルチブランドは4〜6ヶ月',
+    sub: '会員証を含む標準構成。調剤連携を加えると4〜6ヶ月が目安',
   },
 ];
 
 const FAQS = [
   {
     q: '導入にはどのくらいの期間がかかりますか？',
-    a: '会員証を含む標準構成で最短3ヶ月。複数ブランド統合や既存EC連携が必要な場合は4〜6ヶ月が目安です。',
+    a: 'デジタル会員証を含む標準構成で最短3ヶ月。調剤連携（完了通知・事前受付）を追加する場合や複数ブランド統合が必要な場合は4〜6ヶ月が目安です。',
   },
   {
-    q: '複数ブランドで一つのLINEミニアプリを運用できますか？',
-    a: '対応可能です。単一のLINE IDでブランド横断の統合会員証を設計できます。マルチブランド管理はハーフスクラッチの強みです。',
+    q: '調剤を併設していない店舗でも提案は成立しますか？',
+    a: '成立します。調剤非併設の場合はデジタル会員証・スタンプカード・セグメント配信を主軸に据えた構成を提案します。調剤高比率チェーン向けには調剤連携3層がキラー機能になります。',
   },
   {
-    q: '既存のECや基幹システムと連携できますか？',
-    a: '対応します。Shopify・ecbeing・自社EC・基幹POS等と連携実績があり、既存構成に合わせて設計します。',
+    q: '既存のポイントカードやCRMとの連携はできますか？',
+    a: '対応しています。既存のポイントデータ・会員IDの移行・連携とも対応範囲です。データ構造とボリュームによって方式が変わるため、まずはヒアリングさせてください。',
   },
   {
-    q: '既存のポイントや会員データはそのまま移行できますか？',
-    a: '連携・移行とも対応範囲です。データ構造とボリュームによって方式が変わるため、まずはヒアリングさせてください。',
+    q: '傘下に複数チェーンがある場合、統合会員基盤を作れますか？',
+    a: '作れます。単一のLINE IDでマルチブランド・マルチフォーマットをまとめた統合会員基盤を設計できます。ハーフスクラッチの柔軟性で、チェーン固有のルールにも対応します。',
   },
   {
-    q: 'SPAブランドとセレクトショップで提案内容は変わりますか？',
-    a: '変わります。SPA型はセグメント配信とアップセル、セレクト型は統合IDと紹介獲得が主軸です。',
+    q: '調剤連携で処方箋の内容を参照したパーソナライズ配信はできますか？',
+    a: '処方箋内容の直接参照を用いた配信は薬機法・個人情報保護の観点からグレーゾーンとなるため、本サービスでは対象外としています。提供するのは調剤完了通知・待ち時間クーポン配信・事前受付（受付確認用途）の3層です。健診データを活用したポイント設計も現時点では対象外です。',
+  },
+  {
+    q: 'POSデータを使ったセグメント配信はどこまで対応できますか？',
+    a: '購買頻度・カテゴリ嗜好・来店サイクルなど購買属性に基づくセグメントに対応します。POS連携の方式（API・バッチ・CSVインポート等）はご利用のシステムに合わせて設計します。',
   },
 ];
 
@@ -201,10 +205,10 @@ const faqJsonLd = {
 const serviceJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  serviceType: 'アパレル業界向けLINEミニアプリ開発サービス',
-  name: 'グロースパック for LINE（アパレル業界向け）',
+  serviceType: 'ドラッグストア・薬局向けLINEミニアプリ開発サービス',
+  name: 'グロースパック for LINE（ドラッグストア業界向け）',
   description:
-    'マルチブランド対応の統合会員証・店頭商品シェア・自動フォロー・顧客カルテをLINEミニアプリで実現。SaaSの速さとフルスクラッチの柔軟性を両立するハーフスクラッチ開発で、最短3ヶ月で立ち上げます。',
+    'ポイントカード離脱・調剤待ち時間・一斉配信ブロック率の3課題を、LINEミニアプリで解決。調剤完了通知・待ち時間クーポン・事前受付の3層でDS固有の接点を構築します。最短3ヶ月でStep 1を立ち上げます。',
   provider: {
     '@type': 'Organization',
     name: 'クラスメソッド株式会社',
@@ -219,14 +223,10 @@ const serviceJsonLd = {
     name: 'グロースパック for LINE 機能アセット',
     itemListElement: [
       'デジタル会員証',
-      '順番待ち',
-      '予約',
       'スタンプカード',
       'クーポン配信',
-      'チケット・パス',
-      '抽選',
-      'セグメント配信',
       '1to1コミュニケーション',
+      'セグメント配信',
       'ギフト',
     ].map((name) => ({
       '@type': 'Offer',
@@ -248,8 +248,8 @@ const breadcrumbJsonLd = {
     {
       '@type': 'ListItem',
       position: 2,
-      name: 'アパレル業界',
-      item: 'https://lp.growthpackforline.classmethod.net/v2/apparel',
+      name: 'ドラッグストア業界',
+      item: 'https://lp.growthpackforline.classmethod.net/drugstore',
     },
   ],
 };
@@ -258,7 +258,7 @@ const breadcrumbJsonLd = {
 /* PAGE                                                                  */
 /* ------------------------------------------------------------------ */
 
-export default function ApparelPage() {
+export default function DrugstorePage() {
   return (
     <main className="min-h-screen bg-white text-[#1F2937]">
       {/* 構造化データ */}
@@ -281,7 +281,7 @@ export default function ApparelPage() {
       {/* ============================================================ */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-[#E5E7EB]">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 h-16 md:h-20 flex items-center justify-between">
-          <Link href="/v2" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <div className="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-[#06C755] flex items-center justify-center text-white font-bold text-sm">
               G
             </div>
@@ -293,9 +293,8 @@ export default function ApparelPage() {
           </Link>
           <nav className="hidden md:flex items-center gap-6 text-sm font-semibold text-[#1F2937]">
             <a href="#problems" className="hover:text-[#05A847] transition-colors">課題</a>
-            <a href="#appeal" className="hover:text-[#05A847] transition-colors">訴求</a>
+            <a href="#appeal" className="hover:text-[#05A847] transition-colors">調剤連携</a>
             <a href="#features" className="hover:text-[#05A847] transition-colors">機能</a>
-            <a href="#wp-download" className="hover:text-[#05A847] transition-colors">調査レポート</a>
             <a href="#faq" className="hover:text-[#05A847] transition-colors">FAQ</a>
           </nav>
           <Button variant="primary" size="sm" asChild>
@@ -305,13 +304,13 @@ export default function ApparelPage() {
       </header>
 
       {/* ============================================================ */}
-      {/* Hero — ダーク放射型（§7-1）                                      */}
+      {/* Hero — 写真背景バリエーション（§7-1b）                            */}
       {/* ============================================================ */}
       <div className="relative min-h-[560px] md:min-h-[700px] flex items-center bg-[#0a0a0a] overflow-hidden">
-        {/* 背景: アパレル実務シーン写真 */}
+        {/* 背景: ドラッグストア実務シーン写真 */}
         <div
           className="absolute inset-0 bg-center bg-cover"
-          style={{ backgroundImage: "url('/images/apparel-hero.png')" }}
+          style={{ backgroundImage: "url('/images/drugstore-hero.png')" }}
         />
         {/* ダークオーバーレイ（左濃→右薄） */}
         <div
@@ -336,15 +335,15 @@ export default function ApparelPage() {
               {/* 認定バッジ pill */}
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#06C755]/20 border border-[#06C755]/50 rounded-full text-xs sm:text-sm font-semibold text-[#06C755]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#06C755] shrink-0" />
-                LINEヤフー Technology Partner × アパレル業界
+                LINEヤフー Technology Partner × ドラッグストア業界
               </div>
 
               <h1 className="text-4xl md:text-5xl font-bold leading-[1.2] tracking-tight text-white">
-                アパレルの顧客接点、<br />
-                LINEで<span className="text-[#06C755]">ひらく。</span>
+                ドラッグストアの顧客接点、<br />
+                LINEで<span className="text-[#06C755]">つなげる。</span>
               </h1>
 
-              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">アプリ疲れ・OMO・休眠会員・EC返品率。アパレルの5つの壁を、マルチブランド対応の統合会員証で解きます。<span className="font-bold text-white">最短3ヶ月</span>で立ち上げ。</p>
+              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">ポイントカード・調剤待ち時間・一斉配信。ドラッグストアの3つの壁を、アプリDL不要のLINEミニアプリで解きます。<span className="font-bold text-white">最短3ヶ月</span>で立ち上げ。</p>
 
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
@@ -368,7 +367,7 @@ export default function ApparelPage() {
 
               {/* ミニチェックリスト */}
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
-                {['マルチブランド対応', '50ブランド横断の会員証'].map((t) => (
+                {['調剤連携3層対応', '薬機法ガードレール設計'].map((t) => (
                   <div key={t} className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-[#06C755]" />
                     {t}
@@ -388,7 +387,7 @@ export default function ApparelPage() {
                   aria-hidden="true"
                 >
                   <defs>
-                    <radialGradient id="lineFadeApparel" cx="50%" cy="50%" r="50%">
+                    <radialGradient id="lineFadeDrugstore" cx="50%" cy="50%" r="50%">
                       <stop offset="0%" stopColor="#06C755" stopOpacity="0.6" />
                       <stop offset="100%" stopColor="#06C755" stopOpacity="0" />
                     </radialGradient>
@@ -413,7 +412,7 @@ export default function ApparelPage() {
                       opacity="0.35"
                     />
                   ))}
-                  <circle cx="250" cy="280" r="140" fill="url(#lineFadeApparel)" />
+                  <circle cx="250" cy="280" r="140" fill="url(#lineFadeDrugstore)" />
                 </svg>
 
                 {/* 中心スマホ */}
@@ -449,8 +448,8 @@ export default function ApparelPage() {
                           </div>
                         </div>
                         <div className="bg-[#E8F8F0] rounded-md px-2 py-1.5 border border-[#06C755]/20">
-                          <div className="text-[9px] text-[#05A847] font-bold">新着</div>
-                          <div className="text-[10px] text-[#1F2937]">誕生日クーポン</div>
+                          <div className="text-[9px] text-[#05A847] font-bold">調剤完了</div>
+                          <div className="text-[10px] text-[#1F2937]">お薬が準備できました</div>
                         </div>
                       </div>
                     </div>
@@ -461,9 +460,9 @@ export default function ApparelPage() {
                 {[
                   { top: '10%', left: '5%', image: '/images/会員証.png', label: '会員証', delay: '0s' },
                   { top: '10%', right: '5%', image: '/images/スタンプカード.png', label: 'スタンプ', delay: '0.1s' },
-                  { top: '45%', left: '-10%', image: '/images/予約.png', label: '予約', delay: '0.2s' },
-                  { top: '45%', right: '-10%', image: '/images/クーポン.png', label: 'クーポン', delay: '0.3s' },
-                  { bottom: '10%', left: '5%', image: '/images/1to1.png', label: '1to1', delay: '0.4s' },
+                  { top: '45%', left: '-10%', image: '/images/クーポン.png', label: 'クーポン', delay: '0.2s' },
+                  { top: '45%', right: '-10%', image: '/images/1to1.png', label: '1to1', delay: '0.3s' },
+                  { bottom: '10%', left: '5%', image: '/images/セグメント配信.png', label: 'セグメント', delay: '0.4s' },
                   { bottom: '10%', right: '5%', image: '/images/ギフト.png', label: 'ギフト', delay: '0.5s' },
                 ].map((card) => (
                   <div
@@ -502,6 +501,7 @@ export default function ApparelPage() {
               { icon: ShieldCheck, label: 'LINEヤフー Technology Partner', color: '#06C755' },
               { icon: Award, label: 'AWS Premier Tier Services Partner', color: '#FF9900' },
               { icon: ShieldCheck, label: 'ISO 27001 取得（クラスメソッド）', color: '#3B82F6' },
+              { icon: Users, label: 'ドラッグストア業界', color: '#05A847' },
             ].map(({ icon: Icon, label, color }) => (
               <div key={label} className="flex items-center gap-2 text-sm font-semibold text-[#1F2937] whitespace-nowrap">
                 <Icon className="w-4 h-4 shrink-0" style={{ color }} />
@@ -513,7 +513,7 @@ export default function ApparelPage() {
       </div>
 
       {/* ============================================================ */}
-      {/* 実績数字セクション（§7-3、アパレル特化）                           */}
+      {/* 実績数字セクション（§7-3、DS特化）                                */}
       {/* ============================================================ */}
       <Section spacing="sm" container="wide" background="white">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E7EB] border border-[#E5E7EB] rounded-xl overflow-hidden">
@@ -530,7 +530,7 @@ export default function ApparelPage() {
       </Section>
 
       {/* ============================================================ */}
-      {/* 課題セクション（§7-4、DX 5点セット）                             */}
+      {/* 課題セクション（§7-4、DS 5点セット）                             */}
       {/* ============================================================ */}
       <Section id="problems" spacing="sm" container="wide" background="muted">
         <div className="max-w-[720px] mb-10 md:mb-12">
@@ -538,9 +538,9 @@ export default function ApparelPage() {
             CHALLENGES
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            アパレル業界のDX担当者が「限界だ」と感じる、5つの壁。
+            ドラッグストアのDX担当者が直面する、5つの構造課題。
           </h2>
-          <p className="text-base text-[#4B5563]">個別ツールでは解決できない、アパレル業界の構造的な課題です。</p>
+          <p className="text-base text-[#4B5563]">個別ツールでは解決できない、ドラッグストア業界の構造的な課題です。</p>
         </div>
         <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
           {PROBLEMS.map((p) => (
@@ -553,7 +553,7 @@ export default function ApparelPage() {
       </Section>
 
       {/* ============================================================ */}
-      {/* 訴求セクション（アパレル固有 3ステップ訴求、B パターン準拠）          */}
+      {/* 訴求セクション（調剤連携3層、DS固有キラー機能）                      */}
       {/* ============================================================ */}
       <Section id="appeal" spacing="md" container="wide" background="white">
         <div className="max-w-[720px] mb-10 md:mb-12">
@@ -561,9 +561,9 @@ export default function ApparelPage() {
             HOW IT WORKS
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            3つのステップで、顧客との関係を積み上げる。
+            調剤連携3層で、待ち時間を接点に変える。
           </h2>
-          <p className="text-base text-[#4B5563]">店頭での接点づくりから始め、仕組みで関係を深め、データで接客を引き継ぐ。現場に受け入れられやすい導入順序です。</p>
+          <p className="text-base text-[#4B5563]">調剤完了通知から始まる3ステップが、ドラッグストア固有のキラー機能です。薬機法ガードレールを設計に組み込み、商談初動から安心して提案できます。</p>
         </div>
         <div className="grid md:grid-cols-3 gap-4 md:gap-5">
           {APPEAL_STEPS.map((s, i) => (
@@ -594,7 +594,7 @@ export default function ApparelPage() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             SaaSとスクラッチ、その中間に。
           </h2>
-          <p className="text-base text-[#4B5563]">SaaSはマルチブランドや既存EC連携で詰まり、フルスクラッチは期間とコストが膨らむ。グロースパックは<span className="font-bold text-[#1F2937]">速さ・柔軟性・マルチブランド対応</span>を同時に提供するハーフスクラッチ開発です。</p>
+          <p className="text-base text-[#4B5563]">SaaSは調剤連携やマルチチェーン統合で詰まり、フルスクラッチは期間とコストが膨らむ。グロースパックは<span className="font-bold text-[#1F2937]">速さ・柔軟性・業界固有機能</span>を同時に提供するハーフスクラッチ開発です。</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-4 md:gap-5">
@@ -604,8 +604,8 @@ export default function ApparelPage() {
             <h3 className="text-base font-bold mb-4">SaaS<br /><span className="text-sm font-normal text-[#6B7280]">パッケージ型</span></h3>
             <ul className="text-sm text-[#6B7280] space-y-2">
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />初期コスト: 低</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />マルチブランド: △</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />拡張性: △</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />調剤連携: △</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />マルチチェーン: △</li>
             </ul>
           </Card>
 
@@ -618,8 +618,8 @@ export default function ApparelPage() {
             <h3 className="text-base font-bold mb-4">ハーフスクラッチ<br /><span className="text-sm font-normal text-[#05A847]">開発</span></h3>
             <ul className="text-sm text-[#1F2937] space-y-2 font-medium">
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />初期コスト: 中</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />マルチブランド: ◎</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />拡張性: ○ / サポート: ○</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />調剤連携: ◎</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />マルチチェーン: ◎</li>
             </ul>
           </Card>
 
@@ -629,8 +629,8 @@ export default function ApparelPage() {
             <h3 className="text-base font-bold mb-4">スクラッチ<br /><span className="text-sm font-normal text-[#6B7280]">開発</span></h3>
             <ul className="text-sm text-[#6B7280] space-y-2">
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#EF4444] shrink-0" />初期コスト: 高</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />マルチブランド: ◎</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />拡張性: ◎</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />調剤連携: ◎</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />マルチチェーン: ◎</li>
             </ul>
           </Card>
         </div>
@@ -641,8 +641,8 @@ export default function ApparelPage() {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
-              <p className="text-white font-bold text-lg sm:text-xl">どの構成がアパレル事業に合うか、まずご相談ください。</p>
-              <p className="text-white/80 text-sm mt-1">ブランド数・規模・既存システムをお聞きして最適な構成をご提案します。</p>
+              <p className="text-white font-bold text-lg sm:text-xl">調剤連携の構成について、まずご相談ください。</p>
+              <p className="text-white/80 text-sm mt-1">調剤併設の有無・チェーン数・既存システムをお聞きして最適な構成をご提案します。</p>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0">
               <Button
@@ -651,7 +651,7 @@ export default function ApparelPage() {
                 asChild
                 className="bg-white text-[#05A847] hover:bg-white/90 font-bold"
               >
-                <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="midband" destination="contact">
+                <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="mid_band" destination="contact">
                   無料で相談する
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </TrackedExternalLink>
@@ -662,7 +662,7 @@ export default function ApparelPage() {
       </div>
 
       {/* ============================================================ */}
-      {/* 機能グリッド（§7-6、アパレル向けタグライン）                        */}
+      {/* 機能グリッド（§7-6、DS向けタグライン）                             */}
       {/* ============================================================ */}
       <Section id="features" spacing="md" container="wide" background="white">
         <div className="max-w-[720px] mb-10 md:mb-12">
@@ -670,9 +670,9 @@ export default function ApparelPage() {
             FEATURES
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            10の機能アセットから、アパレル向けに選んで組み合わせる。
+            10の機能アセットから、ドラッグストア向けに選んで組み合わせる。
           </h2>
-          <p className="text-base text-[#4B5563]">アパレル業界で特に効く6機能。必要なものだけを選び、フェーズを追って拡張できます。</p>
+          <p className="text-base text-[#4B5563]">ドラッグストア業界で特に効く6機能。必要なものだけを選び、フェーズを追って拡張できます。</p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {FEATURES.map((f) => {
@@ -699,44 +699,6 @@ export default function ApparelPage() {
               </Card>
             );
           })}
-        </div>
-      </Section>
-
-      {/* ============================================================ */}
-      {/* WP（ホワイトペーパー）ダウンロード                                   */}
-      {/* ============================================================ */}
-      <Section id="wp-download" spacing="sm" container="default" background="muted">
-        <div className="bg-white rounded-2xl overflow-hidden border border-[#E5E7EB] shadow-sm">
-          <div className="flex flex-col md:flex-row">
-            {/* 左: WP概要（ダーク） */}
-            <div className="bg-[#0a0a0a] text-white p-6 sm:p-8 md:p-10 flex flex-col justify-center md:w-2/5">
-              <span className="text-xs tracking-[0.15em] uppercase font-semibold text-[#06C755] mb-3">
-                無料ダウンロード
-              </span>
-              <h3 className="text-lg sm:text-xl md:text-2xl font-bold leading-tight mb-3">
-                アパレル店舗スタッフ<br />業務実態調査 2026
-              </h3>
-              <p className="text-sm text-white/60 leading-relaxed">193名調査で見えた、現場の「見えない非効率」と「届かない声」。</p>
-            </div>
-            {/* 右: 内容+CTA */}
-            <div className="p-6 sm:p-8 md:p-10 flex flex-col justify-center md:w-3/5">
-              <ul className="text-sm text-[#4B5563] space-y-2 mb-6">
-                <li className="flex items-start gap-2">
-                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
-                  50.8%が業務時間の4割以上を接客以外に消費
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
-                  最大課題は「EC連携」ではなく「手作業オペ」
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
-                  改善意見を持つスタッフの82%が「声が届いていない」
-                </li>
-              </ul>
-              <WPDownloadButton />
-            </div>
-          </div>
         </div>
       </Section>
 
@@ -774,10 +736,10 @@ export default function ApparelPage() {
             CONTACT
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
-            アパレルの顧客接点DXについて、<br />
+            ドラッグストアの顧客接点DXについて、<br />
             <span className="text-[#06C755]">一度ご相談ください。</span>
           </h2>
-          <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">ブランド数・会員システム・EC構成をお聞きして、最適な構成をご提案します。初回相談は無料です。</p>
+          <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">調剤併設の有無・チェーン数・既存システムをお聞きして、最適な構成をご提案します。初回相談は無料です。</p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4">
             <Button variant="primary" size="lg" asChild>
               <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="final_primary" destination="contact">
@@ -818,7 +780,7 @@ export default function ApparelPage() {
                   <span className="text-base font-bold text-[#06C755]">LINE</span>
                 </div>
               </div>
-              <p className="text-xs text-white/50 leading-relaxed">クラスメソッド株式会社が提供する LINE ミニアプリ開発サービス。アパレル業界のOMO・会員証DX・マルチブランド統合に対応します。</p>
+              <p className="text-xs text-white/50 leading-relaxed">クラスメソッド株式会社が提供する LINE ミニアプリ開発サービス。ドラッグストア・薬局の調剤連携・会員証DX・マルチチェーン統合に対応します。</p>
             </div>
 
             {/* サービス */}
@@ -833,7 +795,8 @@ export default function ApparelPage() {
             <div>
               <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">RESOURCES</div>
               <ul className="space-y-2 text-sm text-white/60">
-                <li><a href="#problems" className="hover:text-white transition-colors">アパレル業界の課題</a></li>
+                <li><a href="#problems" className="hover:text-white transition-colors">ドラッグストア業界の課題</a></li>
+                <li><a href="#appeal" className="hover:text-white transition-colors">調剤連携3層</a></li>
                 <li><a href="#faq" className="hover:text-white transition-colors">よくあるご質問</a></li>
                 <li>
                   <a

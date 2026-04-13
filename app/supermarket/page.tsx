@@ -1,22 +1,23 @@
 /**
- * /v2/drugstore — グロースパック for LINE ドラッグストア業界向けLP
+ * /supermarket — グロースパック for LINE スーパー・ホームセンター業界向けLP
  *
  * docs/DESIGN.md v2.1 に厳密に従う。
- * app/v2/apparel/page.tsx を雛形として、ドラッグストア業界固有のコンテンツに差し替え。
+ * app/apparel/page.tsx を雛形として、SM・HC業界固有のコンテンツに差し替え。
  *
- * 訴求順序:
- *   1. ポイントカード離脱撤廃 → 2. 調剤連携3層 → 3. セグメント配信
+ * 訴求の2軸（固定）:
+ *   (1) 既存会員活性化（新規導入ではなく既に持っている基盤の活性化）
+ *   (2) 紙チラシ削減（経営層フック：年間3,000万〜1億円規模の削減余地）
  *
- * 調剤連携3層（APPEAL_STEPS の核）:
- *   1. 調剤完了通知  2. 待ち時間クーポン配信  3. 事前受付（受付確認用途）
+ * 機能セット（DESIGN §7-6 SM・HC推奨）:
+ *   採用: デジタル会員証 / スタンプカード / クーポン配信 / セグメント配信 / 抽選 / ギフト
+ *   除外: 予約 / チケット / 1to1コミュニケーション
  *
  * - 価格の具体額は一切記載しない
+ * - 最短3ヶ月表記（旧supermarket.tsの「最短1ヶ月」は採用しない）
  * - 和文段落は1行にまとめる（§12 和文改行禁止）
  * - 機能アイコンは /public/images/<機能名>.png を <Image> で表示
  * - CTA リンクは §10 正規 URL
- * - 「最短1ヶ月」は使わない。「最短3ヶ月」が正
- * - 薬機法ガードレール（処方内容の直接参照なし）をFAQで明示
- * - 健診データ活用は訴求しない
+ * - グッデイ公開事例のみ掲載（阪急オアシスは初期リリースでは含めない）
  */
 import Link from 'next/link';
 import Image from 'next/image';
@@ -38,51 +39,51 @@ import { ScrollTracker } from './scroll-tracker';
 /* DATA                                                                  */
 /* ------------------------------------------------------------------ */
 
-// ドラッグストア業界で実際に効く6機能に絞り込み（DESIGN §7-6 DS推奨）
-// 除外: 順番待ち / 予約 / チケット・パス / 抽選（他業種向け）
+// SM・HC業界で実際に効く6機能に絞り込み
+// 除外: 予約 / チケット・パス / 1to1コミュニケーション
 const FEATURES = [
   // Phase 1
   {
     image: '/images/会員証.png',
     name: 'デジタル会員証',
-    tagline: 'レジ前5秒でLINE会員化。ポイントカード携帯率の低下を一気に解消します。',
+    tagline: 'レジQRで5秒会員化。シニアでも使いやすいLINEで来店客全員をデジタル会員に。カード忘れによるポイント未付与をゼロにする。',
     phase: 'Step 1',
     id: 'membership',
   },
-  // Phase 2
   {
     image: '/images/スタンプカード.png',
     name: 'スタンプカード',
-    tagline: '紙カード不要のデジタル台紙で、再来店を設計する。',
-    phase: 'Step 2',
+    tagline: '来店・購買でスタンプ付与。紛失・不正利用のない完全デジタル管理で来店頻度向上と週次来店習慣の形成に直結する。',
+    phase: 'Step 1',
     id: 'stamp-card',
   },
+  // Phase 2
   {
     image: '/images/クーポン.png',
     name: 'クーポン配信',
-    tagline: '調剤完了後の待ち時間に配信。滞在中の購買機会を収益に変えます。',
+    tagline: '折込チラシの代替として、LINEでターゲット配信。来店頻度・購買カテゴリに応じた配信で配信コストを抑えながら効果を最大化する。',
     phase: 'Step 2',
     id: 'coupon',
   },
   {
-    image: '/images/1to1.png',
-    name: '1to1コミュニケーション',
-    tagline: '調剤完了通知・受付案内を個別に届け、待ち時間ストレスを低減します。',
-    phase: 'Step 2',
-    id: 'one-to-one',
-  },
-  // Phase 3
-  {
     image: '/images/セグメント配信.png',
     name: 'セグメント配信',
-    tagline: 'POSデータ×購買属性で配信を出し分け。一斉配信によるブロック率を抑制します。',
-    phase: 'Step 3',
+    tagline: '週1来店層・月1来店層・休眠層に分けて最適な内容を配信。購買カテゴリ別に生鮮・日用品・園芸で訴求を出し分けられる。',
+    phase: 'Step 2',
     id: 'segment-delivery',
   },
   {
+    image: '/images/抽選.png',
+    name: '抽選',
+    tagline: '来店・購買金額を条件に抽選イベントを設定。チラシ掲載の抽選企画をデジタルに移行し、集客効果を計測できる形にする。',
+    phase: 'Step 2',
+    id: 'lottery',
+  },
+  // Phase 3
+  {
     image: '/images/ギフト.png',
     name: 'ギフト',
-    tagline: 'ロイヤル顧客からの紹介で、広告費ゼロの新規会員獲得へ。',
+    tagline: 'ロイヤル会員経由の紹介で新規会員獲得。広告費をかけずに既存会員の口コミを活性化する。',
     phase: 'Step 3',
     id: 'gift',
   },
@@ -90,98 +91,113 @@ const FEATURES = [
 
 const PROBLEMS = [
   {
-    title: 'ポイントカード離脱：アプリ疲れと紙カードの携帯率低下',
-    body: '独自アプリはDLされず、紙カードは財布に入らない。LINEミニアプリならアプリDL不要で5秒会員化が完了し、会員化のハードルを大幅に下げられます。',
+    title: '紙チラシコストの増大',
+    body: '年間3,000万〜1億円規模の折込チラシ費が損益に直結する。配布エリア外には届かず効果測定もできない。デジタル移行を進めたいがシニア層への対応が課題になっている。',
   },
   {
-    title: '調剤の待ち時間：20〜40分の死角',
-    body: '「呼ばれるまで待つ」構造が患者満足度とスタッフ負荷を同時に悪化させます。完了通知と事前受付で、この死角を接点に変えられます。',
+    title: '会員カード提示率の低迷',
+    body: 'カードを持ち歩かない・忘れる顧客が多く会員特典が届かない。ポイント未付与の来店データが蓄積されず顧客行動の全体像が見えない状態が続いている。',
   },
   {
-    title: '一斉配信によるブロック率と開封率の低迷',
-    body: '全会員に同じメッセージを送る一斉配信はブロックにつながりやすい。調剤完了通知のように顧客が必要とするタイミングで届ける配信設計が求められています。',
+    title: 'シニア層のアプリ離脱',
+    body: 'スマホアプリのDL・設定が障壁となりシニア顧客がデジタル施策から取り残される。LINEはシニア世代の利用率が高く、アプリDL不要のLINEミニアプリで解決できる。',
   },
   {
-    title: 'マルチブランド・フォーマット分断：HC併設・食品強化・調剤高比率の3型',
-    body: 'ドラッグストアはブランドごとに顧客IDが分断されがちです。LINEミニアプリで統一会員基盤を構築すれば、傘下チェーンをまとめて管理できます。',
+    title: '紙スタンプカードの管理コスト',
+    body: '紙スタンプカードの印刷・配布・集計に毎月コストと工数がかかる。紛失・不正利用の対応も現場負荷になっており、デジタル化で運用コストを削減できる。',
   },
   {
-    title: 'POS連携不足：購買属性セグメントの不在',
-    body: 'POSデータが活用できていないため、配信は一律になりがちです。購買頻度・カテゴリ嗜好でセグメントを切ることで、配信精度を上げられます。',
+    title: '競合店増加による来店頻度低下',
+    body: 'ディスカウントストアやEC競合の増加で来店頻度が低下している。スタンプ・クーポン施策を打ちたいが紙運用では管理コストがかかりすぎて継続できない。',
   },
 ];
 
-// 調剤連携3層をAPPEAL_STEPSの核に配置
 const APPEAL_STEPS = [
   {
     step: 'Step 1',
-    title: '調剤完了通知',
-    description: '処方箋受付後、調剤が完了したタイミングでLINEに通知を送信。「呼ばれるまで待つ」ストレスを解消し、顧客が必要とするタイミングでの接点を構築します。',
+    title: '会員証をスマホに移行',
+    description: 'プラスチックカードをLINEミニアプリのデジタル会員証に置き換える。アプリDL不要でレジQRから5秒で会員化。シニア層も含めた既存会員基盤をそのままデジタルに移行できる。',
+    icon: '📱',
   },
   {
     step: 'Step 2',
-    title: '待ち時間クーポン配信',
-    description: '完了通知と同時に、店内商品のクーポンや季節提案を配信。調剤待ちの20〜40分を購買機会に転換し、1回あたりの客単価向上につなげます。',
+    title: 'チラシをLINEに置き換え',
+    description: '折込チラシ情報をLINEのクーポン・セグメント配信に移行する。購買カテゴリ別（生鮮・日用品・園芸など）にターゲットを絞った配信に切り替え、配信コストを削減しながら効果を上げる。',
+    icon: '📨',
   },
   {
     step: 'Step 3',
-    title: '事前受付（受付確認用途）',
-    description: '来店前にLINEから受付番号を取得できる事前受付機能を提供します。処方箋内容の直接参照は行わず、受付確認用途に特化した設計で薬機法ガードレールを守ります。',
+    title: '購買データで施策を精緻化',
+    description: '来店頻度・購買カテゴリ・会員ランクをデータで把握し、施策の精度を高める。週1来店層と月1来店層で配信内容を変え、休眠会員への自動フォローで来店を促進する。',
+    icon: '📊',
   },
 ];
 
 
 const STATS = [
   {
-    value: 'DL不要',
-    unit: '',
-    label: 'LINEだけで会員化が完結',
-    sub: 'インストール不要。レジ前5秒で会員証が手に入る',
+    value: '5',
+    unit: '倍',
+    label: '会員証提示率（グッデイ実績）',
+    sub: 'HC63店舗での月間提示率向上。LINEへの移行で提示忘れをゼロに近づけた結果',
+  },
+  {
+    value: '15',
+    unit: '万人',
+    label: 'LINEの友だち増加（グッデイ実績）',
+    sub: '会員証デジタル化を起点に友だち数が急増。接触可能な顧客基盤が拡大した',
   },
   {
     value: '0',
     unit: '件',
-    label: 'スタッフの手作業（調剤完了通知）',
-    sub: '通知配信は全自動。スタッフは調剤業務に集中できる',
-  },
-  {
-    value: '5',
-    unit: '秒',
-    label: '会員登録完了時間',
-    sub: 'QRコードから友だち追加と会員化が同時完了',
+    label: 'スタッフの手作業（クーポン配信）',
+    sub: 'セグメント配信は事前設定。紙チラシからデジタルへ全自動移行',
   },
   {
     value: '最短',
     unit: '3ヶ月',
     label: 'フェーズ1の立ち上げ期間',
-    sub: '会員証を含む標準構成。調剤連携を加えると4〜6ヶ月が目安',
+    sub: '会員証＋スタンプカードの標準構成。既存POSや会員DBとの連携は別途ヒアリング',
   },
 ];
 
 const FAQS = [
   {
     q: '導入にはどのくらいの期間がかかりますか？',
-    a: 'デジタル会員証を含む標準構成で最短3ヶ月。調剤連携（完了通知・事前受付）を追加する場合や複数ブランド統合が必要な場合は4〜6ヶ月が目安です。',
+    a: '会員証とスタンプカードを含む標準構成で最短3ヶ月です。既存POSや会員DBとの連携が必要な場合は4〜6ヶ月が目安になります。まずはヒアリングで現行システム構成をお聞きします。',
   },
   {
-    q: '調剤を併設していない店舗でも提案は成立しますか？',
-    a: '成立します。調剤非併設の場合はデジタル会員証・スタンプカード・セグメント配信を主軸に据えた構成を提案します。調剤高比率チェーン向けには調剤連携3層がキラー機能になります。',
+    q: '購買カテゴリ別のセグメント配信は具体的にどう使いますか？',
+    a: '生鮮食品購買層・日用品購買層・園芸資材購買層などカテゴリ別にセグメントを設定し、それぞれに最適なクーポンやイベント情報を配信できます。週1来店層と月1来店層で内容を変えることも可能です。',
   },
   {
-    q: '既存のポイントカードやCRMとの連携はできますか？',
-    a: '対応しています。既存のポイントデータ・会員IDの移行・連携とも対応範囲です。データ構造とボリュームによって方式が変わるため、まずはヒアリングさせてください。',
+    q: 'シニア層はLINEミニアプリを使えますか？',
+    a: 'LINEは70代以上のシニア層でも利用率が高く、アプリDLが不要なLINEミニアプリはシニア向けのデジタル施策として有効です。レジスタッフが案内するQRからその場で会員登録できる設計にすることで導入障壁を下げられます。',
   },
   {
-    q: '傘下に複数チェーンがある場合、統合会員基盤を作れますか？',
-    a: '作れます。単一のLINE IDでマルチブランド・マルチフォーマットをまとめた統合会員基盤を設計できます。ハーフスクラッチの柔軟性で、チェーン固有のルールにも対応します。',
+    q: '既存の会員POSや会員DBと連携できますか？',
+    a: '対応可能です。既存POSシステムや会員管理DBとのAPI連携実績があります。データ構造とボリュームによって連携方式が変わるため、まずはヒアリングで詳細を確認させてください。',
   },
   {
-    q: '調剤連携で処方箋の内容を参照したパーソナライズ配信はできますか？',
-    a: '処方箋内容の直接参照を用いた配信は薬機法・個人情報保護の観点からグレーゾーンとなるため、本サービスでは対象外としています。提供するのは調剤完了通知・待ち時間クーポン配信・事前受付（受付確認用途）の3層です。健診データを活用したポイント設計も現時点では対象外です。',
+    q: '紙チラシを完全廃止せずLINEと併用しながら移行できますか？',
+    a: '併用移行に対応します。まずLINE会員向けの先行クーポン配信から始め、効果を測定しながら段階的に紙チラシの比率を下げていくアプローチが現実的です。急な全廃ではなく計画的な移行をサポートします。',
   },
+];
+
+/* ------------------------------------------------------------------ */
+/* 事例                                                                  */
+/* ------------------------------------------------------------------ */
+
+const caseStudies = [
   {
-    q: 'POSデータを使ったセグメント配信はどこまで対応できますか？',
-    a: '購買頻度・カテゴリ嗜好・来店サイクルなど購買属性に基づくセグメントに対応します。POS連携の方式（API・バッチ・CSVインポート等）はご利用のシステムに合わせて設計します。',
+    company: 'グッデイ',
+    industry: 'ホームセンター（63店舗）',
+    metrics: [
+      { value: '5倍', label: '会員証提示率（月間）' },
+      { value: '15万人', label: '友だち増加' },
+      { value: '11万人', label: '会員数増加' },
+    ],
+    summary: 'プラスチックカードからLINEミニアプリのデジタル会員証に移行。レジQR読み取りで会員証提示率が月間5倍以上に向上した。',
   },
 ];
 
@@ -205,10 +221,9 @@ const faqJsonLd = {
 const serviceJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  serviceType: 'ドラッグストア・薬局向けLINEミニアプリ開発サービス',
-  name: 'グロースパック for LINE（ドラッグストア業界向け）',
-  description:
-    'ポイントカード離脱・調剤待ち時間・一斉配信ブロック率の3課題を、LINEミニアプリで解決。調剤完了通知・待ち時間クーポン・事前受付の3層でDS固有の接点を構築します。最短3ヶ月でStep 1を立ち上げます。',
+  serviceType: 'スーパー・ホームセンター向けLINEミニアプリ開発サービス',
+  name: 'グロースパック for LINE（スーパー・ホームセンター向け）',
+  description: '既存会員基盤の活性化と紙チラシのLINE配信への移行を実現するLINEミニアプリ開発サービス。ハーフスクラッチ開発で最短3ヶ月で立ち上げます。',
   provider: {
     '@type': 'Organization',
     name: 'クラスメソッド株式会社',
@@ -220,13 +235,13 @@ const serviceJsonLd = {
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'グロースパック for LINE 機能アセット',
+    name: 'グロースパック for LINE 機能アセット（SM・HC向け）',
     itemListElement: [
       'デジタル会員証',
       'スタンプカード',
       'クーポン配信',
-      '1to1コミュニケーション',
       'セグメント配信',
+      '抽選',
       'ギフト',
     ].map((name) => ({
       '@type': 'Offer',
@@ -248,8 +263,8 @@ const breadcrumbJsonLd = {
     {
       '@type': 'ListItem',
       position: 2,
-      name: 'ドラッグストア業界',
-      item: 'https://lp.growthpackforline.classmethod.net/v2/drugstore',
+      name: 'スーパー・ホームセンター業界',
+      item: 'https://lp.growthpackforline.classmethod.net/supermarket',
     },
   ],
 };
@@ -258,7 +273,7 @@ const breadcrumbJsonLd = {
 /* PAGE                                                                  */
 /* ------------------------------------------------------------------ */
 
-export default function DrugstorePage() {
+export default function SupermarketPage() {
   return (
     <main className="min-h-screen bg-white text-[#1F2937]">
       {/* 構造化データ */}
@@ -281,7 +296,7 @@ export default function DrugstorePage() {
       {/* ============================================================ */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-[#E5E7EB]">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 h-16 md:h-20 flex items-center justify-between">
-          <Link href="/v2" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <div className="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-[#06C755] flex items-center justify-center text-white font-bold text-sm">
               G
             </div>
@@ -293,8 +308,9 @@ export default function DrugstorePage() {
           </Link>
           <nav className="hidden md:flex items-center gap-6 text-sm font-semibold text-[#1F2937]">
             <a href="#problems" className="hover:text-[#05A847] transition-colors">課題</a>
-            <a href="#appeal" className="hover:text-[#05A847] transition-colors">調剤連携</a>
+            <a href="#appeal" className="hover:text-[#05A847] transition-colors">訴求</a>
             <a href="#features" className="hover:text-[#05A847] transition-colors">機能</a>
+            <a href="#case-studies" className="hover:text-[#05A847] transition-colors">事例</a>
             <a href="#faq" className="hover:text-[#05A847] transition-colors">FAQ</a>
           </nav>
           <Button variant="primary" size="sm" asChild>
@@ -304,13 +320,13 @@ export default function DrugstorePage() {
       </header>
 
       {/* ============================================================ */}
-      {/* Hero — 写真背景バリエーション（§7-1b）                            */}
+      {/* Hero — ダーク放射型（§7-1）                                      */}
       {/* ============================================================ */}
       <div className="relative min-h-[560px] md:min-h-[700px] flex items-center bg-[#0a0a0a] overflow-hidden">
-        {/* 背景: ドラッグストア実務シーン写真 */}
+        {/* 背景: SM・HC実務シーン写真 */}
         <div
           className="absolute inset-0 bg-center bg-cover"
-          style={{ backgroundImage: "url('/images/drugstore-hero.png')" }}
+          style={{ backgroundImage: "url('/images/supermarket-hero.png')" }}
         />
         {/* ダークオーバーレイ（左濃→右薄） */}
         <div
@@ -328,6 +344,7 @@ export default function DrugstorePage() {
             backgroundSize: '28px 28px',
           }}
         />
+
         <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 py-20 sm:py-24 md:py-28">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             {/* 左カラム */}
@@ -335,15 +352,15 @@ export default function DrugstorePage() {
               {/* 認定バッジ pill */}
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#06C755]/20 border border-[#06C755]/50 rounded-full text-xs sm:text-sm font-semibold text-[#06C755]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#06C755] shrink-0" />
-                LINEヤフー Technology Partner × ドラッグストア業界
+                LINEヤフー Technology Partner × グッデイ（HC63店舗）導入実績
               </div>
 
               <h1 className="text-4xl md:text-5xl font-bold leading-[1.2] tracking-tight text-white">
-                ドラッグストアの顧客接点、<br />
-                LINEで<span className="text-[#06C755]">つなげる。</span>
+                既存会員を活性化し、<br />
+                紙チラシを<span className="text-[#06C755]">LINEに変える。</span>
               </h1>
 
-              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">ポイントカード・調剤待ち時間・一斉配信。ドラッグストアの3つの壁を、アプリDL不要のLINEミニアプリで解きます。<span className="font-bold text-white">最短3ヶ月</span>で立ち上げ。</p>
+              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">プラスチックカードの提示率低迷、年間数千万円の折込チラシ、シニア層のデジタル離れ。SM・HCの3つの顧客接点課題を、既に持っている会員基盤を活かして解決します。<span className="font-bold text-white">最短3ヶ月</span>で立ち上げ。</p>
 
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
@@ -367,7 +384,7 @@ export default function DrugstorePage() {
 
               {/* ミニチェックリスト */}
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
-                {['調剤連携3層対応', '薬機法ガードレール設計'].map((t) => (
+                {['既存会員基盤をそのまま活性化', '紙チラシのLINE移行対応'].map((t) => (
                   <div key={t} className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-[#06C755]" />
                     {t}
@@ -387,7 +404,7 @@ export default function DrugstorePage() {
                   aria-hidden="true"
                 >
                   <defs>
-                    <radialGradient id="lineFadeDrugstore" cx="50%" cy="50%" r="50%">
+                    <radialGradient id="lineFadeSupermarket" cx="50%" cy="50%" r="50%">
                       <stop offset="0%" stopColor="#06C755" stopOpacity="0.6" />
                       <stop offset="100%" stopColor="#06C755" stopOpacity="0" />
                     </radialGradient>
@@ -412,7 +429,7 @@ export default function DrugstorePage() {
                       opacity="0.35"
                     />
                   ))}
-                  <circle cx="250" cy="280" r="140" fill="url(#lineFadeDrugstore)" />
+                  <circle cx="250" cy="280" r="140" fill="url(#lineFadeSupermarket)" />
                 </svg>
 
                 {/* 中心スマホ */}
@@ -448,8 +465,8 @@ export default function DrugstorePage() {
                           </div>
                         </div>
                         <div className="bg-[#E8F8F0] rounded-md px-2 py-1.5 border border-[#06C755]/20">
-                          <div className="text-[9px] text-[#05A847] font-bold">調剤完了</div>
-                          <div className="text-[10px] text-[#1F2937]">お薬が準備できました</div>
+                          <div className="text-[9px] text-[#05A847] font-bold">今週のチラシ</div>
+                          <div className="text-[10px] text-[#1F2937]">週末限定クーポン</div>
                         </div>
                       </div>
                     </div>
@@ -461,8 +478,8 @@ export default function DrugstorePage() {
                   { top: '10%', left: '5%', image: '/images/会員証.png', label: '会員証', delay: '0s' },
                   { top: '10%', right: '5%', image: '/images/スタンプカード.png', label: 'スタンプ', delay: '0.1s' },
                   { top: '45%', left: '-10%', image: '/images/クーポン.png', label: 'クーポン', delay: '0.2s' },
-                  { top: '45%', right: '-10%', image: '/images/1to1.png', label: '1to1', delay: '0.3s' },
-                  { bottom: '10%', left: '5%', image: '/images/セグメント配信.png', label: 'セグメント', delay: '0.4s' },
+                  { top: '45%', right: '-10%', image: '/images/セグメント配信.png', label: 'セグメント', delay: '0.3s' },
+                  { bottom: '10%', left: '5%', image: '/images/抽選.png', label: '抽選', delay: '0.4s' },
                   { bottom: '10%', right: '5%', image: '/images/ギフト.png', label: 'ギフト', delay: '0.5s' },
                 ].map((card) => (
                   <div
@@ -501,7 +518,7 @@ export default function DrugstorePage() {
               { icon: ShieldCheck, label: 'LINEヤフー Technology Partner', color: '#06C755' },
               { icon: Award, label: 'AWS Premier Tier Services Partner', color: '#FF9900' },
               { icon: ShieldCheck, label: 'ISO 27001 取得（クラスメソッド）', color: '#3B82F6' },
-              { icon: Users, label: 'ドラッグストア業界', color: '#05A847' },
+              { icon: Users, label: 'グッデイ（HC63店舗）導入実績', color: '#05A847' },
             ].map(({ icon: Icon, label, color }) => (
               <div key={label} className="flex items-center gap-2 text-sm font-semibold text-[#1F2937] whitespace-nowrap">
                 <Icon className="w-4 h-4 shrink-0" style={{ color }} />
@@ -513,24 +530,25 @@ export default function DrugstorePage() {
       </div>
 
       {/* ============================================================ */}
-      {/* 実績数字セクション（§7-3、DS特化）                                */}
+      {/* 実績数字セクション（§7-3、SM・HC特化）                             */}
       {/* ============================================================ */}
       <Section spacing="sm" container="wide" background="white">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E7EB] border border-[#E5E7EB] rounded-xl overflow-hidden">
           {STATS.map(({ value, unit, label, sub }) => (
             <div key={label} className="px-6 py-8 text-center bg-white">
-              <div className="text-4xl sm:text-5xl font-bold text-[#1F2937] leading-none mb-1">
-                {value}<span className="text-2xl sm:text-3xl text-[#05A847] ml-1">{unit}</span>
+              <div className="text-3xl sm:text-4xl font-bold text-[#1F2937] leading-none mb-1">
+                {value}<span className="text-xl sm:text-2xl text-[#05A847] ml-1">{unit}</span>
               </div>
               <div className="text-sm font-semibold text-[#1F2937] mt-3 mb-1">{label}</div>
               <div className="text-xs text-[#6B7280] leading-relaxed">{sub}</div>
             </div>
           ))}
         </div>
+        <p className="text-xs text-[#9CA3AF] text-center mt-4">※ グッデイの実績は公開情報に基づく数値です。チラシコスト削減余地は業界の一般的な目安です。導入効果は企業規模・既存システム・施策設計によって異なります。</p>
       </Section>
 
       {/* ============================================================ */}
-      {/* 課題セクション（§7-4、DS 5点セット）                             */}
+      {/* 課題セクション（§7-4）                                          */}
       {/* ============================================================ */}
       <Section id="problems" spacing="sm" container="wide" background="muted">
         <div className="max-w-[720px] mb-10 md:mb-12">
@@ -538,9 +556,9 @@ export default function DrugstorePage() {
             CHALLENGES
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            ドラッグストアのDX担当者が直面する、5つの構造課題。
+            SM・HC企業が「このままでは限界だ」と感じる、5つの壁。
           </h2>
-          <p className="text-base text-[#4B5563]">個別ツールでは解決できない、ドラッグストア業界の構造的な課題です。</p>
+          <p className="text-base text-[#4B5563]">個別施策では解決できない、スーパー・ホームセンター業界の構造的な課題です。</p>
         </div>
         <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
           {PROBLEMS.map((p) => (
@@ -553,7 +571,7 @@ export default function DrugstorePage() {
       </Section>
 
       {/* ============================================================ */}
-      {/* 訴求セクション（調剤連携3層、DS固有キラー機能）                      */}
+      {/* 訴求セクション（SM・HC固有 3ステップ訴求）                          */}
       {/* ============================================================ */}
       <Section id="appeal" spacing="md" container="wide" background="white">
         <div className="max-w-[720px] mb-10 md:mb-12">
@@ -561,9 +579,9 @@ export default function DrugstorePage() {
             HOW IT WORKS
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            調剤連携3層で、待ち時間を接点に変える。
+            3つのステップで、既存会員基盤を収益に変える。
           </h2>
-          <p className="text-base text-[#4B5563]">調剤完了通知から始まる3ステップが、ドラッグストア固有のキラー機能です。薬機法ガードレールを設計に組み込み、商談初動から安心して提案できます。</p>
+          <p className="text-base text-[#4B5563]">新規導入ではなく、今すでに持っている会員基盤を活性化するアプローチです。会員証のデジタル移行から始め、チラシをLINEに置き換え、購買データで施策を精緻化する。</p>
         </div>
         <div className="grid md:grid-cols-3 gap-4 md:gap-5">
           {APPEAL_STEPS.map((s, i) => (
@@ -594,7 +612,7 @@ export default function DrugstorePage() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             SaaSとスクラッチ、その中間に。
           </h2>
-          <p className="text-base text-[#4B5563]">SaaSは調剤連携やマルチチェーン統合で詰まり、フルスクラッチは期間とコストが膨らむ。グロースパックは<span className="font-bold text-[#1F2937]">速さ・柔軟性・業界固有機能</span>を同時に提供するハーフスクラッチ開発です。</p>
+          <p className="text-base text-[#4B5563]">SaaSは既存POSや会員DBとの連携で詰まり、フルスクラッチは期間とコストが膨らむ。グロースパックは<span className="font-bold text-[#1F2937]">速さ・柔軟性・既存システム連携</span>を同時に提供するハーフスクラッチ開発です。</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-4 md:gap-5">
@@ -604,8 +622,8 @@ export default function DrugstorePage() {
             <h3 className="text-base font-bold mb-4">SaaS<br /><span className="text-sm font-normal text-[#6B7280]">パッケージ型</span></h3>
             <ul className="text-sm text-[#6B7280] space-y-2">
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />初期コスト: 低</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />調剤連携: △</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />マルチチェーン: △</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />POS連携: △</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />拡張性: △</li>
             </ul>
           </Card>
 
@@ -618,8 +636,8 @@ export default function DrugstorePage() {
             <h3 className="text-base font-bold mb-4">ハーフスクラッチ<br /><span className="text-sm font-normal text-[#05A847]">開発</span></h3>
             <ul className="text-sm text-[#1F2937] space-y-2 font-medium">
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />初期コスト: 中</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />調剤連携: ◎</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />マルチチェーン: ◎</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />POS連携: ◎</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />拡張性: ○ / サポート: ○</li>
             </ul>
           </Card>
 
@@ -629,8 +647,8 @@ export default function DrugstorePage() {
             <h3 className="text-base font-bold mb-4">スクラッチ<br /><span className="text-sm font-normal text-[#6B7280]">開発</span></h3>
             <ul className="text-sm text-[#6B7280] space-y-2">
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#EF4444] shrink-0" />初期コスト: 高</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />調剤連携: ◎</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />マルチチェーン: ◎</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />POS連携: ◎</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />拡張性: ◎</li>
             </ul>
           </Card>
         </div>
@@ -641,8 +659,8 @@ export default function DrugstorePage() {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
-              <p className="text-white font-bold text-lg sm:text-xl">調剤連携の構成について、まずご相談ください。</p>
-              <p className="text-white/80 text-sm mt-1">調剤併設の有無・チェーン数・既存システムをお聞きして最適な構成をご提案します。</p>
+              <p className="text-white font-bold text-lg sm:text-xl">どの構成がSM・HC事業に合うか、まずご相談ください。</p>
+              <p className="text-white/80 text-sm mt-1">店舗数・既存会員DBの規模・POSシステムをお聞きして最適な構成をご提案します。</p>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0">
               <Button
@@ -651,7 +669,7 @@ export default function DrugstorePage() {
                 asChild
                 className="bg-white text-[#05A847] hover:bg-white/90 font-bold"
               >
-                <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="mid_band" destination="contact">
+                <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="midband" destination="contact">
                   無料で相談する
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </TrackedExternalLink>
@@ -662,7 +680,7 @@ export default function DrugstorePage() {
       </div>
 
       {/* ============================================================ */}
-      {/* 機能グリッド（§7-6、DS向けタグライン）                             */}
+      {/* 機能グリッド（§7-6、SM・HC向けタグライン）                          */}
       {/* ============================================================ */}
       <Section id="features" spacing="md" container="wide" background="white">
         <div className="max-w-[720px] mb-10 md:mb-12">
@@ -670,9 +688,9 @@ export default function DrugstorePage() {
             FEATURES
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            10の機能アセットから、ドラッグストア向けに選んで組み合わせる。
+            10の機能アセットから、SM・HC向けに選んで組み合わせる。
           </h2>
-          <p className="text-base text-[#4B5563]">ドラッグストア業界で特に効く6機能。必要なものだけを選び、フェーズを追って拡張できます。</p>
+          <p className="text-base text-[#4B5563]">SM・HC業界で特に効く6機能。予約・チケット・1to1は業態に合わないため除外し、会員活性化とチラシ移行に特化した構成にしています。</p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {FEATURES.map((f) => {
@@ -699,6 +717,45 @@ export default function DrugstorePage() {
               </Card>
             );
           })}
+        </div>
+      </Section>
+
+      {/* ============================================================ */}
+      {/* 事例セクション（グッデイ公開事例のみ）                              */}
+      {/* ============================================================ */}
+      <Section id="case-studies" spacing="md" container="wide" background="white">
+        <div className="max-w-[720px] mb-10 md:mb-12">
+          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">
+            CASE STUDY
+          </div>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+            導入事例
+          </h2>
+          <p className="text-base text-[#4B5563]">HC業界でのLINEミニアプリ導入実績です。</p>
+        </div>
+        <div className="grid md:grid-cols-1 gap-6 max-w-[900px]">
+          {caseStudies.map((c) => (
+            <Card key={c.company} variant="elevated" padding="lg" rounded="xl">
+              <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-start">
+                <div className="md:w-1/3">
+                  <div className="text-xs text-[#9CA3AF] font-semibold uppercase tracking-wider mb-1">COMPANY</div>
+                  <h3 className="text-xl font-bold text-[#1F2937] mb-1">{c.company}</h3>
+                  <p className="text-sm text-[#6B7280]">{c.industry}</p>
+                </div>
+                <div className="md:w-2/3">
+                  <div className="grid grid-cols-3 gap-4 mb-5">
+                    {c.metrics.map((m) => (
+                      <div key={m.label} className="text-center">
+                        <div className="text-2xl sm:text-3xl font-bold text-[#05A847]">{m.value}</div>
+                        <div className="text-xs text-[#6B7280] mt-1 leading-tight">{m.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-sm text-[#4B5563] leading-relaxed">{c.summary}</p>
+                </div>
+              </div>
+            </Card>
+          ))}
         </div>
       </Section>
 
@@ -736,10 +793,10 @@ export default function DrugstorePage() {
             CONTACT
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
-            ドラッグストアの顧客接点DXについて、<br />
+            SM・HCの会員活性化とチラシDXについて、<br />
             <span className="text-[#06C755]">一度ご相談ください。</span>
           </h2>
-          <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">調剤併設の有無・チェーン数・既存システムをお聞きして、最適な構成をご提案します。初回相談は無料です。</p>
+          <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">店舗数・現行会員DB・POSシステムをお聞きして、最適な構成をご提案します。初回相談は無料です。</p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4">
             <Button variant="primary" size="lg" asChild>
               <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="final_primary" destination="contact">
@@ -780,7 +837,7 @@ export default function DrugstorePage() {
                   <span className="text-base font-bold text-[#06C755]">LINE</span>
                 </div>
               </div>
-              <p className="text-xs text-white/50 leading-relaxed">クラスメソッド株式会社が提供する LINE ミニアプリ開発サービス。ドラッグストア・薬局の調剤連携・会員証DX・マルチチェーン統合に対応します。</p>
+              <p className="text-xs text-white/50 leading-relaxed">クラスメソッド株式会社が提供する LINE ミニアプリ開発サービス。SM・HC業界の既存会員活性化と紙チラシのLINE移行に対応します。</p>
             </div>
 
             {/* サービス */}
@@ -795,8 +852,8 @@ export default function DrugstorePage() {
             <div>
               <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">RESOURCES</div>
               <ul className="space-y-2 text-sm text-white/60">
-                <li><a href="#problems" className="hover:text-white transition-colors">ドラッグストア業界の課題</a></li>
-                <li><a href="#appeal" className="hover:text-white transition-colors">調剤連携3層</a></li>
+                <li><a href="#problems" className="hover:text-white transition-colors">SM・HC業界の課題</a></li>
+                <li><a href="#case-studies" className="hover:text-white transition-colors">導入事例</a></li>
                 <li><a href="#faq" className="hover:text-white transition-colors">よくあるご質問</a></li>
                 <li>
                   <a

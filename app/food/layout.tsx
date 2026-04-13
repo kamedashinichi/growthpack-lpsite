@@ -17,17 +17,8 @@ export const metadata: Metadata = {
     '飲食 LINE',
     'クラスメソッド',
   ],
-  robots: {
-    index: false,
-    follow: false,
-    googleBot: {
-      index: false,
-      follow: false,
-      noimageindex: true,
-    },
-  },
   alternates: {
-    canonical: 'https://lp.growthpackforline.classmethod.net/v2/food',
+    canonical: 'https://lp.growthpackforline.classmethod.net/food',
   },
   openGraph: {
     type: 'website',

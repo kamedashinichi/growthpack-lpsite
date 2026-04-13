@@ -1,19 +1,19 @@
 /**
- * /v2/hotel — グロースパック for LINE ホテル・旅館業界向けLP
+ * /food — グロースパック for LINE 飲食業界向けLP
  *
  * docs/DESIGN.md v2.1 に厳密に従う。
- * app/v2/apparel/page.tsx を雛形として、ホテル業界固有のコンテンツに差し替え。
+ * app/apparel/page.tsx を雛形として、飲食業界固有のコンテンツに差し替え。
  *
- * 訴求軸（project_hotel_industry.md 確定）:
- *   OTA手数料削減・直予約率向上を経営層（CFO/社長）に直接フック。
- *   チェックインDXは旅館業法制約があるため Hero では扱わない。
+ * 訴求3軸: 行列（時間）× リピート（頻度）× テイクアウト（チャネル）
+ *
+ * 課題セクション（飲食5点セット）:
+ *   1. 行列×人手不足  2. 紙スタンプの限界  3. テイクアウト手数料
+ *   4. 複数ブランド分断  5. 幽霊会員・休眠会員
  *
  * - 価格の具体額は一切記載しない
  * - 和文段落は1行にまとめる（§12 和文改行禁止）
  * - 機能アイコンは /public/images/<機能名>.png を <Image> で表示
  * - CTA リンクは §10 正規 URL
- * - GP事例ゼロのため caseStudies は空。STATS は「業界水準」として提示
- * - RET-166 は本 LP 非掲載
  */
 import Link from 'next/link';
 import Image from 'next/image';
@@ -35,102 +35,115 @@ import { ScrollTracker } from './scroll-tracker';
 /* DATA                                                                  */
 /* ------------------------------------------------------------------ */
 
-// ホテル・旅館業界で効く6機能に絞り込み
-// 除外: 順番待ち / チケット・パス / 抽選 / スタンプカード（他業種向け）
+// 飲食業界で特に効く7機能に絞り込み（DESIGN §7-6 推奨: 会員証/順番待ち/スタンプ/クーポン/セグメント配信/予約）
+// 1to1は飲食では優先度低めだが、マルチブランドCRM文脈で追加
 const FEATURES = [
   // Phase 1
   {
-    image: '/images/予約.png',
-    name: '予約',
-    tagline: 'LINE上で宿泊予約を受け、OTA経由を直予約に巻き取る。予約完了後の会員登録も自動化します。',
-    phase: 'Step 1',
-    id: 'reservation',
-  },
-  {
     image: '/images/会員証.png',
     name: 'デジタル会員証',
-    tagline: '友だち追加と同時に会員化。アプリDL不要、5秒で会員登録。再来訪時の本人特定も容易に。',
+    tagline: 'アプリDL不要、5秒で会員化。マルチブランドを1つのIDで統合。',
     phase: 'Step 1',
     id: 'membership',
   },
+  {
+    image: '/images/順番待ち.png',
+    name: '順番待ち',
+    tagline: '行列をLINE通知に変換。「並ばなくていい体験」でロイヤルティ向上。',
+    phase: 'Step 1',
+    id: 'queue',
+  },
   // Phase 2
+  {
+    image: '/images/スタンプカード.png',
+    name: 'スタンプカード',
+    tagline: '紙カード紛失ゼロ。来店データが蓄積され再来店サイクルを設計できる。',
+    phase: 'Step 2',
+    id: 'stamp-card',
+  },
   {
     image: '/images/クーポン.png',
     name: 'クーポン配信',
-    tagline: '館内レストラン・スパ・売店・次回宿泊のクーポンをLINEで配信。チェックイン後の消費を引き上げます。',
+    tagline: '来店頻度と購買履歴に応じた配信。テイクアウト誘導にも活用。',
     phase: 'Step 2',
     id: 'coupon',
   },
   {
-    image: '/images/1to1.png',
-    name: '1to1コミュニケーション',
-    tagline: 'コンシェルジュ的な個別応対をLINEに集約。要望・アレルギー・好みを蓄積して次回滞在へ引き継ぎます。',
+    image: '/images/予約.png',
+    name: '予約',
+    tagline: '電話不要のLINE予約で機会損失を防止。ピーク時の着席率を改善。',
     phase: 'Step 2',
-    id: 'one-to-one',
+    id: 'reservation',
   },
   // Phase 3
   {
     image: '/images/セグメント配信.png',
     name: 'セグメント配信',
-    tagline: '宿泊履歴・季節・プランタイプで配信を出し分け。半年未来訪ゲストの呼び戻しに。PMS連携なしでもCSV取込で対応可能です。',
+    tagline: '来店間隔・業態・注文パターンで配信を出し分け。休眠会員の掘り起こしに。',
     phase: 'Step 3',
     id: 'segment-delivery',
   },
   {
-    image: '/images/ギフト.png',
-    name: 'ギフト',
-    tagline: 'ロイヤル顧客経由の紹介・贈答利用を促進。広告費をかけない新規獲得の仕組みを作ります。',
+    image: '/images/1to1.png',
+    name: '1to1コミュニケーション',
+    tagline: 'マルチブランドのCRM基盤として、複数業態にまたがる顧客データを一元管理。',
     phase: 'Step 3',
-    id: 'gift',
+    id: 'one-to-one',
   },
 ];
 
 const PROBLEMS = [
   {
-    title: 'OTA依存による粗利圧迫',
-    body: 'OTA手数料15〜25%が恒常的にP/Lを削る。業界の直予約率は約30%で頭打ちであり、自社チャネル強化が急務です。',
+    title: '行列×人手不足：繁忙時間の客離れに手が打てない',
+    body: '混雑のピーク時に行列が伸びるほど客が離れるが、デジタルで解消する手段がない。LINEの順番待ち通知で「並ばなくていい体験」を提供できます。',
   },
   {
-    title: 'リピーターの取りこぼし',
-    body: '宿泊後の接点が消え、紙のダイレクトメールしか残らない。退館後に再来訪を設計する仕組みがありません。',
+    title: '紙スタンプの限界：顧客データが蓄積されない',
+    body: '紙スタンプカードは紛失・不正・来店確認不可の三重苦。デジタル化すれば来店履歴・頻度・好みが蓄積され、次の施策に活用できます。',
   },
   {
-    title: '館内消費の未取り込み',
-    body: 'レストラン・スパ・売店の利用促進がフロントの声かけだけに依存。付帯収益を組織的に伸ばせていません。',
+    title: 'テイクアウト・デリバリー手数料：マージンが圧迫される',
+    body: 'デリバリープラットフォーム依存で手数料が経営を圧迫。LINEを起点にした自社テイクアウト導線を整備し、プラットフォーム手数料依存から脱却できます。',
   },
   {
-    title: 'ゲストデータの分断',
-    body: 'PMS・予約サイト・口コミサイトにデータが散在し、顧客像が統合されない。パーソナライズが機能しません。',
+    title: '複数ブランドのLINE乱立：管理コストが膨張する',
+    body: 'グループ内の複数ブランドでLINE公式アカウントが乱立し、会員基盤が分断。ハーフスクラッチなら1つのLINE会員基盤でブランドを横断管理できます。',
   },
   {
-    title: 'アプリDL障壁',
-    body: '宿泊施設の単独アプリはDL率が伸びにくく、アプリ疲れが課題に。LINEミニアプリならアプリDL不要で5秒会員化が完了し、接点を確立しやすくなります。',
+    title: '幽霊会員・休眠会員：登録後に来店しない顧客を可視化できない',
+    body: '登録だけして来店しない顧客の割合が見えず、育成施策が打てない。セグメント配信で「来店間隔が空いた顧客」だけに特別クーポンを自動配信できます。',
   },
 ];
 
 const APPEAL_STEPS = [
   {
     step: 'Step 1',
-    title: '直予約チャネルを作る',
-    description: 'LINE予約とデジタル会員証で「OTA経由→LINE直予約」への導線を確立。OTA手数料の発生点そのものを削減します。',
-    icon: '🏨',
+    title: '待ち時間の可視化',
+    description: '順番待ちLINE通知で「並ばなくていい体験」を実現。行列をデジタルの接点に変換し、顧客ロイヤルティの改善につなげます。',
+    icon: '⏱',
   },
   {
     step: 'Step 2',
-    title: '滞在中の館内消費を拾う',
-    description: 'クーポンと1to1でチェックイン後の接点を維持し、レストラン・スパ・売店の付帯収益を引き上げます。',
-    icon: '🍽',
+    title: '再来店の設計',
+    description: 'スタンプカード＋クーポン配信で「また行きたい」サイクルを仕組みで回します。来店間隔が空いた顧客への自動フォローも設計できます。',
+    icon: '🔄',
   },
   {
     step: 'Step 3',
-    title: '退館後にリピートを設計する',
-    description: 'セグメント配信で半年未来訪・季節・プラン別に呼び戻し。紙DMからLINEへ置き換え、直予約の継続ループを作ります。',
-    icon: '🔁',
+    title: 'テイクアウト自社化',
+    description: 'LINEを起点にしたテイクアウト・予約導線を整備。デリバリープラットフォームへの手数料依存を減らし、自社の顧客接点を強化します。',
+    icon: '📦',
   },
 ];
 
 
 const STATS = [
+  {
+    value: 'DL不要',
+    unit: '',
+    label: 'LINEだけで会員化が完結',
+    sub: 'インストール不要。マルチブランドを1つのIDで統合',
+  },
   {
     value: '5',
     unit: '秒',
@@ -140,43 +153,37 @@ const STATS = [
   {
     value: '0',
     unit: '件',
-    label: 'スタッフの手作業（予約リマインド）',
-    sub: '予約前日のリマインドから季節配信まで全自動',
-  },
-  {
-    value: 'DL不要',
-    unit: '',
-    label: 'LINEだけで会員化が完結',
-    sub: 'インストール不要。友だち追加と同時に会員化',
+    label: 'スタッフの手作業（自動フォロー）',
+    sub: '来店間隔が空いた顧客への自動クーポン配信',
   },
   {
     value: '最短',
     unit: '3ヶ月',
-    label: 'フェーズ1の立ち上げ期間',
-    sub: '直予約基盤（予約+会員証）の標準構成',
+    label: 'Step 1の立ち上げ期間',
+    sub: '会員証＋順番待ちの標準構成。マルチブランドは4〜6ヶ月',
   },
 ];
 
 const FAQS = [
   {
-    q: '導入にはどのくらいの期間がかかりますか？',
-    a: '最短3ヶ月（Step 1標準構成）。既存PMSや予約エンジンとの連携有無によって前後します。まずはヒアリングで確認させてください。',
+    q: '導入期間はどのくらいかかりますか？',
+    a: 'Step 1（会員証＋順番待ち）は最短3ヶ月から。スコープや既存システム連携の有無によって異なります。まずはヒアリングしてご提案します。',
   },
   {
-    q: '既存のPMS（宿泊管理システム）と連携できますか？',
-    a: '対応します。PMSベンダーのAPI公開状況によって連携方式が変わるため、初期ヒアリングで確認させてください。API非公開の場合はCSV取込などの代替方式を提案します。',
+    q: '複数ブランドをまとめて管理できますか？',
+    a: '1つのLINE会員基盤でブランドを横断管理できるのがグロースパック for LINEの強みです。SaaS系競合では技術的に対応できないケースが多いため、マルチブランド展開の飲食グループに特に適しています。',
   },
   {
-    q: 'LINEミニアプリでチェックイン手続きまで完結できますか？',
-    a: '旅館業法の本人確認義務があり、フロント対面確認の代替要件は施設・自治体により異なります。法務確認の後に実装範囲を決める前提で進めます。本LPで主に提案しているのは、チェックインDXではなく直予約率向上と滞在中の顧客接点強化です。',
+    q: '既存POSやモバイルオーダーシステムと連携できますか？',
+    a: 'ハーフスクラッチ構造のため柔軟に対応できます。事前にシステム構成をヒアリングし、連携方式を設計します。まずは現在の構成をお聞かせください。',
   },
   {
-    q: '会員データや宿泊履歴がまだPMSに集約されていませんが、セグメント配信は使えますか？',
-    a: '使えます。PMS連携なしでも、宿泊後のCSV取込でリピーター判定・再来訪セグメント作成が可能です。まずはCSV取込で始め、段階的にPMS連携へ移行することもできます。',
+    q: '業態によって提案内容は変わりますか？',
+    a: 'はい。「デリバリー手数料削減型（テイクアウト最適化）」「テーブルオーダー省力化型（ホール人件費削減）」「CRM統合型（マルチブランド顧客統合）」の3パターンで業態に合わせた提案をします。',
   },
   {
-    q: '国内旅行客向けとインバウンド向けで提案内容は変わりますか？',
-    a: '変わります。国内客は直予約率向上とリピーター育成、インバウンドは多言語配信と館内消費促進を主軸にします。ターゲット比率に応じて最適な構成をご提案します。',
+    q: '休眠会員の掘り起こしはできますか？',
+    a: 'セグメント配信機能で「来店間隔が空いた顧客」だけに特別クーポンを自動配信できます。配信条件や頻度は運用に合わせて設計します。',
   },
 ];
 
@@ -200,10 +207,10 @@ const faqJsonLd = {
 const serviceJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  serviceType: 'ホテル・旅館業界向けLINEミニアプリ開発サービス',
-  name: 'グロースパック for LINE（ホテル・旅館業界向け）',
+  serviceType: '飲食業界向けLINEミニアプリ開発サービス',
+  name: 'グロースパック for LINE（飲食業界向け）',
   description:
-    'OTA手数料削減・直予約率向上を軸に、宿泊施設の顧客接点をLINEで統合。会員証・セグメント配信・館内クーポンを最短3ヶ月で立ち上げます。',
+    '行列×リピート×テイクアウトの3軸で、飲食チェーンの顧客接点をLINEミニアプリで実現。順番待ち・スタンプカード・マルチブランド統合に対応するハーフスクラッチ開発で、最短3ヶ月で立ち上げます。',
   provider: {
     '@type': 'Organization',
     name: 'クラスメソッド株式会社',
@@ -218,10 +225,14 @@ const serviceJsonLd = {
     name: 'グロースパック for LINE 機能アセット',
     itemListElement: [
       'デジタル会員証',
+      '順番待ち',
       '予約',
+      'スタンプカード',
       'クーポン配信',
-      '1to1コミュニケーション',
+      'チケット・パス',
+      '抽選',
       'セグメント配信',
+      '1to1コミュニケーション',
       'ギフト',
     ].map((name) => ({
       '@type': 'Offer',
@@ -243,8 +254,8 @@ const breadcrumbJsonLd = {
     {
       '@type': 'ListItem',
       position: 2,
-      name: 'ホテル・旅館業界',
-      item: 'https://lp.growthpackforline.classmethod.net/v2/hotel',
+      name: '飲食業界',
+      item: 'https://lp.growthpackforline.classmethod.net/food',
     },
   ],
 };
@@ -253,7 +264,7 @@ const breadcrumbJsonLd = {
 /* PAGE                                                                  */
 /* ------------------------------------------------------------------ */
 
-export default function HotelPage() {
+export default function FoodPage() {
   return (
     <main className="min-h-screen bg-white text-[#1F2937]">
       {/* 構造化データ */}
@@ -276,7 +287,7 @@ export default function HotelPage() {
       {/* ============================================================ */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-[#E5E7EB]">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 h-16 md:h-20 flex items-center justify-between">
-          <Link href="/v2" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <div className="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-[#06C755] flex items-center justify-center text-white font-bold text-sm">
               G
             </div>
@@ -299,13 +310,13 @@ export default function HotelPage() {
       </header>
 
       {/* ============================================================ */}
-      {/* Hero — 写真背景バリエーション（§7-1b）                           */}
+      {/* Hero — 写真背景バリエーション（§7-1b）                            */}
       {/* ============================================================ */}
       <div className="relative min-h-[560px] md:min-h-[700px] flex items-center bg-[#0a0a0a] overflow-hidden">
-        {/* 背景: ホテル実務シーン写真 */}
+        {/* 背景: 飲食実務シーン写真 */}
         <div
           className="absolute inset-0 bg-center bg-cover"
-          style={{ backgroundImage: "url('/images/hotel-hero.png')" }}
+          style={{ backgroundImage: "url('/images/food-hero.png')" }}
         />
         {/* ダークオーバーレイ（左濃→右薄） */}
         <div
@@ -323,6 +334,7 @@ export default function HotelPage() {
             backgroundSize: '28px 28px',
           }}
         />
+
         <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 py-20 sm:py-24 md:py-28">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             {/* 左カラム */}
@@ -330,15 +342,15 @@ export default function HotelPage() {
               {/* 認定バッジ pill */}
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#06C755]/20 border border-[#06C755]/50 rounded-full text-xs sm:text-sm font-semibold text-[#06C755]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#06C755] shrink-0" />
-                LINEヤフー Technology Partner × ホテル・旅館業界向け
+                LINEヤフー Technology Partner × 飲食チェーン向け
               </div>
 
               <h1 className="text-4xl md:text-5xl font-bold leading-[1.2] tracking-tight text-white">
-                OTA手数料を、<br />
-                直予約に<span className="text-[#06C755]">置き換える。</span>
+                行列、リピート、テイクアウト。<br />
+                飲食の顧客接点を<span className="text-[#06C755]">LINEで設計する。</span>
               </h1>
 
-              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">LINEで作る宿泊施設の直販チャネル。OTA依存の粗利圧迫・リピーターの取りこぼし・館内消費の未取り込み。3つの課題を、<span className="font-bold text-white">最短3ヶ月</span>で解きます。</p>
+              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">順番待ちのデジタル化からマルチブランドのCRM統合まで。飲食チェーンの3つの課題軸を、ハーフスクラッチの柔軟性で解きます。<span className="font-bold text-white">最短3ヶ月</span>で立ち上げ。</p>
 
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
@@ -362,7 +374,7 @@ export default function HotelPage() {
 
               {/* ミニチェックリスト */}
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
-                {['OTA手数料削減', '直予約率向上'].map((t) => (
+                {['行列×リピート×テイクアウトに対応', 'マルチブランド統合'].map((t) => (
                   <div key={t} className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-[#06C755]" />
                     {t}
@@ -382,7 +394,7 @@ export default function HotelPage() {
                   aria-hidden="true"
                 >
                   <defs>
-                    <radialGradient id="lineFadeHotel" cx="50%" cy="50%" r="50%">
+                    <radialGradient id="lineFadeFood" cx="50%" cy="50%" r="50%">
                       <stop offset="0%" stopColor="#06C755" stopOpacity="0.6" />
                       <stop offset="100%" stopColor="#06C755" stopOpacity="0" />
                     </radialGradient>
@@ -407,7 +419,7 @@ export default function HotelPage() {
                       opacity="0.35"
                     />
                   ))}
-                  <circle cx="250" cy="280" r="140" fill="url(#lineFadeHotel)" />
+                  <circle cx="250" cy="280" r="140" fill="url(#lineFadeFood)" />
                 </svg>
 
                 {/* 中心スマホ */}
@@ -444,7 +456,7 @@ export default function HotelPage() {
                         </div>
                         <div className="bg-[#E8F8F0] rounded-md px-2 py-1.5 border border-[#06C755]/20">
                           <div className="text-[9px] text-[#05A847] font-bold">新着</div>
-                          <div className="text-[10px] text-[#1F2937]">館内レストランクーポン</div>
+                          <div className="text-[10px] text-[#1F2937]">スタンプ獲得</div>
                         </div>
                       </div>
                     </div>
@@ -453,12 +465,12 @@ export default function HotelPage() {
 
                 {/* 6つの接点カード */}
                 {[
-                  { top: '10%', left: '5%', image: '/images/予約.png', label: '予約', delay: '0s' },
-                  { top: '10%', right: '5%', image: '/images/会員証.png', label: '会員証', delay: '0.1s' },
-                  { top: '45%', left: '-10%', image: '/images/クーポン.png', label: 'クーポン', delay: '0.2s' },
-                  { top: '45%', right: '-10%', image: '/images/1to1.png', label: '1to1', delay: '0.3s' },
-                  { bottom: '10%', left: '5%', image: '/images/セグメント配信.png', label: 'セグメント', delay: '0.4s' },
-                  { bottom: '10%', right: '5%', image: '/images/ギフト.png', label: 'ギフト', delay: '0.5s' },
+                  { top: '10%', left: '5%', image: '/images/会員証.png', label: '会員証', delay: '0s' },
+                  { top: '10%', right: '5%', image: '/images/順番待ち.png', label: '順番待ち', delay: '0.1s' },
+                  { top: '45%', left: '-10%', image: '/images/予約.png', label: '予約', delay: '0.2s' },
+                  { top: '45%', right: '-10%', image: '/images/クーポン.png', label: 'クーポン', delay: '0.3s' },
+                  { bottom: '10%', left: '5%', image: '/images/スタンプカード.png', label: 'スタンプ', delay: '0.4s' },
+                  { bottom: '10%', right: '5%', image: '/images/セグメント配信.png', label: 'セグメント', delay: '0.5s' },
                 ].map((card) => (
                   <div
                     key={card.label}
@@ -496,7 +508,6 @@ export default function HotelPage() {
               { icon: ShieldCheck, label: 'LINEヤフー Technology Partner', color: '#06C755' },
               { icon: Award, label: 'AWS Premier Tier Services Partner', color: '#FF9900' },
               { icon: ShieldCheck, label: 'ISO 27001 取得（クラスメソッド）', color: '#3B82F6' },
-              { icon: Users, label: 'OTA手数料削減・直予約率向上に特化', color: '#05A847' },
             ].map(({ icon: Icon, label, color }) => (
               <div key={label} className="flex items-center gap-2 text-sm font-semibold text-[#1F2937] whitespace-nowrap">
                 <Icon className="w-4 h-4 shrink-0" style={{ color }} />
@@ -508,7 +519,7 @@ export default function HotelPage() {
       </div>
 
       {/* ============================================================ */}
-      {/* 実績数字セクション（§7-3、ホテル特化）                              */}
+      {/* 実績数字セクション（§7-3、飲食特化）                               */}
       {/* ============================================================ */}
       <Section spacing="sm" container="wide" background="white">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E7EB] border border-[#E5E7EB] rounded-xl overflow-hidden">
@@ -522,10 +533,11 @@ export default function HotelPage() {
             </div>
           ))}
         </div>
+        <p className="text-xs text-[#9CA3AF] text-center mt-4">※ 導入効果は企業規模・既存システム・施策設計によって異なります。</p>
       </Section>
 
       {/* ============================================================ */}
-      {/* 課題セクション（§7-4、ホテル 5点セット）                          */}
+      {/* 課題セクション（§7-4、飲食5点セット）                             */}
       {/* ============================================================ */}
       <Section id="problems" spacing="sm" container="wide" background="muted">
         <div className="max-w-[720px] mb-10 md:mb-12">
@@ -533,9 +545,9 @@ export default function HotelPage() {
             CHALLENGES
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            ホテル・旅館の経営層が「限界だ」と感じる、5つの壁。
+            飲食チェーンのDX担当者が直面する、5つの構造課題。
           </h2>
-          <p className="text-base text-[#4B5563]">個別ツールでは解決できない、宿泊業界の構造的な課題です。</p>
+          <p className="text-base text-[#4B5563]">個別ツールでは解決できない、飲食業界の構造的な課題です。</p>
         </div>
         <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
           {PROBLEMS.map((p) => (
@@ -548,7 +560,7 @@ export default function HotelPage() {
       </Section>
 
       {/* ============================================================ */}
-      {/* 訴求セクション（ホテル固有 3ステップ、経営層訴求の骨格）              */}
+      {/* 訴求セクション（飲食固有 3ステップ訴求）                            */}
       {/* ============================================================ */}
       <Section id="appeal" spacing="md" container="wide" background="white">
         <div className="max-w-[720px] mb-10 md:mb-12">
@@ -556,9 +568,9 @@ export default function HotelPage() {
             HOW IT WORKS
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            3つのステップで、直予約の好循環を作る。
+            行列・リピート・テイクアウトの3軸で、顧客接点を設計する。
           </h2>
-          <p className="text-base text-[#4B5563]">直販チャネルを作り、館内消費を最大化し、退館後の再来訪を設計する。OTA依存を段階的に解消するロードマップです。</p>
+          <p className="text-base text-[#4B5563]">デジタルの接点から始め、再来店を仕組みで回し、自社の収益基盤を強化する。飲食チェーンに合わせた導入順序です。</p>
         </div>
         <div className="grid md:grid-cols-3 gap-4 md:gap-5">
           {APPEAL_STEPS.map((s, i) => (
@@ -589,7 +601,7 @@ export default function HotelPage() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             SaaSとスクラッチ、その中間に。
           </h2>
-          <p className="text-base text-[#4B5563]">SaaSはPMS連携や宿泊施設固有の要件で詰まり、フルスクラッチは期間とコストが膨らむ。グロースパックは<span className="font-bold text-[#1F2937]">速さ・柔軟性・既存PMS対応</span>を同時に提供するハーフスクラッチ開発です。</p>
+          <p className="text-base text-[#4B5563]">SaaSはマルチブランドや既存POSとの連携で詰まり、フルスクラッチは期間とコストが膨らむ。グロースパックは<span className="font-bold text-[#1F2937]">速さ・柔軟性・マルチブランド対応</span>を同時に提供するハーフスクラッチ開発です。</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-4 md:gap-5">
@@ -599,8 +611,8 @@ export default function HotelPage() {
             <h3 className="text-base font-bold mb-4">SaaS<br /><span className="text-sm font-normal text-[#6B7280]">パッケージ型</span></h3>
             <ul className="text-sm text-[#6B7280] space-y-2">
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />初期コスト: 低</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />PMS連携: △</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />拡張性: △</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />マルチブランド: △</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />POS連携: △</li>
             </ul>
           </Card>
 
@@ -613,8 +625,8 @@ export default function HotelPage() {
             <h3 className="text-base font-bold mb-4">ハーフスクラッチ<br /><span className="text-sm font-normal text-[#05A847]">開発</span></h3>
             <ul className="text-sm text-[#1F2937] space-y-2 font-medium">
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />初期コスト: 中</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />PMS連携: ◎</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />拡張性: ○ / サポート: ○</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />マルチブランド: ◎</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />POS連携: ○ / 拡張性: ○</li>
             </ul>
           </Card>
 
@@ -624,7 +636,7 @@ export default function HotelPage() {
             <h3 className="text-base font-bold mb-4">スクラッチ<br /><span className="text-sm font-normal text-[#6B7280]">開発</span></h3>
             <ul className="text-sm text-[#6B7280] space-y-2">
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#EF4444] shrink-0" />初期コスト: 高</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />PMS連携: ◎</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />マルチブランド: ◎</li>
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />拡張性: ◎</li>
             </ul>
           </Card>
@@ -636,8 +648,8 @@ export default function HotelPage() {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
-              <p className="text-white font-bold text-lg sm:text-xl">どの構成が宿泊施設に合うか、まずご相談ください。</p>
-              <p className="text-white/80 text-sm mt-1">施設規模・PMS・既存予約エンジンをお聞きして最適な構成をご提案します。</p>
+              <p className="text-white font-bold text-lg sm:text-xl">飲食チェーンのシステム構成に合わせて最適な構成をご提案します。</p>
+              <p className="text-white/80 text-sm mt-1">業態・ブランド数・既存POSをお聞きして、導入スコープを一緒に設計します。</p>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0">
               <Button
@@ -657,7 +669,7 @@ export default function HotelPage() {
       </div>
 
       {/* ============================================================ */}
-      {/* 機能グリッド（§7-6、ホテル向けタグライン）                         */}
+      {/* 機能グリッド（§7-6、飲食向けタグライン）                            */}
       {/* ============================================================ */}
       <Section id="features" spacing="md" container="wide" background="white">
         <div className="max-w-[720px] mb-10 md:mb-12">
@@ -665,9 +677,9 @@ export default function HotelPage() {
             FEATURES
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            10の機能アセットから、ホテル向けに選んで組み合わせる。
+            10の機能アセットから、飲食チェーン向けに選んで組み合わせる。
           </h2>
-          <p className="text-base text-[#4B5563]">宿泊業界で特に効く6機能。必要なものだけを選び、フェーズを追って拡張できます。</p>
+          <p className="text-base text-[#4B5563]">飲食業界で特に効く7機能。必要なものだけを選び、フェーズを追って拡張できます。</p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {FEATURES.map((f) => {
@@ -731,10 +743,10 @@ export default function HotelPage() {
             CONTACT
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
-            宿泊施設の直予約チャネル構築について、<br />
+            飲食チェーンの顧客接点設計について、<br />
             <span className="text-[#06C755]">一度ご相談ください。</span>
           </h2>
-          <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">施設規模・PMS・既存予約エンジンをお聞きして、最適な構成をご提案します。初回相談は無料です。</p>
+          <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">業態・ブランド数・既存POSをお聞きして、最適な構成をご提案します。初回相談は無料です。</p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4">
             <Button variant="primary" size="lg" asChild>
               <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="final_primary" destination="contact">
@@ -775,7 +787,7 @@ export default function HotelPage() {
                   <span className="text-base font-bold text-[#06C755]">LINE</span>
                 </div>
               </div>
-              <p className="text-xs text-white/50 leading-relaxed">クラスメソッド株式会社が提供するLINEミニアプリ開発サービス。ホテル・旅館業界のOTA手数料削減・直予約率向上・リピーター育成に対応します。</p>
+              <p className="text-xs text-white/50 leading-relaxed">クラスメソッド株式会社が提供するLINEミニアプリ開発サービス。飲食業界の順番待ちデジタル化・マルチブランド統合に対応します。</p>
             </div>
 
             {/* サービス */}
@@ -790,7 +802,7 @@ export default function HotelPage() {
             <div>
               <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">RESOURCES</div>
               <ul className="space-y-2 text-sm text-white/60">
-                <li><a href="#problems" className="hover:text-white transition-colors">ホテル業界の課題</a></li>
+                <li><a href="#problems" className="hover:text-white transition-colors">飲食業界の課題</a></li>
                 <li><a href="#faq" className="hover:text-white transition-colors">よくあるご質問</a></li>
                 <li>
                   <a

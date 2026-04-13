@@ -17,7 +17,7 @@ const SECTIONS = [
  * IntersectionObserver で各セクションへの到達を検知し、
  * section_view イベントを GA4 + Vercel Analytics に送信する。
  * 各セクションへのイベントは初回到達時のみ発火する。
- * 飲食業界LP (/v2/food) 用。
+ * 飲食業界LP (/food) 用。
  */
 export function ScrollTracker() {
   useEffect(() => {

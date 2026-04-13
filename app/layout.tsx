@@ -25,6 +25,33 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://lp.growthpackforline.classmethod.net"),
+  title: 'グロースパック for LINE｜ハーフスクラッチで作るLINEミニアプリ開発サービス',
+  description:
+    'SaaSの速さとフルスクラッチの柔軟性を両立する「ハーフスクラッチ開発」のLINEミニアプリ。会員証・予約・クーポンなど10機能から選び、最短3ヶ月で立ち上げます。クラスメソッド提供。',
+  keywords: [
+    'LINEミニアプリ',
+    'LINEミニアプリ 開発',
+    'ハーフスクラッチ',
+    'LINE 会員証',
+    'LINE OMO',
+    'LINE リテール',
+    'グロースパック for LINE',
+    'クラスメソッド',
+  ],
+  openGraph: {
+    type: 'website',
+    locale: 'ja_JP',
+    title: 'グロースパック for LINE｜ハーフスクラッチで作るLINEミニアプリ開発サービス',
+    description:
+      'SaaSの速さとフルスクラッチの柔軟性を両立。会員証・予約・クーポンなど10機能から選び、最短3ヶ月で立ち上げます。',
+    siteName: 'グロースパック for LINE',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'グロースパック for LINE｜ハーフスクラッチで作るLINEミニアプリ開発サービス',
+    description:
+      'SaaSの速さとフルスクラッチの柔軟性を両立。会員証・予約・クーポンなど10機能から選び、最短3ヶ月で立ち上げます。',
+  },
 }
 
 export default function RootLayout({

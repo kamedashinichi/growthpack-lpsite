@@ -19,17 +19,8 @@ export const metadata: Metadata = {
     'グロースパック for LINE',
     'クラスメソッド',
   ],
-  robots: {
-    index: false,
-    follow: false,
-    googleBot: {
-      index: false,
-      follow: false,
-      noimageindex: true,
-    },
-  },
   alternates: {
-    canonical: 'https://lp.growthpackforline.classmethod.net/v2/hotel',
+    canonical: 'https://lp.growthpackforline.classmethod.net/hotel',
   },
   openGraph: {
     type: 'website',

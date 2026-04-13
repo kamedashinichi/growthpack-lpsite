@@ -1,25 +1,27 @@
 /**
- * /v2/department — グロースパック for LINE 百貨店・商業施設向けLP
+ * /sports — グロースパック for LINE スポーツ・エンタメ業界向けLP
  *
  * docs/DESIGN.md v2.1 に厳密に従う。
- * app/v2/apparel/page.tsx を雛形として、百貨店業界固有のコンテンツ・訴求順序に差し替え。
+ * app/apparel/page.tsx をベースに、スポーツ・エンタメ業界固有のコンテンツへ差し替え。
  *
- * 訴求骨格（外商二層設計）:
- *   外商顧客（関係性継承・組織資産化）× 一般顧客（会員証・セグメント配信・催事）
+ * 訴求軸（15社調査・Issue #38/#50/#84/#85 確定）:
+ *   コアファン vs ライト層の対比を中心に構成。
+ *   ライト層（年1-2回来場）の接点創出・育成フローが業界共通の未解決課題。
  *
  * - 価格の具体額は一切記載しない
  * - 和文段落は1行にまとめる（§12 和文改行禁止）
  * - 機能アイコンは /public/images/<機能名>.png を <Image> で表示
  * - CTA リンクは §10 正規 URL
+ * - 独自アプリを否定しない。LINEとの補完レイヤーとして位置付ける
  */
 import Link from 'next/link';
 import Image from 'next/image';
 import {
   ArrowRight,
   Check,
+  Users,
   ShieldCheck,
   Award,
-  Users,
   Zap,
 } from 'lucide-react';
 import { Button } from '@/components/shared/ui/button';
@@ -32,113 +34,96 @@ import { ScrollTracker } from './scroll-tracker';
 /* DATA                                                                  */
 /* ------------------------------------------------------------------ */
 
-// 百貨店業界で特に効く7機能（外商二層設計に対応）
+// スポーツ・エンタメ業界で特に効く6機能（QR+ポイント統合を先頭に）
 const FEATURES = [
   // Phase 1
   {
     image: '/images/会員証.png',
     name: 'デジタル会員証',
-    tagline: '一般顧客の会員接点をLINEに集約。アプリDL不要で5秒会員化、館内共通IDとして機能します。',
+    tagline: 'QRコード対応のデジタル会員証。アプリDL不要でライト層を即座にデータ化できます。',
     phase: 'Step 1',
     id: 'membership',
-    layer: '一般向け',
   },
   {
-    image: '/images/セグメント配信.png',
-    name: 'セグメント配信',
-    tagline: '来店頻度・購買帯・売場嗜好で動的にメッセージを出し分け。一斉配信からの脱却を支援します。',
+    image: '/images/チケット.png',
+    name: 'チケット・パス',
+    tagline: 'チケット先行販売・試合当日パスをLINEで完結。ライト層の来場ハードルを下げます。',
     phase: 'Step 1',
-    id: 'segment-delivery',
-    layer: '一般向け',
+    id: 'ticket',
+  },
+  // Phase 2
+  {
+    image: '/images/抽選.png',
+    name: '抽選',
+    tagline: '限定グッズ・先行チケットの公平な電子抽選。手作業の属人化を解消します。',
+    phase: 'Step 2',
+    id: 'lottery',
+  },
+  {
+    image: '/images/スタンプカード.png',
+    name: 'スタンプカード',
+    tagline: '来場スタンプで次の来場動機を設計。試合・公演日以外の接点を作ります。',
+    phase: 'Step 2',
+    id: 'stamp-card',
   },
   {
     image: '/images/クーポン.png',
     name: 'クーポン配信',
-    tagline: '催事前後・誕生日・長期未来店タイミングに自動配信。休眠会員の掘り起こしと来店促進に。',
-    phase: 'Step 1',
+    tagline: '来場頻度・会員ランク別の特典配信。ライト層とコアファンで施策を出し分けます。',
+    phase: 'Step 2',
     id: 'coupon',
-    layer: '一般向け',
-  },
-  // Phase 2
-  {
-    image: '/images/チケット.png',
-    name: 'チケット・パス管理',
-    tagline: '催事・招待会・先行販売のチケット発行と入場管理をLINE上で完結します。紙・Excelからの脱却。',
-    phase: 'Step 2',
-    id: 'ticket',
-    layer: '催事向け',
-  },
-  {
-    image: '/images/予約.png',
-    name: '予約',
-    tagline: 'レストラン・サービスカウンター・外商個別商談の予約受付をLINEで一元管理します。',
-    phase: 'Step 2',
-    id: 'reservation',
-    layer: '一般向け',
   },
   // Phase 3
   {
-    image: '/images/1to1.png',
-    name: '1to1コミュニケーション',
-    tagline: '外商顧客との接触履歴・嗜好を蓄積し、担当者が変わっても同品質の接客を引き継ぎます。',
+    image: '/images/セグメント配信.png',
+    name: 'セグメント配信',
+    tagline: '払っているが来ない会員（幽霊会員）を再活性化するセグメント別メッセージ配信。',
     phase: 'Step 3',
-    id: 'one-to-one',
-    layer: '外商向け',
-  },
-  {
-    image: '/images/ギフト.png',
-    name: 'ギフト',
-    tagline: '歳暮・中元など季節ギフトをLINE上で受付。外商顧客のソーシャルギフト機会を組織的に取りこぼさない設計。',
-    phase: 'Step 3',
-    id: 'gift',
-    layer: '外商向け',
+    id: 'segment-delivery',
   },
 ];
 
 const PROBLEMS = [
   {
-    title: '外商の属人化：担当者交代で顧客関係がリセットされる',
-    body: '接客履歴・好み・人間関係が個人の頭の中にある。異動・退職で関係がゼロに戻り、上顧客層が離れるリスクが組織に潜んでいます。',
+    title: 'コアファンは整備済み、ライト層への接点がゼロ',
+    body: '年1-2回来場のライト層はデジタルデータがほぼ存在しない。既存アプリはコアファン向けで、ライト層はDLすら起きていません。',
   },
   {
-    title: '催事管理のアナログ残存：招待状・入場・先行販売が紙とExcel',
-    body: '年多数回の催事で誰が来たか残らない。来場データがなければ次の催事案内の精度も上がらず、関係深化のループが回りません。',
+    title: '独自アプリとLINE公式が並立し、顧客データが分散',
+    body: '12社中12社が独自アプリを保有しながらLINEも運用。会員IDが分散して本部管理コストが増大しています。',
   },
   {
-    title: '売場をまたいだデータ分断：食品・ファッション・レストランでIDが別管理',
-    body: '館内を回遊しても顧客が見えない。売場ごとに会員IDが別管理では購買行動の全体像が把握できず、パーソナライズに活かせません。',
+    title: '払っているが来ない会員の離脱をメール・DMで止められない',
+    body: 'フィットネス・スポーツクラブ共通の構造課題。解約のタイミングを捉えた自動フォローが機能していません。',
   },
   {
-    title: '一斉配信からの脱却困難：コストだけ増えて来店頻度は落ちている',
-    body: '全会員に同じDMを送り続けてもROIは下がる一方。来店頻度・購買帯・カテゴリ嗜好で配信を出し分ける仕組みが必要です。',
+    title: 'チケット先行抽選・限定グッズ配布が手作業で属人化',
+    body: '公平性の担保と当選通知がスプレッドシートと人力で回っている。ミスやクレームが発生しやすい状態です。',
   },
   {
-    title: 'ソーシャルギフト機会の損失：歳暮・中元前の外商ギフト導線がない',
-    body: '上顧客層が知人に贈り物をする機会を組織的に取りこぼしている。デジタルでのギフト受付体験が整備されていません。',
+    title: '試合・公演当日以外にファンとの接点がなく、来場動機を作れない',
+    body: 'オフシーズンや公演間のコミュニケーションが途切れる。来場スタンプや先行情報で日常的な接点が必要です。',
   },
 ];
 
 const APPEAL_STEPS = [
   {
     step: 'Step 1',
-    title: '一般顧客の会員接点をデジタル化',
-    description: 'デジタル会員証・クーポン・セグメント配信を整備し、一般顧客を館内共通IDで一元管理します。売場横断のデータ蓄積がここから始まります。',
-    icon: '🪪',
-    layer: '一般顧客層',
+    title: 'ライト層をLINEで捕まえる',
+    description: '会員証とチケット・パスで、これまでデータがなかったライト層（年1-2回来場）をLINE IDに紐づけます。独自アプリを持っているファンはそのまま継続利用、ライト層はLINEが窓口になります。',
+    icon: '📱',
   },
   {
     step: 'Step 2',
-    title: '催事・イベントをデジタルで管理',
-    description: 'チケット発行・来場セグメント案内・先行販売受付をLINE上で完結。催事ごとの来場データが次の案内精度を高めます。',
-    icon: '🎟',
-    layer: '催事・イベント',
+    title: '来場動機を設計する',
+    description: 'チケット先行抽選・限定グッズ配布・来場スタンプを組み合わせ、次の来場理由を継続的に作ります。試合・公演日以外にもLINEで接点を持ち続けることがライト層育成の核心です。',
+    icon: '🎫',
   },
   {
     step: 'Step 3',
-    title: '外商顧客の関係を組織資産として継承',
-    description: '1to1コミュニケーションで接触履歴・嗜好・担当引き継ぎ情報を蓄積。外商の関係性を個人の記憶から組織の資産に変えます。',
-    icon: '🤝',
-    layer: '外商顧客層',
+    title: '払っているが来ない会員を再活性化する',
+    description: 'セグメント配信で幽霊会員を検知し、自動フォローで解約前に介入します。解約1件を阻止するコストは新規獲得よりはるかに小さく、フィットネス業界では最も即効性の高い施策です。',
+    icon: '🔄',
   },
 ];
 
@@ -147,53 +132,53 @@ const STATS = [
   {
     value: 'DL不要',
     unit: '',
-    label: 'LINEだけで会員化が完結',
-    sub: 'インストール不要。館内共通IDとして機能',
+    label: 'LINEでライト層を即データ化',
+    sub: 'インストール不要。QRから会員登録が完了',
   },
   {
-    value: '館内',
-    unit: '横断',
-    label: '売場をまたいだ単一ID管理',
-    sub: '食品・ファッション・レストランを一つのIDで統合',
-  },
-  {
-    value: '催事',
-    unit: 'DX',
-    label: '運営工数の大幅削減',
-    sub: '紙・Excelの招待管理からデジタルへ。来場データも蓄積',
+    value: '5',
+    unit: '秒',
+    label: '会員登録完了時間',
+    sub: 'QRコードから友だち追加と会員化が同時完了',
   },
   {
     value: '最短',
     unit: '3ヶ月',
     label: 'Step 1立ち上げ期間',
-    sub: 'デジタル会員証を含む標準構成。複数館は4〜6ヶ月が目安',
+    sub: '会員証＋チケット・パスを含む標準構成',
+  },
+  {
+    value: '独自アプリ',
+    unit: '併用対応',
+    label: '既存アプリとの並行運用サポート',
+    sub: 'LINEはライト層向け補完レイヤーとして機能',
   },
 ];
 
 const FAQS = [
   {
-    q: '導入にはどのくらいの期間がかかりますか？',
-    a: '一般会員証・クーポン・セグメント配信を含む標準構成（Step 1）で最短3ヶ月。複数館や既存基幹との連携が必要な場合は4〜6ヶ月が目安です。',
+    q: '独自アプリを既に持っているが、LINE併用は必要か？',
+    a: '独自アプリはコアファン向けに維持しつつ、ライト層（年1-2回来場）の接点としてLINEを補完レイヤーとして使う構成を推奨しています。DL不要のLINEはライト層の会員化率が大幅に改善するため、両立することで全体の顧客基盤が広がります。',
   },
   {
-    q: '既存のCRM・基幹システムと連携できますか？',
-    a: '対応します。CRM整備と並走できる設計です。既存のデータ構造や連携範囲に応じて段階的に統合を進めるアプローチをご提案します。',
+    q: '払っているが来ない会員（幽霊会員）の離脱率を下げる仕組みはどう作るのか？',
+    a: '来場データと在籍期間をもとに離脱リスクの高い会員をセグメント化し、自動フォローメッセージを送る仕組みを設計します。解約1件を阻止するコストは新規獲得よりも小さく、フィットネス業界では特に即効性の高い施策です。',
   },
   {
-    q: '外商顧客向けと一般顧客向けで機能が分かれるのでしょうか？',
-    a: '二層設計が基本です。一般顧客向けにはデジタル会員証・セグメント配信・クーポンを、外商顧客向けには1to1コミュニケーション・接触履歴管理・ギフト受付を担当します。同一のLINEミニアプリ上でロール別の体験を設計します。',
+    q: 'チケット先行抽選の公平性はどう担保するのか？',
+    a: '電子抽選機能で当選ロジックをシステム化し、手作業の介在を排除します。当選通知から受け取りまでLINEで完結するため、クレームリスクと運用工数を同時に削減できます。',
   },
   {
-    q: '担当者が異動しても顧客関係が引き継がれますか？',
-    a: 'これが設計の核心です。接触履歴・嗜好・過去の相談内容をシステムに蓄積することで、次の担当者が同品質の接客から始められます。外商の関係性を個人の記憶から組織資産に変えることが差別化軸です。',
+    q: 'フィットネス・プロスポーツ・エンタメで提案内容は変わるのか？',
+    a: '変わります。フィットネスは幽霊会員の解約防止が主軸、プロスポーツはチケット先行・来場スタンプによるライト層育成、エンタメはグッズ抽選・公演当日パスが有効です。業態・会員構成に合わせてフェーズ設計を調整します。',
   },
   {
-    q: '催事チケット・先行販売・抽選はLINE上で完結できますか？',
-    a: '対応します。招待状送付・チケット発行・当日入場確認・先行販売の受付をLINEミニアプリで完結できます。来場データも自動で蓄積されます。',
+    q: '既存のチケッティングシステム・会員管理システムとの連携は可能か？',
+    a: '対応します。既存の会員管理・チケッティング・ポイント管理システムとのAPI連携を設計します。システム構成と連携方式はヒアリング後に個別でご提案します。',
   },
   {
-    q: 'インバウンド・多言語対応はどの範囲まで可能ですか？',
-    a: '多言語対応はオプションで対応可能です。中国語・英語・韓国語などの対応範囲は要件定義時に詳細をすり合わせます。まずはヒアリングでご要件をお聞かせください。',
+    q: '実装期間と立ち上げ後の運用体制について教えてほしい。',
+    a: 'Step 1（会員証＋チケット・パス）は最短3ヶ月が目安です。立ち上げ後の運用はクラスメソッドがサポート体制を提供します。セグメント配信等の設定変更はダッシュボードから自社で運用できる構成を基本とします。',
   },
 ];
 
@@ -217,10 +202,10 @@ const faqJsonLd = {
 const serviceJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  serviceType: '百貨店・商業施設向けLINEミニアプリ開発サービス',
-  name: 'グロースパック for LINE（百貨店・商業施設向け）',
+  serviceType: 'スポーツ・エンタメ業界向けLINEミニアプリ開発サービス',
+  name: 'グロースパック for LINE（スポーツ・エンタメ業界向け）',
   description:
-    '外商の関係継承と一般会員DXを二層設計で同時解決。最短3ヶ月で立ち上げます。',
+    'コアファンは整備済み、ライト層はゼロ。年1-2回来場のファンを育てる接点インフラをLINEで構築。チケット先行抽選・来場スタンプ・幽霊会員再活性化をハーフスクラッチで実現し、最短3ヶ月で立ち上げます。',
   provider: {
     '@type': 'Organization',
     name: 'クラスメソッド株式会社',
@@ -235,12 +220,15 @@ const serviceJsonLd = {
     name: 'グロースパック for LINE 機能アセット',
     itemListElement: [
       'デジタル会員証',
-      '1to1コミュニケーション',
-      'チケット・パス管理',
-      'セグメント配信',
-      'クーポン配信',
-      'ギフト',
+      '順番待ち',
       '予約',
+      'スタンプカード',
+      'クーポン配信',
+      'チケット・パス',
+      '抽選',
+      'セグメント配信',
+      '1to1コミュニケーション',
+      'ギフト',
     ].map((name) => ({
       '@type': 'Offer',
       itemOffered: { '@type': 'Service', name },
@@ -261,8 +249,8 @@ const breadcrumbJsonLd = {
     {
       '@type': 'ListItem',
       position: 2,
-      name: '百貨店・商業施設',
-      item: 'https://lp.growthpackforline.classmethod.net/v2/department',
+      name: 'スポーツ・エンタメ業界',
+      item: 'https://lp.growthpackforline.classmethod.net/sports',
     },
   ],
 };
@@ -271,7 +259,7 @@ const breadcrumbJsonLd = {
 /* PAGE                                                                  */
 /* ------------------------------------------------------------------ */
 
-export default function DepartmentPage() {
+export default function SportsPage() {
   return (
     <main className="min-h-screen bg-white text-[#1F2937]">
       {/* 構造化データ */}
@@ -294,7 +282,7 @@ export default function DepartmentPage() {
       {/* ============================================================ */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-[#E5E7EB]">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 h-16 md:h-20 flex items-center justify-between">
-          <Link href="/v2" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <div className="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-[#06C755] flex items-center justify-center text-white font-bold text-sm">
               G
             </div>
@@ -317,13 +305,13 @@ export default function DepartmentPage() {
       </header>
 
       {/* ============================================================ */}
-      {/* Hero — ダーク背景（外商二層設計訴求）                              */}
+      {/* Hero — ダーク放射型（§7-1）                                      */}
       {/* ============================================================ */}
       <div className="relative min-h-[560px] md:min-h-[700px] flex items-center bg-[#0a0a0a] overflow-hidden">
-        {/* 背景: 百貨店実務シーン写真 */}
+        {/* 背景: スポーツ・エンタメシーン写真 */}
         <div
           className="absolute inset-0 bg-center bg-cover"
-          style={{ backgroundImage: "url('/images/department-hero.png')" }}
+          style={{ backgroundImage: "url('/images/sports-hero.png')" }}
         />
         {/* ダークオーバーレイ（左濃→右薄） */}
         <div
@@ -341,7 +329,6 @@ export default function DepartmentPage() {
             backgroundSize: '28px 28px',
           }}
         />
-
         <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 py-20 sm:py-24 md:py-28">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             {/* 左カラム */}
@@ -349,15 +336,15 @@ export default function DepartmentPage() {
               {/* 認定バッジ pill */}
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#06C755]/20 border border-[#06C755]/50 rounded-full text-xs sm:text-sm font-semibold text-[#06C755]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#06C755] shrink-0" />
-                LINEヤフー Technology Partner × 百貨店・商業施設 二層設計
+                LINEヤフー Technology Partner × スポーツ・エンタメ業界
               </div>
 
               <h1 className="text-4xl md:text-5xl font-bold leading-[1.2] tracking-tight text-white">
-                担当者が変わっても、<br />
-                外商顧客は<span className="text-[#06C755]">離れない。</span>
+                コアファンは整備済み。<br />
+                ライト層を<span className="text-[#06C755]">育てる。</span>
               </h1>
 
-              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">外商の関係継承と一般会員DXを、二層設計で同時に解決。<span className="font-bold text-white">最短3ヶ月</span>で立ち上げます。</p>
+              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">年1-2回来場のファンが、デジタルデータとして存在しない。チケット先行・来場スタンプ・幽霊会員再活性化を組み合わせたライト層育成インフラを、<span className="font-bold text-white">最短3ヶ月</span>で立ち上げます。</p>
 
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
@@ -381,7 +368,7 @@ export default function DepartmentPage() {
 
               {/* ミニチェックリスト */}
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
-                {['外商・一般の二層設計', '催事デジタル化対応'].map((t) => (
+                {['ライト層育成フロー設計', '独自アプリとの併用対応'].map((t) => (
                   <div key={t} className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-[#06C755]" />
                     {t}
@@ -390,7 +377,7 @@ export default function DepartmentPage() {
               </div>
             </div>
 
-            {/* 右カラム — 二層構造タッチポイント図 */}
+            {/* 右カラム — 放射型タッチポイント図（§7-1） */}
             <div className="lg:col-span-5 hidden lg:block">
               <div className="relative h-[560px] w-full">
                 {/* 放射接続線 */}
@@ -401,7 +388,7 @@ export default function DepartmentPage() {
                   aria-hidden="true"
                 >
                   <defs>
-                    <radialGradient id="lineFadeDept" cx="50%" cy="50%" r="50%">
+                    <radialGradient id="lineFadeSports" cx="50%" cy="50%" r="50%">
                       <stop offset="0%" stopColor="#06C755" stopOpacity="0.6" />
                       <stop offset="100%" stopColor="#06C755" stopOpacity="0" />
                     </radialGradient>
@@ -426,7 +413,7 @@ export default function DepartmentPage() {
                       opacity="0.35"
                     />
                   ))}
-                  <circle cx="250" cy="280" r="140" fill="url(#lineFadeDept)" />
+                  <circle cx="250" cy="280" r="140" fill="url(#lineFadeSports)" />
                 </svg>
 
                 {/* 中心スマホ */}
@@ -462,8 +449,8 @@ export default function DepartmentPage() {
                           </div>
                         </div>
                         <div className="bg-[#E8F8F0] rounded-md px-2 py-1.5 border border-[#06C755]/20">
-                          <div className="text-[9px] text-[#05A847] font-bold">外商</div>
-                          <div className="text-[10px] text-[#1F2937]">担当者からのご連絡</div>
+                          <div className="text-[9px] text-[#05A847] font-bold">チケット先行</div>
+                          <div className="text-[10px] text-[#1F2937]">抽選エントリー受付中</div>
                         </div>
                       </div>
                     </div>
@@ -474,10 +461,10 @@ export default function DepartmentPage() {
                 {[
                   { top: '10%', left: '5%', image: '/images/会員証.png', label: '会員証', delay: '0s' },
                   { top: '10%', right: '5%', image: '/images/チケット.png', label: 'チケット', delay: '0.1s' },
-                  { top: '45%', left: '-10%', image: '/images/1to1.png', label: '外商1to1', delay: '0.2s' },
-                  { top: '45%', right: '-10%', image: '/images/セグメント配信.png', label: 'セグメント', delay: '0.3s' },
-                  { bottom: '10%', left: '5%', image: '/images/クーポン.png', label: 'クーポン', delay: '0.4s' },
-                  { bottom: '10%', right: '5%', image: '/images/ギフト.png', label: 'ギフト', delay: '0.5s' },
+                  { top: '45%', left: '-10%', image: '/images/抽選.png', label: '抽選', delay: '0.2s' },
+                  { top: '45%', right: '-10%', image: '/images/クーポン.png', label: 'クーポン', delay: '0.3s' },
+                  { bottom: '10%', left: '5%', image: '/images/スタンプカード.png', label: 'スタンプ', delay: '0.4s' },
+                  { bottom: '10%', right: '5%', image: '/images/セグメント配信.png', label: '配信', delay: '0.5s' },
                 ].map((card) => (
                   <div
                     key={card.label}
@@ -515,7 +502,6 @@ export default function DepartmentPage() {
               { icon: ShieldCheck, label: 'LINEヤフー Technology Partner', color: '#06C755' },
               { icon: Award, label: 'AWS Premier Tier Services Partner', color: '#FF9900' },
               { icon: ShieldCheck, label: 'ISO 27001 取得（クラスメソッド）', color: '#3B82F6' },
-              { icon: Users, label: '外商・一般顧客の二層設計に対応', color: '#05A847' },
               { icon: Users, label: 'ハーフスクラッチで柔軟対応', color: '#05A847' },
             ].map(({ icon: Icon, label, color }) => (
               <div key={label} className="flex items-center gap-2 text-sm font-semibold text-[#1F2937] whitespace-nowrap">
@@ -528,7 +514,7 @@ export default function DepartmentPage() {
       </div>
 
       {/* ============================================================ */}
-      {/* 実績数字セクション（§7-3、百貨店特化）                             */}
+      {/* 実績数字セクション（§7-3、スポーツ・エンタメ特化）                    */}
       {/* ============================================================ */}
       <Section spacing="sm" container="wide" background="white">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E7EB] border border-[#E5E7EB] rounded-xl overflow-hidden">
@@ -545,7 +531,7 @@ export default function DepartmentPage() {
       </Section>
 
       {/* ============================================================ */}
-      {/* 課題セクション（§7-4、百貨店5点）                                 */}
+      {/* 課題セクション（§7-4）                                           */}
       {/* ============================================================ */}
       <Section id="problems" spacing="sm" container="wide" background="muted">
         <div className="max-w-[720px] mb-10 md:mb-12">
@@ -553,9 +539,9 @@ export default function DepartmentPage() {
             CHALLENGES
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            外商の属人化から催事管理まで、百貨店の顧客接点が抱える構造的な課題。
+            スポーツ・エンタメのDX担当者が「限界だ」と感じる、5つの壁。
           </h2>
-          <p className="text-base text-[#4B5563]">外商の属人化・催事のアナログ管理・一斉配信依存。百貨店特有の課題を二層設計で解きます。</p>
+          <p className="text-base text-[#4B5563]">個別ツールでは解決できない、スポーツ・エンタメ業界の構造的な課題です。</p>
         </div>
         <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
           {PROBLEMS.map((p) => (
@@ -568,7 +554,7 @@ export default function DepartmentPage() {
       </Section>
 
       {/* ============================================================ */}
-      {/* 訴求セクション（二層設計 3ステップ訴求）                            */}
+      {/* 訴求セクション（3ステップ: ライト層育成フロー）                      */}
       {/* ============================================================ */}
       <Section id="appeal" spacing="md" container="wide" background="white">
         <div className="max-w-[720px] mb-10 md:mb-12">
@@ -576,14 +562,14 @@ export default function DepartmentPage() {
             HOW IT WORKS
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            一般顧客のデジタル化から始め、外商の関係性を組織資産に変える3ステップ。
+            3つのステップで、ライト層を育てる。
           </h2>
-          <p className="text-base text-[#4B5563]">一般会員整備→催事DX→外商組織化の順で、百貨店の顧客構造に合わせて段階導入できます。</p>
+          <p className="text-base text-[#4B5563]">LINEで捕まえる→来場動機を設計する→幽霊会員を再活性化する。コアファン施策とは独立したライト層育成フローです。</p>
         </div>
         <div className="grid md:grid-cols-3 gap-4 md:gap-5">
           {APPEAL_STEPS.map((s, i) => (
             <Card key={s.step} variant="elevated" padding="lg" rounded="xl" className="relative">
-              <div className="flex items-center gap-3 mb-3">
+              <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-full bg-[#05A847] text-white font-bold flex items-center justify-center text-sm shrink-0">
                   {i + 1}
                 </div>
@@ -591,9 +577,6 @@ export default function DepartmentPage() {
                   <div className="text-xs text-[#9CA3AF] font-semibold uppercase tracking-wider">{s.step}</div>
                   <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{s.title}</h3>
                 </div>
-              </div>
-              <div className="mb-3">
-                <span className="inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#E8F8F0] text-[#05A847]">{s.layer}</span>
               </div>
               <p className="text-sm text-[#4B5563] leading-relaxed">{s.description}</p>
             </Card>
@@ -612,7 +595,7 @@ export default function DepartmentPage() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             SaaSとスクラッチ、その中間に。
           </h2>
-          <p className="text-base text-[#4B5563]">SaaSは外商二層設計で詰まり、フルスクラッチはコスト・期間が膨らむ。グロースパックは<span className="font-bold text-[#1F2937]">速さ・柔軟性・外商対応</span>を同時に提供します。</p>
+          <p className="text-base text-[#4B5563]">SaaSは独自アプリとの連携やセグメント設計で詰まり、フルスクラッチは期間とコストが膨らむ。グロースパックは<span className="font-bold text-[#1F2937]">速さ・柔軟性・既存システム連携</span>を同時に提供するハーフスクラッチ開発です。</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-4 md:gap-5">
@@ -622,8 +605,8 @@ export default function DepartmentPage() {
             <h3 className="text-base font-bold mb-4">SaaS<br /><span className="text-sm font-normal text-[#6B7280]">パッケージ型</span></h3>
             <ul className="text-sm text-[#6B7280] space-y-2">
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />初期コスト: 低</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />外商二層設計: △</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />基幹連携: △</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />既存システム連携: △</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />拡張性: △</li>
             </ul>
           </Card>
 
@@ -636,8 +619,8 @@ export default function DepartmentPage() {
             <h3 className="text-base font-bold mb-4">ハーフスクラッチ<br /><span className="text-sm font-normal text-[#05A847]">開発</span></h3>
             <ul className="text-sm text-[#1F2937] space-y-2 font-medium">
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />初期コスト: 中</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />外商二層設計: ◎</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />基幹連携: ○ / サポート: ○</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />既存システム連携: ◎</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />拡張性: ○ / サポート: ○</li>
             </ul>
           </Card>
 
@@ -647,7 +630,7 @@ export default function DepartmentPage() {
             <h3 className="text-base font-bold mb-4">スクラッチ<br /><span className="text-sm font-normal text-[#6B7280]">開発</span></h3>
             <ul className="text-sm text-[#6B7280] space-y-2">
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#EF4444] shrink-0" />初期コスト: 高</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />外商二層設計: ◎</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />既存システム連携: ◎</li>
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />拡張性: ◎</li>
             </ul>
           </Card>
@@ -659,8 +642,8 @@ export default function DepartmentPage() {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
-              <p className="text-white font-bold text-lg sm:text-xl">外商・一般顧客の二層設計について、まずご相談ください。</p>
-              <p className="text-white/80 text-sm mt-1">外商顧客の規模・催事頻度・既存CRM状況をお聞きして最適な構成をご提案します。</p>
+              <p className="text-white font-bold text-lg sm:text-xl">ライト層育成の構成について、まずご相談ください。</p>
+              <p className="text-white/80 text-sm mt-1">業態・会員構成・既存システムをお聞きして最適な構成をご提案します。</p>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0">
               <Button
@@ -669,7 +652,7 @@ export default function DepartmentPage() {
                 asChild
                 className="bg-white text-[#05A847] hover:bg-white/90 font-bold"
               >
-                <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="mid_band" destination="contact">
+                <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="midband" destination="contact">
                   無料で相談する
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </TrackedExternalLink>
@@ -680,7 +663,7 @@ export default function DepartmentPage() {
       </div>
 
       {/* ============================================================ */}
-      {/* 機能グリッド（§7-6、百貨店二層設計タグライン）                       */}
+      {/* 機能グリッド（§7-6、スポーツ・エンタメ向けタグライン）               */}
       {/* ============================================================ */}
       <Section id="features" spacing="md" container="wide" background="white">
         <div className="max-w-[720px] mb-10 md:mb-12">
@@ -688,9 +671,9 @@ export default function DepartmentPage() {
             FEATURES
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            外商向けと一般向けを分けて選ぶ、7つの機能アセット。
+            10の機能アセットから、スポーツ・エンタメ向けに選んで組み合わせる。
           </h2>
-          <p className="text-base text-[#4B5563]">外商顧客層（関係性継承）と一般顧客層（会員証・催事）に最適な機能を選んで組み合わせます。</p>
+          <p className="text-base text-[#4B5563]">スポーツ・エンタメ業界で特に効く6機能。必要なものだけを選び、フェーズを追って拡張できます。</p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {FEATURES.map((f) => {
@@ -700,12 +683,6 @@ export default function DepartmentPage() {
                 : f.phase === 'Step 2'
                 ? 'bg-[#FEF3C7] text-[#B45309]'
                 : 'bg-[#EDE9FE] text-[#6D28D9]';
-            const layerColor =
-              f.layer === '外商向け'
-                ? 'bg-[#FEF3C7] text-[#B45309]'
-                : f.layer === '催事向け'
-                ? 'bg-[#EDE9FE] text-[#6D28D9]'
-                : 'bg-[#E8F8F0] text-[#05A847]';
             return (
               <Card key={f.id} padding="md">
                 <div className="flex items-start gap-4 mb-3">
@@ -714,14 +691,9 @@ export default function DepartmentPage() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{f.name}</h3>
-                    <div className="flex items-center gap-2 mt-1 flex-wrap">
-                      <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full ${phaseColor}`}>
-                        {f.phase}
-                      </span>
-                      <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full ${layerColor}`}>
-                        {f.layer}
-                      </span>
-                    </div>
+                    <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full mt-1 ${phaseColor}`}>
+                      {f.phase}
+                    </span>
                   </div>
                 </div>
                 <p className="text-sm text-[#4B5563] leading-relaxed">{f.tagline}</p>
@@ -732,7 +704,7 @@ export default function DepartmentPage() {
       </Section>
 
       {/* ============================================================ */}
-      {/* FAQ（§7-9、百貨店固有）                                         */}
+      {/* FAQ（§7-9）                                                    */}
       {/* ============================================================ */}
       <Section id="faq" spacing="md" container="default" background="white">
         <div className="mb-10 md:mb-12">
@@ -765,10 +737,10 @@ export default function DepartmentPage() {
             CONTACT
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
-            外商顧客の関係継承と一般会員DXについて、<br />
+            ライト層育成の仕組みについて、<br />
             <span className="text-[#06C755]">一度ご相談ください。</span>
           </h2>
-          <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">外商規模・催事頻度・既存CRMをお聞きして最適な構成をご提案します。初回相談は無料です。</p>
+          <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">業態・会員構成・既存システムをお聞きして、最適な構成をご提案します。初回相談は無料です。</p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4">
             <Button variant="primary" size="lg" asChild>
               <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="final_primary" destination="contact">
@@ -809,7 +781,7 @@ export default function DepartmentPage() {
                   <span className="text-base font-bold text-[#06C755]">LINE</span>
                 </div>
               </div>
-              <p className="text-xs text-white/50 leading-relaxed">クラスメソッド株式会社が提供する LINE ミニアプリ開発サービス。百貨店・商業施設の外商二層設計・催事デジタル化・館内ID統合に対応します。</p>
+              <p className="text-xs text-white/50 leading-relaxed">クラスメソッド株式会社が提供するLINEミニアプリ開発サービス。スポーツ・エンタメ業界のライト層育成・チケット先行・幽霊会員再活性化に対応します。</p>
             </div>
 
             {/* サービス */}
@@ -824,7 +796,7 @@ export default function DepartmentPage() {
             <div>
               <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">RESOURCES</div>
               <ul className="space-y-2 text-sm text-white/60">
-                <li><a href="#problems" className="hover:text-white transition-colors">百貨店業界の課題</a></li>
+                <li><a href="#problems" className="hover:text-white transition-colors">スポーツ・エンタメ業界の課題</a></li>
                 <li><a href="#faq" className="hover:text-white transition-colors">よくあるご質問</a></li>
                 <li>
                   <a

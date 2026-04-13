@@ -18,7 +18,7 @@ interface TrackedExternalLinkProps {
 /**
  * GA4 + Vercel Analytics の cta_click イベントを送信する外部リンクラッパー。
  * <Button asChild> の子要素として使用することで既存の見た目を保ったまま計測できる。
- * 飲食業界LP (/v2/food) 用。
+ * 飲食業界LP (/food) 用。
  */
 export function TrackedExternalLink({
   href,
