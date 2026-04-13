@@ -8,8 +8,6 @@ const SECTIONS = [
   'problems',
   'appeal',
   'features',
-  'phases',
-  'wp-download',
   'faq',
   'contact',
 ] as const;

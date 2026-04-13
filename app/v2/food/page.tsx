@@ -159,7 +159,7 @@ const STATS = [
   {
     value: '最短',
     unit: '3ヶ月',
-    label: 'Phase 1の立ち上げ期間',
+    label: 'Step 1の立ち上げ期間',
     sub: '会員証＋順番待ちの標準構成。マルチブランドは4〜6ヶ月',
   },
 ];
@@ -167,7 +167,7 @@ const STATS = [
 const FAQS = [
   {
     q: '導入期間はどのくらいかかりますか？',
-    a: 'Phase 1（会員証＋順番待ち）は最短3ヶ月から。スコープや既存システム連携の有無によって異なります。まずはヒアリングしてご提案します。',
+    a: 'Step 1（会員証＋順番待ち）は最短3ヶ月から。スコープや既存システム連携の有無によって異なります。まずはヒアリングしてご提案します。',
   },
   {
     q: '複数ブランドをまとめて管理できますか？',
@@ -374,7 +374,7 @@ export default function FoodPage() {
 
               {/* ミニチェックリスト */}
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
-                {['行列×リピート×テイクアウトに対応', 'マルチブランド統合', '最短3ヶ月導入'].map((t) => (
+                {['行列×リピート×テイクアウトに対応', 'マルチブランド統合'].map((t) => (
                   <div key={t} className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-[#06C755]" />
                     {t}

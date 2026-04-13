@@ -154,7 +154,7 @@ const STATS = [
 const FAQS = [
   {
     q: '導入にはどのくらいの期間がかかりますか？',
-    a: 'LINE ID連携を含むPhase 1標準構成で最短3ヶ月が目安です。既存EC基盤との連携範囲やカスタマイズによって変わりますので、まずはヒアリングさせてください。',
+    a: 'LINE ID連携を含むStep 1標準構成で最短3ヶ月が目安です。既存EC基盤との連携範囲やカスタマイズによって変わりますので、まずはヒアリングさせてください。',
   },
   {
     q: '実店舗も運営しています。EC向けLPと店舗ありアパレルLPの違いは何ですか？',
@@ -355,7 +355,7 @@ export default function EcPage() {
 
               {/* ミニチェックリスト */}
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
-                {['LINE ID連携対応', 'カゴ落ち自動フォロー', '最短3ヶ月導入'].map((t) => (
+                {['LINE ID連携対応', 'カゴ落ち自動フォロー'].map((t) => (
                   <div key={t} className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-[#06C755]" />
                     {t}

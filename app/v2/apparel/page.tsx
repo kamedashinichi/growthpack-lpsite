@@ -368,7 +368,7 @@ export default function ApparelPage() {
 
               {/* ミニチェックリスト */}
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
-                {['マルチブランド対応', '50ブランド横断の会員証', '最短3ヶ月導入'].map((t) => (
+                {['マルチブランド対応', '50ブランド横断の会員証'].map((t) => (
                   <div key={t} className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-[#06C755]" />
                     {t}

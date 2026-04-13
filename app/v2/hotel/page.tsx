@@ -160,7 +160,7 @@ const STATS = [
 const FAQS = [
   {
     q: '導入にはどのくらいの期間がかかりますか？',
-    a: '最短3ヶ月（Phase 1 標準構成）。既存PMSや予約エンジンとの連携有無によって前後します。まずはヒアリングで確認させてください。',
+    a: '最短3ヶ月（Step 1標準構成）。既存PMSや予約エンジンとの連携有無によって前後します。まずはヒアリングで確認させてください。',
   },
   {
     q: '既存のPMS（宿泊管理システム）と連携できますか？',
@@ -362,7 +362,7 @@ export default function HotelPage() {
 
               {/* ミニチェックリスト */}
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
-                {['OTA手数料削減', '直予約率向上', '最短3ヶ月導入'].map((t) => (
+                {['OTA手数料削減', '直予約率向上'].map((t) => (
                   <div key={t} className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-[#06C755]" />
                     {t}

@@ -173,7 +173,7 @@ const STATS = [
 const FAQS = [
   {
     q: '導入にはどのくらいの期間がかかりますか？',
-    a: '一般会員証・クーポン・セグメント配信を含む標準構成（Phase 1）で最短3ヶ月。複数館や既存基幹との連携が必要な場合は4〜6ヶ月が目安です。',
+    a: '一般会員証・クーポン・セグメント配信を含む標準構成（Step 1）で最短3ヶ月。複数館や既存基幹との連携が必要な場合は4〜6ヶ月が目安です。',
   },
   {
     q: '既存のCRM・基幹システムと連携できますか？',
@@ -381,7 +381,7 @@ export default function DepartmentPage() {
 
               {/* ミニチェックリスト */}
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
-                {['外商・一般の二層設計', '催事デジタル化対応', '最短3ヶ月導入'].map((t) => (
+                {['外商・一般の二層設計', '催事デジタル化対応'].map((t) => (
                   <div key={t} className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-[#06C755]" />
                     {t}

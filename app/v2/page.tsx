@@ -33,7 +33,7 @@ const FEATURES = [
     image: '/images/会員証.png',
     name: 'デジタル会員証',
     tagline: 'アプリDL不要。バーコード提示で5秒つながる次世代会員体験。',
-    phase: 'Phase 1',
+    phase: 'Step 1',
     id: 'membership',
     url: '/memberscard',
   },
@@ -41,7 +41,7 @@ const FEATURES = [
     image: '/images/順番待ち.png',
     name: '順番待ち',
     tagline: '待ち時間を会員化のチャンスへ。混雑状況もLINEで配信。',
-    phase: 'Phase 1',
+    phase: 'Step 1',
     id: 'queue',
     url: '/queue',
   },
@@ -49,7 +49,7 @@ const FEATURES = [
     image: '/images/予約.png',
     name: '予約',
     tagline: '予約完了から来店後まで、LINEで一貫した顧客体験を設計。',
-    phase: 'Phase 1',
+    phase: 'Step 1',
     id: 'reservation',
     url: '/reservation',
   },
@@ -57,7 +57,7 @@ const FEATURES = [
     image: '/images/スタンプカード.png',
     name: 'スタンプカード',
     tagline: '来店履歴が見える、育つ。紛失ゼロのデジタルスタンプ。',
-    phase: 'Phase 2',
+    phase: 'Step 2',
     id: 'stamp-card',
     url: '/stampcard',
   },
@@ -65,7 +65,7 @@ const FEATURES = [
     image: '/images/クーポン.png',
     name: 'クーポン配信',
     tagline: 'LINE公式の配信制限を超えた、属性連動のクーポン発行。',
-    phase: 'Phase 2',
+    phase: 'Step 2',
     id: 'coupon',
     url: '/coupon',
   },
@@ -73,7 +73,7 @@ const FEATURES = [
     image: '/images/チケット.png',
     name: 'チケット・パス',
     tagline: 'LINEで入場管理まで完結。CRM側で利用状況を可視化。',
-    phase: 'Phase 2',
+    phase: 'Step 2',
     id: 'ticket',
     url: '/ticket',
   },
@@ -81,7 +81,7 @@ const FEATURES = [
     image: '/images/抽選.png',
     name: '抽選',
     tagline: '当選体験でエンゲージメントを加速。来店動機に変える。',
-    phase: 'Phase 2',
+    phase: 'Step 2',
     id: 'lottery',
     url: '/lottery',
   },
@@ -89,7 +89,7 @@ const FEATURES = [
     image: '/images/セグメント配信.png',
     name: 'セグメント配信',
     tagline: '属性・購買履歴に連動した動的リッチメニュー対応配信。',
-    phase: 'Phase 3',
+    phase: 'Step 3',
     id: 'segment-delivery',
     url: '/segment',
   },
@@ -97,7 +97,7 @@ const FEATURES = [
     image: '/images/1to1.png',
     name: '1to1コミュニケーション',
     tagline: 'オペレーター対応をLINEに統合。接客以上の価値を提供。',
-    phase: 'Phase 3',
+    phase: 'Step 3',
     id: 'one-to-one',
     url: '/1to1',
   },
@@ -105,7 +105,7 @@ const FEATURES = [
     image: '/images/ギフト.png',
     name: 'ギフト',
     tagline: 'ソーシャルギフト機能で、顧客が顧客を呼ぶ循環を作る。',
-    phase: 'Phase 3',
+    phase: 'Step 3',
     id: 'gift',
     url: '/gift',
   },
@@ -130,23 +130,23 @@ const PROBLEMS = [
   },
 ];
 
-const PHASES = [
+const STEPS = [
   {
-    phase: 'Phase 1',
+    step: 'Step 1',
     label: '顧客接点の創出',
     features: ['デジタル会員証', '順番待ち', '予約'],
     description:
       'まず「つながる」土台を作ります。アプリDL不要の会員化で、ライトユーザーを含めた顧客基盤を構築します。',
   },
   {
-    phase: 'Phase 2',
+    step: 'Step 2',
     label: 'エンゲージメント強化',
     features: ['スタンプカード', 'クーポン配信', 'チケット・パス', '抽選'],
     description:
       '来店動機と再訪のきっかけを設計します。基盤の上に施策を重ねて、顧客体験を段階的に厚くします。',
   },
   {
-    phase: 'Phase 3',
+    step: 'Step 3',
     label: '関係性の深化',
     features: ['セグメント配信', '1to1コミュニケーション', 'ギフト'],
     description:
@@ -164,7 +164,7 @@ const STATS = [
   {
     value: '最短',
     unit: '3ヶ月',
-    label: 'フェーズ1の立ち上げ期間',
+    label: 'Step 1の立ち上げ期間',
     sub: '会員証を含む標準構成。機能範囲と連携要件で変動します',
   },
   {
@@ -175,9 +175,9 @@ const STATS = [
   },
   {
     value: '3',
-    unit: 'フェーズ',
+    unit: 'ステップ',
     label: '段階的なロードマップ設計',
-    sub: '一度に全部入れず、フェーズで育てる設計思想',
+    sub: '一度に全部入れず、ステップで育てる設計思想',
   },
 ];
 
@@ -290,7 +290,7 @@ export default function V2TopPage() {
             <a href="#problems" className="hover:text-[#05A847] transition-colors">課題</a>
             <a href="#positioning" className="hover:text-[#05A847] transition-colors">選ばれる理由</a>
             <a href="#features" className="hover:text-[#05A847] transition-colors">機能</a>
-            <a href="#phases" className="hover:text-[#05A847] transition-colors">導入ステップ</a>
+            <a href="#steps" className="hover:text-[#05A847] transition-colors">導入ステップ</a>
             <a href="#faq" className="hover:text-[#05A847] transition-colors">FAQ</a>
           </nav>
           <Button variant="primary" size="sm" asChild>
@@ -511,7 +511,7 @@ export default function V2TopPage() {
               { icon: Award, label: 'AWS Premier Tier Services Partner', color: '#FF9900' },
               { icon: ShieldCheck, label: 'ISO 27001 取得（クラスメソッド）', color: '#3B82F6' },
               { icon: Users, label: '技術支援実績 5,000社以上', color: '#05A847' },
-              { icon: Zap, label: '最短3ヶ月導入', color: '#05A847' },
+              { icon: Zap, label: 'Step 1最短3ヶ月', color: '#05A847' },
             ].map(({ icon: Icon, label, color }) => (
               <div key={label} className="flex items-center gap-2 text-sm font-semibold text-[#1F2937] whitespace-nowrap">
                 <Icon className="w-4 h-4 shrink-0" style={{ color }} />
@@ -676,9 +676,9 @@ export default function V2TopPage() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {FEATURES.map((f) => {
             const phaseColor =
-              f.phase === 'Phase 1'
+              f.phase === 'Step 1'
                 ? 'bg-[#E8F8F0] text-[#05A847]'
-                : f.phase === 'Phase 2'
+                : f.phase === 'Step 2'
                 ? 'bg-[#FEF3C7] text-[#B45309]'
                 : 'bg-[#EDE9FE] text-[#6D28D9]';
             return (
@@ -715,32 +715,32 @@ export default function V2TopPage() {
       {/* ============================================================ */}
       {/* 3フェーズ ロードマップ                                            */}
       {/* ============================================================ */}
-      <Section id="phases" spacing="md" container="wide" background="white">
+      <Section id="steps" spacing="md" container="wide" background="white">
         <div className="max-w-[720px] mb-10 md:mb-12">
           <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">
             ROADMAP
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            3フェーズで段階的に育てる。
+            3ステップで段階的に育てる。
           </h2>
           <p className="text-base text-[#4B5563]">
-            一度にすべてを導入するのではなく、まず基盤を作り、施策を重ねて、関係を深化させます。各フェーズが次のフェーズのデータ基盤になります。
+            一度にすべてを導入するのではなく、まず基盤を作り、施策を重ねて、関係を深化させます。各ステップが次のステップのデータ基盤になります。
           </p>
         </div>
 
-        {/* フェーズ接続ライン + カード */}
+        {/* ステップ接続ライン + カード */}
         <div className="relative">
           {/* デスクトップ接続線 */}
           <div className="hidden md:block absolute top-10 left-[calc(33.333%+0px)] right-[calc(33.333%+0px)] h-0.5 bg-[#E5E7EB] z-0" />
           <div className="grid md:grid-cols-3 gap-5 md:gap-6 relative z-10">
-            {PHASES.map((p, i) => (
-              <Card key={p.phase} variant="elevated" padding="lg" rounded="xl" className="relative">
+            {STEPS.map((p, i) => (
+              <Card key={p.step} variant="elevated" padding="lg" rounded="xl" className="relative">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 rounded-full bg-[#05A847] text-white font-bold flex items-center justify-center text-sm shrink-0">
                     {i + 1}
                   </div>
                   <div>
-                    <div className="text-xs text-[#9CA3AF] font-semibold uppercase tracking-wider">{p.phase}</div>
+                    <div className="text-xs text-[#9CA3AF] font-semibold uppercase tracking-wider">{p.step}</div>
                     <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{p.label}</h3>
                   </div>
                 </div>
@@ -946,7 +946,7 @@ export default function V2TopPage() {
               <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">SERVICE</div>
               <ul className="space-y-2 text-sm text-white/60">
                 <li><a href="#features" className="hover:text-white transition-colors">機能一覧</a></li>
-                <li><a href="#phases" className="hover:text-white transition-colors">導入ロードマップ</a></li>
+                <li><a href="#steps" className="hover:text-white transition-colors">導入ロードマップ</a></li>
                 <li><a href="#positioning" className="hover:text-white transition-colors">ハーフスクラッチとは</a></li>
               </ul>
             </div>

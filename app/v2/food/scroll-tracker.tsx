@@ -9,8 +9,6 @@ const SECTIONS = [
   'appeal',
   'positioning',
   'features',
-  'phases',
-  'wp-download',
   'faq',
   'contact',
 ] as const;

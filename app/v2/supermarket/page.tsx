@@ -384,7 +384,7 @@ export default function SupermarketPage() {
 
               {/* ミニチェックリスト */}
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
-                {['既存会員基盤をそのまま活性化', '紙チラシのLINE移行対応', '最短3ヶ月導入'].map((t) => (
+                {['既存会員基盤をそのまま活性化', '紙チラシのLINE移行対応'].map((t) => (
                   <div key={t} className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-[#06C755]" />
                     {t}

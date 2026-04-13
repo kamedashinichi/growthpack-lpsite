@@ -208,7 +208,7 @@ const serviceJsonLd = {
   serviceType: 'ドラッグストア・薬局向けLINEミニアプリ開発サービス',
   name: 'グロースパック for LINE（ドラッグストア業界向け）',
   description:
-    'ポイントカード離脱・調剤待ち時間・一斉配信ブロック率の3課題を、LINEミニアプリで解決。調剤完了通知・待ち時間クーポン・事前受付の3層でDS固有の接点を構築します。最短3ヶ月でPhase1を立ち上げます。',
+    'ポイントカード離脱・調剤待ち時間・一斉配信ブロック率の3課題を、LINEミニアプリで解決。調剤完了通知・待ち時間クーポン・事前受付の3層でDS固有の接点を構築します。最短3ヶ月でStep 1を立ち上げます。',
   provider: {
     '@type': 'Organization',
     name: 'クラスメソッド株式会社',
@@ -367,7 +367,7 @@ export default function DrugstorePage() {
 
               {/* ミニチェックリスト */}
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
-                {['調剤連携3層対応', '薬機法ガードレール設計', '最短3ヶ月導入'].map((t) => (
+                {['調剤連携3層対応', '薬機法ガードレール設計'].map((t) => (
                   <div key={t} className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-[#06C755]" />
                     {t}
