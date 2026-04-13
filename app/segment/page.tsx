@@ -24,6 +24,8 @@ import {
 import { Button } from '@/components/shared/ui/button';
 import { Section } from '@/components/shared/ui/section';
 import { Card } from '@/components/shared/ui/card';
+import { FeatureScrollTracker } from '@/components/shared/feature-page/scroll-tracker';
+import { TrackedExternalLink } from '@/components/shared/feature-page/tracking';
 
 /* ------------------------------------------------------------------ */
 /* DATA                                                                */
@@ -182,6 +184,7 @@ export default function SegmentPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
+      <FeatureScrollTracker page="segment" />
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-[#E5E7EB]">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 h-16 md:h-20 flex items-center justify-between">
@@ -222,10 +225,14 @@ export default function SegmentPage() {
             <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">会員証・スタンプ・予約などのデータを組み合わせてセグメントを構築。パーソナライズ配信と自動シナリオで、配信効果を最大化します。</p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
               <Button variant="primary" size="lg" asChild>
-                <a href="https://classmethod.jp/services/line/line-apps/#iframe-form" target="_blank" rel="noopener noreferrer">
+                <TrackedExternalLink
+                  href="https://classmethod.jp/services/line/line-apps/#iframe-form"
+                  location="hero"
+                  destination="contact"
+                >
                   無料で相談する
                   <ArrowRight className="w-5 h-5 ml-2" />
-                </a>
+                </TrackedExternalLink>
               </Button>
             </div>
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
@@ -356,13 +363,27 @@ export default function SegmentPage() {
           <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">既存のCRM/MAツール・最初に自動化したい配信シナリオをお聞きして、最適な構成をご提案します。初回相談は無料です。</p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4">
             <Button variant="primary" size="lg" asChild>
-              <a href="https://classmethod.jp/services/line/line-apps/#iframe-form" target="_blank" rel="noopener noreferrer">
+              <TrackedExternalLink
+                href="https://classmethod.jp/services/line/line-apps/#iframe-form"
+                location="footer_cta"
+                destination="contact"
+              >
                 無料で相談する
                 <ArrowRight className="w-5 h-5 ml-2" />
-              </a>
+              </TrackedExternalLink>
             </Button>
-            <Button variant="outline" size="lg" asChild className="border-white/50 text-white hover:bg-white/10 hover:border-white">
-              <a href="https://classmethod.jp/download/line-mini-app/" target="_blank" rel="noopener noreferrer">資料をダウンロード</a>
+            <Button
+              variant="outline"
+              size="lg"
+              asChild
+              className="border-white/50 text-white hover:bg-white/10 hover:border-white"
+            >
+              <TrackedExternalLink
+                href="https://classmethod.jp/download/line-mini-app/"
+                location="footer_cta"
+                destination="download"
+              >
+                資料をダウンロード</TrackedExternalLink>
             </Button>
           </div>
           <div className="text-xs text-white/50 pt-2">※ お打ち合わせでご要件を伺ったうえで、個別にお見積もりいたします。</div>
