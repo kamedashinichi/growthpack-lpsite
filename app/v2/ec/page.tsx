@@ -269,7 +269,7 @@ export default function EcPage() {
       {/* ============================================================ */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-[#E5E7EB]">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 h-16 md:h-20 flex items-center justify-between">
-          <Link href="/v2/ec" className="flex items-center gap-2">
+          <Link href="/v2" className="flex items-center gap-2">
             <div className="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-[#06C755] flex items-center justify-center text-white font-bold text-sm">
               G
             </div>
