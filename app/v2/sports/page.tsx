@@ -357,7 +357,7 @@ export default function SportsPage() {
               {/* 認定バッジ pill */}
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#06C755]/20 border border-[#06C755]/50 rounded-full text-xs sm:text-sm font-semibold text-[#06C755]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#06C755] shrink-0" />
-                LINEヤフー Technology Partner × スポーツ・エンタメ業界 15社以上調査実績
+                LINEヤフー Technology Partner × スポーツ・エンタメ業界
               </div>
 
               <h1 className="text-4xl md:text-5xl font-bold leading-[1.2] tracking-tight text-white">
@@ -523,7 +523,6 @@ export default function SportsPage() {
               { icon: ShieldCheck, label: 'LINEヤフー Technology Partner', color: '#06C755' },
               { icon: Award, label: 'AWS Premier Tier Services Partner', color: '#FF9900' },
               { icon: ShieldCheck, label: 'ISO 27001 取得（クラスメソッド）', color: '#3B82F6' },
-              { icon: Users, label: 'スポーツ・エンタメ 15社以上 業界調査実績', color: '#05A847' },
               { icon: Users, label: 'ハーフスクラッチで柔軟対応', color: '#05A847' },
             ].map(({ icon: Icon, label, color }) => (
               <div key={label} className="flex items-center gap-2 text-sm font-semibold text-[#1F2937] whitespace-nowrap">
