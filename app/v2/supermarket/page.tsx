@@ -32,7 +32,6 @@ import {
 import { Button } from '@/components/shared/ui/button';
 import { Section } from '@/components/shared/ui/section';
 import { Card } from '@/components/shared/ui/card';
-import { WPDownloadButton } from './wp-download-button';
 import { TrackedExternalLink } from './tracking';
 import { ScrollTracker } from './scroll-tracker';
 
@@ -824,44 +823,6 @@ export default function SupermarketPage() {
               </div>
             </Card>
           ))}
-        </div>
-      </Section>
-
-      {/* ============================================================ */}
-      {/* WP（ホワイトペーパー）ダウンロード                                   */}
-      {/* ============================================================ */}
-      <Section id="wp-download" spacing="sm" container="default" background="muted">
-        <div className="bg-white rounded-2xl overflow-hidden border border-[#E5E7EB] shadow-sm">
-          <div className="flex flex-col md:flex-row">
-            {/* 左: WP概要（ダーク） */}
-            <div className="bg-[#0a0a0a] text-white p-6 sm:p-8 md:p-10 flex flex-col justify-center md:w-2/5">
-              <span className="text-xs tracking-[0.15em] uppercase font-semibold text-[#06C755] mb-3">
-                近日公開
-              </span>
-              <h3 className="text-lg sm:text-xl md:text-2xl font-bold leading-tight mb-3">
-                SM・HC業界向け<br />LINEミニアプリ活用ガイド
-              </h3>
-              <p className="text-sm text-white/60 leading-relaxed">既存会員活性化とチラシDXの実践事例・導入ステップを詳解します。</p>
-            </div>
-            {/* 右: 内容+CTA */}
-            <div className="p-6 sm:p-8 md:p-10 flex flex-col justify-center md:w-3/5">
-              <ul className="text-sm text-[#4B5563] space-y-2 mb-6">
-                <li className="flex items-start gap-2">
-                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
-                  グッデイ（HC63店舗）の導入プロセスと定量効果
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
-                  チラシコスト削減とLINE移行の段階的アプローチ
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
-                  シニア層のデジタル会員証活用ノウハウ
-                </li>
-              </ul>
-              <WPDownloadButton />
-            </div>
-          </div>
         </div>
       </Section>
 

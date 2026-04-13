@@ -27,7 +27,6 @@ import {
 import { Button } from '@/components/shared/ui/button';
 import { Section } from '@/components/shared/ui/section';
 import { Card } from '@/components/shared/ui/card';
-import { WPDownloadButton } from './wp-download-button';
 import { TrackedExternalLink } from './tracking';
 import { ScrollTracker } from './scroll-tracker';
 
@@ -318,7 +317,6 @@ export default function SportsPage() {
             <a href="#appeal" className="hover:text-[#05A847] transition-colors">訴求</a>
             <a href="#features" className="hover:text-[#05A847] transition-colors">機能</a>
             <a href="#phases" className="hover:text-[#05A847] transition-colors">導入ステップ</a>
-            <a href="#wp-download" className="hover:text-[#05A847] transition-colors">調査レポート</a>
             <a href="#faq" className="hover:text-[#05A847] transition-colors">FAQ</a>
           </nav>
           <Button variant="primary" size="sm" asChild>
@@ -770,44 +768,6 @@ export default function SportsPage() {
                 </div>
               </Card>
             ))}
-          </div>
-        </div>
-      </Section>
-
-      {/* ============================================================ */}
-      {/* WP（ホワイトペーパー）ダウンロード                                   */}
-      {/* ============================================================ */}
-      <Section id="wp-download" spacing="sm" container="default" background="muted">
-        <div className="bg-white rounded-2xl overflow-hidden border border-[#E5E7EB] shadow-sm">
-          <div className="flex flex-col md:flex-row">
-            {/* 左: WP概要（ダーク） */}
-            <div className="bg-[#0a0a0a] text-white p-6 sm:p-8 md:p-10 flex flex-col justify-center md:w-2/5">
-              <span className="text-xs tracking-[0.15em] uppercase font-semibold text-[#06C755] mb-3">
-                近日公開
-              </span>
-              <h3 className="text-lg sm:text-xl md:text-2xl font-bold leading-tight mb-3">
-                スポーツ・エンタメ業界<br />ライト層育成実態調査
-              </h3>
-              <p className="text-sm text-white/60 leading-relaxed">15社調査で見えた、コアファンとライト層の接点格差と育成フローの現状。</p>
-            </div>
-            {/* 右: 内容+CTA */}
-            <div className="p-6 sm:p-8 md:p-10 flex flex-col justify-center md:w-3/5">
-              <ul className="text-sm text-[#4B5563] space-y-2 mb-6">
-                <li className="flex items-start gap-2">
-                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
-                  15社中12社が独自アプリを保有するがライト層接点はほぼゼロ
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
-                  チケット先行抽選の運用課題と電子化による改善余地
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
-                  幽霊会員の解約防止に効くフォロー施策の設計パターン
-                </li>
-              </ul>
-              <WPDownloadButton />
-            </div>
           </div>
         </div>
       </Section>

@@ -28,7 +28,6 @@ import {
 import { Button } from '@/components/shared/ui/button';
 import { Section } from '@/components/shared/ui/section';
 import { Card } from '@/components/shared/ui/card';
-import { WPDownloadButton } from './wp-download-button';
 import { TrackedExternalLink } from './tracking';
 import { ScrollTracker } from './scroll-tracker';
 
@@ -774,44 +773,6 @@ export default function FoodPage() {
                 </div>
               </Card>
             ))}
-          </div>
-        </div>
-      </Section>
-
-      {/* ============================================================ */}
-      {/* WP（ホワイトペーパー）ダウンロード（準備中）                          */}
-      {/* ============================================================ */}
-      <Section id="wp-download" spacing="sm" container="default" background="muted">
-        <div className="bg-white rounded-2xl overflow-hidden border border-[#E5E7EB] shadow-sm">
-          <div className="flex flex-col md:flex-row">
-            {/* 左: WP概要（ダーク） */}
-            <div className="bg-[#0a0a0a] text-white p-6 sm:p-8 md:p-10 flex flex-col justify-center md:w-2/5">
-              <span className="text-xs tracking-[0.15em] uppercase font-semibold text-[#06C755] mb-3">
-                無料ダウンロード
-              </span>
-              <h3 className="text-lg sm:text-xl md:text-2xl font-bold leading-tight mb-3">
-                飲食チェーン向け<br />LINE会員化・顧客接点設計ガイド
-              </h3>
-              <p className="text-sm text-white/60 leading-relaxed">行列×リピート×テイクアウトの3軸で設計する、飲食チェーンのLINE活用パターン集。</p>
-            </div>
-            {/* 右: 内容+CTA */}
-            <div className="p-6 sm:p-8 md:p-10 flex flex-col justify-center md:w-3/5">
-              <ul className="text-sm text-[#4B5563] space-y-2 mb-6">
-                <li className="flex items-start gap-2">
-                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
-                  業態別3パターン（デリバリー手数料削減型 / テーブルオーダー省力化型 / CRM統合型）
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
-                  マルチブランドLINE統合の設計事例と導入ステップ
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
-                  SaaS比較・スクラッチ比較のTCOシミュレーション観点
-                </li>
-              </ul>
-              <WPDownloadButton />
-            </div>
           </div>
         </div>
       </Section>

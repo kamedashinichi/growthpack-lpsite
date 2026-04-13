@@ -28,7 +28,6 @@ import {
 import { Button } from '@/components/shared/ui/button';
 import { Section } from '@/components/shared/ui/section';
 import { Card } from '@/components/shared/ui/card';
-import { WPDownloadButton } from './wp-download-button';
 import { TrackedExternalLink } from './tracking';
 import { ScrollTracker } from './scroll-tracker';
 
@@ -312,7 +311,6 @@ export default function HotelPage() {
             <a href="#appeal" className="hover:text-[#05A847] transition-colors">訴求</a>
             <a href="#features" className="hover:text-[#05A847] transition-colors">機能</a>
             <a href="#phases" className="hover:text-[#05A847] transition-colors">導入ステップ</a>
-            <a href="#wp-download" className="hover:text-[#05A847] transition-colors">調査レポート</a>
             <a href="#faq" className="hover:text-[#05A847] transition-colors">FAQ</a>
           </nav>
           <Button variant="primary" size="sm" asChild>
@@ -763,44 +761,6 @@ export default function HotelPage() {
                 </div>
               </Card>
             ))}
-          </div>
-        </div>
-      </Section>
-
-      {/* ============================================================ */}
-      {/* WP（ホワイトペーパー）ダウンロード                                   */}
-      {/* ============================================================ */}
-      <Section id="wp-download" spacing="sm" container="default" background="muted">
-        <div className="bg-white rounded-2xl overflow-hidden border border-[#E5E7EB] shadow-sm">
-          <div className="flex flex-col md:flex-row">
-            {/* 左: WP概要（ダーク） */}
-            <div className="bg-[#0a0a0a] text-white p-6 sm:p-8 md:p-10 flex flex-col justify-center md:w-2/5">
-              <span className="text-xs tracking-[0.15em] uppercase font-semibold text-[#06C755] mb-3">
-                無料ダウンロード
-              </span>
-              <h3 className="text-lg sm:text-xl md:text-2xl font-bold leading-tight mb-3">
-                ホテル・旅館業界向け<br />LINEミニアプリ活用ガイド
-              </h3>
-              <p className="text-sm text-white/60 leading-relaxed">OTA手数料削減・直予約率向上の実践手順と、セグメント配信導入のステップ。</p>
-            </div>
-            {/* 右: 内容+CTA */}
-            <div className="p-6 sm:p-8 md:p-10 flex flex-col justify-center md:w-3/5">
-              <ul className="text-sm text-[#4B5563] space-y-2 mb-6">
-                <li className="flex items-start gap-2">
-                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
-                  OTA依存を脱する直販チャネル構築の全体像
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
-                  PMS連携なしでも始められるセグメント配信の方法
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
-                  旅館業法制約を踏まえた提案範囲の整理
-                </li>
-              </ul>
-              <WPDownloadButton />
-            </div>
           </div>
         </div>
       </Section>

@@ -25,7 +25,6 @@ import {
 import { Button } from '@/components/shared/ui/button';
 import { Section } from '@/components/shared/ui/section';
 import { Card } from '@/components/shared/ui/card';
-import { WPDownloadButton } from './wp-download-button';
 import { TrackedExternalLink } from './tracking';
 import { ScrollTracker } from './scroll-tracker';
 
@@ -330,7 +329,6 @@ export default function DepartmentPage() {
             <a href="#appeal" className="hover:text-[#05A847] transition-colors">訴求</a>
             <a href="#features" className="hover:text-[#05A847] transition-colors">機能</a>
             <a href="#phases" className="hover:text-[#05A847] transition-colors">導入ステップ</a>
-            <a href="#wp-download" className="hover:text-[#05A847] transition-colors">レポート</a>
             <a href="#faq" className="hover:text-[#05A847] transition-colors">FAQ</a>
           </nav>
           <Button variant="primary" size="sm" asChild>
@@ -797,45 +795,6 @@ export default function DepartmentPage() {
                 </div>
               </Card>
             ))}
-          </div>
-        </div>
-      </Section>
-
-      {/* ============================================================ */}
-      {/* WP（ホワイトペーパー）ダウンロード — 百貨店版準備中                   */}
-      {/* ============================================================ */}
-      <Section id="wp-download" spacing="sm" container="default" background="muted">
-        <div className="bg-white rounded-2xl overflow-hidden border border-[#E5E7EB] shadow-sm">
-          <div className="flex flex-col md:flex-row">
-            {/* 左: WP概要（ダーク） */}
-            <div className="bg-[#0a0a0a] text-white p-6 sm:p-8 md:p-10 flex flex-col justify-center md:w-2/5">
-              <span className="text-xs tracking-[0.15em] uppercase font-semibold text-[#06C755] mb-3">
-                無料ダウンロード
-              </span>
-              <h3 className="text-lg sm:text-xl md:text-2xl font-bold leading-tight mb-3">
-                百貨店業界向け<br />外商デジタル化調査レポート
-              </h3>
-              <p className="text-sm text-white/60 leading-relaxed">外商属人化の実態と、関係性継承を組織資産化するための設計指針。</p>
-            </div>
-            {/* 右: 内容+CTA */}
-            <div className="p-6 sm:p-8 md:p-10 flex flex-col justify-center md:w-3/5">
-              <ul className="text-sm text-[#4B5563] space-y-2 mb-6">
-                <li className="flex items-start gap-2">
-                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
-                  外商担当者の情報管理実態と引き継ぎ課題
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
-                  催事のデジタル化で変わる来場データ活用
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
-                  一般顧客のセグメント配信ROI改善事例
-                </li>
-              </ul>
-              <WPDownloadButton />
-              <p className="text-xs text-[#9CA3AF] mt-3">百貨店業界向けレポートは現在準備中です。ご相談はお問い合わせフォームからどうぞ。</p>
-            </div>
           </div>
         </div>
       </Section>
