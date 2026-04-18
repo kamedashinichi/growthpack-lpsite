@@ -307,7 +307,7 @@ export default function LotteryPage() {
                       {f.demo_url && (
                         <TrackedExternalLink
                           href={f.demo_url}
-                          location={`lottery_card_demo_${f.id}`}
+                          location={`lottery_card_demo_${f.name}`}
                           destination="demo"
                           className="inline-flex items-center gap-1 text-sm font-semibold text-[#05A847] mt-3 hover:text-[#048838] transition-colors"
                         >
