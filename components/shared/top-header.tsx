@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { ChevronDown } from 'lucide-react';
 import { Button } from '@/components/shared/ui/button';
+import { TrackedExternalLink } from '@/components/shared/feature-page/tracking';
 
 const FEATURE_ITEMS = [
   { href: '/memberscard', label: 'デジタル会員証' },
@@ -103,7 +104,13 @@ export function TopHeader() {
           <a href="#faq" className="hover:text-[#05A847] transition-colors">FAQ</a>
         </nav>
         <Button variant="primary" size="sm" asChild>
-          <a href="https://classmethod.jp/services/line/line-apps/#iframe-form" target="_blank" rel="noopener noreferrer">お問い合わせ</a>
+          <TrackedExternalLink
+            href="https://classmethod.jp/services/line/line-apps/#iframe-form"
+            location="top_header"
+            destination="contact"
+          >
+            お問い合わせ
+          </TrackedExternalLink>
         </Button>
       </div>
     </header>
