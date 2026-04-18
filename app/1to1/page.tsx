@@ -428,15 +428,15 @@ export default function OneToOnePage() {
                       <p className="text-sm text-[#9CA3AF] mb-2">「{f.challenge}」</p>
                       <p className="text-sm text-[#4B5563] leading-relaxed">{f.solution}</p>
                       {f.demo_url && (
-                        <a
+                        <TrackedExternalLink
                           href={f.demo_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                          location={`1to1_card_demo_${f.id}`}
+                          destination="demo"
                           className="inline-flex items-center gap-1 text-sm font-semibold text-[#05A847] mt-3 hover:text-[#048838] transition-colors"
                         >
                           デモを試す
                           <ArrowRight className="w-4 h-4" />
-                        </a>
+                        </TrackedExternalLink>
                       )}
                     </Card>
                   );
