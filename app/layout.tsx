@@ -45,12 +45,21 @@ export const metadata: Metadata = {
     description:
       'SaaSの速さとフルスクラッチの柔軟性を両立。会員証・予約・クーポンなど10機能から選び、最短3ヶ月で立ち上げます。',
     siteName: 'グロースパック for LINE',
+    images: [
+      {
+        url: '/images/ogp-v2.jpg',
+        width: 1024,
+        height: 537,
+        alt: 'グロースパック for LINE｜機能アセットで実現するスピード×柔軟性のLINEミニアプリ開発',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'グロースパック for LINE｜ハーフスクラッチで作るLINEミニアプリ開発サービス',
     description:
       'SaaSの速さとフルスクラッチの柔軟性を両立。会員証・予約・クーポンなど10機能から選び、最短3ヶ月で立ち上げます。',
+    images: ['/images/ogp-v2.jpg'],
   },
 }
 

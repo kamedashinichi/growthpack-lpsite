@@ -24,6 +24,7 @@ import {
 import { Button } from '@/components/shared/ui/button';
 import { Section } from '@/components/shared/ui/section';
 import { Card } from '@/components/shared/ui/card';
+import { TrackedExternalLink } from './tracking';
 
 /* ------------------------------------------------------------------ */
 /* DATA                                                                  */
@@ -321,14 +322,14 @@ export default function V2TopPage() {
               {/* CTA — ヒーロー内（1箇所目） */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
                 <Button variant="primary" size="lg" asChild>
-                  <a
+                  <TrackedExternalLink
                     href="https://classmethod.jp/services/line/line-apps/#iframe-form"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    location="top_lp_hero_primary"
+                    destination="contact"
                   >
                     無料で相談する
                     <ArrowRight className="w-5 h-5 ml-2" />
-                  </a>
+                  </TrackedExternalLink>
                 </Button>
                 <Button
                   variant="outline"
@@ -336,13 +337,13 @@ export default function V2TopPage() {
                   asChild
                   className="border-white/60 text-white hover:bg-white/10 hover:border-white"
                 >
-                  <a
+                  <TrackedExternalLink
                     href="https://classmethod.jp/download/line-mini-app/"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    location="top_lp_hero_secondary"
+                    destination="download"
                   >
                     資料をダウンロード
-                  </a>
+                  </TrackedExternalLink>
                 </Button>
               </div>
 
@@ -622,14 +623,14 @@ export default function V2TopPage() {
                 asChild
                 className="bg-white text-[#05A847] hover:bg-white/90 font-bold"
               >
-                <a
+                <TrackedExternalLink
                   href="https://classmethod.jp/services/line/line-apps/#iframe-form"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  location="top_lp_midband"
+                  destination="contact"
                 >
                   無料で相談する
                   <ArrowRight className="w-5 h-5 ml-2" />
-                </a>
+                </TrackedExternalLink>
               </Button>
             </div>
           </div>
@@ -870,14 +871,14 @@ export default function V2TopPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4">
             <Button variant="primary" size="lg" asChild>
-              <a
+              <TrackedExternalLink
                 href="https://classmethod.jp/services/line/line-apps/#iframe-form"
-                target="_blank"
-                rel="noopener noreferrer"
+                location="top_lp_final_primary"
+                destination="contact"
               >
                 無料で相談する
                 <ArrowRight className="w-5 h-5 ml-2" />
-              </a>
+              </TrackedExternalLink>
             </Button>
             <Button
               variant="outline"
@@ -885,13 +886,13 @@ export default function V2TopPage() {
               asChild
               className="border-white/50 text-white hover:bg-white/10 hover:border-white"
             >
-              <a
+              <TrackedExternalLink
                 href="https://classmethod.jp/download/line-mini-app/"
-                target="_blank"
-                rel="noopener noreferrer"
+                location="top_lp_final_secondary"
+                destination="download"
               >
                 資料をダウンロード
-              </a>
+              </TrackedExternalLink>
             </Button>
           </div>
           <div className="text-xs text-white/50 pt-2">
@@ -955,24 +956,24 @@ export default function V2TopPage() {
               <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">CONTACT</div>
               <ul className="space-y-2 text-sm text-white/60">
                 <li>
-                  <a
+                  <TrackedExternalLink
                     href="https://classmethod.jp/services/line/line-apps/#iframe-form"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    location="top_lp_footer_contact"
+                    destination="contact"
                     className="hover:text-white transition-colors"
                   >
                     無料相談はこちら
-                  </a>
+                  </TrackedExternalLink>
                 </li>
                 <li>
-                  <a
+                  <TrackedExternalLink
                     href="https://classmethod.jp/download/line-mini-app/"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    location="top_lp_footer_download"
+                    destination="download"
                     className="hover:text-white transition-colors"
                   >
                     資料ダウンロード
-                  </a>
+                  </TrackedExternalLink>
                 </li>
               </ul>
             </div>
