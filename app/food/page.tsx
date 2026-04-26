@@ -94,12 +94,16 @@ const FEATURES = [
 
 const PROBLEMS = [
   {
-    title: '行列×人手不足：繁忙時間の客離れに手が打てない',
-    body: '混雑のピーク時に行列が伸びるほど客が離れるが、デジタルで解消する手段がない。LINEの順番待ち通知で「並ばなくていい体験」を提供できます。',
+    title: 'ピーク時のレジ混雑と機会損失：行列で帰る顧客が客数と回転率を下げる',
+    body: '混雑のピーク時に行列が伸びるほど客が離れ、客数と回転率が低下する。事前注文・順番待ちLINE通知で「並ばなくていい体験」を実現し、機会損失を防ぎます（モバイルオーダーは追加開発で実現可能）。',
   },
   {
-    title: '紙スタンプの限界：顧客データが蓄積されない',
-    body: '紙スタンプカードは紛失・不正・来店確認不可の三重苦。デジタル化すれば来店履歴・頻度・好みが蓄積され、次の施策に活用できます。',
+    title: '事前注文データが会員データと連携していない：購買傾向がブラックボックス',
+    body: '注文データと会員データが別管理のため、誰が何を買っているかが見えない。LINEを軸に注文・来店・購買を一元管理し、販促施策の精度を高めます。',
+  },
+  {
+    title: 'クーポン・スタンプによるリピート促進が仕組み化されていない：来店後の即フォローができない',
+    body: '来店したその日にLINEで再来店を促す自動シナリオがない。スタンプカード+クーポン自動配信で「また行きたい」サイクルを設計します。',
   },
   {
     title: 'テイクアウト・デリバリー手数料：マージンが圧迫される',
@@ -108,10 +112,6 @@ const PROBLEMS = [
   {
     title: '複数ブランドのLINE乱立：管理コストが膨張する',
     body: 'グループ内の複数ブランドでLINE公式アカウントが乱立し、会員基盤が分断。ハーフスクラッチなら1つのLINE会員基盤でブランドを横断管理できます。',
-  },
-  {
-    title: '幽霊会員・休眠会員：登録後に来店しない顧客を可視化できない',
-    body: '登録だけして来店しない顧客の割合が見えず、育成施策が打てない。セグメント配信で「来店間隔が空いた顧客」だけに特別クーポンを自動配信できます。',
   },
 ];
 
@@ -355,7 +355,7 @@ export default function FoodPage() {
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
                 <Button variant="primary" size="lg" asChild>
-                  <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="hero_primary" destination="contact">
+                  <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/?utm_source=organic&utm_medium=lp&utm_campaign=hypothesis-v1&utm_content=food-110#iframe-form" location="hero_primary" destination="contact">
                     無料で相談する
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </TrackedExternalLink>
@@ -658,7 +658,7 @@ export default function FoodPage() {
                 asChild
                 className="bg-white text-[#05A847] hover:bg-white/90 font-bold"
               >
-                <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="midband" destination="contact">
+                <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/?utm_source=organic&utm_medium=lp&utm_campaign=hypothesis-v1&utm_content=food-110#iframe-form" location="midband" destination="contact">
                   無料で相談する
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </TrackedExternalLink>
@@ -749,7 +749,7 @@ export default function FoodPage() {
           <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">業態・ブランド数・既存POSをお聞きして、最適な構成をご提案します。初回相談は無料です。</p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4">
             <Button variant="primary" size="lg" asChild>
-              <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="final_primary" destination="contact">
+              <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/?utm_source=organic&utm_medium=lp&utm_campaign=hypothesis-v1&utm_content=food-110#iframe-form" location="final_primary" destination="contact">
                 無料で相談する
                 <ArrowRight className="w-5 h-5 ml-2" />
               </TrackedExternalLink>

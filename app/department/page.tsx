@@ -97,24 +97,24 @@ const FEATURES = [
 
 const PROBLEMS = [
   {
+    title: 'インバウンド顧客の購買機会損失：言語バリアで接客できない',
+    body: '訪日外国人が増えても、スタッフが対応できる言語は限られ購買機会を取りこぼしている。LINEミニアプリを入口に多言語での案内・手続き誘導が可能です（多言語UI・言語自動検出は追加開発で実現可能）。',
+  },
+  {
+    title: '免税手続きの煩雑さ：紙・口頭対応でスタッフ負荷と顧客待ち時間が増大する',
+    body: '免税対象の外国人顧客への対応が属人的になり、繁忙期のスタッフ工数と顧客の待ち時間が圧迫されている。デジタル化で手続きをガイドし、スタッフ対応コストを削減できます（免税通知は追加開発で実現可能）。',
+  },
+  {
+    title: '来館後の再来訪率が低い：一見客化してLTVが最大化できない',
+    body: 'インバウンド・観光顧客は「旅行中の一度だけ」になりがち。来館後にLINEで接点を持ち、次回来日時の再来訪やオンライン購買につなげる仕組みが必要です。',
+  },
+  {
     title: '外商の属人化：担当者交代で顧客関係がリセットされる',
     body: '接客履歴・好み・人間関係が個人の頭の中にある。異動・退職で関係がゼロに戻り、上顧客層が離れるリスクが組織に潜んでいます。',
   },
   {
-    title: '催事管理のアナログ残存：招待状・入場・先行販売が紙とExcel',
-    body: '年多数回の催事で誰が来たか残らない。来場データがなければ次の催事案内の精度も上がらず、関係深化のループが回りません。',
-  },
-  {
     title: '売場をまたいだデータ分断：食品・ファッション・レストランでIDが別管理',
     body: '館内を回遊しても顧客が見えない。売場ごとに会員IDが別管理では購買行動の全体像が把握できず、パーソナライズに活かせません。',
-  },
-  {
-    title: '一斉配信からの脱却困難：コストだけ増えて来店頻度は落ちている',
-    body: '全会員に同じDMを送り続けてもROIは下がる一方。来店頻度・購買帯・カテゴリ嗜好で配信を出し分ける仕組みが必要です。',
-  },
-  {
-    title: 'ソーシャルギフト機会の損失：歳暮・中元前の外商ギフト導線がない',
-    body: '上顧客層が知人に贈り物をする機会を組織的に取りこぼしている。デジタルでのギフト受付体験が整備されていません。',
   },
 ];
 
@@ -362,7 +362,7 @@ export default function DepartmentPage() {
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
                 <Button variant="primary" size="lg" asChild>
-                  <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="hero_primary" destination="contact">
+                  <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/?utm_source=organic&utm_medium=lp&utm_campaign=hypothesis-v1&utm_content=department-118#iframe-form" location="hero_primary" destination="contact">
                     無料で相談する
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </TrackedExternalLink>
@@ -669,7 +669,7 @@ export default function DepartmentPage() {
                 asChild
                 className="bg-white text-[#05A847] hover:bg-white/90 font-bold"
               >
-                <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="mid_band" destination="contact">
+                <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/?utm_source=organic&utm_medium=lp&utm_campaign=hypothesis-v1&utm_content=department-118#iframe-form" location="mid_band" destination="contact">
                   無料で相談する
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </TrackedExternalLink>
@@ -771,7 +771,7 @@ export default function DepartmentPage() {
           <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">外商規模・催事頻度・既存CRMをお聞きして最適な構成をご提案します。初回相談は無料です。</p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4">
             <Button variant="primary" size="lg" asChild>
-              <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="final_primary" destination="contact">
+              <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/?utm_source=organic&utm_medium=lp&utm_campaign=hypothesis-v1&utm_content=department-118#iframe-form" location="final_primary" destination="contact">
                 無料で相談する
                 <ArrowRight className="w-5 h-5 ml-2" />
               </TrackedExternalLink>

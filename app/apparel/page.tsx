@@ -88,12 +88,16 @@ const FEATURES = [
 
 const PROBLEMS = [
   {
-    title: '会員証DX：ポイントカードを持ち歩かない',
-    body: 'アプリDLは障壁。LINEミニアプリなら5秒で会員化が完了。インストール不要のため、店頭での会員化率が大幅に向上します。',
+    title: '試着後の購買意欲を逃す：店頭でLINE会員化できず、帰宅後に忘れられる',
+    body: '試着・検討中に「また今度」で帰宅すると購買転換できない。QRコードで即座に友だち追加と会員化を同時完了させ、退店後も接点を維持します。',
   },
   {
-    title: 'アプリ疲れ：DL数も起動率も伸びない',
-    body: 'ネイティブアプリとLINEの併用が主流に。LINEの中に接点を作ることで、アプリ未DLの顧客層にもリーチできます。',
+    title: 'スタッフが接客データを残せない：顧客カルテ未整備でパーソナライズ不可',
+    body: '好み・サイズ・試着履歴がスタッフの記憶にしかない。接客情報をシステムに蓄積することで、次回来店時の精度と担当引き継ぎの質を高めます。',
+  },
+  {
+    title: '季節セール・再入荷の通知が届かない：セグメント配信基盤なし',
+    body: '購買嗜好・来店チャネルに応じた配信ができず、全会員に同じメッセージを送り続けている。ブランド嗜好・購買帯ごとのセグメント配信で売上機会の損失を防ぎます。',
   },
   {
     title: 'OMO課題：店舗とECで顧客が別人扱い',
@@ -102,10 +106,6 @@ const PROBLEMS = [
   {
     title: '休眠会員：6〜7割が年1回未満来店',
     body: '誕生日・離脱直後・季節の自動トリガーで、眠っている会員を起こす仕組みが必要です。',
-  },
-  {
-    title: '接客の属人化：スタッフ異動で顧客が離れる',
-    body: '顧客の好み・サイズ・試着履歴が担当スタッフの記憶に依存。異動・退職で関係が切れ、リピート率が低下します。',
   },
 ];
 
@@ -349,7 +349,7 @@ export default function ApparelPage() {
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
                 <Button variant="primary" size="lg" asChild>
-                  <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="hero_primary" destination="contact">
+                  <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/?utm_source=organic&utm_medium=lp&utm_campaign=hypothesis-v1&utm_content=apparel-153#iframe-form" location="hero_primary" destination="contact">
                     無料で相談する
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </TrackedExternalLink>
@@ -651,7 +651,7 @@ export default function ApparelPage() {
                 asChild
                 className="bg-white text-[#05A847] hover:bg-white/90 font-bold"
               >
-                <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="midband" destination="contact">
+                <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/?utm_source=organic&utm_medium=lp&utm_campaign=hypothesis-v1&utm_content=apparel-153#iframe-form" location="midband" destination="contact">
                   無料で相談する
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </TrackedExternalLink>
@@ -780,7 +780,7 @@ export default function ApparelPage() {
           <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">ブランド数・会員システム・EC構成をお聞きして、最適な構成をご提案します。初回相談は無料です。</p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4">
             <Button variant="primary" size="lg" asChild>
-              <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="final_primary" destination="contact">
+              <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/?utm_source=organic&utm_medium=lp&utm_campaign=hypothesis-v1&utm_content=apparel-153#iframe-form" location="final_primary" destination="contact">
                 無料で相談する
                 <ArrowRight className="w-5 h-5 ml-2" />
               </TrackedExternalLink>
