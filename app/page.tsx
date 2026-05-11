@@ -620,30 +620,17 @@ export default function V2TopPage() {
             ].map((item) => (
               <div
                 key={item.name}
-                className="flex-none w-[240px] sm:w-[260px] snap-start"
+                className="flex-none w-[200px] sm:w-[220px] snap-start"
               >
-                {/* iPhone風スマホフレーム */}
-                <div className="bg-[#1a1a1a] rounded-[28px] p-[6px] shadow-[0_16px_48px_rgba(0,0,0,0.5)] border border-white/10 mx-auto w-fit">
-                  <div className="bg-white rounded-[22px] overflow-hidden w-[228px] sm:w-[248px]">
-                    {/* スマホ上部バー（ノッチ風） */}
-                    <div className="h-6 bg-[#1a1a1a] flex items-center justify-center">
-                      <div className="w-16 h-1.5 rounded-full bg-[#333]" />
-                    </div>
-                    {/* 機能画像エリア — 縦長スクショ（750×1622）をtop基準で表示 */}
-                    <div className="relative w-full h-[320px] overflow-hidden">
-                      <Image
-                        src={item.image}
-                        alt={item.name}
-                        fill
-                        className="object-cover object-top"
-                        sizes="248px"
-                      />
-                    </div>
-                    {/* ホームバー風 */}
-                    <div className="h-5 bg-white flex items-center justify-center">
-                      <div className="w-20 h-1 rounded-full bg-[#D1D5DB]" />
-                    </div>
-                  </div>
+                {/* スクショ画像（画像自体に枠が含まれているので装飾なし） */}
+                <div className="relative w-full aspect-[750/1622] mx-auto drop-shadow-[0_16px_32px_rgba(0,0,0,0.5)]">
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 640px) 200px, 220px"
+                  />
                 </div>
 
                 {/* フレーム下のキャプション */}
