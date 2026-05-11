@@ -73,59 +73,66 @@ const FEATURES = [
     image: '/images/会員証.png',
     name: 'デジタル会員証',
     tagline: '一般顧客の会員接点をLINEに集約。アプリDL不要で5秒会員化、館内共通IDとして機能します。',
-    phase: 'Step 1',
+    phase: '顧客接点の創出',
     id: 'membership',
     layer: '一般向け',
+    url: '/memberscard',
   },
   {
     image: '/images/セグメント配信.png',
     name: 'セグメント配信',
     tagline: '来店頻度・購買帯・売場嗜好で動的にメッセージを出し分け。一斉配信からの脱却を支援します。',
-    phase: 'Step 1',
+    phase: '顧客接点の創出',
     id: 'segment-delivery',
     layer: '一般向け',
+    url: '/segment',
   },
   {
     image: '/images/クーポン.png',
     name: 'クーポン配信',
     tagline: '催事前後・誕生日・長期未来店タイミングに自動配信。休眠会員の掘り起こしと来店促進に。',
-    phase: 'Step 1',
+    phase: '顧客接点の創出',
     id: 'coupon',
     layer: '一般向け',
+    url: '/coupon',
   },
   // Phase 2
   {
     image: '/images/チケット.png',
     name: 'チケット・パス管理',
     tagline: '催事・招待会・先行販売のチケット発行と入場管理をLINE上で完結します。紙・Excelからの脱却。',
-    phase: 'Step 2',
+    phase: 'エンゲージメント強化',
     id: 'ticket',
     layer: '催事向け',
+    url: '/ticket',
   },
   {
     image: '/images/予約.png',
     name: '予約',
     tagline: 'レストラン・サービスカウンター・外商個別商談の予約受付をLINEで一元管理します。',
-    phase: 'Step 2',
+    phase: 'エンゲージメント強化',
     id: 'reservation',
     layer: '一般向け',
+    url: '/reservation',
   },
   // Phase 3
   {
     image: '/images/1to1.png',
     name: '1to1コミュニケーション',
     tagline: '外商顧客との接触履歴・嗜好を蓄積し、担当者が変わっても同品質の接客を引き継ぎます。',
-    phase: 'Step 3',
+    phase: '関係性の深化',
     id: 'one-to-one',
     layer: '外商向け',
+    url: '/1to1',
   },
   {
     image: '/images/ギフト.png',
     name: 'ギフト',
     tagline: '歳暮・中元など季節ギフトをLINE上で受付。外商顧客のソーシャルギフト機会を組織的に取りこぼさない設計。',
-    phase: 'Step 3',
+    phase: '関係性の深化',
     id: 'gift',
     layer: '外商向け',
+    url: '/gift',
   },
 ];
 
@@ -893,9 +900,9 @@ export default function DepartmentPage() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {FEATURES.map((f) => {
             const phaseColor =
-              f.phase === 'Step 1'
+              f.phase === '顧客接点の創出'
                 ? 'bg-[#E8F8F0] text-[#05A847]'
-                : f.phase === 'Step 2'
+                : f.phase === 'エンゲージメント強化'
                 ? 'bg-[#FEF3C7] text-[#B45309]'
                 : 'bg-[#EDE9FE] text-[#6D28D9]';
             const layerColor =
@@ -905,25 +912,32 @@ export default function DepartmentPage() {
                 ? 'bg-[#EDE9FE] text-[#6D28D9]'
                 : 'bg-[#E8F8F0] text-[#05A847]';
             return (
-              <Card key={f.id} padding="md">
-                <div className="flex items-start gap-4 mb-3">
-                  <div className="shrink-0 relative w-11 h-11">
-                    <Image src={f.image} alt={f.name} fill className="object-contain" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{f.name}</h3>
-                    <div className="flex items-center gap-2 mt-1 flex-wrap">
-                      <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full ${phaseColor}`}>
-                        {f.phase}
-                      </span>
-                      <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full ${layerColor}`}>
-                        {f.layer}
-                      </span>
+              <Link key={f.id} href={f.url} target="_blank" rel="noopener noreferrer" className="block hover:shadow-lg transition-shadow rounded-xl">
+                <Card padding="md">
+                  <div className="flex items-start gap-4 mb-3">
+                    <div className="shrink-0 relative w-11 h-11">
+                      <Image src={f.image} alt={f.name} fill className="object-contain" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{f.name}</h3>
+                      <div className="flex items-center gap-2 mt-1 flex-wrap">
+                        <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full ${phaseColor}`}>
+                          {f.phase}
+                        </span>
+                        <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full ${layerColor}`}>
+                          {f.layer}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <p className="text-sm text-[#4B5563] leading-relaxed">{f.tagline}</p>
-              </Card>
+                  <p className="text-sm text-[#4B5563] leading-relaxed">{f.tagline}</p>
+                  <div className="mt-2 text-right">
+                    <span className="text-xs font-semibold text-[#06C755]">
+                      詳細を見る（別タブで開く） →
+                    </span>
+                  </div>
+                </Card>
+              </Link>
             );
           })}
         </div>

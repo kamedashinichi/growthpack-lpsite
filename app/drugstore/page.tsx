@@ -80,45 +80,51 @@ const FEATURES = [
     image: '/images/会員証.png',
     name: 'デジタル会員証',
     tagline: 'レジ前5秒でLINE会員化。ポイントカード携帯率の低下を一気に解消します。',
-    phase: 'Step 1',
+    phase: '顧客接点の創出',
     id: 'membership',
+    url: '/memberscard',
   },
   // Phase 2
   {
     image: '/images/スタンプカード.png',
     name: 'スタンプカード',
     tagline: '紙カード不要のデジタル台紙で、再来店を設計する。',
-    phase: 'Step 2',
+    phase: 'エンゲージメント強化',
     id: 'stamp-card',
+    url: '/stampcard',
   },
   {
     image: '/images/クーポン.png',
     name: 'クーポン配信',
     tagline: '調剤完了後の待ち時間に配信。滞在中の購買機会を収益に変えます。',
-    phase: 'Step 2',
+    phase: 'エンゲージメント強化',
     id: 'coupon',
+    url: '/coupon',
   },
   {
     image: '/images/1to1.png',
     name: '1to1コミュニケーション',
     tagline: '調剤完了通知・受付案内を個別に届け、待ち時間ストレスを低減します。',
-    phase: 'Step 2',
+    phase: 'エンゲージメント強化',
     id: 'one-to-one',
+    url: '/1to1',
   },
   // Phase 3
   {
     image: '/images/セグメント配信.png',
     name: 'セグメント配信',
     tagline: 'POSデータ×購買属性で配信を出し分け。一斉配信によるブロック率を抑制します。',
-    phase: 'Step 3',
+    phase: '関係性の深化',
     id: 'segment-delivery',
+    url: '/segment',
   },
   {
     image: '/images/ギフト.png',
     name: 'ギフト',
     tagline: 'ロイヤル顧客からの紹介で、広告費ゼロの新規会員獲得へ。',
-    phase: 'Step 3',
+    phase: '関係性の深化',
     id: 'gift',
+    url: '/gift',
   },
 ];
 
@@ -869,26 +875,33 @@ export default function DrugstorePage() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {FEATURES.map((f) => {
             const phaseColor =
-              f.phase === 'Step 1'
+              f.phase === '顧客接点の創出'
                 ? 'bg-[#E8F8F0] text-[#05A847]'
-                : f.phase === 'Step 2'
+                : f.phase === 'エンゲージメント強化'
                 ? 'bg-[#FEF3C7] text-[#B45309]'
                 : 'bg-[#EDE9FE] text-[#6D28D9]';
             return (
-              <Card key={f.id} padding="md">
-                <div className="flex items-start gap-4 mb-3">
-                  <div className="shrink-0 relative w-11 h-11">
-                    <Image src={f.image} alt={f.name} fill className="object-contain" />
+              <Link key={f.id} href={f.url} target="_blank" rel="noopener noreferrer" className="block hover:shadow-lg transition-shadow rounded-xl">
+                <Card padding="md">
+                  <div className="flex items-start gap-4 mb-3">
+                    <div className="shrink-0 relative w-11 h-11">
+                      <Image src={f.image} alt={f.name} fill className="object-contain" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{f.name}</h3>
+                      <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full mt-1 ${phaseColor}`}>
+                        {f.phase}
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{f.name}</h3>
-                    <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full mt-1 ${phaseColor}`}>
-                      {f.phase}
+                  <p className="text-sm text-[#4B5563] leading-relaxed">{f.tagline}</p>
+                  <div className="mt-2 text-right">
+                    <span className="text-xs font-semibold text-[#06C755]">
+                      詳細を見る（別タブで開く） →
                     </span>
                   </div>
-                </div>
-                <p className="text-sm text-[#4B5563] leading-relaxed">{f.tagline}</p>
-              </Card>
+                </Card>
+              </Link>
             );
           })}
         </div>
