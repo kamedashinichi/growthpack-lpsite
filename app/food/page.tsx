@@ -79,6 +79,7 @@ const FEATURES = [
     tagline: 'アプリDL不要、5秒で会員化。マルチブランドを1つのIDで統合。',
     phase: 'Step 1',
     id: 'membership',
+    url: '/memberscard',
   },
   {
     image: '/images/順番待ち.png',
@@ -86,6 +87,7 @@ const FEATURES = [
     tagline: '行列をLINE通知に変換。「並ばなくていい体験」でロイヤルティ向上。',
     phase: 'Step 1',
     id: 'queue',
+    url: '/queue',
   },
   // Phase 2
   {
@@ -94,6 +96,7 @@ const FEATURES = [
     tagline: '紙カード紛失ゼロ。来店データが蓄積され再来店サイクルを設計できる。',
     phase: 'Step 2',
     id: 'stamp-card',
+    url: '/stampcard',
   },
   {
     image: '/images/クーポン.png',
@@ -101,6 +104,7 @@ const FEATURES = [
     tagline: '来店頻度と購買履歴に応じた配信。テイクアウト誘導にも活用。',
     phase: 'Step 2',
     id: 'coupon',
+    url: '/coupon',
   },
   {
     image: '/images/予約.png',
@@ -108,6 +112,7 @@ const FEATURES = [
     tagline: '電話不要のLINE予約で機会損失を防止。ピーク時の着席率を改善。',
     phase: 'Step 2',
     id: 'reservation',
+    url: '/reservation',
   },
   // Phase 3
   {
@@ -116,6 +121,7 @@ const FEATURES = [
     tagline: '来店間隔・業態・注文パターンで配信を出し分け。休眠会員の掘り起こしに。',
     phase: 'Step 3',
     id: 'segment-delivery',
+    url: '/segment',
   },
   {
     image: '/images/1to1.png',
@@ -123,6 +129,7 @@ const FEATURES = [
     tagline: 'マルチブランドのCRM基盤として、複数業態にまたがる顧客データを一元管理。',
     phase: 'Step 3',
     id: 'one-to-one',
+    url: '/1to1',
   },
 ];
 
@@ -847,21 +854,34 @@ export default function FoodPage() {
                 : f.phase === 'Step 2'
                 ? 'bg-[#FEF3C7] text-[#B45309]'
                 : 'bg-[#EDE9FE] text-[#6D28D9]';
+            const phaseLabel =
+              f.phase === 'Step 1'
+                ? '顧客接点の創出'
+                : f.phase === 'Step 2'
+                ? 'エンゲージメント強化'
+                : '関係性の深化';
             return (
-              <Card key={f.id} padding="md">
-                <div className="flex items-start gap-4 mb-3">
-                  <div className="shrink-0 relative w-11 h-11">
-                    <Image src={f.image} alt={f.name} fill className="object-contain" />
+              <Link key={f.id} href={f.url} target="_blank" rel="noopener noreferrer" className="block hover:shadow-lg transition-shadow rounded-xl">
+                <Card padding="md">
+                  <div className="flex items-start gap-4 mb-3">
+                    <div className="shrink-0 relative w-11 h-11">
+                      <Image src={f.image} alt={f.name} fill className="object-contain" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{f.name}</h3>
+                      <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full mt-1 ${phaseColor}`}>
+                        {phaseLabel}
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{f.name}</h3>
-                    <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full mt-1 ${phaseColor}`}>
-                      {f.phase}
+                  <p className="text-sm text-[#4B5563] leading-relaxed">{f.tagline}</p>
+                  <div className="mt-2 text-right">
+                    <span className="text-xs font-semibold text-[#06C755]">
+                      詳細を見る（別タブで開く） →
                     </span>
                   </div>
-                </div>
-                <p className="text-sm text-[#4B5563] leading-relaxed">{f.tagline}</p>
-              </Card>
+                </Card>
+              </Link>
             );
           })}
         </div>

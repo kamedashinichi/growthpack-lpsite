@@ -80,6 +80,7 @@ const FEATURES = [
     tagline: 'EC会員IDとLINE IDを統合。アプリDL不要、友だち追加の延長線で会員化。',
     phase: 'Step 1',
     id: 'id-linkage',
+    url: '/memberscard',
   },
   // Phase 2
   {
@@ -88,6 +89,7 @@ const FEATURES = [
     tagline: '購買回数・カテゴリ・最終購入日・閲覧履歴で動的にセグメントを切り、精度の高い配信を実現。',
     phase: 'Step 2',
     id: 'segment-delivery',
+    url: '/segment',
   },
   {
     image: '/images/クーポン.png',
@@ -95,6 +97,7 @@ const FEATURES = [
     tagline: 'カゴ落ち回収・休眠掘り起こし・購買周期リマインドの3用途で活用。',
     phase: 'Step 2',
     id: 'coupon',
+    url: '/coupon',
   },
   {
     image: '/images/1to1.png',
@@ -102,6 +105,7 @@ const FEATURES = [
     tagline: '再入荷通知・購買周期リマインドを自動配信。個別接点でLTVを最大化。',
     phase: 'Step 2',
     id: 'one-to-one',
+    url: '/1to1',
   },
   // Phase 3
   {
@@ -110,6 +114,7 @@ const FEATURES = [
     tagline: '受取人の即時会員化・住所不要・CAC≒0の新規獲得モデル。ロイヤル顧客が自社の営業マンになる。',
     phase: 'Step 3',
     id: 'social-gift',
+    url: '/gift',
   },
 ];
 
@@ -870,21 +875,34 @@ export default function EcPage() {
                 : f.phase === 'Step 2'
                 ? 'bg-[#FEF3C7] text-[#B45309]'
                 : 'bg-[#EDE9FE] text-[#6D28D9]';
+            const phaseLabel =
+              f.phase === 'Step 1'
+                ? '顧客接点の創出'
+                : f.phase === 'Step 2'
+                ? 'エンゲージメント強化'
+                : '関係性の深化';
             return (
-              <Card key={f.id} padding="md">
-                <div className="flex items-start gap-4 mb-3">
-                  <div className="shrink-0 relative w-11 h-11">
-                    <Image src={f.image} alt={f.name} fill className="object-contain" />
+              <Link key={f.id} href={f.url} target="_blank" rel="noopener noreferrer" className="block hover:shadow-lg transition-shadow rounded-xl">
+                <Card padding="md">
+                  <div className="flex items-start gap-4 mb-3">
+                    <div className="shrink-0 relative w-11 h-11">
+                      <Image src={f.image} alt={f.name} fill className="object-contain" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{f.name}</h3>
+                      <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full mt-1 ${phaseColor}`}>
+                        {phaseLabel}
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{f.name}</h3>
-                    <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full mt-1 ${phaseColor}`}>
-                      {f.phase}
+                  <p className="text-sm text-[#4B5563] leading-relaxed">{f.tagline}</p>
+                  <div className="mt-2 text-right">
+                    <span className="text-xs font-semibold text-[#06C755]">
+                      詳細を見る（別タブで開く） →
                     </span>
                   </div>
-                </div>
-                <p className="text-sm text-[#4B5563] leading-relaxed">{f.tagline}</p>
-              </Card>
+                </Card>
+              </Link>
             );
           })}
         </div>

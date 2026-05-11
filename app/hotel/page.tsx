@@ -79,6 +79,7 @@ const FEATURES = [
     tagline: 'LINE上で宿泊予約を受け、OTA経由を直予約に巻き取る。予約完了後の会員登録も自動化します。',
     phase: 'Step 1',
     id: 'reservation',
+    url: '/reservation',
   },
   {
     image: '/images/会員証.png',
@@ -86,6 +87,7 @@ const FEATURES = [
     tagline: '友だち追加と同時に会員化。アプリDL不要、5秒で会員登録。再来訪時の本人特定も容易に。',
     phase: 'Step 1',
     id: 'membership',
+    url: '/memberscard',
   },
   // Phase 2
   {
@@ -94,6 +96,7 @@ const FEATURES = [
     tagline: '館内レストラン・スパ・売店・次回宿泊のクーポンをLINEで配信。チェックイン後の消費を引き上げます。',
     phase: 'Step 2',
     id: 'coupon',
+    url: '/coupon',
   },
   {
     image: '/images/1to1.png',
@@ -101,6 +104,7 @@ const FEATURES = [
     tagline: 'コンシェルジュ的な個別応対をLINEに集約。要望・アレルギー・好みを蓄積して次回滞在へ引き継ぎます。',
     phase: 'Step 2',
     id: 'one-to-one',
+    url: '/1to1',
   },
   // Phase 3
   {
@@ -109,6 +113,7 @@ const FEATURES = [
     tagline: '宿泊履歴・季節・プランタイプで配信を出し分け。半年未来訪ゲストの呼び戻しに。PMS連携なしでもCSV取込で対応可能です。',
     phase: 'Step 3',
     id: 'segment-delivery',
+    url: '/segment',
   },
   {
     image: '/images/ギフト.png',
@@ -116,6 +121,7 @@ const FEATURES = [
     tagline: 'ロイヤル顧客経由の紹介・贈答利用を促進。広告費をかけない新規獲得の仕組みを作ります。',
     phase: 'Step 3',
     id: 'gift',
+    url: '/gift',
   },
 ];
 
@@ -877,21 +883,34 @@ export default function HotelPage() {
                 : f.phase === 'Step 2'
                 ? 'bg-[#FEF3C7] text-[#B45309]'
                 : 'bg-[#EDE9FE] text-[#6D28D9]';
+            const phaseLabel =
+              f.phase === 'Step 1'
+                ? '顧客接点の創出'
+                : f.phase === 'Step 2'
+                ? 'エンゲージメント強化'
+                : '関係性の深化';
             return (
-              <Card key={f.id} padding="md">
-                <div className="flex items-start gap-4 mb-3">
-                  <div className="shrink-0 relative w-11 h-11">
-                    <Image src={f.image} alt={f.name} fill className="object-contain" />
+              <Link key={f.id} href={f.url} target="_blank" rel="noopener noreferrer" className="block hover:shadow-lg transition-shadow rounded-xl">
+                <Card padding="md">
+                  <div className="flex items-start gap-4 mb-3">
+                    <div className="shrink-0 relative w-11 h-11">
+                      <Image src={f.image} alt={f.name} fill className="object-contain" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{f.name}</h3>
+                      <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full mt-1 ${phaseColor}`}>
+                        {phaseLabel}
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{f.name}</h3>
-                    <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full mt-1 ${phaseColor}`}>
-                      {f.phase}
+                  <p className="text-sm text-[#4B5563] leading-relaxed">{f.tagline}</p>
+                  <div className="mt-2 text-right">
+                    <span className="text-xs font-semibold text-[#06C755]">
+                      詳細を見る（別タブで開く） →
                     </span>
                   </div>
-                </div>
-                <p className="text-sm text-[#4B5563] leading-relaxed">{f.tagline}</p>
-              </Card>
+                </Card>
+              </Link>
             );
           })}
         </div>
