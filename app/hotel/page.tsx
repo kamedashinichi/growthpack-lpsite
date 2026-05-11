@@ -399,9 +399,14 @@ export default function HotelPage() {
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-[#E5E7EB]">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 h-16 md:h-20 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-[#06C755] flex items-center justify-center text-white font-bold text-sm">
-              G
-            </div>
+            <Image
+              src="/logo_classmethod_black.png"
+              alt="クラスメソッド"
+              width={120}
+              height={38}
+              className="h-[30px] md:h-[34px] w-auto object-contain"
+              priority
+            />
             <div className="flex items-center gap-1">
               <span className="text-base md:text-lg font-bold text-[#1F2937]">グロースパック</span>
               <span className="text-sm md:text-base text-[#6B7280]"> for </span>
@@ -906,7 +911,7 @@ export default function HotelPage() {
                   <p className="text-sm text-[#4B5563] leading-relaxed">{f.tagline}</p>
                   <div className="mt-2 text-right">
                     <span className="text-xs font-semibold text-[#06C755]">
-                      詳細を見る（別タブで開く） →
+                      詳細を見る →
                     </span>
                   </div>
                 </Card>

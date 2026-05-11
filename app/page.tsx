@@ -899,7 +899,7 @@ export default function V2TopPage() {
                   )}
                   <div className="mt-2 text-right">
                     <span className="text-xs font-semibold text-[#06C755]">
-                      詳細を見る（別タブで開く） →
+                      詳細を見る →
                     </span>
                   </div>
                 </Card>
