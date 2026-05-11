@@ -863,7 +863,7 @@ export default function V2TopPage() {
                 : 'bg-[#EDE9FE] text-[#6D28D9]';
             const pricing = getPricingEntry(f.url.slice(1) as FeatureKey);
             return (
-              <Link key={f.id} href={f.url} className="block hover:shadow-lg transition-shadow rounded-xl">
+              <Link key={f.id} href={f.url} target="_blank" rel="noopener noreferrer" className="block hover:shadow-lg transition-shadow rounded-xl">
                 <Card padding="md">
                   <div className="flex items-start gap-4 mb-3">
                     <div className="shrink-0 relative w-11 h-11">
@@ -899,7 +899,7 @@ export default function V2TopPage() {
                   )}
                   <div className="mt-2 text-right">
                     <span className="text-xs font-semibold text-[#06C755]">
-                      詳細を見る →
+                      詳細を見る（別タブで開く） →
                     </span>
                   </div>
                 </Card>
