@@ -77,6 +77,7 @@ const FEATURES = [
     tagline: 'QRコード対応のデジタル会員証。アプリDL不要でライト層を即座にデータ化できます。',
     phase: 'Step 1',
     id: 'membership',
+    url: '/memberscard',
   },
   {
     image: '/images/チケット.png',
@@ -84,6 +85,7 @@ const FEATURES = [
     tagline: 'チケット先行販売・試合当日パスをLINEで完結。ライト層の来場ハードルを下げます。',
     phase: 'Step 1',
     id: 'ticket',
+    url: '/ticket',
   },
   // Phase 2
   {
@@ -92,6 +94,7 @@ const FEATURES = [
     tagline: '限定グッズ・先行チケットの公平な電子抽選。手作業の属人化を解消します。',
     phase: 'Step 2',
     id: 'lottery',
+    url: '/lottery',
   },
   {
     image: '/images/スタンプカード.png',
@@ -99,6 +102,7 @@ const FEATURES = [
     tagline: '来場スタンプで次の来場動機を設計。試合・公演日以外の接点を作ります。',
     phase: 'Step 2',
     id: 'stamp-card',
+    url: '/stampcard',
   },
   {
     image: '/images/クーポン.png',
@@ -106,6 +110,7 @@ const FEATURES = [
     tagline: '来場頻度・会員ランク別の特典配信。ライト層とコアファンで施策を出し分けます。',
     phase: 'Step 2',
     id: 'coupon',
+    url: '/coupon',
   },
   // Phase 3
   {
@@ -114,6 +119,7 @@ const FEATURES = [
     tagline: '払っているが来ない会員（幽霊会員）を再活性化するセグメント別メッセージ配信。',
     phase: 'Step 3',
     id: 'segment-delivery',
+    url: '/segment',
   },
 ];
 
@@ -875,21 +881,34 @@ export default function SportsPage() {
                 : f.phase === 'Step 2'
                 ? 'bg-[#FEF3C7] text-[#B45309]'
                 : 'bg-[#EDE9FE] text-[#6D28D9]';
+            const phaseLabel =
+              f.phase === 'Step 1'
+                ? '顧客接点の創出'
+                : f.phase === 'Step 2'
+                ? 'エンゲージメント強化'
+                : '関係性の深化';
             return (
-              <Card key={f.id} padding="md">
-                <div className="flex items-start gap-4 mb-3">
-                  <div className="shrink-0 relative w-11 h-11">
-                    <Image src={f.image} alt={f.name} fill className="object-contain" />
+              <Link key={f.id} href={f.url} target="_blank" rel="noopener noreferrer" className="block hover:shadow-lg transition-shadow rounded-xl">
+                <Card padding="md">
+                  <div className="flex items-start gap-4 mb-3">
+                    <div className="shrink-0 relative w-11 h-11">
+                      <Image src={f.image} alt={f.name} fill className="object-contain" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{f.name}</h3>
+                      <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full mt-1 ${phaseColor}`}>
+                        {phaseLabel}
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{f.name}</h3>
-                    <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full mt-1 ${phaseColor}`}>
-                      {f.phase}
+                  <p className="text-sm text-[#4B5563] leading-relaxed">{f.tagline}</p>
+                  <div className="mt-2 text-right">
+                    <span className="text-xs font-semibold text-[#06C755]">
+                      詳細を見る（別タブで開く） →
                     </span>
                   </div>
-                </div>
-                <p className="text-sm text-[#4B5563] leading-relaxed">{f.tagline}</p>
-              </Card>
+                </Card>
+              </Link>
             );
           })}
         </div>

@@ -83,6 +83,7 @@ const FEATURES = [
     tagline: 'レジQRで5秒会員化。シニアでも使いやすいLINEで来店客全員をデジタル会員に。カード忘れによるポイント未付与をゼロにする。',
     phase: 'Step 1',
     id: 'membership',
+    url: '/memberscard',
   },
   {
     image: '/images/スタンプカード.png',
@@ -90,6 +91,7 @@ const FEATURES = [
     tagline: '来店・購買でスタンプ付与。紛失・不正利用のない完全デジタル管理で来店頻度向上と週次来店習慣の形成に直結する。',
     phase: 'Step 1',
     id: 'stamp-card',
+    url: '/stampcard',
   },
   // Phase 2
   {
@@ -98,6 +100,7 @@ const FEATURES = [
     tagline: '折込チラシの代替として、LINEでターゲット配信。来店頻度・購買カテゴリに応じた配信で配信コストを抑えながら効果を最大化する。',
     phase: 'Step 2',
     id: 'coupon',
+    url: '/coupon',
   },
   {
     image: '/images/セグメント配信.png',
@@ -105,6 +108,7 @@ const FEATURES = [
     tagline: '週1来店層・月1来店層・休眠層に分けて最適な内容を配信。購買カテゴリ別に生鮮・日用品・園芸で訴求を出し分けられる。',
     phase: 'Step 2',
     id: 'segment-delivery',
+    url: '/segment',
   },
   {
     image: '/images/抽選.png',
@@ -112,6 +116,7 @@ const FEATURES = [
     tagline: '来店・購買金額を条件に抽選イベントを設定。チラシ掲載の抽選企画をデジタルに移行し、集客効果を計測できる形にする。',
     phase: 'Step 2',
     id: 'lottery',
+    url: '/lottery',
   },
   // Phase 3
   {
@@ -120,6 +125,7 @@ const FEATURES = [
     tagline: 'ロイヤル会員経由の紹介で新規会員獲得。広告費をかけずに既存会員の口コミを活性化する。',
     phase: 'Step 3',
     id: 'gift',
+    url: '/gift',
   },
 ];
 
@@ -900,21 +906,34 @@ export default function SupermarketPage() {
                 : f.phase === 'Step 2'
                 ? 'bg-[#FEF3C7] text-[#B45309]'
                 : 'bg-[#EDE9FE] text-[#6D28D9]';
+            const phaseLabel =
+              f.phase === 'Step 1'
+                ? '顧客接点の創出'
+                : f.phase === 'Step 2'
+                ? 'エンゲージメント強化'
+                : '関係性の深化';
             return (
-              <Card key={f.id} padding="md">
-                <div className="flex items-start gap-4 mb-3">
-                  <div className="shrink-0 relative w-11 h-11">
-                    <Image src={f.image} alt={f.name} fill className="object-contain" />
+              <Link key={f.id} href={f.url} target="_blank" rel="noopener noreferrer" className="block hover:shadow-lg transition-shadow rounded-xl">
+                <Card padding="md">
+                  <div className="flex items-start gap-4 mb-3">
+                    <div className="shrink-0 relative w-11 h-11">
+                      <Image src={f.image} alt={f.name} fill className="object-contain" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{f.name}</h3>
+                      <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full mt-1 ${phaseColor}`}>
+                        {phaseLabel}
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{f.name}</h3>
-                    <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full mt-1 ${phaseColor}`}>
-                      {f.phase}
+                  <p className="text-sm text-[#4B5563] leading-relaxed">{f.tagline}</p>
+                  <div className="mt-2 text-right">
+                    <span className="text-xs font-semibold text-[#06C755]">
+                      詳細を見る（別タブで開く） →
                     </span>
                   </div>
-                </div>
-                <p className="text-sm text-[#4B5563] leading-relaxed">{f.tagline}</p>
-              </Card>
+                </Card>
+              </Link>
             );
           })}
         </div>
