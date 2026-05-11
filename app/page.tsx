@@ -552,7 +552,7 @@ export default function V2TopPage() {
               PRODUCT PREVIEW
             </p>
             <p className="text-white/70 text-sm">
-              LINEミニアプリで実際に作れる画面
+              LINEミニアプリで実際に作れる主要8機能の画面
             </p>
           </div>
 
@@ -562,70 +562,56 @@ export default function V2TopPage() {
           >
             {[
               {
-                image: '/images/会員証.png',
+                image: '/images/member.png',
                 name: 'デジタル会員証',
                 desc: '来店ごとに育つ会員体験',
                 stepLabel: '顧客接点の創出',
                 color: '#06C755',
               },
               {
-                image: '/images/順番待ち.png',
+                image: '/images/queue.png',
                 name: '順番待ち',
                 desc: '待ち時間を会員化のチャンスへ',
                 stepLabel: '顧客接点の創出',
                 color: '#06C755',
               },
               {
-                image: '/images/予約.png',
+                image: '/images/reservation.png',
                 name: '予約',
                 desc: 'LINE完結で来店体験を設計',
                 stepLabel: '顧客接点の創出',
                 color: '#06C755',
               },
               {
-                image: '/images/スタンプカード.png',
+                image: '/images/stamp.png',
                 name: 'スタンプカード',
                 desc: '紛失ゼロのデジタルスタンプ',
                 stepLabel: 'エンゲージメント強化',
                 color: '#F59E0B',
               },
               {
-                image: '/images/クーポン.png',
+                image: '/images/coupon.png',
                 name: 'クーポン配信',
                 desc: '属性連動のパーソナル配信',
                 stepLabel: 'エンゲージメント強化',
                 color: '#F59E0B',
               },
               {
-                image: '/images/チケット.png',
+                image: '/images/ticket.png',
                 name: 'チケット・パス',
                 desc: 'LINEで入場管理まで完結',
                 stepLabel: 'エンゲージメント強化',
                 color: '#F59E0B',
               },
               {
-                image: '/images/抽選.png',
+                image: '/images/lottery.png',
                 name: '抽選',
                 desc: '当選体験でエンゲージメントを加速',
                 stepLabel: 'エンゲージメント強化',
                 color: '#F59E0B',
               },
               {
-                image: '/images/セグメント配信.png',
-                name: 'セグメント配信',
-                desc: '購買履歴に連動した動的配信',
-                stepLabel: '関係性の深化',
-                color: '#8B5CF6',
-              },
-              {
-                image: '/images/1to1.png',
-                name: '1to1コミュニケーション',
-                desc: 'オペレーター対応をLINEに統合',
-                stepLabel: '関係性の深化',
-                color: '#8B5CF6',
-              },
-              {
-                image: '/images/ギフト.png',
+                image: '/images/gift.png',
                 name: 'ギフト',
                 desc: '顧客が顧客を呼ぶ循環を作る',
                 stepLabel: '関係性の深化',
@@ -643,28 +629,15 @@ export default function V2TopPage() {
                     <div className="h-6 bg-[#1a1a1a] flex items-center justify-center">
                       <div className="w-16 h-1.5 rounded-full bg-[#333]" />
                     </div>
-                    {/* LINEミニアプリ風ヘッダー */}
-                    <div className="h-9 bg-[#06C755] flex items-center px-3 gap-2">
-                      <div className="w-5 h-5 rounded-md bg-white/20 flex items-center justify-center text-white font-bold text-[9px]">
-                        G
-                      </div>
-                      <span className="text-white text-[11px] font-bold">グロースパック</span>
-                    </div>
-                    {/* 機能画像エリア */}
-                    <div className="bg-[#F8F9FA] flex items-center justify-center p-4 h-[180px]">
-                      <div className="relative w-full h-full">
-                        <Image
-                          src={item.image}
-                          alt={item.name}
-                          fill
-                          className="object-contain"
-                          sizes="248px"
-                        />
-                      </div>
-                    </div>
-                    {/* 機能名バー */}
-                    <div className="px-3 py-2.5 bg-white border-t border-[#E5E7EB]">
-                      <div className="text-[11px] font-bold text-[#1F2937]">{item.name}</div>
+                    {/* 機能画像エリア — 縦長スクショ（750×1622）をtop基準で表示 */}
+                    <div className="relative w-full h-[320px] overflow-hidden">
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        fill
+                        className="object-cover object-top"
+                        sizes="248px"
+                      />
                     </div>
                     {/* ホームバー風 */}
                     <div className="h-5 bg-white flex items-center justify-center">
@@ -692,7 +665,7 @@ export default function V2TopPage() {
 
           {/* スクロールヒント — スマホのみ表示 */}
           <p className="text-center text-white/30 text-[10px] mt-2 sm:hidden">
-            横にスワイプして全10機能を確認できます
+            横にスワイプして8つの画面を確認できます
           </p>
         </div>
       </div>
