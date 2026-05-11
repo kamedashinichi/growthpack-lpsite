@@ -588,13 +588,12 @@ export default function ApparelPage() {
                 ].map((card) => (
                   <div
                     key={card.label}
-                    className="absolute bg-white/95 backdrop-blur rounded-xl border border-white/30 shadow-[0_8px_24px_rgba(0,0,0,0.3)] p-3 w-[110px] flex flex-col items-center gap-1 animate-fade-in"
+                    className="absolute bg-white/95 backdrop-blur rounded-xl border border-white/30 shadow-[0_8px_24px_rgba(0,0,0,0.3)] p-3 w-[110px] flex flex-col items-center gap-1"
                     style={{
                       top: card.top,
                       bottom: card.bottom,
                       left: card.left,
                       right: card.right,
-                      animationDelay: card.delay,
                     }}
                   >
                     <div className="relative w-8 h-8">
