@@ -619,6 +619,43 @@ export default function MembersCardPage() {
         </ol>
       </Section>
 
+      {/* 同じステップの他の機能 */}
+      <Section id="related-features" spacing="md" container="wide" background="white">
+        <div className="max-w-[720px] mb-6">
+          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">SAME STEP</div>
+          <h2 className="text-xl sm:text-2xl font-bold mb-2">同じステップの他の機能</h2>
+          <p className="text-sm text-[#6B7280]">「顧客接点の創出」ステップで一緒に検討される機能です。</p>
+        </div>
+        <div className="grid sm:grid-cols-2 gap-4 max-w-[800px]">
+          <Link
+            href="/queue"
+            className="flex items-center gap-4 p-4 rounded-xl border border-[#E5E7EB] hover:border-[#05A847] hover:bg-[#F0FBF4] transition-colors group"
+          >
+            <div className="shrink-0 w-10 h-10 rounded-lg bg-[#E8F8F0] flex items-center justify-center">
+              <Image src="/images/順番待ち.png" alt="順番待ち" width={24} height={24} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-bold text-[#1F2937] group-hover:text-[#05A847] transition-colors">順番待ち</p>
+              <p className="text-xs text-[#6B7280] leading-snug mt-0.5">待ち時間を会員化のチャンスへ。混雑状況もLINEで配信。</p>
+            </div>
+            <ArrowRight className="w-4 h-4 text-[#9CA3AF] group-hover:text-[#05A847] shrink-0 transition-colors" />
+          </Link>
+          <Link
+            href="/reservation"
+            className="flex items-center gap-4 p-4 rounded-xl border border-[#E5E7EB] hover:border-[#05A847] hover:bg-[#F0FBF4] transition-colors group"
+          >
+            <div className="shrink-0 w-10 h-10 rounded-lg bg-[#E8F8F0] flex items-center justify-center">
+              <Image src="/images/予約.png" alt="予約" width={24} height={24} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-bold text-[#1F2937] group-hover:text-[#05A847] transition-colors">予約</p>
+              <p className="text-xs text-[#6B7280] leading-snug mt-0.5">予約完了から来店後まで、LINEで一貫した顧客体験を設計。</p>
+            </div>
+            <ArrowRight className="w-4 h-4 text-[#9CA3AF] group-hover:text-[#05A847] shrink-0 transition-colors" />
+          </Link>
+        </div>
+      </Section>
+
       {/* CTA */}
       <Section id="contact" spacing="lg" container="default" background="dark">
         <div className="text-center space-y-6 md:space-y-8">

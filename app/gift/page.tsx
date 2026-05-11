@@ -571,6 +571,56 @@ export default function GiftPage() {
         </ol>
       </Section>
 
+      {/* 同じステップの他の機能 */}
+      <Section id="related-features" spacing="md" container="wide" background="white">
+        <div className="max-w-[720px] mb-6">
+          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">SAME STEP</div>
+          <h2 className="text-xl sm:text-2xl font-bold mb-2">あわせて検討したい機能</h2>
+          <p className="text-sm text-[#6B7280]">「関係性の深化」ステップの機能と、連携効果の高い機能です。</p>
+        </div>
+        <div className="grid sm:grid-cols-3 gap-4 max-w-[900px]">
+          <Link
+            href="/segment"
+            className="flex items-center gap-4 p-4 rounded-xl border border-[#E5E7EB] hover:border-[#05A847] hover:bg-[#F0FBF4] transition-colors group"
+          >
+            <div className="shrink-0 w-10 h-10 rounded-lg bg-[#E8F8F0] flex items-center justify-center">
+              <Image src="/images/セグメント配信.png" alt="セグメント配信" width={24} height={24} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-bold text-[#1F2937] group-hover:text-[#05A847] transition-colors">セグメント配信</p>
+              <p className="text-xs text-[#6B7280] leading-snug mt-0.5">属性・購買履歴に連動した動的リッチメニュー対応配信。</p>
+            </div>
+            <ArrowRight className="w-4 h-4 text-[#9CA3AF] group-hover:text-[#05A847] shrink-0 transition-colors" />
+          </Link>
+          <Link
+            href="/1to1"
+            className="flex items-center gap-4 p-4 rounded-xl border border-[#E5E7EB] hover:border-[#05A847] hover:bg-[#F0FBF4] transition-colors group"
+          >
+            <div className="shrink-0 w-10 h-10 rounded-lg bg-[#E8F8F0] flex items-center justify-center">
+              <Image src="/images/1to1.png" alt="1to1コミュニケーション" width={24} height={24} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-bold text-[#1F2937] group-hover:text-[#05A847] transition-colors">1to1コミュニケーション</p>
+              <p className="text-xs text-[#6B7280] leading-snug mt-0.5">オペレーター対応をLINEに統合。接客以上の価値を提供。</p>
+            </div>
+            <ArrowRight className="w-4 h-4 text-[#9CA3AF] group-hover:text-[#05A847] shrink-0 transition-colors" />
+          </Link>
+          <Link
+            href="/memberscard"
+            className="flex items-center gap-4 p-4 rounded-xl border border-[#E5E7EB] hover:border-[#05A847] hover:bg-[#F0FBF4] transition-colors group"
+          >
+            <div className="shrink-0 w-10 h-10 rounded-lg bg-[#E8F8F0] flex items-center justify-center">
+              <Image src="/images/会員証.png" alt="デジタル会員証" width={24} height={24} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-bold text-[#1F2937] group-hover:text-[#05A847] transition-colors">デジタル会員証</p>
+              <p className="text-xs text-[#6B7280] leading-snug mt-0.5">アプリDL不要。バーコード提示で5秒つながる次世代会員体験。</p>
+            </div>
+            <ArrowRight className="w-4 h-4 text-[#9CA3AF] group-hover:text-[#05A847] shrink-0 transition-colors" />
+          </Link>
+        </div>
+      </Section>
+
       {/* CTA */}
       <Section id="contact" spacing="lg" container="default" background="dark">
         <div className="text-center space-y-6 md:space-y-8">
