@@ -36,7 +36,7 @@ const FEATURES = [
     image: '/images/会員証.png',
     name: 'デジタル会員証',
     tagline: 'アプリDL不要。バーコード提示で5秒つながる次世代会員体験。',
-    phase: 'Step 1',
+    stepLabel: '顧客接点の創出',
     id: 'membership',
     url: '/memberscard',
   },
@@ -44,7 +44,7 @@ const FEATURES = [
     image: '/images/順番待ち.png',
     name: '順番待ち',
     tagline: '待ち時間を会員化のチャンスへ。混雑状況もLINEで配信。',
-    phase: 'Step 1',
+    stepLabel: '顧客接点の創出',
     id: 'queue',
     url: '/queue',
   },
@@ -52,7 +52,7 @@ const FEATURES = [
     image: '/images/予約.png',
     name: '予約',
     tagline: '予約完了から来店後まで、LINEで一貫した顧客体験を設計。',
-    phase: 'Step 1',
+    stepLabel: '顧客接点の創出',
     id: 'reservation',
     url: '/reservation',
   },
@@ -60,7 +60,7 @@ const FEATURES = [
     image: '/images/スタンプカード.png',
     name: 'スタンプカード',
     tagline: '来店履歴が見える、育つ。紛失ゼロのデジタルスタンプ。',
-    phase: 'Step 2',
+    stepLabel: 'エンゲージメント強化',
     id: 'stamp-card',
     url: '/stampcard',
   },
@@ -68,7 +68,7 @@ const FEATURES = [
     image: '/images/クーポン.png',
     name: 'クーポン配信',
     tagline: 'LINE公式の配信制限を超えた、属性連動のクーポン発行。',
-    phase: 'Step 2',
+    stepLabel: 'エンゲージメント強化',
     id: 'coupon',
     url: '/coupon',
   },
@@ -76,7 +76,7 @@ const FEATURES = [
     image: '/images/チケット.png',
     name: 'チケット・パス',
     tagline: 'LINEで入場管理まで完結。CRM側で利用状況を可視化。',
-    phase: 'Step 2',
+    stepLabel: 'エンゲージメント強化',
     id: 'ticket',
     url: '/ticket',
   },
@@ -84,7 +84,7 @@ const FEATURES = [
     image: '/images/抽選.png',
     name: '抽選',
     tagline: '当選体験でエンゲージメントを加速。来店動機に変える。',
-    phase: 'Step 2',
+    stepLabel: 'エンゲージメント強化',
     id: 'lottery',
     url: '/lottery',
   },
@@ -92,7 +92,7 @@ const FEATURES = [
     image: '/images/セグメント配信.png',
     name: 'セグメント配信',
     tagline: '属性・購買履歴に連動した動的リッチメニュー対応配信。',
-    phase: 'Step 3',
+    stepLabel: '関係性の深化',
     id: 'segment-delivery',
     url: '/segment',
   },
@@ -100,7 +100,7 @@ const FEATURES = [
     image: '/images/1to1.png',
     name: '1to1コミュニケーション',
     tagline: 'オペレーター対応をLINEに統合。接客以上の価値を提供。',
-    phase: 'Step 3',
+    stepLabel: '関係性の深化',
     id: 'one-to-one',
     url: '/1to1',
   },
@@ -108,7 +108,7 @@ const FEATURES = [
     image: '/images/ギフト.png',
     name: 'ギフト',
     tagline: 'ソーシャルギフト機能で、顧客が顧客を呼ぶ循環を作る。',
-    phase: 'Step 3',
+    stepLabel: '関係性の深化',
     id: 'gift',
     url: '/gift',
   },
@@ -738,10 +738,10 @@ export default function V2TopPage() {
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {FEATURES.map((f) => {
-            const phaseColor =
-              f.phase === 'Step 1'
+            const badgeColor =
+              f.stepLabel === '顧客接点の創出'
                 ? 'bg-[#E8F8F0] text-[#05A847]'
-                : f.phase === 'Step 2'
+                : f.stepLabel === 'エンゲージメント強化'
                 ? 'bg-[#FEF3C7] text-[#B45309]'
                 : 'bg-[#EDE9FE] text-[#6D28D9]';
             const pricing = getPricingEntry(f.url.slice(1) as FeatureKey);
@@ -761,8 +761,8 @@ export default function V2TopPage() {
                       <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">
                         {f.name}
                       </h3>
-                      <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full mt-1 ${phaseColor}`}>
-                        {f.phase}
+                      <span className={`inline-block text-[9px] font-semibold px-2 py-0.5 rounded-full mt-1 whitespace-nowrap ${badgeColor}`}>
+                        {f.stepLabel}
                       </span>
                     </div>
                   </div>
@@ -780,6 +780,11 @@ export default function V2TopPage() {
                       </span>
                     </div>
                   )}
+                  <div className="mt-2 text-right">
+                    <span className="text-xs font-semibold text-[#06C755]">
+                      詳細を見る →
+                    </span>
+                  </div>
                 </Card>
               </Link>
             );
