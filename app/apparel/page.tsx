@@ -396,13 +396,13 @@ export default function ApparelPage() {
       {/* ============================================================ */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-[#E5E7EB]">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 h-16 md:h-20 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-3">
             <Image
               src="/logo_classmethod_black.png"
               alt="クラスメソッド"
               width={120}
               height={38}
-              className="h-[30px] md:h-[34px] w-auto object-contain"
+              className="h-[30px] md:h-[34px] w-auto"
               priority
             />
             <div className="flex items-center gap-1">
@@ -489,7 +489,7 @@ export default function ApparelPage() {
               {/* ミニチェックリスト */}
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
                 {['マルチブランド対応', '50ブランド横断の会員証'].map((t) => (
-                  <div key={t} className="flex items-center gap-2">
+                  <div key={t} className="flex items-center gap-3">
                     <Check className="w-4 h-4 text-[#06C755]" />
                     {t}
                   </div>
