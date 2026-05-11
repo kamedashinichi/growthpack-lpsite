@@ -541,6 +541,163 @@ export default function V2TopPage() {
       </div>
 
       {/* ============================================================ */}
+      {/* 画面プレビュー帯 — Hero直下・信頼バッジ帯の前                        */}
+      {/* スマホフレーム埋め込み式横スクロール（A案）                            */}
+      {/* 全デバイスで表示（hidden lg:block は使わない）                        */}
+      {/* ============================================================ */}
+      <div className="bg-[#0d0d0d] border-t border-white/10">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 py-10 md:py-12">
+          <div className="mb-6 text-center">
+            <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#06C755] mb-2">
+              PRODUCT PREVIEW
+            </p>
+            <p className="text-white/70 text-sm">
+              LINEミニアプリで実際に作れる画面
+            </p>
+          </div>
+
+          {/* 横スクロールコンテナ — CSS only スナップスクロール */}
+          <div
+            className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+          >
+            {[
+              {
+                image: '/images/会員証.png',
+                name: 'デジタル会員証',
+                desc: '来店ごとに育つ会員体験',
+                stepLabel: '顧客接点の創出',
+                color: '#06C755',
+              },
+              {
+                image: '/images/順番待ち.png',
+                name: '順番待ち',
+                desc: '待ち時間を会員化のチャンスへ',
+                stepLabel: '顧客接点の創出',
+                color: '#06C755',
+              },
+              {
+                image: '/images/予約.png',
+                name: '予約',
+                desc: 'LINE完結で来店体験を設計',
+                stepLabel: '顧客接点の創出',
+                color: '#06C755',
+              },
+              {
+                image: '/images/スタンプカード.png',
+                name: 'スタンプカード',
+                desc: '紛失ゼロのデジタルスタンプ',
+                stepLabel: 'エンゲージメント強化',
+                color: '#F59E0B',
+              },
+              {
+                image: '/images/クーポン.png',
+                name: 'クーポン配信',
+                desc: '属性連動のパーソナル配信',
+                stepLabel: 'エンゲージメント強化',
+                color: '#F59E0B',
+              },
+              {
+                image: '/images/チケット.png',
+                name: 'チケット・パス',
+                desc: 'LINEで入場管理まで完結',
+                stepLabel: 'エンゲージメント強化',
+                color: '#F59E0B',
+              },
+              {
+                image: '/images/抽選.png',
+                name: '抽選',
+                desc: '当選体験でエンゲージメントを加速',
+                stepLabel: 'エンゲージメント強化',
+                color: '#F59E0B',
+              },
+              {
+                image: '/images/セグメント配信.png',
+                name: 'セグメント配信',
+                desc: '購買履歴に連動した動的配信',
+                stepLabel: '関係性の深化',
+                color: '#8B5CF6',
+              },
+              {
+                image: '/images/1to1.png',
+                name: '1to1コミュニケーション',
+                desc: 'オペレーター対応をLINEに統合',
+                stepLabel: '関係性の深化',
+                color: '#8B5CF6',
+              },
+              {
+                image: '/images/ギフト.png',
+                name: 'ギフト',
+                desc: '顧客が顧客を呼ぶ循環を作る',
+                stepLabel: '関係性の深化',
+                color: '#8B5CF6',
+              },
+            ].map((item) => (
+              <div
+                key={item.name}
+                className="flex-none w-[240px] sm:w-[260px] snap-start"
+              >
+                {/* iPhone風スマホフレーム */}
+                <div className="bg-[#1a1a1a] rounded-[28px] p-[6px] shadow-[0_16px_48px_rgba(0,0,0,0.5)] border border-white/10 mx-auto w-fit">
+                  <div className="bg-white rounded-[22px] overflow-hidden w-[228px] sm:w-[248px]">
+                    {/* スマホ上部バー（ノッチ風） */}
+                    <div className="h-6 bg-[#1a1a1a] flex items-center justify-center">
+                      <div className="w-16 h-1.5 rounded-full bg-[#333]" />
+                    </div>
+                    {/* LINEミニアプリ風ヘッダー */}
+                    <div className="h-9 bg-[#06C755] flex items-center px-3 gap-2">
+                      <div className="w-5 h-5 rounded-md bg-white/20 flex items-center justify-center text-white font-bold text-[9px]">
+                        G
+                      </div>
+                      <span className="text-white text-[11px] font-bold">グロースパック</span>
+                    </div>
+                    {/* 機能画像エリア */}
+                    <div className="bg-[#F8F9FA] flex items-center justify-center p-4 h-[180px]">
+                      <div className="relative w-full h-full">
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          fill
+                          className="object-contain"
+                          sizes="248px"
+                        />
+                      </div>
+                    </div>
+                    {/* 機能名バー */}
+                    <div className="px-3 py-2.5 bg-white border-t border-[#E5E7EB]">
+                      <div className="text-[11px] font-bold text-[#1F2937]">{item.name}</div>
+                    </div>
+                    {/* ホームバー風 */}
+                    <div className="h-5 bg-white flex items-center justify-center">
+                      <div className="w-20 h-1 rounded-full bg-[#D1D5DB]" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* フレーム下のキャプション */}
+                <div className="mt-3 text-center px-2">
+                  <div
+                    className="inline-block text-[9px] font-semibold px-2 py-0.5 rounded-full mb-1 whitespace-nowrap"
+                    style={{
+                      backgroundColor: `${item.color}22`,
+                      color: item.color,
+                    }}
+                  >
+                    {item.stepLabel}
+                  </div>
+                  <p className="text-white/60 text-xs leading-snug">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* スクロールヒント — スマホのみ表示 */}
+          <p className="text-center text-white/30 text-[10px] mt-2 sm:hidden">
+            横にスワイプして全10機能を確認できます
+          </p>
+        </div>
+      </div>
+
+      {/* ============================================================ */}
       {/* 信頼バッジ帯 — ヒーロー直下                                       */}
       {/* ============================================================ */}
       <div className="bg-white border-b border-[#E5E7EB]">
