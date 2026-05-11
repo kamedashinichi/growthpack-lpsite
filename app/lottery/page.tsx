@@ -553,6 +553,35 @@ export default function LotteryPage() {
         </ol>
       </Section>
 
+      {/* 同じステップの他の機能 */}
+      <Section id="related-features" spacing="md" container="wide" background="muted">
+        <div className="max-w-[720px] mb-8">
+          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">RELATED FEATURES</div>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-2">同じステップの他の機能</h2>
+          <p className="text-base text-[#4B5563]">抽選と同じ「エンゲージメント強化」ステップの機能です。組み合わせることで来店動機の設計がより多彩になります。</p>
+        </div>
+        <div className="grid sm:grid-cols-3 gap-4 md:gap-6">
+          {[
+            { name: 'スタンプカード', tagline: '来店履歴が見える、育つ。紛失ゼロのデジタルスタンプ。', url: '/stampcard' },
+            { name: 'クーポン配信', tagline: 'LINE公式の配信制限を超えた、属性連動のクーポン発行。', url: '/coupon' },
+            { name: 'チケット・パス', tagline: 'LINEで入場管理まで完結。CRM側で利用状況を可視化。', url: '/ticket' },
+          ].map((f) => (
+            <Link
+              key={f.name}
+              href={f.url}
+              className="block bg-white rounded-xl border border-[#E5E7EB] p-5 hover:border-[#05A847] hover:shadow-md transition-all group"
+            >
+              <h3 className="text-base font-bold text-[#1F2937] mb-2 group-hover:text-[#05A847] transition-colors">{f.name}</h3>
+              <p className="text-sm text-[#6B7280] leading-relaxed mb-3">{f.tagline}</p>
+              <span className="inline-flex items-center gap-1 text-sm font-semibold text-[#05A847]">
+                詳しく見る
+                <ArrowRight className="w-4 h-4" />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </Section>
+
       {/* CTA */}
       <Section id="contact" spacing="lg" container="default" background="dark">
         <div className="text-center space-y-6 md:space-y-8">

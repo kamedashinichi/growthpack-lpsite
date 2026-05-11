@@ -530,6 +530,35 @@ export default function SegmentPage() {
         </ol>
       </Section>
 
+      {/* 同じステップの他の機能 */}
+      <Section id="related-features" spacing="md" container="wide" background="muted">
+        <div className="max-w-[720px] mb-8">
+          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">RELATED FEATURES</div>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-2">あわせて検討したい機能</h2>
+          <p className="text-base text-[#4B5563]">セグメント配信と組み合わせることで、顧客データをより深いエンゲージメントに変換できます。</p>
+        </div>
+        <div className="grid sm:grid-cols-3 gap-4 md:gap-6">
+          {[
+            { name: '1to1コミュニケーション', tagline: 'オペレーター対応をLINEに統合。接客以上の価値を提供。', url: '/1to1' },
+            { name: 'ギフト', tagline: 'ソーシャルギフト機能で、顧客が顧客を呼ぶ循環を作る。', url: '/gift' },
+            { name: 'クーポン配信', tagline: 'LINE公式の配信制限を超えた、属性連動のクーポン発行。', url: '/coupon' },
+          ].map((f) => (
+            <Link
+              key={f.name}
+              href={f.url}
+              className="block bg-white rounded-xl border border-[#E5E7EB] p-5 hover:border-[#05A847] hover:shadow-md transition-all group"
+            >
+              <h3 className="text-base font-bold text-[#1F2937] mb-2 group-hover:text-[#05A847] transition-colors">{f.name}</h3>
+              <p className="text-sm text-[#6B7280] leading-relaxed mb-3">{f.tagline}</p>
+              <span className="inline-flex items-center gap-1 text-sm font-semibold text-[#05A847]">
+                詳しく見る
+                <ArrowRight className="w-4 h-4" />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </Section>
+
       {/* CTA */}
       <Section id="contact" spacing="lg" container="default" background="dark">
         <div className="text-center space-y-6 md:space-y-8">

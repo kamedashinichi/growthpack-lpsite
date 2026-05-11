@@ -708,6 +708,35 @@ export default function OneToOnePage() {
         </ol>
       </Section>
 
+      {/* 同じステップの他の機能 */}
+      <Section id="related-features" spacing="md" container="wide" background="muted">
+        <div className="max-w-[720px] mb-8">
+          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">RELATED FEATURES</div>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-2">あわせて検討したい機能</h2>
+          <p className="text-base text-[#4B5563]">1to1コミュニケーションと組み合わせることで、顧客との関係性をさらに深める施策が設計できます。</p>
+        </div>
+        <div className="grid sm:grid-cols-3 gap-4 md:gap-6">
+          {[
+            { name: 'セグメント配信', tagline: '属性・購買履歴に連動した動的リッチメニュー対応配信。', url: '/segment' },
+            { name: 'ギフト', tagline: 'ソーシャルギフト機能で、顧客が顧客を呼ぶ循環を作る。', url: '/gift' },
+            { name: 'スタンプカード', tagline: '来店履歴が見える、育つ。紛失ゼロのデジタルスタンプ。', url: '/stampcard' },
+          ].map((f) => (
+            <Link
+              key={f.name}
+              href={f.url}
+              className="block bg-white rounded-xl border border-[#E5E7EB] p-5 hover:border-[#05A847] hover:shadow-md transition-all group"
+            >
+              <h3 className="text-base font-bold text-[#1F2937] mb-2 group-hover:text-[#05A847] transition-colors">{f.name}</h3>
+              <p className="text-sm text-[#6B7280] leading-relaxed mb-3">{f.tagline}</p>
+              <span className="inline-flex items-center gap-1 text-sm font-semibold text-[#05A847]">
+                詳しく見る
+                <ArrowRight className="w-4 h-4" />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </Section>
+
       {/* ============================================================ */}
       {/* 最終CTA（§7-10 ダーク背景）                                     */}
       {/* ============================================================ */}
