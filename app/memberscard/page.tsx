@@ -476,8 +476,8 @@ export default function MembersCardPage() {
               <Image
                 src="/badge_ly_tech_partner_miniapp.png"
                 alt="LINEヤフー 2026年度 Technology Partner LINEミニアプリ部門"
-                width={150}
-                height={131}
+                width={437}
+                height={382}
                 className="h-20 sm:h-24 w-auto object-contain shrink-0"
               />
               <div className="text-left">
