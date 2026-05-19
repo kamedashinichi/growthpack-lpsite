@@ -708,7 +708,7 @@ export default function SupermarketPage() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E7EB] border border-[#E5E7EB] rounded-xl overflow-hidden">
           {STATS.map(({ value, unit, label, sub }) => (
             <div key={label} className="px-6 py-8 text-center bg-white">
-              <div className="text-3xl sm:text-4xl font-bold text-[#1F2937] leading-none mb-1">
+              <div className="text-3xl sm:text-4xl font-bold text-[#1F2937] leading-none mb-1 whitespace-nowrap">
                 {value}<span className="text-xl sm:text-2xl text-[#05A847] ml-1">{unit}</span>
               </div>
               <div className="text-sm font-semibold text-[#1F2937] mt-3 mb-1">{label}</div>
