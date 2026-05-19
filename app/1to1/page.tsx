@@ -568,7 +568,7 @@ export default function OneToOnePage() {
       {/* 3行でわかる                                                     */}
       {/* ============================================================ */}
       <Section id="key-takeaways" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-6">
+        <div className="mb-6">
           <h2 className="text-2xl sm:text-3xl font-bold mb-6">3行でわかる、LINE 1to1コミュニケーションで何ができるか</h2>
           <ol className="space-y-4">
             <li className="flex gap-4 items-start">
