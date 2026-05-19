@@ -453,21 +453,45 @@ export default function MembersCardPage() {
       {/* 信頼バッジ帯 */}
       <div className="bg-white border-b border-[#E5E7EB]">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 py-6">
-          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
-            <Image
-              src="/badge_ly_tech_partner_communication.png"
-              alt="LINEヤフー 2026年度 Technology Partner Communication部門"
-              width={437}
-              height={382}
-              className="h-16 sm:h-20 w-auto object-contain"
-            />
-            <Image
-              src="/badge_ly_tech_partner_miniapp.png"
-              alt="LINEヤフー 2026年度 Technology Partner LINEミニアプリ部門"
-              width={150}
-              height={131}
-              className="h-16 sm:h-20 w-auto object-contain"
-            />
+          {/* 信頼帯 上段: LINEヤフー パートナー認定 */}
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-5 sm:gap-8 md:gap-12">
+            <div className="flex items-center gap-3">
+              <Image
+                src="/badge_ly_tech_partner_communication.png"
+                alt="LINEヤフー 2026年度 Technology Partner Communication部門"
+                width={437}
+                height={382}
+                className="h-16 sm:h-20 w-auto object-contain shrink-0"
+              />
+              <div className="text-left">
+                <div className="text-xs text-[#6B7280]">LINEヤフー</div>
+                <div className="text-sm font-semibold text-[#1F2937] leading-snug">
+                  2026年度 Technology Partner
+                  <br />
+                  Communication部門
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <Image
+                src="/badge_ly_tech_partner_miniapp.png"
+                alt="LINEヤフー 2026年度 Technology Partner LINEミニアプリ部門"
+                width={150}
+                height={131}
+                className="h-16 sm:h-20 w-auto object-contain shrink-0"
+              />
+              <div className="text-left">
+                <div className="text-xs text-[#6B7280]">LINEヤフー</div>
+                <div className="text-sm font-semibold text-[#1F2937] leading-snug">
+                  2026年度 Technology Partner
+                  <br />
+                  LINEミニアプリ部門
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* 信頼帯 下段: その他の認定・実績 */}
+          <div className="mt-5 pt-5 border-t border-[#E5E7EB] flex flex-wrap items-center justify-center gap-6 md:gap-10">
             {[
               { icon: Award, label: 'AWS Premier Tier Services Partner', color: '#FF9900' },
               { icon: ShieldCheck, label: 'ISO 27001 取得（クラスメソッド）', color: '#3B82F6' },
