@@ -289,13 +289,21 @@ export default function LotteryPage() {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-[#E5E7EB]">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 h-16 md:h-20 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-2 md:gap-3">
             <Image
               src="/logo_classmethod_black.png"
               alt="クラスメソッド"
               width={120}
               height={38}
-              className="h-[30px] md:h-[34px] w-auto"
+              className="hidden md:block h-[34px] w-auto object-contain"
+              priority
+            />
+            <Image
+              src="/icon-dark-32x32.png"
+              alt="クラスメソッド"
+              width={32}
+              height={32}
+              className="md:hidden h-7 w-7 object-contain"
               priority
             />
             <div className="flex items-center gap-1">
@@ -633,7 +641,20 @@ export default function LotteryPage() {
           <div className="grid md:grid-cols-4 gap-8 md:gap-10 mb-10">
             <div className="md:col-span-1">
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 rounded-lg bg-[#06C755] flex items-center justify-center text-white font-bold text-sm">G</div>
+                <Image
+                  src="/logo_classmethod_white.png"
+                  alt="クラスメソッド"
+                  width={120}
+                  height={38}
+                  className="hidden md:block h-7 w-auto object-contain"
+                />
+                <Image
+                  src="/icon-light-32x32.png"
+                  alt="クラスメソッド"
+                  width={32}
+                  height={32}
+                  className="md:hidden h-7 w-7 object-contain"
+                />
                 <div className="flex items-center gap-1">
                   <span className="text-base font-bold text-white">グロースパック</span>
                   <span className="text-sm text-white/50"> for </span>
