@@ -414,7 +414,7 @@ export default function FoodPage() {
               priority
             />
             <Image
-              src="/icon-dark-32x32.png"
+              src="/logo_classmethod_mobile.png"
               alt="クラスメソッド"
               width={32}
               height={32}
