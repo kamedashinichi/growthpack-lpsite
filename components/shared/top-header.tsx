@@ -86,13 +86,22 @@ export function TopHeader() {
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-[#E5E7EB]">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 h-16 md:h-20 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-2 md:gap-3">
+          {/* デスクトップ: クラスメソッドロゴ / スマホ: アイコン（レイアウト崩れ防止） */}
           <Image
             src="/logo_classmethod_black.png"
             alt="クラスメソッド"
             width={120}
             height={38}
-            className="h-[30px] md:h-[34px] w-auto object-contain"
+            className="hidden md:block h-[34px] w-auto object-contain"
+            priority
+          />
+          <Image
+            src="/icon-dark-32x32.png"
+            alt="クラスメソッド"
+            width={32}
+            height={32}
+            className="md:hidden h-7 w-7 object-contain"
             priority
           />
           <div className="flex items-center gap-1">

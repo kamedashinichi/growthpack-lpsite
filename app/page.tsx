@@ -636,7 +636,7 @@ export default function V2TopPage() {
                 {/* フレーム下のキャプション */}
                 <div className="mt-3 text-center px-2">
                   <div
-                    className="inline-block text-[9px] font-semibold px-2 py-0.5 rounded-full mb-1 whitespace-nowrap"
+                    className="inline-block text-xs font-semibold px-2 py-0.5 rounded-full mb-1 whitespace-nowrap"
                     style={{
                       backgroundColor: `${item.color}22`,
                       color: item.color,
@@ -682,8 +682,8 @@ export default function V2TopPage() {
       {/* ============================================================ */}
       {/* 3行でわかる                                                     */}
       {/* ============================================================ */}
-      <Section id="key-takeaways" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-6">
+      <Section id="key-takeaways" spacing="sm" container="wide" background="white" className="pb-0">
+        <div className="mb-6">
           <h2 className="text-2xl sm:text-3xl font-bold mb-6">3行でわかる、グロースパック for LINE で何ができるか</h2>
           <ol className="space-y-4">
             <li className="flex gap-4 items-start">
@@ -705,7 +705,7 @@ export default function V2TopPage() {
       {/* ============================================================ */}
       {/* 実績数字セクション                                               */}
       {/* ============================================================ */}
-      <Section spacing="sm" container="wide" background="white">
+      <Section spacing="sm" container="wide" background="white" className="pt-6 sm:pt-8">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E7EB] border border-[#E5E7EB] rounded-xl overflow-hidden">
           {STATS.map(({ value, unit, label, sub }) => (
             <div key={label} className="px-6 py-8 text-center bg-white">
@@ -1152,7 +1152,21 @@ export default function V2TopPage() {
             {/* ブランド */}
             <div className="md:col-span-1">
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 rounded-lg bg-[#06C755] flex items-center justify-center text-white font-bold text-sm">G</div>
+                {/* デスクトップ: クラスメソッドロゴ / スマホ: アイコン（レイアウト崩れ防止） */}
+                <Image
+                  src="/logo_classmethod_white.png"
+                  alt="クラスメソッド"
+                  width={120}
+                  height={38}
+                  className="hidden md:block h-7 w-auto object-contain"
+                />
+                <Image
+                  src="/icon-light-32x32.png"
+                  alt="クラスメソッド"
+                  width={32}
+                  height={32}
+                  className="md:hidden h-7 w-7 object-contain"
+                />
                 <div className="flex items-center gap-1">
                   <span className="text-base font-bold text-white">グロースパック</span>
                   <span className="text-sm text-white/50"> for </span>
