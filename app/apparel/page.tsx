@@ -632,7 +632,7 @@ export default function ApparelPage() {
                 alt="LINEヤフー 2026年度 Technology Partner Communication部門"
                 width={437}
                 height={382}
-                className="h-16 sm:h-20 w-auto object-contain shrink-0"
+                className="h-20 sm:h-24 w-auto object-contain shrink-0"
               />
               <div className="text-left">
                 <div className="text-xs text-[#6B7280]">LINEヤフー</div>
@@ -649,7 +649,7 @@ export default function ApparelPage() {
                 alt="LINEヤフー 2026年度 Technology Partner LINEミニアプリ部門"
                 width={150}
                 height={131}
-                className="h-16 sm:h-20 w-auto object-contain shrink-0"
+                className="h-20 sm:h-24 w-auto object-contain shrink-0"
               />
               <div className="text-left">
                 <div className="text-xs text-[#6B7280]">LINEヤフー</div>
