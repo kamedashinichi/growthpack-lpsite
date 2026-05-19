@@ -311,8 +311,23 @@ export default function QueuePage() {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-[#E5E7EB]">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 h-16 md:h-20 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-[#06C755] flex items-center justify-center text-white font-bold text-sm">G</div>
+          <Link href="/" className="flex items-center gap-2 md:gap-3">
+            <Image
+              src="/logo_classmethod_black.png"
+              alt="クラスメソッド"
+              width={120}
+              height={38}
+              className="hidden md:block h-[34px] w-auto object-contain"
+              priority
+            />
+            <Image
+              src="/logo_classmethod_mobile.png"
+              alt="クラスメソッド"
+              width={32}
+              height={32}
+              className="md:hidden h-7 w-7 object-contain"
+              priority
+            />
             <div className="flex items-center gap-1">
               <span className="text-base md:text-lg font-bold text-[#1F2937]">グロースパック</span>
               <span className="text-sm md:text-base text-[#6B7280]"> for </span>
@@ -398,9 +413,46 @@ export default function QueuePage() {
       {/* 信頼バッジ帯 */}
       <div className="bg-white border-b border-[#E5E7EB]">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 py-6">
-          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
+          {/* 信頼帯 上段: LINEヤフー パートナー認定 */}
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-5 sm:gap-8 md:gap-12">
+            <div className="flex items-center gap-3">
+              <Image
+                src="/badge_ly_tech_partner_communication.png"
+                alt="LINEヤフー 2026年度 Technology Partner Communication部門"
+                width={437}
+                height={382}
+                className="h-20 sm:h-24 w-auto object-contain shrink-0"
+              />
+              <div className="text-left">
+                <div className="text-xs text-[#6B7280]">LINEヤフー</div>
+                <div className="text-sm font-semibold text-[#1F2937] leading-snug">
+                  2026年度 Technology Partner
+                  <br />
+                  Communication部門
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <Image
+                src="/badge_ly_tech_partner_miniapp.png"
+                alt="LINEヤフー 2026年度 Technology Partner LINEミニアプリ部門"
+                width={437}
+                height={382}
+                className="h-20 sm:h-24 w-auto object-contain shrink-0"
+              />
+              <div className="text-left">
+                <div className="text-xs text-[#6B7280]">LINEヤフー</div>
+                <div className="text-sm font-semibold text-[#1F2937] leading-snug">
+                  2026年度 Technology Partner
+                  <br />
+                  LINEミニアプリ部門
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* 信頼帯 下段: その他の認定・実績 */}
+          <div className="mt-5 pt-5 border-t border-[#E5E7EB] flex flex-wrap items-center justify-center gap-6 md:gap-10">
             {[
-              { icon: ShieldCheck, label: 'LINEヤフー Technology Partner', color: '#06C755' },
               { icon: Award, label: 'AWS Premier Tier Services Partner', color: '#FF9900' },
               { icon: ShieldCheck, label: 'ISO 27001 取得（クラスメソッド）', color: '#3B82F6' },
             ].map(({ icon: Icon, label, color }) => (
@@ -415,7 +467,7 @@ export default function QueuePage() {
 
       {/* 3行でわかる */}
       <Section id="key-takeaways" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-6">
+        <div className="mb-6">
           <h2 className="text-2xl sm:text-3xl font-bold mb-6">3行でわかる、LINE順番待ちで何ができるか</h2>
           <ol className="space-y-4">
             <li className="flex gap-4 items-start">
@@ -575,6 +627,43 @@ export default function QueuePage() {
         </ol>
       </Section>
 
+      {/* 同じステップの他の機能 */}
+      <Section id="related-features" spacing="md" container="wide" background="white">
+        <div className="max-w-[720px] mb-6">
+          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">SAME STEP</div>
+          <h2 className="text-xl sm:text-2xl font-bold mb-2">同じステップの他の機能</h2>
+          <p className="text-sm text-[#6B7280]">「顧客接点の創出」ステップで一緒に検討される機能です。</p>
+        </div>
+        <div className="grid sm:grid-cols-2 gap-4 max-w-[800px]">
+          <Link
+            href="/memberscard"
+            className="flex items-center gap-4 p-4 rounded-xl border border-[#E5E7EB] hover:border-[#05A847] hover:bg-[#F0FBF4] transition-colors group"
+          >
+            <div className="shrink-0 w-10 h-10 rounded-lg bg-[#E8F8F0] flex items-center justify-center">
+              <Image src="/images/会員証.png" alt="デジタル会員証" width={24} height={24} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-bold text-[#1F2937] group-hover:text-[#05A847] transition-colors">デジタル会員証</p>
+              <p className="text-xs text-[#6B7280] leading-snug mt-0.5">アプリDL不要。バーコード提示で5秒つながる次世代会員体験。</p>
+            </div>
+            <ArrowRight className="w-4 h-4 text-[#9CA3AF] group-hover:text-[#05A847] shrink-0 transition-colors" />
+          </Link>
+          <Link
+            href="/reservation"
+            className="flex items-center gap-4 p-4 rounded-xl border border-[#E5E7EB] hover:border-[#05A847] hover:bg-[#F0FBF4] transition-colors group"
+          >
+            <div className="shrink-0 w-10 h-10 rounded-lg bg-[#E8F8F0] flex items-center justify-center">
+              <Image src="/images/予約.png" alt="予約" width={24} height={24} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-bold text-[#1F2937] group-hover:text-[#05A847] transition-colors">予約</p>
+              <p className="text-xs text-[#6B7280] leading-snug mt-0.5">予約完了から来店後まで、LINEで一貫した顧客体験を設計。</p>
+            </div>
+            <ArrowRight className="w-4 h-4 text-[#9CA3AF] group-hover:text-[#05A847] shrink-0 transition-colors" />
+          </Link>
+        </div>
+      </Section>
+
       {/* CTA */}
       <Section id="contact" spacing="lg" container="default" background="dark">
         <div className="text-center space-y-6 md:space-y-8">
@@ -619,7 +708,20 @@ export default function QueuePage() {
           <div className="grid md:grid-cols-4 gap-8 md:gap-10 mb-10">
             <div className="md:col-span-1">
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 rounded-lg bg-[#06C755] flex items-center justify-center text-white font-bold text-sm">G</div>
+                <Image
+                  src="/logo_classmethod_white.png"
+                  alt="クラスメソッド"
+                  width={120}
+                  height={38}
+                  className="hidden md:block h-7 w-auto object-contain"
+                />
+                <Image
+                  src="/icon-light-32x32.png"
+                  alt="クラスメソッド"
+                  width={32}
+                  height={32}
+                  className="md:hidden h-7 w-7 object-contain"
+                />
                 <div className="flex items-center gap-1">
                   <span className="text-base font-bold text-white">グロースパック</span>
                   <span className="text-sm text-white/50"> for </span>

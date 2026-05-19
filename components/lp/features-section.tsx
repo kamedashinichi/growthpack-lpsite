@@ -7,7 +7,7 @@ interface FeaturesSectionProps {
 export function FeaturesSection({ highlightIds }: FeaturesSectionProps) {
   const features = [
     { image: "/images/会員証.png", name: "LINE会員証", description: "5秒で会員化、アプリDL不要", url: "/memberscard", isExternal: false, id: "memberscard" },
-    { image: "/images/順番待ち.png", name: "順番待ち", description: "待ち時間を可視化", url: "/waiting", isExternal: false, id: "waiting" },
+    { image: "/images/順番待ち.png", name: "順番待ち", description: "待ち時間を可視化", url: "/queue", isExternal: false, id: "waiting" },
     { image: "/images/予約.png", name: "予約", description: "無断キャンセル削減", url: "/reservation", isExternal: false, id: "reservation" },
     { image: "/images/スタンプカード.png", name: "スタンプカード", description: "デジタルで紛失なし", url: "/stampcard", isExternal: false, id: "stampcard" },
     { image: "/images/クーポン.png", name: "クーポン配信", description: "セグメント別配信", url: "/coupon", isExternal: false, id: "coupon" },

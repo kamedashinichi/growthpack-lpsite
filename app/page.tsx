@@ -19,13 +19,12 @@ import {
   Users,
   ShieldCheck,
   Award,
-  Zap,
 } from 'lucide-react';
 import { Button } from '@/components/shared/ui/button';
 import { Section } from '@/components/shared/ui/section';
 import { Card } from '@/components/shared/ui/card';
 import { TrackedExternalLink } from './tracking';
-import { PRICING_DATA, PRICE_NOTE, getPricingEntry, type FeatureKey } from '@/lib/pricing';
+import { getPricingEntry, type FeatureKey } from '@/lib/pricing';
 
 /* ------------------------------------------------------------------ */
 /* DATA                                                                  */
@@ -36,7 +35,7 @@ const FEATURES = [
     image: '/images/会員証.png',
     name: 'デジタル会員証',
     tagline: 'アプリDL不要。バーコード提示で5秒つながる次世代会員体験。',
-    phase: 'Step 1',
+    stepLabel: '顧客接点の創出',
     id: 'membership',
     url: '/memberscard',
   },
@@ -44,7 +43,7 @@ const FEATURES = [
     image: '/images/順番待ち.png',
     name: '順番待ち',
     tagline: '待ち時間を会員化のチャンスへ。混雑状況もLINEで配信。',
-    phase: 'Step 1',
+    stepLabel: '顧客接点の創出',
     id: 'queue',
     url: '/queue',
   },
@@ -52,7 +51,7 @@ const FEATURES = [
     image: '/images/予約.png',
     name: '予約',
     tagline: '予約完了から来店後まで、LINEで一貫した顧客体験を設計。',
-    phase: 'Step 1',
+    stepLabel: '顧客接点の創出',
     id: 'reservation',
     url: '/reservation',
   },
@@ -60,7 +59,7 @@ const FEATURES = [
     image: '/images/スタンプカード.png',
     name: 'スタンプカード',
     tagline: '来店履歴が見える、育つ。紛失ゼロのデジタルスタンプ。',
-    phase: 'Step 2',
+    stepLabel: 'エンゲージメント強化',
     id: 'stamp-card',
     url: '/stampcard',
   },
@@ -68,7 +67,7 @@ const FEATURES = [
     image: '/images/クーポン.png',
     name: 'クーポン配信',
     tagline: 'LINE公式の配信制限を超えた、属性連動のクーポン発行。',
-    phase: 'Step 2',
+    stepLabel: 'エンゲージメント強化',
     id: 'coupon',
     url: '/coupon',
   },
@@ -76,7 +75,7 @@ const FEATURES = [
     image: '/images/チケット.png',
     name: 'チケット・パス',
     tagline: 'LINEで入場管理まで完結。CRM側で利用状況を可視化。',
-    phase: 'Step 2',
+    stepLabel: 'エンゲージメント強化',
     id: 'ticket',
     url: '/ticket',
   },
@@ -84,7 +83,7 @@ const FEATURES = [
     image: '/images/抽選.png',
     name: '抽選',
     tagline: '当選体験でエンゲージメントを加速。来店動機に変える。',
-    phase: 'Step 2',
+    stepLabel: 'エンゲージメント強化',
     id: 'lottery',
     url: '/lottery',
   },
@@ -92,7 +91,7 @@ const FEATURES = [
     image: '/images/セグメント配信.png',
     name: 'セグメント配信',
     tagline: '属性・購買履歴に連動した動的リッチメニュー対応配信。',
-    phase: 'Step 3',
+    stepLabel: '関係性の深化',
     id: 'segment-delivery',
     url: '/segment',
   },
@@ -100,7 +99,7 @@ const FEATURES = [
     image: '/images/1to1.png',
     name: '1to1コミュニケーション',
     tagline: 'オペレーター対応をLINEに統合。接客以上の価値を提供。',
-    phase: 'Step 3',
+    stepLabel: '関係性の深化',
     id: 'one-to-one',
     url: '/1to1',
   },
@@ -108,7 +107,7 @@ const FEATURES = [
     image: '/images/ギフト.png',
     name: 'ギフト',
     tagline: 'ソーシャルギフト機能で、顧客が顧客を呼ぶ循環を作る。',
-    phase: 'Step 3',
+    stepLabel: '関係性の深化',
     id: 'gift',
     url: '/gift',
   },
@@ -541,17 +540,170 @@ export default function V2TopPage() {
       </div>
 
       {/* ============================================================ */}
+      {/* 画面プレビュー帯 — Hero直下・信頼バッジ帯の前                        */}
+      {/* スマホフレーム埋め込み式横スクロール（A案）                            */}
+      {/* 全デバイスで表示（hidden lg:block は使わない）                        */}
+      {/* ============================================================ */}
+      <div className="bg-[#0d0d0d] border-t border-white/10">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 py-10 md:py-12">
+          <div className="mb-6 text-center">
+            <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#06C755] mb-2">
+              PRODUCT PREVIEW
+            </p>
+            <p className="text-white/70 text-sm">
+              LINEミニアプリで実際に作れる主要8機能の画面
+            </p>
+          </div>
+
+          {/* 横スクロールコンテナ — CSS only スナップスクロール */}
+          <div
+            className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+          >
+            {[
+              {
+                image: '/images/member.png',
+                name: 'デジタル会員証',
+                desc: '来店ごとに育つ会員体験',
+                stepLabel: '顧客接点の創出',
+                color: '#06C755',
+              },
+              {
+                image: '/images/queue.png',
+                name: '順番待ち',
+                desc: '待ち時間を会員化のチャンスへ',
+                stepLabel: '顧客接点の創出',
+                color: '#06C755',
+              },
+              {
+                image: '/images/reservation.png',
+                name: '予約',
+                desc: 'LINE完結で来店体験を設計',
+                stepLabel: '顧客接点の創出',
+                color: '#06C755',
+              },
+              {
+                image: '/images/stamp.png',
+                name: 'スタンプカード',
+                desc: '紛失ゼロのデジタルスタンプ',
+                stepLabel: 'エンゲージメント強化',
+                color: '#F59E0B',
+              },
+              {
+                image: '/images/coupon.png',
+                name: 'クーポン配信',
+                desc: '属性連動のパーソナル配信',
+                stepLabel: 'エンゲージメント強化',
+                color: '#F59E0B',
+              },
+              {
+                image: '/images/ticket.png',
+                name: 'チケット・パス',
+                desc: 'LINEで入場管理まで完結',
+                stepLabel: 'エンゲージメント強化',
+                color: '#F59E0B',
+              },
+              {
+                image: '/images/lottery.png',
+                name: '抽選',
+                desc: '当選体験でエンゲージメントを加速',
+                stepLabel: 'エンゲージメント強化',
+                color: '#F59E0B',
+              },
+              {
+                image: '/images/gift.png',
+                name: 'ギフト',
+                desc: '顧客が顧客を呼ぶ循環を作る',
+                stepLabel: '関係性の深化',
+                color: '#8B5CF6',
+              },
+            ].map((item) => (
+              <div
+                key={item.name}
+                className="flex-none w-[200px] sm:w-[220px] snap-start"
+              >
+                {/* スクショ画像（画像自体に枠が含まれているので装飾なし） */}
+                <div className="relative w-full aspect-[750/1622] mx-auto drop-shadow-[0_16px_32px_rgba(0,0,0,0.5)]">
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 640px) 200px, 220px"
+                  />
+                </div>
+
+                {/* フレーム下のキャプション */}
+                <div className="mt-3 text-center px-2">
+                  <div
+                    className="inline-block text-xs font-semibold px-2 py-0.5 rounded-full mb-1 whitespace-nowrap"
+                    style={{
+                      backgroundColor: `${item.color}22`,
+                      color: item.color,
+                    }}
+                  >
+                    {item.stepLabel}
+                  </div>
+                  <p className="text-white/60 text-xs leading-snug">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* スクロールヒント — スマホのみ表示 */}
+          <p className="text-center text-white/30 text-[10px] mt-2 sm:hidden">
+            横にスワイプして8つの画面を確認できます
+          </p>
+        </div>
+      </div>
+
+      {/* ============================================================ */}
       {/* 信頼バッジ帯 — ヒーロー直下                                       */}
       {/* ============================================================ */}
       <div className="bg-white border-b border-[#E5E7EB]">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 py-6">
-          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
+          {/* 信頼帯 上段: LINEヤフー パートナー認定 */}
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-5 sm:gap-8 md:gap-12">
+            <div className="flex items-center gap-3">
+              <Image
+                src="/badge_ly_tech_partner_communication.png"
+                alt="LINEヤフー 2026年度 Technology Partner Communication部門"
+                width={437}
+                height={382}
+                className="h-20 sm:h-24 w-auto object-contain shrink-0"
+              />
+              <div className="text-left">
+                <div className="text-xs text-[#6B7280]">LINEヤフー</div>
+                <div className="text-sm font-semibold text-[#1F2937] leading-snug">
+                  2026年度 Technology Partner
+                  <br />
+                  Communication部門
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <Image
+                src="/badge_ly_tech_partner_miniapp.png"
+                alt="LINEヤフー 2026年度 Technology Partner LINEミニアプリ部門"
+                width={437}
+                height={382}
+                className="h-20 sm:h-24 w-auto object-contain shrink-0"
+              />
+              <div className="text-left">
+                <div className="text-xs text-[#6B7280]">LINEヤフー</div>
+                <div className="text-sm font-semibold text-[#1F2937] leading-snug">
+                  2026年度 Technology Partner
+                  <br />
+                  LINEミニアプリ部門
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* 信頼帯 下段: その他の認定・実績 */}
+          <div className="mt-5 pt-5 border-t border-[#E5E7EB] flex flex-wrap items-center justify-center gap-6 md:gap-10">
             {[
-              { icon: ShieldCheck, label: 'LINEヤフー Technology Partner', color: '#06C755' },
               { icon: Award, label: 'AWS Premier Tier Services Partner', color: '#FF9900' },
               { icon: ShieldCheck, label: 'ISO 27001 取得（クラスメソッド）', color: '#3B82F6' },
               { icon: Users, label: '技術支援実績 5,000社以上', color: '#05A847' },
-              { icon: Zap, label: 'Step 1最短3ヶ月', color: '#05A847' },
             ].map(({ icon: Icon, label, color }) => (
               <div key={label} className="flex items-center gap-2 text-sm font-semibold text-[#1F2937] whitespace-nowrap">
                 <Icon className="w-4 h-4 shrink-0" style={{ color }} />
@@ -565,8 +717,8 @@ export default function V2TopPage() {
       {/* ============================================================ */}
       {/* 3行でわかる                                                     */}
       {/* ============================================================ */}
-      <Section id="key-takeaways" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-6">
+      <Section id="key-takeaways" spacing="sm" container="wide" background="white" className="pb-0">
+        <div className="mb-6">
           <h2 className="text-2xl sm:text-3xl font-bold mb-6">3行でわかる、グロースパック for LINE で何ができるか</h2>
           <ol className="space-y-4">
             <li className="flex gap-4 items-start">
@@ -588,11 +740,11 @@ export default function V2TopPage() {
       {/* ============================================================ */}
       {/* 実績数字セクション                                               */}
       {/* ============================================================ */}
-      <Section spacing="sm" container="wide" background="white">
+      <Section spacing="sm" container="wide" background="white" className="pt-6 sm:pt-8">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E7EB] border border-[#E5E7EB] rounded-xl overflow-hidden">
           {STATS.map(({ value, unit, label, sub }) => (
             <div key={label} className="px-6 py-8 text-center bg-white">
-              <div className="text-4xl sm:text-5xl font-bold text-[#1F2937] leading-none mb-1">
+              <div className="text-4xl sm:text-5xl font-bold text-[#1F2937] leading-none mb-1 whitespace-nowrap">
                 {value}<span className="text-2xl sm:text-3xl text-[#05A847] ml-1">{unit}</span>
               </div>
               <div className="text-sm font-semibold text-[#1F2937] mt-3 mb-1">{label}</div>
@@ -738,15 +890,15 @@ export default function V2TopPage() {
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {FEATURES.map((f) => {
-            const phaseColor =
-              f.phase === 'Step 1'
+            const badgeColor =
+              f.stepLabel === '顧客接点の創出'
                 ? 'bg-[#E8F8F0] text-[#05A847]'
-                : f.phase === 'Step 2'
+                : f.stepLabel === 'エンゲージメント強化'
                 ? 'bg-[#FEF3C7] text-[#B45309]'
                 : 'bg-[#EDE9FE] text-[#6D28D9]';
             const pricing = getPricingEntry(f.url.slice(1) as FeatureKey);
             return (
-              <Link key={f.id} href={f.url} className="block hover:shadow-lg transition-shadow rounded-xl">
+              <Link key={f.id} href={f.url} target="_blank" rel="noopener noreferrer" className="block hover:shadow-lg transition-shadow rounded-xl">
                 <Card padding="md">
                   <div className="flex items-start gap-4 mb-3">
                     <div className="shrink-0 relative w-11 h-11">
@@ -761,8 +913,8 @@ export default function V2TopPage() {
                       <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">
                         {f.name}
                       </h3>
-                      <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full mt-1 ${phaseColor}`}>
-                        {f.phase}
+                      <span className={`inline-block text-[9px] font-semibold px-2 py-0.5 rounded-full mt-1 whitespace-nowrap ${badgeColor}`}>
+                        {f.stepLabel}
                       </span>
                     </div>
                   </div>
@@ -780,74 +932,15 @@ export default function V2TopPage() {
                       </span>
                     </div>
                   )}
+                  <div className="mt-2 text-right">
+                    <span className="text-xs font-semibold text-[#06C755]">
+                      詳細を見る →
+                    </span>
+                  </div>
                 </Card>
               </Link>
             );
           })}
-        </div>
-      </Section>
-
-      {/* ============================================================ */}
-      {/* 機能別初期費用の目安                                              */}
-      {/* ============================================================ */}
-      <Section id="pricing" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-8 md:mb-10">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">
-            PRICING
-          </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            機能別 初期費用の目安
-          </h2>
-          <p className="text-base text-[#4B5563] leading-relaxed">{PRICE_NOTE}</p>
-        </div>
-
-        <div className="overflow-x-auto rounded-xl border border-[#E5E7EB]">
-          <table className="w-full min-w-[640px] text-sm">
-            <thead className="bg-[#F9FAFB]">
-              <tr className="border-b border-[#E5E7EB]">
-                <th className="text-left py-3 px-4 font-semibold text-[#6B7280]">機能名</th>
-                <th className="text-left py-3 px-4 font-semibold text-[#6B7280] whitespace-nowrap">
-                  初期費用（税抜）
-                </th>
-                <th className="text-left py-3 px-4 font-semibold text-[#6B7280] whitespace-nowrap">
-                  外部連携
-                </th>
-                <th className="text-left py-3 px-4 font-semibold text-[#6B7280]">標準仕様</th>
-              </tr>
-            </thead>
-            <tbody>
-              {PRICING_DATA.map((p) => (
-                <tr key={p.key} className="border-b border-[#F3F4F6] last:border-b-0 hover:bg-[#F9FAFB]">
-                  <td className="py-3 px-4">
-                    <Link
-                      href={p.path}
-                      className="text-[#05A847] hover:text-[#048838] hover:underline font-medium"
-                    >
-                      {p.name}
-                    </Link>
-                  </td>
-                  <td className="py-3 px-4 whitespace-nowrap text-[#1F2937] font-semibold">
-                    {p.price}
-                  </td>
-                  <td className="py-3 px-4 whitespace-nowrap text-[#1F2937]">{p.integration}</td>
-                  <td className="py-3 px-4 text-[#4B5563]">{p.note}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
-          <Button variant="primary" size="lg" asChild>
-            <TrackedExternalLink
-              href="https://classmethod.jp/services/line/line-apps/#iframe-form"
-              location="top_pricing_section"
-              destination="contact"
-            >
-              お問い合わせ
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </TrackedExternalLink>
-          </Button>
         </div>
       </Section>
 
@@ -1094,7 +1187,21 @@ export default function V2TopPage() {
             {/* ブランド */}
             <div className="md:col-span-1">
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 rounded-lg bg-[#06C755] flex items-center justify-center text-white font-bold text-sm">G</div>
+                {/* デスクトップ: クラスメソッドロゴ / スマホ: アイコン（レイアウト崩れ防止） */}
+                <Image
+                  src="/logo_classmethod_white.png"
+                  alt="クラスメソッド"
+                  width={120}
+                  height={38}
+                  className="hidden md:block h-7 w-auto object-contain"
+                />
+                <Image
+                  src="/icon-light-32x32.png"
+                  alt="クラスメソッド"
+                  width={32}
+                  height={32}
+                  className="md:hidden h-7 w-7 object-contain"
+                />
                 <div className="flex items-center gap-1">
                   <span className="text-base font-bold text-white">グロースパック</span>
                   <span className="text-sm text-white/50"> for </span>

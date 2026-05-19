@@ -83,6 +83,7 @@ const FEATURES = [
     tagline: 'レジQRで5秒会員化。シニアでも使いやすいLINEで来店客全員をデジタル会員に。カード忘れによるポイント未付与をゼロにする。',
     phase: 'Step 1',
     id: 'membership',
+    url: '/memberscard',
   },
   {
     image: '/images/スタンプカード.png',
@@ -90,6 +91,7 @@ const FEATURES = [
     tagline: '来店・購買でスタンプ付与。紛失・不正利用のない完全デジタル管理で来店頻度向上と週次来店習慣の形成に直結する。',
     phase: 'Step 1',
     id: 'stamp-card',
+    url: '/stampcard',
   },
   // Phase 2
   {
@@ -98,6 +100,7 @@ const FEATURES = [
     tagline: '折込チラシの代替として、LINEでターゲット配信。来店頻度・購買カテゴリに応じた配信で配信コストを抑えながら効果を最大化する。',
     phase: 'Step 2',
     id: 'coupon',
+    url: '/coupon',
   },
   {
     image: '/images/セグメント配信.png',
@@ -105,6 +108,7 @@ const FEATURES = [
     tagline: '週1来店層・月1来店層・休眠層に分けて最適な内容を配信。購買カテゴリ別に生鮮・日用品・園芸で訴求を出し分けられる。',
     phase: 'Step 2',
     id: 'segment-delivery',
+    url: '/segment',
   },
   {
     image: '/images/抽選.png',
@@ -112,6 +116,7 @@ const FEATURES = [
     tagline: '来店・購買金額を条件に抽選イベントを設定。チラシ掲載の抽選企画をデジタルに移行し、集客効果を計測できる形にする。',
     phase: 'Step 2',
     id: 'lottery',
+    url: '/lottery',
   },
   // Phase 3
   {
@@ -120,6 +125,7 @@ const FEATURES = [
     tagline: 'ロイヤル会員経由の紹介で新規会員獲得。広告費をかけずに既存会員の口コミを活性化する。',
     phase: 'Step 3',
     id: 'gift',
+    url: '/gift',
   },
 ];
 
@@ -412,10 +418,23 @@ export default function SupermarketPage() {
       {/* ============================================================ */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-[#E5E7EB]">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 h-16 md:h-20 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-[#06C755] flex items-center justify-center text-white font-bold text-sm">
-              G
-            </div>
+          <Link href="/" className="flex items-center gap-2 md:gap-3">
+            <Image
+              src="/logo_classmethod_black.png"
+              alt="クラスメソッド"
+              width={120}
+              height={38}
+              className="hidden md:block h-[34px] w-auto object-contain"
+              priority
+            />
+            <Image
+              src="/logo_classmethod_mobile.png"
+              alt="クラスメソッド"
+              width={32}
+              height={32}
+              className="md:hidden h-7 w-7 object-contain"
+              priority
+            />
             <div className="flex items-center gap-1">
               <span className="text-base md:text-lg font-bold text-[#1F2937]">グロースパック</span>
               <span className="text-sm md:text-base text-[#6B7280]"> for </span>
@@ -502,7 +521,7 @@ export default function SupermarketPage() {
               {/* ミニチェックリスト */}
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
                 {['既存会員基盤をそのまま活性化', '紙チラシのLINE移行対応'].map((t) => (
-                  <div key={t} className="flex items-center gap-2">
+                  <div key={t} className="flex items-center gap-3">
                     <Check className="w-4 h-4 text-[#06C755]" />
                     {t}
                   </div>
@@ -601,13 +620,12 @@ export default function SupermarketPage() {
                 ].map((card) => (
                   <div
                     key={card.label}
-                    className="absolute bg-white/95 backdrop-blur rounded-xl border border-white/30 shadow-[0_8px_24px_rgba(0,0,0,0.3)] p-3 w-[110px] flex flex-col items-center gap-1 animate-fade-in"
+                    className="absolute bg-white/95 backdrop-blur rounded-xl border border-white/30 shadow-[0_8px_24px_rgba(0,0,0,0.3)] p-3 w-[110px] flex flex-col items-center gap-1"
                     style={{
                       top: card.top,
                       bottom: card.bottom,
                       left: card.left,
                       right: card.right,
-                      animationDelay: card.delay,
                     }}
                   >
                     <div className="relative w-8 h-8">
@@ -630,9 +648,46 @@ export default function SupermarketPage() {
       {/* ============================================================ */}
       <div className="bg-white border-b border-[#E5E7EB]">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 py-6">
-          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
+          {/* 信頼帯 上段: LINEヤフー パートナー認定 */}
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-5 sm:gap-8 md:gap-12">
+            <div className="flex items-center gap-3">
+              <Image
+                src="/badge_ly_tech_partner_communication.png"
+                alt="LINEヤフー 2026年度 Technology Partner Communication部門"
+                width={437}
+                height={382}
+                className="h-20 sm:h-24 w-auto object-contain shrink-0"
+              />
+              <div className="text-left">
+                <div className="text-xs text-[#6B7280]">LINEヤフー</div>
+                <div className="text-sm font-semibold text-[#1F2937] leading-snug">
+                  2026年度 Technology Partner
+                  <br />
+                  Communication部門
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <Image
+                src="/badge_ly_tech_partner_miniapp.png"
+                alt="LINEヤフー 2026年度 Technology Partner LINEミニアプリ部門"
+                width={437}
+                height={382}
+                className="h-20 sm:h-24 w-auto object-contain shrink-0"
+              />
+              <div className="text-left">
+                <div className="text-xs text-[#6B7280]">LINEヤフー</div>
+                <div className="text-sm font-semibold text-[#1F2937] leading-snug">
+                  2026年度 Technology Partner
+                  <br />
+                  LINEミニアプリ部門
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* 信頼帯 下段: その他の認定・実績 */}
+          <div className="mt-5 pt-5 border-t border-[#E5E7EB] flex flex-wrap items-center justify-center gap-6 md:gap-10">
             {[
-              { icon: ShieldCheck, label: 'LINEヤフー Technology Partner', color: '#06C755' },
               { icon: Award, label: 'AWS Premier Tier Services Partner', color: '#FF9900' },
               { icon: ShieldCheck, label: 'ISO 27001 取得（クラスメソッド）', color: '#3B82F6' },
               { icon: Users, label: 'グッデイ（HC63店舗）導入実績', color: '#05A847' },
@@ -653,7 +708,7 @@ export default function SupermarketPage() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E7EB] border border-[#E5E7EB] rounded-xl overflow-hidden">
           {STATS.map(({ value, unit, label, sub }) => (
             <div key={label} className="px-6 py-8 text-center bg-white">
-              <div className="text-3xl sm:text-4xl font-bold text-[#1F2937] leading-none mb-1">
+              <div className="text-3xl sm:text-4xl font-bold text-[#1F2937] leading-none mb-1 whitespace-nowrap">
                 {value}<span className="text-xl sm:text-2xl text-[#05A847] ml-1">{unit}</span>
               </div>
               <div className="text-sm font-semibold text-[#1F2937] mt-3 mb-1">{label}</div>
@@ -789,9 +844,9 @@ export default function SupermarketPage() {
             <div className="text-xs font-semibold text-[#9CA3AF] uppercase tracking-wider mb-3">Option A</div>
             <h3 className="text-base font-bold mb-4">SaaS<br /><span className="text-sm font-normal text-[#6B7280]">パッケージ型</span></h3>
             <ul className="text-sm text-[#6B7280] space-y-2">
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />初期コスト: 低</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />POS連携: △</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />拡張性: △</li>
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />初期コスト: 低</li>
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />POS連携: △</li>
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />拡張性: △</li>
             </ul>
           </Card>
 
@@ -803,9 +858,9 @@ export default function SupermarketPage() {
             <div className="text-xs font-semibold text-[#05A847] uppercase tracking-wider mb-3">グロースパック</div>
             <h3 className="text-base font-bold mb-4">ハーフスクラッチ<br /><span className="text-sm font-normal text-[#05A847]">開発</span></h3>
             <ul className="text-sm text-[#1F2937] space-y-2 font-medium">
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />初期コスト: 中</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />POS連携: ◎</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />拡張性: ○ / サポート: ○</li>
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />初期コスト: 中</li>
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />POS連携: ◎</li>
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />拡張性: ○ / サポート: ○</li>
             </ul>
           </Card>
 
@@ -814,9 +869,9 @@ export default function SupermarketPage() {
             <div className="text-xs font-semibold text-[#9CA3AF] uppercase tracking-wider mb-3">Option C</div>
             <h3 className="text-base font-bold mb-4">スクラッチ<br /><span className="text-sm font-normal text-[#6B7280]">開発</span></h3>
             <ul className="text-sm text-[#6B7280] space-y-2">
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#EF4444] shrink-0" />初期コスト: 高</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />POS連携: ◎</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />拡張性: ◎</li>
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#EF4444] shrink-0" />初期コスト: 高</li>
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />POS連携: ◎</li>
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />拡張性: ◎</li>
             </ul>
           </Card>
         </div>
@@ -900,21 +955,34 @@ export default function SupermarketPage() {
                 : f.phase === 'Step 2'
                 ? 'bg-[#FEF3C7] text-[#B45309]'
                 : 'bg-[#EDE9FE] text-[#6D28D9]';
+            const phaseLabel =
+              f.phase === 'Step 1'
+                ? '顧客接点の創出'
+                : f.phase === 'Step 2'
+                ? 'エンゲージメント強化'
+                : '関係性の深化';
             return (
-              <Card key={f.id} padding="md">
-                <div className="flex items-start gap-4 mb-3">
-                  <div className="shrink-0 relative w-11 h-11">
-                    <Image src={f.image} alt={f.name} fill className="object-contain" />
+              <Link key={f.id} href={f.url} target="_blank" rel="noopener noreferrer" className="block hover:shadow-lg transition-shadow rounded-xl">
+                <Card padding="md">
+                  <div className="flex items-start gap-4 mb-3">
+                    <div className="shrink-0 relative w-11 h-11">
+                      <Image src={f.image} alt={f.name} fill className="object-contain" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{f.name}</h3>
+                      <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full mt-1 ${phaseColor}`}>
+                        {phaseLabel}
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{f.name}</h3>
-                    <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full mt-1 ${phaseColor}`}>
-                      {f.phase}
+                  <p className="text-sm text-[#4B5563] leading-relaxed">{f.tagline}</p>
+                  <div className="mt-2 text-right">
+                    <span className="text-xs font-semibold text-[#06C755]">
+                      詳細を見る →
                     </span>
                   </div>
-                </div>
-                <p className="text-sm text-[#4B5563] leading-relaxed">{f.tagline}</p>
-              </Card>
+                </Card>
+              </Link>
             );
           })}
         </div>
@@ -1066,7 +1134,20 @@ export default function SupermarketPage() {
             {/* ブランド */}
             <div className="md:col-span-1">
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 rounded-lg bg-[#06C755] flex items-center justify-center text-white font-bold text-sm">G</div>
+                <Image
+                  src="/logo_classmethod_white.png"
+                  alt="クラスメソッド"
+                  width={120}
+                  height={38}
+                  className="hidden md:block h-7 w-auto object-contain"
+                />
+                <Image
+                  src="/icon-light-32x32.png"
+                  alt="クラスメソッド"
+                  width={32}
+                  height={32}
+                  className="md:hidden h-7 w-7 object-contain"
+                />
                 <div className="flex items-center gap-1">
                   <span className="text-base font-bold text-white">グロースパック</span>
                   <span className="text-sm text-white/50"> for </span>

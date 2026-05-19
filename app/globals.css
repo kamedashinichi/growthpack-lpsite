@@ -175,10 +175,7 @@
   }
 }
 
-/* Added smooth scroll behavior */
-html {
-  scroll-behavior: smooth;
-}
+/* スムーススクロール無効化（ページ遷移時のスライド演出を防ぐ） */
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
