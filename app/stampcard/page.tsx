@@ -413,8 +413,21 @@ export default function StampCardPage() {
       <div className="bg-white border-b border-[#E5E7EB]">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 py-6">
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
+            <Image
+              src="/badge_ly_tech_partner_communication.png"
+              alt="LINEヤフー 2026年度 Technology Partner Communication部門"
+              width={437}
+              height={382}
+              className="h-16 sm:h-20 w-auto object-contain"
+            />
+            <Image
+              src="/badge_ly_tech_partner_miniapp.png"
+              alt="LINEヤフー 2026年度 Technology Partner LINEミニアプリ部門"
+              width={150}
+              height={131}
+              className="h-16 sm:h-20 w-auto object-contain"
+            />
             {[
-              { icon: ShieldCheck, label: 'LINEヤフー Technology Partner', color: '#06C755' },
               { icon: Award, label: 'AWS Premier Tier Services Partner', color: '#FF9900' },
               { icon: ShieldCheck, label: 'ISO 27001 取得（クラスメソッド）', color: '#3B82F6' },
             ].map(({ icon: Icon, label, color }) => (
