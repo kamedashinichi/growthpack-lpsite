@@ -92,7 +92,7 @@ const FEATURE_GROUPS = [
         name: 'スタッフ⇔顧客チャット',
         challenge: '個人LINEでやり取りしていて、退職で顧客との関係がリセットされる',
         solution: '公式チャットで対話。履歴は組織に残り、誰が対応しても文脈がわかる。',
-        demo_url: 'https://1to1demo-496glb3ku-classmethod-8335c27a.vercel.app',
+        demo_url: 'https://1to1demo.vercel.app',
       },
       {
         icon: FileText,
