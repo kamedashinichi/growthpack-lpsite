@@ -485,7 +485,7 @@ export default function OneToOnePage() {
                 className="border-white/60 text-white hover:bg-white/10 hover:border-white"
               >
                 <TrackedExternalLink
-                  href="https://1to1demo-496glb3ku-classmethod-8335c27a.vercel.app"
+                  href="https://1to1demo.vercel.app"
                   location="hero"
                   destination="demo"
                 >
