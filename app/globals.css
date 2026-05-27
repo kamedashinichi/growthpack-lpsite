@@ -85,7 +85,7 @@
 
 @theme inline {
   /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
-  --font-sans: "Noto Sans JP", sans-serif; /* Added font-sans using Noto Sans JP */
+  --font-sans: "univia-pro", "Noto Sans JP", sans-serif; /* Added font-sans using Noto Sans JP */
   --font-mono: "Roboto", monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -148,6 +148,7 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family:
+      "univia-pro",
       var(--font-noto-sans-jp),
       "Hiragino Kaku Gothic ProN",
       "Hiragino Sans",
