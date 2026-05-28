@@ -156,7 +156,13 @@ const STEPS = [
   },
 ];
 
-const STATS = [
+const STATS: Array<{
+  value: string;
+  unit: string;
+  accent?: string;
+  label: string;
+  sub: string;
+}> = [
   {
     value: '5,000社',
     unit: '以上',
@@ -165,7 +171,8 @@ const STATS = [
   },
   {
     value: '最短',
-    unit: '3ヶ月',
+    accent: '3ヶ月',
+    unit: '',
     label: 'Step 1の立ち上げ期間',
     sub: '会員証を含む標準構成。機能範囲と連携要件で変動します',
   },
@@ -319,7 +326,7 @@ const serviceJsonLd = {
 
 export default function V2TopPage() {
   return (
-    <main className="min-h-screen bg-white text-[#1F2937]">
+    <main className="min-h-screen bg-white text-foreground">
       {/* 構造化データ */}
       <script
         type="application/ld+json"
@@ -364,15 +371,15 @@ export default function V2TopPage() {
             {/* 左カラム */}
             <div className="lg:col-span-7 space-y-6 md:space-y-7">
               {/* 認定バッジ */}
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#06C755]/20 border border-[#06C755]/50 rounded-full text-xs sm:text-sm font-semibold text-[#06C755]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#06C755] shrink-0" />
-                LINEヤフー Partner Program Technology Partner
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-line-green/20 border border-line-green/50 rounded-full text-xs sm:text-sm font-semibold text-line-green">
+                <Award className="w-4 h-4 shrink-0" />
+                LINEヤフー Partner Program Technology Partner認定
               </div>
 
               <h1 className="text-4xl md:text-5xl font-bold leading-[1.2] tracking-tight text-white">
                 LINEミニアプリで、<br />
                 顧客との接点を<br />
-                <span className="text-[#06C755]">ひらく。</span>
+                <span className="text-line-green">ひらく。</span>
               </h1>
 
               <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">
@@ -411,7 +418,7 @@ export default function V2TopPage() {
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
                 {['最短3ヶ月で立ち上げ', '10機能から選択可能', 'CRM・POS連携対応'].map((t) => (
                   <div key={t} className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#06C755]" />
+                    <Check className="w-4 h-4 text-line-green" />
                     {t}
                   </div>
                 ))}
@@ -463,16 +470,15 @@ export default function V2TopPage() {
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px]">
                   <div className="bg-[#111] rounded-[28px] p-1.5 shadow-[0_20px_60px_rgba(6,199,85,0.25)] border border-white/10">
                     <div className="bg-white rounded-[22px] overflow-hidden">
-                      <div className="h-10 bg-[#06C755] flex items-center px-4 gap-2">
-                        <div className="w-6 h-6 rounded-md bg-white/20 flex items-center justify-center text-white font-bold text-[10px]">G</div>
-                        <span className="text-white text-xs font-bold">グロースパック</span>
+                      <div className="h-10 bg-line-green flex items-center px-4 gap-2">
+                        <span className="text-white text-xs font-bold whitespace-nowrap">グロースパック for LINE</span>
                       </div>
-                      <div className="p-3 space-y-2.5 bg-[#F8F9FA]">
-                        <div className="bg-white rounded-lg p-3 border border-[#E5E7EB] shadow-sm">
-                          <div className="text-[9px] text-[#05A847] font-bold mb-1 uppercase tracking-wider">MEMBERSHIP</div>
-                          <div className="font-bold text-[#1F2937] text-xs mb-2">デジタル会員証</div>
+                      <div className="p-3 space-y-2.5 bg-secondary">
+                        <div className="bg-white rounded-lg p-3 border border-border shadow-sm">
+                          <div className="text-[9px] text-line-green-dark font-bold mb-1 uppercase tracking-wider">MEMBERSHIP</div>
+                          <div className="font-bold text-foreground text-xs mb-2">デジタル会員証</div>
                           {/* 1次元バーコード（疑似） */}
-                          <div className="h-10 bg-white rounded border border-[#E5E7EB] flex flex-col items-center justify-center gap-0.5 px-2">
+                          <div className="h-10 bg-white rounded border border-border flex flex-col items-center justify-center gap-0.5 px-2">
                             <svg
                               viewBox="0 0 100 20"
                               className="w-full h-5"
@@ -489,14 +495,14 @@ export default function V2TopPage() {
                                 ) : null;
                               })}
                             </svg>
-                            <div className="text-[7px] tracking-[0.15em] text-[#6B7280] font-mono">
+                            <div className="text-[7px] tracking-[0.15em] text-muted-foreground font-mono">
                               4901234 567890
                             </div>
                           </div>
                         </div>
-                        <div className="bg-[#E8F8F0] rounded-md px-2 py-1.5 border border-[#06C755]/20">
-                          <div className="text-[9px] text-[#05A847] font-bold">新着</div>
-                          <div className="text-[10px] text-[#1F2937]">期間限定クーポン</div>
+                        <div className="bg-line-green-extra-light rounded-md px-2 py-1.5 border border-line-green/20">
+                          <div className="text-[9px] text-line-green-dark font-bold">新着</div>
+                          <div className="text-[10px] text-foreground">期間限定クーポン</div>
                         </div>
                       </div>
                     </div>
@@ -526,13 +532,13 @@ export default function V2TopPage() {
                     <div className="relative w-8 h-8">
                       <Image src={card.image} alt={card.label} fill className="object-contain" />
                     </div>
-                    <div className="text-[11px] font-bold text-[#1F2937]">{card.label}</div>
+                    <div className="text-[11px] font-bold text-foreground">{card.label}</div>
                   </div>
                 ))}
 
                 {/* 装飾グロー */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[#06C755] rounded-full opacity-10 blur-3xl pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-24 h-24 bg-[#06C755] rounded-full opacity-10 blur-3xl pointer-events-none" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-line-green rounded-full opacity-10 blur-3xl pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-24 h-24 bg-line-green rounded-full opacity-10 blur-3xl pointer-events-none" />
               </div>
             </div>
           </div>
@@ -547,7 +553,7 @@ export default function V2TopPage() {
       <div className="bg-[#0d0d0d] border-t border-white/10">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 py-10 md:py-12">
           <div className="mb-6 text-center">
-            <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#06C755] mb-2">
+            <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green mb-2">
               PRODUCT PREVIEW
             </p>
             <p className="text-white/70 text-sm">
@@ -557,7 +563,10 @@ export default function V2TopPage() {
 
           {/* 横スクロールコンテナ — CSS only スナップスクロール */}
           <div
-            className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            role="region"
+            aria-label="製品画面プレビュー（横スクロール）"
+            tabIndex={0}
+            className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] focus:outline-none focus-visible:outline-2 focus-visible:outline-line-green focus-visible:outline-offset-2 rounded-lg"
           >
             {[
               {
@@ -565,21 +574,21 @@ export default function V2TopPage() {
                 name: 'デジタル会員証',
                 desc: '来店ごとに育つ会員体験',
                 stepLabel: '顧客接点の創出',
-                color: '#06C755',
+                color: 'var(--color-line-green-light)',
               },
               {
                 image: '/images/queue.png',
                 name: '順番待ち',
                 desc: '待ち時間を会員化のチャンスへ',
                 stepLabel: '顧客接点の創出',
-                color: '#06C755',
+                color: 'var(--color-line-green-light)',
               },
               {
                 image: '/images/reservation.png',
                 name: '予約',
                 desc: 'LINE完結で来店体験を設計',
                 stepLabel: '顧客接点の創出',
-                color: '#06C755',
+                color: 'var(--color-line-green-light)',
               },
               {
                 image: '/images/stamp.png',
@@ -659,7 +668,7 @@ export default function V2TopPage() {
       {/* ============================================================ */}
       {/* 信頼バッジ帯 — ヒーロー直下                                       */}
       {/* ============================================================ */}
-      <div className="bg-white border-b border-[#E5E7EB]">
+      <div className="bg-white border-b border-border">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 py-6">
           {/* 信頼帯 上段: LINEヤフー パートナー認定 */}
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-5 sm:gap-8 md:gap-12">
@@ -669,11 +678,12 @@ export default function V2TopPage() {
                 alt="LINEヤフー 2026年度 Technology Partner Communication部門"
                 width={437}
                 height={382}
+                priority
                 className="h-20 sm:h-24 w-auto object-contain shrink-0"
               />
               <div className="text-left">
-                <div className="text-xs text-[#6B7280]">LINEヤフー</div>
-                <div className="text-sm font-semibold text-[#1F2937] leading-snug">
+                <div className="text-xs text-muted-foreground">LINEヤフー</div>
+                <div className="text-sm font-semibold text-foreground leading-snug">
                   2026年度 Technology Partner
                   <br />
                   Communication部門
@@ -686,11 +696,12 @@ export default function V2TopPage() {
                 alt="LINEヤフー 2026年度 Technology Partner LINEミニアプリ部門"
                 width={437}
                 height={382}
+                priority
                 className="h-20 sm:h-24 w-auto object-contain shrink-0"
               />
               <div className="text-left">
-                <div className="text-xs text-[#6B7280]">LINEヤフー</div>
-                <div className="text-sm font-semibold text-[#1F2937] leading-snug">
+                <div className="text-xs text-muted-foreground">LINEヤフー</div>
+                <div className="text-sm font-semibold text-foreground leading-snug">
                   2026年度 Technology Partner
                   <br />
                   LINEミニアプリ部門
@@ -699,13 +710,13 @@ export default function V2TopPage() {
             </div>
           </div>
           {/* 信頼帯 下段: その他の認定・実績 */}
-          <div className="mt-5 pt-5 border-t border-[#E5E7EB] flex flex-wrap items-center justify-center gap-6 md:gap-10">
+          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
             {[
               { icon: Award, label: 'AWS Premier Tier Services Partner', color: '#FF9900' },
               { icon: ShieldCheck, label: 'ISO 27001 取得（クラスメソッド）', color: '#3B82F6' },
-              { icon: Users, label: '技術支援実績 5,000社以上', color: '#05A847' },
+              { icon: Users, label: '技術支援実績 5,000社以上', color: 'var(--color-line-green-dark)' },
             ].map(({ icon: Icon, label, color }) => (
-              <div key={label} className="flex items-center gap-2 text-sm font-semibold text-[#1F2937] whitespace-nowrap">
+              <div key={label} className="flex items-center gap-2 text-sm font-semibold text-foreground whitespace-nowrap">
                 <Icon className="w-4 h-4 shrink-0" style={{ color }} />
                 {label}
               </div>
@@ -715,40 +726,44 @@ export default function V2TopPage() {
       </div>
 
       {/* ============================================================ */}
-      {/* 3行でわかる                                                     */}
+      {/* 3行でわかる + 実績数字                                           */}
       {/* ============================================================ */}
-      <Section id="key-takeaways" spacing="sm" container="wide" background="white" className="pb-0">
-        <div className="mb-6">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-6">3行でわかる、グロースパック for LINE で何ができるか</h2>
-          <ol className="space-y-4">
-            <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-[#06C755] text-white font-bold flex items-center justify-center text-sm">1</span>
-              <p className="text-base text-[#1F2937] leading-relaxed pt-1">会員証・予約・クーポンなど10機能から選び、最短3ヶ月で立ち上げられるLINEミニアプリ開発サービス</p>
-            </li>
-            <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-[#06C755] text-white font-bold flex items-center justify-center text-sm">2</span>
-              <p className="text-base text-[#1F2937] leading-relaxed pt-1">SaaSの速さとフルスクラッチの柔軟性を両立する「ハーフスクラッチ」で、既存CRM・POSとの深い連携が可能</p>
-            </li>
-            <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-[#06C755] text-white font-bold flex items-center justify-center text-sm">3</span>
-              <p className="text-base text-[#1F2937] leading-relaxed pt-1">業種別事例8業界・機能別11ページで、業界と機能の掛け算から自社の導入イメージを設計できる</p>
-            </li>
+      <Section id="key-takeaways" spacing="sm" container="wide" background="white">
+        <div className="mb-10 md:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-8">3行でわかる、グロースパック for LINE で何ができるか</h2>
+          <ol className="space-y-6">
+            {[
+              '会員証・予約・クーポンなど10機能から選び、最短3ヶ月で立ち上げられるLINEミニアプリ開発サービス',
+              'SaaSの速さとフルスクラッチの柔軟性を両立する「ハーフスクラッチ」で、既存CRM・POSとの深い連携が可能',
+              '業種別事例8業界・機能別11ページで、業界と機能の掛け算から自社の導入イメージを設計できる',
+            ].map((text, i) => (
+              <li key={i} className="flex gap-4 items-start">
+                <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <p className="text-base text-foreground leading-relaxed pt-1">{text}</p>
+              </li>
+            ))}
           </ol>
         </div>
-      </Section>
 
-      {/* ============================================================ */}
-      {/* 実績数字セクション                                               */}
-      {/* ============================================================ */}
-      <Section spacing="sm" container="wide" background="white" className="pt-6 sm:pt-8">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E7EB] border border-[#E5E7EB] rounded-xl overflow-hidden">
-          {STATS.map(({ value, unit, label, sub }) => (
-            <div key={label} className="px-6 py-8 text-center bg-white">
-              <div className="text-4xl sm:text-5xl font-bold text-[#1F2937] leading-none mb-1 whitespace-nowrap">
-                {value}<span className="text-2xl sm:text-3xl text-[#05A847] ml-1">{unit}</span>
+        <div className="grid grid-cols-1 sm:grid-cols-2 border border-border rounded-xl overflow-hidden">
+          {STATS.map(({ value, unit, accent, label, sub }) => (
+            <div
+              key={label}
+              className="px-6 py-10 sm:py-12 text-center bg-white border-b border-border last:border-b-0 sm:odd:border-r sm:[&:nth-child(3)]:border-b-0"
+            >
+              <div className="text-5xl sm:text-6xl font-bold text-foreground leading-none mb-1 whitespace-nowrap">
+                {value}
+                {accent && (
+                  <span className="text-line-green-dark ml-1">{accent}</span>
+                )}
+                {unit && (
+                  <span className="text-3xl sm:text-4xl text-line-green-dark ml-1">{unit}</span>
+                )}
               </div>
-              <div className="text-sm font-semibold text-[#1F2937] mt-3 mb-1">{label}</div>
-              <div className="text-xs text-[#6B7280] leading-relaxed">{sub}</div>
+              <div className="text-sm font-semibold text-foreground mt-4 mb-1">{label}</div>
+              <div className="text-xs text-muted-foreground leading-relaxed max-w-[280px] mx-auto">{sub}</div>
             </div>
           ))}
         </div>
@@ -758,26 +773,30 @@ export default function V2TopPage() {
       {/* 課題セクション                                                   */}
       {/* ============================================================ */}
       <Section id="problems" spacing="sm" container="wide" background="muted">
-        <div className="max-w-[720px] mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">
-            CHALLENGES
-          </div>
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            こんな課題、ありませんか。
+            こんな課題ありませんか?
           </h2>
           <p className="text-base text-[#4B5563]">
             リテール・サービス業の現場では、顧客接点のデジタル化が進む一方で、次のような構造的な課題が繰り返し発生しています。
           </p>
         </div>
         <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
-          {PROBLEMS.map((p) => (
-            <Card key={p.title} padding="md" className="border-l-4 border-l-[#06C755]">
-              <h3 className="text-base sm:text-lg font-bold text-[#1F2937] mb-2">
-                {p.title}
-              </h3>
-              <p className="text-sm sm:text-base text-[#4B5563] leading-relaxed">
-                {p.body}
-              </p>
+          {PROBLEMS.map((p, i) => (
+            <Card key={p.title} padding="md">
+              <div className="flex items-start gap-4">
+                <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-base sm:text-lg font-bold text-foreground mb-2">
+                    {p.title}
+                  </h3>
+                  <p className="text-sm sm:text-base text-[#4B5563] leading-relaxed">
+                    {p.body}
+                  </p>
+                </div>
+              </div>
             </Card>
           ))}
         </div>
@@ -787,52 +806,50 @@ export default function V2TopPage() {
       {/* ポジショニング                                                   */}
       {/* ============================================================ */}
       <Section id="positioning" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">
-            WHY GROWTHPACK
-          </div>
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             SaaSとスクラッチ、その中間に。
           </h2>
           <p className="text-base text-[#4B5563]">
-            SaaSは速く安いが、拡張と連携に制約があります。フルスクラッチは自由度が高いが、期間とコストが膨らみます。グロースパックは<span className="font-bold text-[#1F2937]">速さ・柔軟性・サポート品質</span>を同時に提供するハーフスクラッチ開発です。
+            SaaSは速く安いが、拡張と連携に制約があります。フルスクラッチは自由度が高いが、期間とコストが膨らみます。<br />
+            グロースパックは<span className="font-bold text-foreground">速さ・柔軟性・サポート品質</span>を同時に提供するハーフスクラッチ開発です。
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-4 md:gap-5">
           {/* SaaS */}
           <Card variant="outline" padding="md">
-            <div className="text-xs font-semibold text-[#9CA3AF] uppercase tracking-wider mb-3">Option A</div>
-            <h3 className="text-base font-bold mb-4">SaaS<br /><span className="text-sm font-normal text-[#6B7280]">パッケージ型</span></h3>
-            <ul className="text-sm text-[#6B7280] space-y-2">
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />初期コスト: 低</li>
+            <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">Option A</div>
+            <h3 className="text-base font-bold mb-4 whitespace-nowrap">SaaS <span className="font-normal text-muted-foreground">パッケージ型</span></h3>
+            <ul className="text-sm text-muted-foreground space-y-2">
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />初期コスト: 低</li>
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />拡張性: △</li>
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />サポート: △</li>
             </ul>
           </Card>
 
           {/* Growthpack — 推奨 */}
-          <Card variant="accent" padding="md" className="ring-2 ring-[#06C755] shadow-lg relative">
-            <div className="absolute -top-3 left-4 px-2 py-0.5 bg-[#05A847] text-white text-xs font-bold rounded-sm">
+          <Card variant="accent" padding="md" className="ring-2 ring-line-green relative">
+            <div className="absolute -top-3 left-4 px-2 py-0.5 bg-line-green-dark text-white text-xs font-bold rounded-sm">
               RECOMMENDED
             </div>
-            <div className="text-xs font-semibold text-[#05A847] uppercase tracking-wider mb-3">Growthpack</div>
-            <h3 className="text-base font-bold mb-4">ハーフスクラッチ<br /><span className="text-sm font-normal text-[#05A847]">開発</span></h3>
-            <ul className="text-sm text-[#1F2937] space-y-2 font-medium">
+            <div className="text-xs font-semibold text-line-green-dark uppercase tracking-wider mb-3">Growthpack</div>
+            <h3 className="text-base font-bold mb-4 whitespace-nowrap">ハーフスクラッチ開発</h3>
+            <ul className="text-sm text-foreground space-y-2 font-medium">
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />初期コスト: 中</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />拡張性: ○</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />サポート: ○ / 性能: ○</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />拡張性: ○</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />サポート: ○ / 性能: ○</li>
             </ul>
           </Card>
 
           {/* スクラッチ */}
           <Card variant="outline" padding="md">
-            <div className="text-xs font-semibold text-[#9CA3AF] uppercase tracking-wider mb-3">Option C</div>
-            <h3 className="text-base font-bold mb-4">スクラッチ<br /><span className="text-sm font-normal text-[#6B7280]">開発</span></h3>
-            <ul className="text-sm text-[#6B7280] space-y-2">
+            <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">Option C</div>
+            <h3 className="text-base font-bold mb-4 whitespace-nowrap">スクラッチ開発</h3>
+            <ul className="text-sm text-muted-foreground space-y-2">
               <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#EF4444] shrink-0" />初期コスト: 高</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />拡張性: ◎</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />サポート: ○</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />拡張性: ◎</li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />サポート: ○</li>
             </ul>
           </Card>
         </div>
@@ -841,7 +858,7 @@ export default function V2TopPage() {
       {/* ============================================================ */}
       {/* 中盤CTA帯（2箇所目）                                             */}
       {/* ============================================================ */}
-      <div className="bg-[#05A847] py-8">
+      <div className="bg-line-green-dark py-8">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
@@ -857,7 +874,7 @@ export default function V2TopPage() {
                 variant="secondary"
                 size="lg"
                 asChild
-                className="bg-white text-[#05A847] hover:bg-white/90 font-bold"
+                className="bg-white text-line-green-dark hover:bg-white/90 font-bold"
               >
                 <TrackedExternalLink
                   href="https://classmethod.jp/services/line/line-apps/#iframe-form"
@@ -877,14 +894,11 @@ export default function V2TopPage() {
       {/* 機能一覧                                                        */}
       {/* ============================================================ */}
       <Section id="features" spacing="md" container="wide" background="muted">
-        <div className="max-w-[720px] mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">
-            FEATURES
-          </div>
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             10の機能アセットから、選んで組み合わせる。
           </h2>
-          <p className="text-base text-[#4B5563]">
+          <p className="text-base text-muted-foreground">
             全機能を導入する必要はありません。ビジネスの優先度に合わせて必要なものだけを選び、フェーズを追って拡張できます。
           </p>
         </div>
@@ -892,48 +906,55 @@ export default function V2TopPage() {
           {FEATURES.map((f) => {
             const badgeColor =
               f.stepLabel === '顧客接点の創出'
-                ? 'bg-[#E8F8F0] text-[#05A847]'
+                ? 'bg-line-green-extra-light text-line-green-dark'
                 : f.stepLabel === 'エンゲージメント強化'
                 ? 'bg-[#FEF3C7] text-[#B45309]'
                 : 'bg-[#EDE9FE] text-[#6D28D9]';
             const pricing = getPricingEntry(f.url.slice(1) as FeatureKey);
             return (
-              <Link key={f.id} href={f.url} target="_blank" rel="noopener noreferrer" className="block hover:shadow-lg transition-shadow rounded-xl">
-                <Card padding="md">
+              <Link
+                key={f.id}
+                href={f.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block h-full rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-link focus-visible:ring-offset-2"
+              >
+                <Card padding="md" className="h-full flex flex-col border-2 border-border group-hover:border-line-green transition-colors">
+                  <span className={`inline-block self-start text-sm font-semibold px-2.5 py-1 rounded-full mb-3 whitespace-nowrap ${badgeColor}`}>
+                    {f.stepLabel}
+                  </span>
                   <div className="flex items-start gap-4 mb-3">
                     <div className="shrink-0 relative w-11 h-11">
                       <Image
                         src={f.image}
                         alt={f.name}
                         fill
+                        sizes="44px"
                         className="object-contain"
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">
+                      <h3 className="text-base sm:text-lg font-bold text-foreground">
                         {f.name}
                       </h3>
-                      <span className={`inline-block text-[9px] font-semibold px-2 py-0.5 rounded-full mt-1 whitespace-nowrap ${badgeColor}`}>
-                        {f.stepLabel}
-                      </span>
                     </div>
                   </div>
-                  <p className="text-sm text-[#4B5563] leading-relaxed mb-3">
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">
                     {f.tagline}
                   </p>
                   {pricing && (
-                    <div className="pt-3 border-t border-[#E5E7EB] flex items-baseline justify-between">
-                      <span className="text-xs text-[#9CA3AF] font-semibold uppercase tracking-wider">
+                    <div className="mt-auto pt-3 border-t border-border flex items-baseline justify-between">
+                      <span className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">
                         初期費用
                       </span>
-                      <span className="text-sm font-bold text-[#05A847]">
+                      <span className="text-sm font-bold text-foreground">
                         {pricing.price}
-                        <span className="text-xs font-normal text-[#6B7280] ml-1">（税抜）</span>
+                        <span className="text-xs font-normal text-muted-foreground ml-1">（税抜）</span>
                       </span>
                     </div>
                   )}
                   <div className="mt-2 text-right">
-                    <span className="text-xs font-semibold text-[#06C755]">
+                    <span className="text-sm font-semibold text-link underline underline-offset-4 decoration-link/40 group-hover:text-link-hover group-hover:decoration-link-hover transition-colors">
                       詳細を見る →
                     </span>
                   </div>
@@ -948,10 +969,7 @@ export default function V2TopPage() {
       {/* 3フェーズ ロードマップ                                            */}
       {/* ============================================================ */}
       <Section id="steps" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">
-            ROADMAP
-          </div>
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             3ステップで段階的に育てる。
           </h2>
@@ -960,36 +978,28 @@ export default function V2TopPage() {
           </p>
         </div>
 
-        {/* ステップ接続ライン + カード */}
-        <div className="relative">
-          {/* デスクトップ接続線 */}
-          <div className="hidden md:block absolute top-10 left-[calc(33.333%+0px)] right-[calc(33.333%+0px)] h-0.5 bg-[#E5E7EB] z-0" />
-          <div className="grid md:grid-cols-3 gap-5 md:gap-6 relative z-10">
-            {STEPS.map((p, i) => (
-              <Card key={p.step} variant="elevated" padding="lg" rounded="xl" className="relative">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-full bg-[#05A847] text-white font-bold flex items-center justify-center text-sm shrink-0">
-                    {i + 1}
+        <div className="grid md:grid-cols-3 gap-5 md:gap-6">
+          {STEPS.map((p, i) => (
+            <Card key={p.step} variant="elevated" padding="lg" rounded="xl">
+              <div className="flex items-start gap-4 mb-4">
+                <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h3 className="text-base sm:text-lg font-bold text-foreground pt-1">{p.label}</h3>
+              </div>
+              <p className="text-sm text-[#4B5563] leading-relaxed mb-4">
+                {p.description}
+              </p>
+              <div className="pt-4 border-t border-border space-y-1.5">
+                {p.features.map((f) => (
+                  <div key={f} className="flex items-center gap-2 text-sm text-foreground">
+                    <Check className="w-4 h-4 text-line-green shrink-0" />
+                    {f}
                   </div>
-                  <div>
-                    <div className="text-xs text-[#9CA3AF] font-semibold uppercase tracking-wider">{p.step}</div>
-                    <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{p.label}</h3>
-                  </div>
-                </div>
-                <p className="text-sm text-[#4B5563] leading-relaxed mb-4">
-                  {p.description}
-                </p>
-                <div className="pt-4 border-t border-[#E5E7EB] space-y-1.5">
-                  {p.features.map((f) => (
-                    <div key={f} className="flex items-center gap-2 text-sm text-[#1F2937]">
-                      <Check className="w-4 h-4 text-[#06C755] shrink-0" />
-                      {f}
-                    </div>
-                  ))}
-                </div>
-              </Card>
-            ))}
-          </div>
+                ))}
+              </div>
+            </Card>
+          ))}
         </div>
       </Section>
 
@@ -997,10 +1007,7 @@ export default function V2TopPage() {
       {/* 業種別導入実績（事例セクション / 社名なし）                          */}
       {/* ============================================================ */}
       <Section id="case-studies" spacing="sm" container="wide" background="muted">
-        <div className="max-w-[720px] mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">
-            CASE STUDIES
-          </div>
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             業種を問わず、導入が進んでいます。
           </h2>
@@ -1059,23 +1066,26 @@ export default function V2TopPage() {
               href: '/supermarket',
             },
           ].map(({ industry, use, result, href }) => (
-            <Link key={industry} href={href} className="block hover:shadow-lg transition-shadow rounded-xl">
-              <Card key={industry} padding="md">
-                <div className="text-xs font-semibold text-[#05A847] uppercase tracking-wider mb-2">INDUSTRY</div>
-                <h3 className="text-base font-bold text-[#1F2937] mb-2">{industry}</h3>
-                <div className="text-xs text-[#9CA3AF] mb-1">主な活用機能</div>
+            <Link
+              key={industry}
+              href={href}
+              className="group block rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-line-green-dark focus-visible:ring-offset-2"
+            >
+              <Card key={industry} padding="md" className="border-2 border-border group-hover:border-line-green transition-colors">
+                <h3 className="text-base font-bold mb-2 text-line-green-dark">{industry}</h3>
+                <div className="text-xs text-muted-foreground mb-1">主な活用機能</div>
                 <p className="text-sm text-[#4B5563] mb-3">{use}</p>
-                <div className="pt-3 border-t border-[#E5E7EB]">
+                <div className="pt-3 border-t border-border">
                   <div className="flex items-start gap-2">
-                    <Check className="w-4 h-4 text-[#06C755] shrink-0 mt-0.5" />
-                    <p className="text-sm font-semibold text-[#1F2937]">{result}</p>
+                    <Check className="w-4 h-4 text-line-green shrink-0 mt-0.5" />
+                    <p className="text-sm font-semibold text-foreground">{result}</p>
                   </div>
                 </div>
               </Card>
             </Link>
           ))}
         </div>
-        <p className="text-xs text-[#9CA3AF] text-center mt-6">
+        <p className="text-xs text-muted-foreground text-center mt-6">
           ※ 事例は業種・活用パターンを抽象化して記載しています。具体的な実績はご商談にてご説明します。
         </p>
       </Section>
@@ -1083,11 +1093,8 @@ export default function V2TopPage() {
       {/* ============================================================ */}
       {/* FAQ                                                             */}
       {/* ============================================================ */}
-      <Section id="faq" spacing="md" container="default" background="white">
+      <Section id="faq" spacing="sm" container="wide" background="white">
         <div className="mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">
-            FAQ
-          </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             よくあるご質問
           </h2>
@@ -1095,8 +1102,8 @@ export default function V2TopPage() {
         <div className="space-y-4">
           {FAQS.map((f) => (
             <Card key={f.q} padding="md">
-              <h3 className="text-base sm:text-lg font-bold text-[#1F2937] mb-2 flex items-start gap-2">
-                <span className="text-[#06C755] shrink-0 font-bold">Q.</span>
+              <h3 className="text-base sm:text-lg font-bold text-foreground mb-2 flex items-start gap-2">
+                <span className="text-line-green shrink-0 font-bold">Q.</span>
                 {f.q}
               </h3>
               <p className="text-sm sm:text-base text-[#4B5563] leading-relaxed pl-6">
@@ -1108,43 +1115,43 @@ export default function V2TopPage() {
       </Section>
 
       {/* ============================================================ */}
-      {/* 3ステップ導入フロー (HowTo)                                      */}
+      {/* 最終CTA帯 — 3ステップ導入フロー(HowTo)を内包・ダーク背景            */}
       {/* ============================================================ */}
-      <Section id="how-to" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-8 sm:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">HOW TO START</div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">3ステップで導入できます</h2>
+      <Section id="contact" spacing="md" container="wide" background="dark">
+        {/* 3ステップで導入できます */}
+        <div className="mb-16 md:mb-24">
+          <div className="mb-8 sm:mb-10">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">3ステップで導入できます</h2>
+          </div>
+          <ol className="grid md:grid-cols-3 gap-4 md:gap-6">
+            {[
+              { title: '要件ヒアリング・見積（〜2週間）', body: '業種・規模・既存システムをお聞きし、機能の組み合わせと概算費用をご提示します。' },
+              { title: '設計・実装（1〜2ヶ月）', body: 'UI/UX設計・LINEミニアプリ開発・既存システム連携を並列で進行します。' },
+              { title: 'テスト・本番リリース（1ヶ月）', body: '受入テスト・LINEヤフー審査・本番リリースまで伴走します。リリース後の運用フォローも対応可能です。' },
+            ].map((s, i) => (
+              <li key={s.title} className="bg-white/5 rounded-xl border border-white/10 p-6">
+                <span className="block text-3xl font-bold text-line-green leading-none tabular-nums mb-3">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h3 className="text-lg font-bold text-white mb-2">{s.title}</h3>
+                <p className="text-sm text-white/70 leading-relaxed">{s.body}</p>
+              </li>
+            ))}
+          </ol>
         </div>
-        <ol className="max-w-[800px] space-y-4">
-          <li className="bg-[#F9FAFB] rounded-xl border border-[#E5E7EB] p-6">
-            <h3 className="text-lg font-bold text-[#1F2937] mb-2">1. 要件ヒアリング・見積（〜2週間）</h3>
-            <p className="text-sm text-[#4B5563] leading-relaxed">業種・規模・既存システムをお聞きし、機能の組み合わせと概算費用をご提示します。</p>
-          </li>
-          <li className="bg-[#F9FAFB] rounded-xl border border-[#E5E7EB] p-6">
-            <h3 className="text-lg font-bold text-[#1F2937] mb-2">2. 設計・実装（1〜2ヶ月）</h3>
-            <p className="text-sm text-[#4B5563] leading-relaxed">UI/UX設計・LINEミニアプリ開発・既存システム連携を並列で進行します。</p>
-          </li>
-          <li className="bg-[#F9FAFB] rounded-xl border border-[#E5E7EB] p-6">
-            <h3 className="text-lg font-bold text-[#1F2937] mb-2">3. テスト・本番リリース（1ヶ月）</h3>
-            <p className="text-sm text-[#4B5563] leading-relaxed">受入テスト・LINEヤフー審査・本番リリースまで伴走します。リリース後の運用フォローも対応可能です。</p>
-          </li>
-        </ol>
-      </Section>
 
-      {/* ============================================================ */}
-      {/* 最終CTA帯（3箇所目）— ダーク背景                                  */}
-      {/* ============================================================ */}
-      <Section id="contact" spacing="lg" container="default" background="dark">
+        {/* CONTACT 本体 */}
         <div className="text-center space-y-6 md:space-y-8">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#06C755] mb-2">
+          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green mb-2">
             CONTACT
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
             LINEミニアプリの設計から運用まで、<br />
-            <span className="text-[#06C755]">一度ご相談ください。</span>
+            <span className="text-line-green">一度ご相談ください。</span>
           </h2>
-          <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">
-            業種・規模・現状のシステム構成をお聞きしたうえで、最適な機能の組み合わせとフェーズ計画をご提案します。初回相談は無料です。
+          <p className="text-xl sm:text-2xl text-white/80 leading-relaxed">
+            業種・規模・現状のシステム構成をお聞きしたうえで、最適な機能の組み合わせとフェーズ計画をご提案します。<br />
+            <span className="font-bold text-white">初回相談は無料です。</span>
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4">
             <Button variant="primary" size="lg" asChild>
@@ -1186,26 +1193,26 @@ export default function V2TopPage() {
           <div className="grid md:grid-cols-4 gap-8 md:gap-10 mb-10">
             {/* ブランド */}
             <div className="md:col-span-1">
-              <div className="flex items-center gap-2 mb-4">
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-2 mb-4">
                 {/* デスクトップ: クラスメソッドロゴ / スマホ: アイコン（レイアウト崩れ防止） */}
                 <Image
                   src="/logo_classmethod_white.png"
                   alt="クラスメソッド"
                   width={120}
                   height={38}
-                  className="hidden md:block h-7 w-auto object-contain"
+                  className="hidden md:block h-7 w-auto object-contain shrink-0"
                 />
                 <Image
-                  src="/icon-light-32x32.png"
+                  src="/logo_classmethod_mark.png"
                   alt="クラスメソッド"
                   width={32}
                   height={32}
-                  className="md:hidden h-7 w-7 object-contain"
+                  className="md:hidden h-7 w-7 object-contain shrink-0"
                 />
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 whitespace-nowrap">
                   <span className="text-base font-bold text-white">グロースパック</span>
                   <span className="text-sm text-white/50"> for </span>
-                  <span className="text-base font-bold text-[#06C755]">LINE</span>
+                  <span className="text-base font-bold text-line-green">LINE</span>
                 </div>
               </div>
               <p className="text-xs text-white/50 leading-relaxed">
@@ -1215,26 +1222,26 @@ export default function V2TopPage() {
 
             {/* サービス */}
             <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">SERVICE</div>
-              <ul className="space-y-2 text-sm text-white/60">
-                <li><a href="#features" className="hover:text-white transition-colors">機能一覧</a></li>
-                <li><a href="#steps" className="hover:text-white transition-colors">導入ロードマップ</a></li>
-                <li><a href="#positioning" className="hover:text-white transition-colors">ハーフスクラッチとは</a></li>
+              <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-3">SERVICE</div>
+              <ul className="text-sm text-white/60">
+                <li><a href="#features" className="inline-flex items-center min-h-[44px] hover:text-white transition-colors">機能一覧</a></li>
+                <li><a href="#steps" className="inline-flex items-center min-h-[44px] hover:text-white transition-colors">導入ロードマップ</a></li>
+                <li><a href="#positioning" className="inline-flex items-center min-h-[44px] hover:text-white transition-colors">ハーフスクラッチとは</a></li>
               </ul>
             </div>
 
             {/* 事例・リソース */}
             <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">RESOURCES</div>
-              <ul className="space-y-2 text-sm text-white/60">
-                <li><a href="#case-studies" className="hover:text-white transition-colors">業種別導入事例</a></li>
-                <li><a href="#faq" className="hover:text-white transition-colors">よくあるご質問</a></li>
+              <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-3">RESOURCES</div>
+              <ul className="text-sm text-white/60">
+                <li><a href="#case-studies" className="inline-flex items-center min-h-[44px] hover:text-white transition-colors">業種別導入事例</a></li>
+                <li><a href="#faq" className="inline-flex items-center min-h-[44px] hover:text-white transition-colors">よくあるご質問</a></li>
                 <li>
                   <a
                     href="https://dev.classmethod.jp/tags/line/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-white transition-colors"
+                    className="inline-flex items-center min-h-[44px] hover:text-white transition-colors"
                   >
                     技術ブログ
                   </a>
@@ -1244,14 +1251,14 @@ export default function V2TopPage() {
 
             {/* お問い合わせ */}
             <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">CONTACT</div>
-              <ul className="space-y-2 text-sm text-white/60">
+              <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-3">CONTACT</div>
+              <ul className="text-sm text-white/60">
                 <li>
                   <TrackedExternalLink
                     href="https://classmethod.jp/services/line/line-apps/#iframe-form"
                     location="top_lp_footer_contact"
                     destination="contact"
-                    className="hover:text-white transition-colors"
+                    className="inline-flex items-center min-h-[44px] hover:text-white transition-colors"
                   >
                     無料相談はこちら
                   </TrackedExternalLink>
@@ -1261,7 +1268,7 @@ export default function V2TopPage() {
                     href="https://classmethod.jp/download/line-mini-app/"
                     location="top_lp_footer_download"
                     destination="download"
-                    className="hover:text-white transition-colors"
+                    className="inline-flex items-center min-h-[44px] hover:text-white transition-colors"
                   >
                     資料ダウンロード
                   </TrackedExternalLink>

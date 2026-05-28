@@ -97,7 +97,7 @@ export function TopHeader() {
             priority
           />
           <Image
-            src="/logo_classmethod_mobile.png"
+            src="/logo_classmethod_mark.png"
             alt="クラスメソッド"
             width={32}
             height={32}
