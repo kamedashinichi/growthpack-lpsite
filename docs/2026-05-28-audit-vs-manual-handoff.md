@@ -148,7 +148,10 @@ audit でも一部拾えるが、人間の目で最終確認が必要。
 
 ## 関連ファイル
 
-- `docs/2026-05-27-impeccable-audit-notes.md` — トップページ全体の audit ブログ下書き
-- `docs/2026-05-28-features-section-audit.md` — features セクション単体監査ログ（13/20 → 18/20）
 - `app/page.tsx` — 実装本体
 - `app/globals.css` — link カラートークン追加
+
+## 補足
+
+features セクション単体監査のスコアは 13/20 → 18/20（Excellent ライン）。
+詳細な audit ログとブログ下書きは鈴木がローカルで管理してます。必要なら共有します。
