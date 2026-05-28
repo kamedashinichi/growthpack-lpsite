@@ -348,21 +348,13 @@ export default function V2TopPage() {
       {/* ============================================================ */}
       {/* Hero — 写真背景 + ダークオーバーレイ + 白テキスト                  */}
       {/* ============================================================ */}
-      <div className="relative min-h-[560px] md:min-h-[700px] flex items-center bg-[#0a0a0a] overflow-hidden">
-        {/* 背景グラデ（LINE Green の光を右下から） */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              'radial-gradient(ellipse 80% 60% at 80% 100%, rgba(6,199,85,0.22) 0%, rgba(6,199,85,0.06) 40%, transparent 70%), linear-gradient(135deg, #0a0a0a 0%, #1a1d21 60%, #0a0a0a 100%)',
-          }}
-        />
+      <div className="relative min-h-[560px] md:min-h-[700px] flex items-center bg-[#f5f5f5] overflow-hidden">
         {/* 背景グリッド（細かいドット） */}
         <div
-          className="absolute inset-0 opacity-[0.07]"
+          className="absolute inset-0 opacity-[0.06]"
           style={{
             backgroundImage:
-              'radial-gradient(circle, #ffffff 1px, transparent 1px)',
+              'radial-gradient(circle, #1F2937 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
@@ -371,19 +363,19 @@ export default function V2TopPage() {
             {/* 左カラム */}
             <div className="lg:col-span-7 space-y-6 md:space-y-7">
               {/* 認定バッジ */}
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-line-green/20 border border-line-green/50 rounded-full text-xs sm:text-sm font-semibold text-line-green">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-line-green-extra-light border border-line-green/40 rounded-full text-xs sm:text-sm font-semibold text-line-green-dark">
                 <Award className="w-4 h-4 shrink-0" />
                 LINEヤフー Partner Program Technology Partner認定
               </div>
 
-              <h1 className="text-4xl md:text-5xl font-bold leading-[1.2] tracking-tight text-white">
+              <h1 className="text-4xl md:text-5xl font-bold leading-[1.2] tracking-tight text-foreground">
                 LINEミニアプリで、<br />
                 顧客との接点を<br />
-                <span className="text-line-green">ひらく。</span>
+                <span className="text-line-green-dark">ひらく。</span>
               </h1>
 
-              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">
-                ハーフスクラッチ開発で、SaaSの速さとフルスクラッチの柔軟性を両立。会員証・予約・クーポンなど10機能のアセットから必要なものだけを選び、<span className="font-bold text-white">最短3ヶ月</span>で立ち上げます。
+              <p className="text-base sm:text-lg text-foreground/80 leading-relaxed max-w-[600px]">
+                ハーフスクラッチ開発で、SaaSの速さとフルスクラッチの柔軟性を両立。会員証・予約・クーポンなど10機能のアセットから必要なものだけを選び、<span className="font-bold text-foreground">最短3ヶ月</span>で立ち上げます。
               </p>
 
               {/* CTA — ヒーロー内（1箇所目） */}
@@ -402,7 +394,6 @@ export default function V2TopPage() {
                   variant="outline"
                   size="lg"
                   asChild
-                  className="border-white/60 text-white hover:bg-white/10 hover:border-white"
                 >
                   <TrackedExternalLink
                     href="https://classmethod.jp/download/line-mini-app/"
@@ -415,10 +406,10 @@ export default function V2TopPage() {
               </div>
 
               {/* ミニチェックリスト */}
-              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-muted-foreground">
                 {['最短3ヶ月で立ち上げ', '10機能から選択可能', 'CRM・POS連携対応'].map((t) => (
                   <div key={t} className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-line-green" />
+                    <Check className="w-4 h-4 text-line-green-dark" />
                     {t}
                   </div>
                 ))}
@@ -435,12 +426,6 @@ export default function V2TopPage() {
                   preserveAspectRatio="xMidYMid meet"
                   aria-hidden="true"
                 >
-                  <defs>
-                    <radialGradient id="lineFade" cx="50%" cy="50%" r="50%">
-                      <stop offset="0%" stopColor="#06C755" stopOpacity="0.6" />
-                      <stop offset="100%" stopColor="#06C755" stopOpacity="0" />
-                    </radialGradient>
-                  </defs>
                   {/* 中心から6方向へ */}
                   {[
                     { x: 90, y: 100 },
@@ -462,13 +447,11 @@ export default function V2TopPage() {
                       opacity="0.35"
                     />
                   ))}
-                  {/* 中心のグロー */}
-                  <circle cx="250" cy="280" r="140" fill="url(#lineFade)" />
                 </svg>
 
                 {/* 中心のスマホ */}
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px]">
-                  <div className="bg-[#111] rounded-[28px] p-1.5 shadow-[0_20px_60px_rgba(6,199,85,0.25)] border border-white/10">
+                  <div className="bg-[#111] rounded-[28px] p-1.5 shadow-[0_20px_60px_rgba(0,0,0,0.15)] border border-white/10">
                     <div className="bg-white rounded-[22px] overflow-hidden">
                       <div className="h-10 bg-line-green flex items-center px-4 gap-2">
                         <span className="text-white text-xs font-bold whitespace-nowrap">グロースパック for LINE</span>
@@ -520,7 +503,7 @@ export default function V2TopPage() {
                 ].map((card) => (
                   <div
                     key={card.label}
-                    className="absolute bg-white/95 backdrop-blur rounded-xl border border-white/30 shadow-[0_8px_24px_rgba(0,0,0,0.3)] p-3 w-[110px] flex flex-col items-center gap-1 animate-fade-in"
+                    className="absolute bg-white rounded-xl border border-border shadow-[0_4px_12px_rgba(0,0,0,0.08)] p-3 w-[110px] flex flex-col items-center gap-1 animate-fade-in"
                     style={{
                       top: card.top,
                       bottom: card.bottom,
@@ -536,9 +519,6 @@ export default function V2TopPage() {
                   </div>
                 ))}
 
-                {/* 装飾グロー */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-line-green rounded-full opacity-10 blur-3xl pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-24 h-24 bg-line-green rounded-full opacity-10 blur-3xl pointer-events-none" />
               </div>
             </div>
           </div>
@@ -550,13 +530,13 @@ export default function V2TopPage() {
       {/* スマホフレーム埋め込み式横スクロール（A案）                            */}
       {/* 全デバイスで表示（hidden lg:block は使わない）                        */}
       {/* ============================================================ */}
-      <div className="bg-[#0d0d0d] border-t border-white/10">
+      <div className="bg-[#f5f5f5] border-t border-border">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 py-10 md:py-12">
           <div className="mb-6 text-center">
-            <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green mb-2">
+            <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green-dark mb-2">
               PRODUCT PREVIEW
             </p>
-            <p className="text-white/70 text-sm">
+            <p className="text-muted-foreground text-sm">
               LINEミニアプリで実際に作れる主要8機能の画面
             </p>
           </div>
@@ -574,21 +554,21 @@ export default function V2TopPage() {
                 name: 'デジタル会員証',
                 desc: '来店ごとに育つ会員体験',
                 stepLabel: '顧客接点の創出',
-                color: 'var(--color-line-green-light)',
+                color: 'var(--color-line-green-dark)',
               },
               {
                 image: '/images/queue.png',
                 name: '順番待ち',
                 desc: '待ち時間を会員化のチャンスへ',
                 stepLabel: '顧客接点の創出',
-                color: 'var(--color-line-green-light)',
+                color: 'var(--color-line-green-dark)',
               },
               {
                 image: '/images/reservation.png',
                 name: '予約',
                 desc: 'LINE完結で来店体験を設計',
                 stepLabel: '顧客接点の創出',
-                color: 'var(--color-line-green-light)',
+                color: 'var(--color-line-green-dark)',
               },
               {
                 image: '/images/stamp.png',
@@ -631,7 +611,7 @@ export default function V2TopPage() {
                 className="flex-none w-[200px] sm:w-[220px] snap-start"
               >
                 {/* スクショ画像（画像自体に枠が含まれているので装飾なし） */}
-                <div className="relative w-full aspect-[750/1622] mx-auto drop-shadow-[0_16px_32px_rgba(0,0,0,0.5)]">
+                <div className="relative w-full aspect-[750/1622] mx-auto drop-shadow-[0_8px_20px_rgba(0,0,0,0.12)]">
                   <Image
                     src={item.image}
                     alt={item.name}
@@ -652,14 +632,14 @@ export default function V2TopPage() {
                   >
                     {item.stepLabel}
                   </div>
-                  <p className="text-white/60 text-xs leading-snug">{item.desc}</p>
+                  <p className="text-muted-foreground text-xs leading-snug">{item.desc}</p>
                 </div>
               </div>
             ))}
           </div>
 
           {/* スクロールヒント — スマホのみ表示 */}
-          <p className="text-center text-white/30 text-[10px] mt-2 sm:hidden">
+          <p className="text-center text-muted-foreground/60 text-[10px] mt-2 sm:hidden">
             横にスワイプして8つの画面を確認できます
           </p>
         </div>
