@@ -9,7 +9,7 @@ const GA_ID = process.env.NEXT_PUBLIC_GA_ID
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
-  weight: ["400", "700", "800"],
+  weight: ["400", "500", "700"],
   variable: "--font-noto-sans-jp",
 })
 
@@ -71,6 +71,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <head>
+        <link rel="stylesheet" href="https://use.typekit.net/xgn0kia.css" />
         {GA_ID && (
           <>
             <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />

@@ -38,8 +38,8 @@ const containerClasses: Record<Container, string> = {
 
 const bgClasses: Record<Background, string> = {
   white: 'bg-white',
-  muted: 'bg-[#F8F9FA]',
-  accent: 'bg-[#E8F8F0]',
+  muted: 'bg-secondary',
+  accent: 'bg-line-green-extra-light',
   dark: 'bg-[#1a1d21] text-white',
 };
 

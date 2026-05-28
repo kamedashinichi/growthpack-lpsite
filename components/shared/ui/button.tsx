@@ -21,20 +21,20 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-md font-semibold transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06C755] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center rounded-md font-semibold transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-line-green focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
         primary:
-          'bg-[#05A847] text-white hover:bg-[#048838] active:bg-[#048838]',
+          'bg-line-green-dark text-white hover:bg-[#048838] active:bg-[#048838]',
         secondary:
           'bg-[#32373c] text-white hover:bg-[#1a1d21] active:bg-[#1a1d21]',
         outline:
-          'border-2 border-[#05A847] text-[#05A847] bg-transparent hover:bg-[#05A847] hover:text-white',
+          'border-2 border-line-green-dark text-line-green-dark bg-transparent hover:bg-line-green-dark hover:text-white',
         ghost:
-          'text-[#1F2937] hover:bg-[#E8F8F0] hover:text-[#05A847]',
+          'text-foreground hover:bg-line-green-extra-light hover:text-line-green-dark',
         link:
-          'text-[#05A847] underline underline-offset-2 hover:text-[#048838] p-0 h-auto',
+          'text-line-green-dark underline underline-offset-2 hover:text-[#048838] p-0 h-auto',
         destructive:
           'bg-[#EF4444] text-white hover:bg-[#DC2626]',
       },

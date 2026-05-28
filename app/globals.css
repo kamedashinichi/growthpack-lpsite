@@ -20,6 +20,10 @@
   --accent-orange-light: #fed7aa;
   --accent-blue: #3b82f6;
 
+  /* Link Colors（classmethod.jp 準拠） */
+  --link: #2d8de0;
+  --link-hover: #1e71b9;
+
   /* Neutral Colors */
   --neutral-bg: #ffffff;
   --neutral-section-light: #f8f9fa;
@@ -85,7 +89,7 @@
 
 @theme inline {
   /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
-  --font-sans: "Noto Sans JP", sans-serif; /* Added font-sans using Noto Sans JP */
+  --font-sans: "univia-pro", "Noto Sans JP", sans-serif; /* Added font-sans using Noto Sans JP */
   --font-mono: "Roboto", monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -124,6 +128,10 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
+  /* Link Colors */
+  --color-link: var(--link);
+  --color-link-hover: var(--link-hover);
+
   /* Custom LINE colors */
   --color-line-green: #06c755;
   --color-line-green-light: #39d275;
@@ -145,9 +153,13 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    font-size: 17px;
+  }
   body {
     @apply bg-background text-foreground antialiased;
     font-family:
+      "univia-pro",
       var(--font-noto-sans-jp),
       "Hiragino Kaku Gothic ProN",
       "Hiragino Sans",

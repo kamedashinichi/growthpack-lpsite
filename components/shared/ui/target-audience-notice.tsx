@@ -11,8 +11,8 @@ import { Section } from '@/components/shared/ui/section';
 export function TargetAudienceNotice() {
   return (
     <Section spacing="sm" container="wide" background="muted">
-      <div className="border border-[#E5E7EB] rounded-lg bg-white px-5 py-4">
-        <p className="text-sm text-[#6B7280] leading-relaxed">
+      <div className="border border-border rounded-lg bg-white px-5 py-4">
+        <p className="text-sm text-muted-foreground leading-relaxed">
           本サービスは、自社サービスとしてLINEミニアプリの導入をご検討の事業会社さまを対象としています。代理店・パートナー経由でのご提案や、エンドクライアントを別企業とする受託開発等は対象外です。
         </p>
       </div>

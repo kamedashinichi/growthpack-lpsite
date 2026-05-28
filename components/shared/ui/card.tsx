@@ -19,13 +19,13 @@ type Padding = 'none' | 'sm' | 'md' | 'lg';
 
 const variantClasses: Record<Variant, string> = {
   default:
-    'bg-white border border-[#E5E7EB] hover:shadow-lg hover:border-[#06C755]/40 transition-all duration-200',
+    'bg-white border border-border transition-all duration-200',
   elevated:
-    'bg-white shadow-sm hover:shadow-lg border border-[#E5E7EB]/50 transition-shadow duration-200',
+    'bg-white shadow-sm border border-border/50 transition-shadow duration-200',
   outline:
-    'bg-transparent border border-[#E5E7EB]',
+    'bg-transparent border border-border',
   accent:
-    'bg-[#E8F8F0] border border-[#06C755]/20',
+    'bg-line-green-extra-light border border-line-green/20',
 };
 
 const roundedClasses: Record<Rounded, string> = {
