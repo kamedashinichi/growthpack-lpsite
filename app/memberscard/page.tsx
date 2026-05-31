@@ -484,15 +484,15 @@ export default function MembersCardPage() {
           <h2 className="text-2xl sm:text-3xl font-bold mb-6">3行でわかる、LINEデジタル会員証で何ができるか</h2>
           <ol className="space-y-4">
             <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-line-green text-white font-bold flex items-center justify-center text-sm">1</span>
+              <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">01</span>
               <p className="text-base text-foreground leading-relaxed pt-1">QRコードを提示するだけ。アプリDL不要で、友だち追加と同時に会員登録が完了する</p>
             </li>
             <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-line-green text-white font-bold flex items-center justify-center text-sm">2</span>
+              <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">02</span>
               <p className="text-base text-foreground leading-relaxed pt-1">既存POS・CRMとID連携し、来店・購買履歴をLINE上で一元管理できる</p>
             </li>
             <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-line-green text-white font-bold flex items-center justify-center text-sm">3</span>
+              <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">03</span>
               <p className="text-base text-foreground leading-relaxed pt-1">蓄積した来店・購買データをセグメント配信や個別フォローに活用し、リピート率を仕組みで高める</p>
             </li>
           </ol>

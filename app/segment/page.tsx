@@ -422,15 +422,15 @@ export default function SegmentPage() {
           <h2 className="text-2xl sm:text-3xl font-bold mb-6">3行でわかる、LINEセグメント配信で何ができるか</h2>
           <ol className="space-y-4">
             <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-line-green text-white font-bold flex items-center justify-center text-sm">1</span>
+              <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">01</span>
               <p className="text-base text-foreground leading-relaxed pt-1">購買履歴・属性別の最適配信でブロック率を下げ、一斉配信から脱却する</p>
             </li>
             <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-line-green text-white font-bold flex items-center justify-center text-sm">2</span>
+              <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">02</span>
               <p className="text-base text-foreground leading-relaxed pt-1">適切な人への配信集中で配信あたりの開封率・クリック率を上昇させる</p>
             </li>
             <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-line-green text-white font-bold flex items-center justify-center text-sm">3</span>
+              <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">03</span>
               <p className="text-base text-foreground leading-relaxed pt-1">配信効果をLINE上で計測しPDCAを高速化する仕組みを整備する</p>
             </li>
           </ol>

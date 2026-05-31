@@ -443,15 +443,15 @@ export default function ReservationPage() {
           <h2 className="text-2xl sm:text-3xl font-bold mb-6">3行でわかる、LINE予約で何ができるか</h2>
           <ol className="space-y-4">
             <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-line-green text-white font-bold flex items-center justify-center text-sm">1</span>
+              <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">01</span>
               <p className="text-base text-foreground leading-relaxed pt-1">飲食・サロン・施設の予約をLINE上で完結。アプリのダウンロードなしに24時間受け付けられる</p>
             </li>
             <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-line-green text-white font-bold flex items-center justify-center text-sm">2</span>
+              <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">02</span>
               <p className="text-base text-foreground leading-relaxed pt-1">予約確認・前日リマインド・キャンセル待ち・空席通知を自動化し、スタッフの確認工数をなくす</p>
             </li>
             <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-line-green text-white font-bold flex items-center justify-center text-sm">3</span>
+              <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">03</span>
               <p className="text-base text-foreground leading-relaxed pt-1">既存の予約システム・POSとAPI連携するため、現場の運用フローを変えずに導入できる</p>
             </li>
           </ol>

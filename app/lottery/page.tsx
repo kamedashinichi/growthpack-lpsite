@@ -428,15 +428,15 @@ export default function LotteryPage() {
           <h2 className="text-2xl sm:text-3xl font-bold mb-6">3行でわかる、LINE抽選で何ができるか</h2>
           <ol className="space-y-4">
             <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-line-green text-white font-bold flex items-center justify-center text-sm">1</span>
+              <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">01</span>
               <p className="text-base text-foreground leading-relaxed pt-1">キャンペーン抽選・スタンプラリーを手作業からシステム化し、集計と通知コストをゼロにする</p>
             </li>
             <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-line-green text-white font-bold flex items-center justify-center text-sm">2</span>
+              <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">02</span>
               <p className="text-base text-foreground leading-relaxed pt-1">ライト層獲得とコアファン育成の両方を1つの機能で実現し、参加賞でハズレの人にも来店動機を残す</p>
             </li>
             <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-line-green text-white font-bold flex items-center justify-center text-sm">3</span>
+              <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">03</span>
               <p className="text-base text-foreground leading-relaxed pt-1">当選通知・特典配布まで自動化し、キャンペーン頻度を上げても運用工数が増えない体制を作る</p>
             </li>
           </ol>

@@ -442,15 +442,15 @@ export default function CouponPage() {
           <h2 className="text-2xl sm:text-3xl font-bold mb-6">3行でわかる、LINEクーポン配信で何ができるか</h2>
           <ol className="space-y-4">
             <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-line-green text-white font-bold flex items-center justify-center text-sm">1</span>
+              <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">01</span>
               <p className="text-base text-foreground leading-relaxed pt-1">会員ランク・来店頻度・購買履歴でセグメントを切り、最適なクーポンを適切なタイミングに絞って配信することでブロック率を抑制できる</p>
             </li>
             <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-line-green text-white font-bold flex items-center justify-center text-sm">2</span>
+              <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">02</span>
               <p className="text-base text-foreground leading-relaxed pt-1">一斉配信から、購買履歴・属性別の精度配信へシフトすることで、値引き依存を抑えながら来店転換率を高められる</p>
             </li>
             <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-line-green text-white font-bold flex items-center justify-center text-sm">3</span>
+              <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">03</span>
               <p className="text-base text-foreground leading-relaxed pt-1">配布数・利用率・来店転換率をLINE上でリアルタイム計測し、次のクーポン設計にすぐ活かせるPDCAが回せる</p>
             </li>
           </ol>

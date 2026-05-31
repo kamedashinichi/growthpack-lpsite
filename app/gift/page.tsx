@@ -435,15 +435,15 @@ export default function GiftPage() {
           <h2 className="text-2xl sm:text-3xl font-bold mb-6">3行でわかる、LINEソーシャルギフトで何ができるか</h2>
           <ol className="space-y-4">
             <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-line-green text-white font-bold flex items-center justify-center text-sm">1</span>
+              <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">01</span>
               <p className="text-base text-foreground leading-relaxed pt-1">受取人の自動会員化でCACをゼロに近づける送付スキーム。住所不要でURLを送るだけで贈れる</p>
             </li>
             <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-line-green text-white font-bold flex items-center justify-center text-sm">2</span>
+              <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">02</span>
               <p className="text-base text-foreground leading-relaxed pt-1">ギフト受取→会員化→再来訪のフローをLINE上で完結させ、一度きりの接点をリピートに変える</p>
             </li>
             <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-line-green text-white font-bold flex items-center justify-center text-sm">3</span>
+              <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">03</span>
               <p className="text-base text-foreground leading-relaxed pt-1">既存EC・通販と連携し、贈り物市場を新規顧客獲得チャネルとして設計できる</p>
             </li>
           </ol>

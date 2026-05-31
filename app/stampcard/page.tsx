@@ -449,15 +449,15 @@ export default function StampCardPage() {
           <h2 className="text-2xl sm:text-3xl font-bold mb-6">3行でわかる、LINEスタンプカードで何ができるか</h2>
           <ol className="space-y-4">
             <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-line-green text-white font-bold flex items-center justify-center text-sm">1</span>
+              <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">01</span>
               <p className="text-base text-foreground leading-relaxed pt-1">紙のスタンプカードをLINE上でデジタル化し、QRスキャンで来店スタンプを自動付与できる</p>
             </li>
             <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-line-green text-white font-bold flex items-center justify-center text-sm">2</span>
+              <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">02</span>
               <p className="text-base text-foreground leading-relaxed pt-1">来店履歴・購買金額に応じたランク設定や特典管理が可能で、常連顧客への優遇施策を自動化できる</p>
             </li>
             <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-line-green text-white font-bold flex items-center justify-center text-sm">3</span>
+              <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">03</span>
               <p className="text-base text-foreground leading-relaxed pt-1">POS・会員ID連携で「いつ・誰が・何回来たか」を可視化し、離脱予兆の早期検知とリテンション施策に活用できる</p>
             </li>
           </ol>
