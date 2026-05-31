@@ -58,7 +58,7 @@ export const PRICING_DATA: PricingEntry[] = [
     key: 'coupon',
     name: 'クーポン配信',
     path: '/coupon',
-    price: '¥200万円〜',
+    price: '¥300万円〜',
     integration: '不要',
     note: 'クーポン10種まで標準',
   },
