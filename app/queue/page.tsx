@@ -465,7 +465,6 @@ export default function QueuePage() {
       {/* できること */}
       <Section id="features" spacing="md" container="wide" background="white">
         <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green-dark mb-3">FEATURES</div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">順番待ちでできること</h2>
           <p className="text-base text-muted-foreground">紙の番号札と「あと何分？」の問い合わせをなくし、お客様とスタッフ双方の体験を改善します。</p>
         </div>
@@ -514,7 +513,6 @@ export default function QueuePage() {
       {/* 組み合わせ */}
       <Section id="combinations" spacing="md" container="wide" background="muted">
         <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green-dark mb-3">INTEGRATIONS</div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">他の機能と組み合わせる</h2>
           <p className="text-base text-muted-foreground">順番待ちで蓄積したデータを他機能と連携することで、待ち時間が顧客獲得と来店促進の機会に変わります。</p>
         </div>
@@ -543,17 +541,16 @@ export default function QueuePage() {
       {/* 導入ステップ */}
       <Section id="steps" spacing="md" container="wide" background="white">
         <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green-dark mb-3">GETTING STARTED</div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">導入ステップ</h2>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
           {STEPS.map((s, i) => (
             <Card key={s.step} variant="elevated" padding="md" rounded="xl">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-line-green-dark text-white font-bold flex items-center justify-center text-sm shrink-0">{i + 1}</div>
-                <div>
-                  <h3 className="text-base font-bold text-foreground">{s.title}</h3>
-                </div>
+              <div className="flex items-start gap-4 mb-4">
+                <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h3 className="text-base sm:text-lg font-bold text-foreground pt-1">{s.title}</h3>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">{s.description}</p>
             </Card>
@@ -564,83 +561,50 @@ export default function QueuePage() {
       {/* よくある質問 */}
       <Section id="faq" spacing="md" container="wide" background="muted">
         <div className="max-w-[720px] mb-8 sm:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green-dark mb-3">FAQ</div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">よくある質問</h2>
         </div>
-        <div className="max-w-[800px] space-y-4">
+        <div className="space-y-4">
           {FAQS.map((f) => (
-            <details key={f.q} className="bg-white rounded-xl border border-border p-5 group">
-              <summary className="cursor-pointer font-semibold text-foreground text-base leading-snug list-none flex justify-between items-start gap-4">
-                <span>{f.q}</span>
-                <span className="shrink-0 text-line-green-dark mt-0.5">+</span>
-              </summary>
-              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{f.a}</p>
-            </details>
+            <Card key={f.q} padding="md">
+              <h3 className="text-base sm:text-lg font-bold text-foreground mb-2 flex items-start gap-2">
+                <span className="text-line-green shrink-0 font-bold">Q.</span>
+                {f.q}
+              </h3>
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed pl-6">{f.a}</p>
+            </Card>
           ))}
         </div>
       </Section>
 
-      {/* 3ステップ導入フロー */}
-      <Section id="how-to" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-8 sm:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green-dark mb-3">HOW TO START</div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">3ステップで導入できます</h2>
-        </div>
-        <ol className="max-w-[800px] space-y-4">
-          <li className="bg-secondary rounded-xl border border-border p-6">
-            <h3 className="text-lg font-bold text-foreground mb-2">1. 要件ヒアリング・見積（〜2週間）</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">店舗数・ピーク時の来客数・既存呼び出しシステムを確認し、概算費用と工期をご提示します。</p>
-          </li>
-          <li className="bg-secondary rounded-xl border border-border p-6">
-            <h3 className="text-lg font-bold text-foreground mb-2">2. 設計・実装（1〜2ヶ月）</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">LINE整理券・リアルタイム待ち状況表示・順番接近通知の設計と実装を行います。既存システム連携も並列で進行します。</p>
-          </li>
-          <li className="bg-secondary rounded-xl border border-border p-6">
-            <h3 className="text-lg font-bold text-foreground mb-2">3. テスト・本番リリース（1ヶ月）</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">受入テスト・LINEヤフー審査・本番リリースまで伴走します。リリース後の運用フォローも対応可能です。</p>
-          </li>
-        </ol>
-      </Section>
 
-      {/* 同じステップの他の機能 */}
-      <Section id="related-features" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-6">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green-dark mb-3">SAME STEP</div>
-          <h2 className="text-xl sm:text-2xl font-bold mb-2">同じステップの他の機能</h2>
-          <p className="text-sm text-muted-foreground">「顧客接点の創出」ステップで一緒に検討される機能です。</p>
-        </div>
-        <div className="grid sm:grid-cols-2 gap-4 max-w-[800px]">
-          <Link
-            href="/memberscard"
-            className="flex items-center gap-4 p-4 rounded-xl border border-border hover:border-line-green-dark hover:bg-[#F0FBF4] transition-colors group"
-          >
-            <div className="shrink-0 w-10 h-10 rounded-lg bg-line-green-extra-light flex items-center justify-center">
-              <Image src="/images/会員証.png" alt="デジタル会員証" width={24} height={24} />
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-bold text-foreground group-hover:text-line-green-dark transition-colors">デジタル会員証</p>
-              <p className="text-xs text-muted-foreground leading-snug mt-0.5">アプリDL不要。バーコード提示で5秒つながる次世代会員体験。</p>
-            </div>
-            <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-line-green-dark shrink-0 transition-colors" />
-          </Link>
-          <Link
-            href="/reservation"
-            className="flex items-center gap-4 p-4 rounded-xl border border-border hover:border-line-green-dark hover:bg-[#F0FBF4] transition-colors group"
-          >
-            <div className="shrink-0 w-10 h-10 rounded-lg bg-line-green-extra-light flex items-center justify-center">
-              <Image src="/images/予約.png" alt="予約" width={24} height={24} />
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-bold text-foreground group-hover:text-line-green-dark transition-colors">予約</p>
-              <p className="text-xs text-muted-foreground leading-snug mt-0.5">予約完了から来店後まで、LINEで一貫した顧客体験を設計。</p>
-            </div>
-            <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-line-green-dark shrink-0 transition-colors" />
-          </Link>
-        </div>
-      </Section>
+
+
 
       {/* CTA */}
-      <Section id="contact" spacing="lg" container="default" background="dark">
+      <Section id="contact" spacing="md" container="wide" background="dark">
+        {/* 3ステップで導入できますで導入できます */}
+        <div className="mb-16 md:mb-24">
+          <div className="mb-8 sm:mb-10">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">3ステップで導入できます</h2>
+          </div>
+          <ol className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            {[
+              { title: '要件ヒアリング・見積（〜2週間）', body: '店舗数・ピーク時の来客数・既存呼び出しシステムを確認し、概算費用と工期をご提示します。' },
+              { title: '設計・実装（1〜2ヶ月）', body: 'LINE整理券・リアルタイム待ち状況表示・順番接近通知の設計と実装を行います。既存システム連携も並列で進行します。' },
+              { title: 'テスト・本番リリース（1ヶ月）', body: '受入テスト・LINEヤフー審査・本番リリースまで伴走します。リリース後の運用フォローも対応可能です。' },
+            ].map((s, i) => (
+              <li key={s.title} className="bg-white/5 rounded-xl border border-white/10 p-6">
+                <span className="block text-3xl font-bold text-line-green leading-none tabular-nums mb-3">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h3 className="text-lg font-bold text-white mb-2">{s.title}</h3>
+                <p className="text-sm text-white/70 leading-relaxed">{s.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        {/* CONTACT 本体 */}
         <div className="text-center space-y-6 md:space-y-8">
           <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green mb-2">CONTACT</div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
