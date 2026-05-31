@@ -693,16 +693,16 @@ export default function DepartmentPage() {
       {/* ============================================================ */}
       {/* Key Takeaways（AIO §A — 結論先出し）                            */}
       {/* ============================================================ */}
-      <Section spacing="sm" container="default" background="white">
-        <div className="max-w-[800px] mx-auto">
-          <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-6">
+      <Section spacing="sm" container="wide" background="white">
+        <div className="mb-10 md:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-8">
             3行でわかる、百貨店×LINEミニアプリで何が変わるか
           </h2>
           <ol className="space-y-4">
             {KEY_TAKEAWAYS.map((item, i) => (
-              <li key={i} className="flex items-start gap-4 p-4 bg-line-green-pale rounded-xl border border-green-200">
-                <span className="w-8 h-8 rounded-full bg-line-green text-white font-bold text-sm flex items-center justify-center shrink-0">{i + 1}</span>
-                <p className="text-sm sm:text-base text-foreground leading-relaxed font-medium">{item}</p>
+              <li key={i} className="flex gap-4 items-start">
+                <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">{String(i + 1).padStart(2, '0')}</span>
+                <p className="text-base text-foreground leading-relaxed pt-1">{item}</p>
               </li>
             ))}
           </ol>
@@ -713,10 +713,7 @@ export default function DepartmentPage() {
       {/* 課題セクション（§7-4、百貨店 PROBLEMS 3点）                        */}
       {/* ============================================================ */}
       <Section id="problems" spacing="sm" container="wide" background="muted">
-        <div className="max-w-[720px] mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green-dark mb-3">
-            CHALLENGES
-          </div>
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             言語の壁・免税・一見客化—インバウンド時代の百貨店が抱える接点課題。
           </h2>
@@ -724,7 +721,7 @@ export default function DepartmentPage() {
         </div>
         <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
           {PROBLEMS.map((p) => (
-            <Card key={p.title} padding="md" className="border-l-4 border-l-[#06C755]">
+            <Card key={p.title} padding="md">
               <h3 className="text-base sm:text-lg font-bold text-foreground mb-2">{p.title}</h3>
               <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{p.body}</p>
             </Card>
@@ -736,10 +733,7 @@ export default function DepartmentPage() {
       {/* 構造課題セクション（主旨外 2点）                                   */}
       {/* ============================================================ */}
       <Section id="structural-issues" spacing="sm" container="wide" background="white">
-        <div className="max-w-[720px] mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">
-            STRUCTURAL ISSUES
-          </div>
+        <div className="mb-10 md:mb-12">
           <h3 className="text-xl sm:text-2xl font-semibold text-gray-700 mb-3">
             業界全体の構造課題
           </h3>
@@ -764,10 +758,7 @@ export default function DepartmentPage() {
       {/* 訴求セクション（二層設計 3ステップ訴求 — HowTo構造化）              */}
       {/* ============================================================ */}
       <Section id="appeal" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green-dark mb-3">
-            HOW IT WORKS
-          </div>
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             一般顧客のデジタル化から始め、外商の関係性を組織資産に変える3ステップ。
           </h2>
@@ -805,10 +796,7 @@ export default function DepartmentPage() {
       {/* ポジショニング（§7-5）                                          */}
       {/* ============================================================ */}
       <Section id="positioning" spacing="md" container="wide" background="muted">
-        <div className="max-w-[720px] mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green-dark mb-3">
-            WHY GROWTHPACK
-          </div>
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             SaaSとスクラッチ、その中間に。
           </h2>
@@ -915,10 +903,7 @@ export default function DepartmentPage() {
       {/* 機能グリッド（§7-6、百貨店二層設計タグライン）                       */}
       {/* ============================================================ */}
       <Section id="features" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green-dark mb-3">
-            FEATURES
-          </div>
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             外商向けと一般向けを分けて選ぶ、7つの機能アセット。
           </h2>
@@ -1011,9 +996,6 @@ export default function DepartmentPage() {
 
       <Section id="faq" spacing="md" container="default" background="white">
         <div className="mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green-dark mb-3">
-            FAQ
-          </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             よくあるご質問
           </h2>
