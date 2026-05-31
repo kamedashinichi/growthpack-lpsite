@@ -750,13 +750,11 @@ export default function ApparelPage() {
           {APPEAL_STEPS.map((s, i) => (
             <li key={s.step}>
               <Card variant="elevated" padding="lg" rounded="xl" className="relative h-full">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-full bg-line-green-dark text-white font-bold flex items-center justify-center text-sm shrink-0">
-                    {i + 1}
-                  </div>
-                  <div>
-                    <h3 className="text-base sm:text-lg font-bold text-foreground">{s.title}</h3>
-                  </div>
+                <div className="flex items-start gap-4 mb-3">
+                  <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <h3 className="text-base sm:text-lg font-bold text-foreground pt-1">{s.title}</h3>
                 </div>
                 <p className="text-[11px] font-semibold text-line-green-dark mb-2">
                   {i === 0 ? '初月〜1ヶ月目' : i === 1 ? '1〜2ヶ月目' : '3ヶ月以降'}
