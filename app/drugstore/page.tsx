@@ -444,7 +444,7 @@ export default function DrugstorePage() {
             <div className="lg:col-span-7 space-y-6 md:space-y-7">
               {/* 認定バッジ pill */}
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-line-green/20 border border-line-green/50 rounded-full text-xs sm:text-sm font-semibold text-line-green">
-                <span className="w-1.5 h-1.5 rounded-full bg-line-green shrink-0" />
+                <Award className="w-4 h-4 shrink-0" />
                 LINEヤフー Technology Partner × ドラッグストア業界
               </div>
 

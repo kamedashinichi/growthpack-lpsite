@@ -330,7 +330,7 @@ export default function ReservationPage() {
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
             <div className="flex-1 max-w-[600px] space-y-6 md:space-y-7">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-line-green-extra-light border border-line-green/40 rounded-full text-xs sm:text-sm font-semibold text-line-green-dark">
-                <span className="w-1.5 h-1.5 rounded-full bg-line-green-dark shrink-0" />
+                <Award className="w-4 h-4 shrink-0" />
                 予約機能
               </div>
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.15] tracking-tight text-foreground">
