@@ -686,9 +686,9 @@ export default function SupermarketPage() {
       {/* 実績数字セクション（§7-3、SM・HC特化）                             */}
       {/* ============================================================ */}
       <Section spacing="sm" container="wide" background="white">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E7EB] border border-border rounded-xl overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 border border-border rounded-xl overflow-hidden">
           {STATS.map(({ value, unit, label, sub }) => (
-            <div key={label} className="px-6 py-8 text-center bg-white">
+            <div key={label} className="px-6 py-10 sm:py-12 text-center bg-white border-b border-border last:border-b-0 sm:odd:border-r sm:[&:nth-child(3)]:border-b-0">
               <div className="text-3xl sm:text-4xl font-bold text-foreground leading-none mb-1 whitespace-nowrap">
                 {value}<span className="text-xl sm:text-2xl text-line-green-dark ml-1">{unit}</span>
               </div>
@@ -831,7 +831,7 @@ export default function SupermarketPage() {
           </Card>
 
           {/* Growthpack */}
-          <Card variant="accent" padding="md" className="ring-2 ring-[#06C755] shadow-lg relative">
+          <Card variant="accent" padding="md" className="ring-2 ring-line-green shadow-lg relative">
             <div className="absolute -top-3 left-4 px-2 py-0.5 bg-line-green-dark text-white text-xs font-bold rounded-sm">
               RECOMMENDED
             </div>
@@ -867,7 +867,7 @@ export default function SupermarketPage() {
                 <th className="px-4 py-3 text-center font-semibold">フルスクラッチ開発</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#E5E7EB]">
+            <tbody className="divide-y divide-border">
               {[
                 ['初期費用', '低', '中', '高'],
                 ['月額費用', '低〜中', '中', '中〜高'],

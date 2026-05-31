@@ -659,9 +659,9 @@ export default function ApparelPage() {
       {/* 実績数字セクション（§7-3、アパレル特化）                           */}
       {/* ============================================================ */}
       <Section spacing="sm" container="wide" background="white">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E7EB] border border-border rounded-xl overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 border border-border rounded-xl overflow-hidden">
           {STATS.map(({ value, unit, label, sub }) => (
-            <div key={label} className="px-6 py-8 text-center bg-white">
+            <div key={label} className="px-6 py-10 sm:py-12 text-center bg-white border-b border-border last:border-b-0 sm:odd:border-r sm:[&:nth-child(3)]:border-b-0">
               <div className="text-4xl sm:text-5xl font-bold text-foreground leading-none mb-1 whitespace-nowrap">
                 {value}<span className="text-2xl sm:text-3xl text-line-green-dark ml-1">{unit}</span>
               </div>
@@ -805,7 +805,7 @@ export default function ApparelPage() {
                 <th className="px-4 py-3 text-center font-semibold">フルスクラッチ開発</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#E5E7EB]">
+            <tbody className="divide-y divide-border">
               {[
                 ['初期費用', '低', '中', '高'],
                 ['月額費用', '低〜中', '中', '中〜高'],
