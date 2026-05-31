@@ -585,7 +585,7 @@ export default function ApparelPage() {
                     }}
                   >
                     <div className="relative w-8 h-8">
-                      <Image src={card.image} alt={card.label} fill className="object-contain" />
+                      <Image src={card.image} alt={card.label} fill sizes="32px" className="object-contain" />
                     </div>
                     <div className="text-[11px] font-bold text-foreground">{card.label}</div>
                   </div>
