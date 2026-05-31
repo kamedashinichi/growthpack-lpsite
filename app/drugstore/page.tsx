@@ -906,7 +906,7 @@ export default function DrugstorePage() {
                   </div>
                   <p className="text-sm text-muted-foreground leading-relaxed">{f.tagline}</p>
                   <div className="mt-2 text-right">
-                    <span className="text-xs font-semibold text-line-green">
+                    <span className="text-xs font-semibold text-link underline underline-offset-4 decoration-link/40">
                       詳細を見る →
                     </span>
                   </div>
@@ -956,7 +956,7 @@ export default function DrugstorePage() {
         </div>
       </Section>
 
-      <Section id="faq" spacing="md" container="default" background="white">
+      <Section id="faq" spacing="md" container="wide" background="white">
         <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             よくあるご質問
