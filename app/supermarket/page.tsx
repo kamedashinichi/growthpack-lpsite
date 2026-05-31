@@ -64,6 +64,9 @@ import {
 import { Button } from '@/components/shared/ui/button';
 import { Section } from '@/components/shared/ui/section';
 import { Card } from '@/components/shared/ui/card';
+import { getPricingEntry, type FeatureKey } from '@/lib/pricing';
+import { LpHeader } from '@/components/shared/lp-header';
+import { LpFooter } from '@/components/shared/lp-footer';
 import { TrackedExternalLink } from './tracking';
 import { ScrollTracker } from './scroll-tracker';
 import { WPDownloadButton } from './wp-download-button';
@@ -389,7 +392,7 @@ const articleJsonLd = {
 
 export default function SupermarketPage() {
   return (
-    <main className="min-h-screen bg-white text-[#1F2937]">
+    <main className="min-h-screen bg-white text-foreground">
       {/* 構造化データ */}
       <script
         type="application/ld+json"
@@ -416,44 +419,23 @@ export default function SupermarketPage() {
       {/* ============================================================ */}
       {/* Header                                                         */}
       {/* ============================================================ */}
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-[#E5E7EB]">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 h-16 md:h-20 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 md:gap-3">
-            <Image
-              src="/logo_classmethod_black.png"
-              alt="クラスメソッド"
-              width={120}
-              height={38}
-              className="hidden md:block h-[34px] w-auto object-contain"
-              priority
-            />
-            <Image
-              src="/logo_classmethod_mobile.png"
-              alt="クラスメソッド"
-              width={32}
-              height={32}
-              className="md:hidden h-7 w-7 object-contain"
-              priority
-            />
-            <div className="flex items-center gap-1">
-              <span className="text-base md:text-lg font-bold text-[#1F2937]">グロースパック</span>
-              <span className="text-sm md:text-base text-[#6B7280]"> for </span>
-              <span className="text-base md:text-lg font-bold text-[#06C755]">LINE</span>
-            </div>
-          </Link>
-          <nav className="hidden md:flex items-center gap-6 text-sm font-semibold text-[#1F2937]">
-            <a href="#problems" className="hover:text-[#05A847] transition-colors">課題</a>
-            <a href="#appeal" className="hover:text-[#05A847] transition-colors">訴求</a>
-            <a href="#features" className="hover:text-[#05A847] transition-colors">機能</a>
-            <a href="#case-studies" className="hover:text-[#05A847] transition-colors">事例</a>
-            <a href="#wp-download" className="hover:text-[#05A847] transition-colors">調査レポート</a>
-            <a href="#faq" className="hover:text-[#05A847] transition-colors">FAQ</a>
-          </nav>
+      <LpHeader
+        navItems={[
+          { href: '#problems', label: '課題' },
+          { href: '#appeal', label: '訴求' },
+          { href: '#features', label: '機能' },
+          { href: '#case-studies', label: '事例' },
+          { href: '#wp-download', label: '調査レポート' },
+          { href: '#faq', label: 'FAQ' },
+        ]}
+        cta={
           <Button variant="primary" size="sm" asChild>
-            <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="header" destination="contact">お問い合わせ</TrackedExternalLink>
+            <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="header" destination="contact">
+              お問い合わせ
+            </TrackedExternalLink>
           </Button>
-        </div>
-      </header>
+        }
+      />
 
       {/* ============================================================ */}
       {/* Hero — ダーク放射型（§7-1）                                      */}
@@ -469,7 +451,7 @@ export default function SupermarketPage() {
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(to right, rgba(10,10,10,0.90) 0%, rgba(10,10,10,0.70) 45%, rgba(10,10,10,0.35) 85%, rgba(10,10,10,0.15) 100%), radial-gradient(ellipse 60% 60% at 85% 100%, rgba(6,199,85,0.18) 0%, transparent 70%)',
+              'linear-gradient(to right, rgba(10,10,10,0.80) 0%, rgba(10,10,10,0.52) 45%, rgba(10,10,10,0.20) 85%, rgba(10,10,10,0.06) 100%), radial-gradient(ellipse 60% 60% at 85% 100%, rgba(6,199,85,0.18) 0%, transparent 70%)',
           }}
         />
         {/* 背景グリッド */}
@@ -486,14 +468,14 @@ export default function SupermarketPage() {
             {/* 左カラム */}
             <div className="lg:col-span-7 space-y-6 md:space-y-7">
               {/* 認定バッジ pill */}
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#06C755]/20 border border-[#06C755]/50 rounded-full text-xs sm:text-sm font-semibold text-[#06C755]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#06C755] shrink-0" />
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-line-green/20 border border-line-green/50 rounded-full text-xs sm:text-sm font-semibold text-line-green">
+                <Award className="w-4 h-4 shrink-0" />
                 LINEヤフー Technology Partner × グッデイ（HC63店舗）導入実績
               </div>
 
               <h1 className="text-4xl md:text-5xl font-bold leading-[1.2] tracking-tight text-white">
                 既存会員を活性化し、<br />
-                紙チラシを<span className="text-[#06C755]">LINEに変える。</span>
+                紙チラシを<span className="text-line-green">LINEに変える。</span>
               </h1>
 
               <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">プラスチックカードの提示率低迷、年間数千万円の折込チラシ、シニア層のデジタル離れ。SM・HCの3つの顧客接点課題を、既に持っている会員基盤を活かして解決します。<span className="font-bold text-white">最短3ヶ月</span>で立ち上げ。</p>
@@ -522,7 +504,7 @@ export default function SupermarketPage() {
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
                 {['既存会員基盤をそのまま活性化', '紙チラシのLINE移行対応'].map((t) => (
                   <div key={t} className="flex items-center gap-3">
-                    <Check className="w-4 h-4 text-[#06C755]" />
+                    <Check className="w-4 h-4 text-line-green" />
                     {t}
                   </div>
                 ))}
@@ -572,15 +554,15 @@ export default function SupermarketPage() {
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px]">
                   <div className="bg-[#111] rounded-[28px] p-1.5 shadow-[0_20px_60px_rgba(6,199,85,0.25)] border border-white/10">
                     <div className="bg-white rounded-[22px] overflow-hidden">
-                      <div className="h-10 bg-[#06C755] flex items-center px-4 gap-2">
+                      <div className="h-10 bg-line-green flex items-center px-4 gap-2">
                         <div className="w-6 h-6 rounded-md bg-white/20 flex items-center justify-center text-white font-bold text-[10px]">G</div>
                         <span className="text-white text-xs font-bold">グロースパック</span>
                       </div>
-                      <div className="p-3 space-y-2.5 bg-[#F8F9FA]">
-                        <div className="bg-white rounded-lg p-3 border border-[#E5E7EB] shadow-sm">
-                          <div className="text-[9px] text-[#05A847] font-bold mb-1 uppercase tracking-wider">MEMBERSHIP</div>
-                          <div className="font-bold text-[#1F2937] text-xs mb-2">デジタル会員証</div>
-                          <div className="h-10 bg-white rounded border border-[#E5E7EB] flex flex-col items-center justify-center gap-0.5 px-2">
+                      <div className="p-3 space-y-2.5 bg-secondary">
+                        <div className="bg-white rounded-lg p-3 border border-border shadow-sm">
+                          <div className="text-[9px] text-line-green-dark font-bold mb-1 uppercase tracking-wider">MEMBERSHIP</div>
+                          <div className="font-bold text-foreground text-xs mb-2">デジタル会員証</div>
+                          <div className="h-10 bg-white rounded border border-border flex flex-col items-center justify-center gap-0.5 px-2">
                             <svg
                               viewBox="0 0 100 20"
                               className="w-full h-5"
@@ -597,12 +579,12 @@ export default function SupermarketPage() {
                                 ) : null;
                               })}
                             </svg>
-                            <div className="text-[7px] tracking-[0.15em] text-[#6B7280] font-mono">4901234 567890</div>
+                            <div className="text-[7px] tracking-[0.15em] text-muted-foreground font-mono">4901234 567890</div>
                           </div>
                         </div>
-                        <div className="bg-[#E8F8F0] rounded-md px-2 py-1.5 border border-[#06C755]/20">
-                          <div className="text-[9px] text-[#05A847] font-bold">今週のチラシ</div>
-                          <div className="text-[10px] text-[#1F2937]">週末限定クーポン</div>
+                        <div className="bg-line-green-extra-light rounded-md px-2 py-1.5 border border-line-green/20">
+                          <div className="text-[9px] text-line-green-dark font-bold">今週のチラシ</div>
+                          <div className="text-[10px] text-foreground">週末限定クーポン</div>
                         </div>
                       </div>
                     </div>
@@ -629,14 +611,14 @@ export default function SupermarketPage() {
                     }}
                   >
                     <div className="relative w-8 h-8">
-                      <Image src={card.image} alt={card.label} fill className="object-contain" />
+                      <Image src={card.image} alt={card.label} fill sizes="32px" className="object-contain" />
                     </div>
-                    <div className="text-[11px] font-bold text-[#1F2937]">{card.label}</div>
+                    <div className="text-[11px] font-bold text-foreground">{card.label}</div>
                   </div>
                 ))}
 
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[#06C755] rounded-full opacity-10 blur-3xl pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-24 h-24 bg-[#06C755] rounded-full opacity-10 blur-3xl pointer-events-none" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-line-green rounded-full opacity-10 blur-3xl pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-24 h-24 bg-line-green rounded-full opacity-10 blur-3xl pointer-events-none" />
               </div>
             </div>
           </div>
@@ -646,7 +628,7 @@ export default function SupermarketPage() {
       {/* ============================================================ */}
       {/* 信頼バッジ帯（§7-2）                                            */}
       {/* ============================================================ */}
-      <div className="bg-white border-b border-[#E5E7EB]">
+      <div className="bg-white border-b border-border">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 py-6">
           {/* 信頼帯 上段: LINEヤフー パートナー認定 */}
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-5 sm:gap-8 md:gap-12">
@@ -659,8 +641,8 @@ export default function SupermarketPage() {
                 className="h-20 sm:h-24 w-auto object-contain shrink-0"
               />
               <div className="text-left">
-                <div className="text-xs text-[#6B7280]">LINEヤフー</div>
-                <div className="text-sm font-semibold text-[#1F2937] leading-snug">
+                <div className="text-xs text-muted-foreground">LINEヤフー</div>
+                <div className="text-sm font-semibold text-foreground leading-snug">
                   2026年度 Technology Partner
                   <br />
                   Communication部門
@@ -676,8 +658,8 @@ export default function SupermarketPage() {
                 className="h-20 sm:h-24 w-auto object-contain shrink-0"
               />
               <div className="text-left">
-                <div className="text-xs text-[#6B7280]">LINEヤフー</div>
-                <div className="text-sm font-semibold text-[#1F2937] leading-snug">
+                <div className="text-xs text-muted-foreground">LINEヤフー</div>
+                <div className="text-sm font-semibold text-foreground leading-snug">
                   2026年度 Technology Partner
                   <br />
                   LINEミニアプリ部門
@@ -686,13 +668,13 @@ export default function SupermarketPage() {
             </div>
           </div>
           {/* 信頼帯 下段: その他の認定・実績 */}
-          <div className="mt-5 pt-5 border-t border-[#E5E7EB] flex flex-wrap items-center justify-center gap-6 md:gap-10">
+          <div className="mt-5 pt-5 border-t border-border flex flex-wrap items-center justify-center gap-6 md:gap-10">
             {[
               { icon: Award, label: 'AWS Premier Tier Services Partner', color: '#FF9900' },
               { icon: ShieldCheck, label: 'ISO 27001 取得（クラスメソッド）', color: '#3B82F6' },
               { icon: Users, label: 'グッデイ（HC63店舗）導入実績', color: '#05A847' },
             ].map(({ icon: Icon, label, color }) => (
-              <div key={label} className="flex items-center gap-2 text-sm font-semibold text-[#1F2937] whitespace-nowrap">
+              <div key={label} className="flex items-center gap-2 text-sm font-semibold text-foreground whitespace-nowrap">
                 <Icon className="w-4 h-4 shrink-0" style={{ color }} />
                 {label}
               </div>
@@ -705,33 +687,33 @@ export default function SupermarketPage() {
       {/* 実績数字セクション（§7-3、SM・HC特化）                             */}
       {/* ============================================================ */}
       <Section spacing="sm" container="wide" background="white">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E7EB] border border-[#E5E7EB] rounded-xl overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 border border-border rounded-xl overflow-hidden">
           {STATS.map(({ value, unit, label, sub }) => (
-            <div key={label} className="px-6 py-8 text-center bg-white">
-              <div className="text-3xl sm:text-4xl font-bold text-[#1F2937] leading-none mb-1 whitespace-nowrap">
-                {value}<span className="text-xl sm:text-2xl text-[#05A847] ml-1">{unit}</span>
+            <div key={label} className="px-6 py-10 sm:py-12 text-center bg-white border-b border-border last:border-b-0 sm:odd:border-r sm:[&:nth-child(3)]:border-b-0">
+              <div className="text-3xl sm:text-4xl font-bold text-foreground leading-none mb-1 whitespace-nowrap">
+                {value}<span className="text-xl sm:text-2xl text-line-green-dark ml-1">{unit}</span>
               </div>
-              <div className="text-sm font-semibold text-[#1F2937] mt-3 mb-1">{label}</div>
-              <div className="text-xs text-[#6B7280] leading-relaxed">{sub}</div>
+              <div className="text-sm font-semibold text-foreground mt-3 mb-1">{label}</div>
+              <div className="text-xs text-muted-foreground leading-relaxed">{sub}</div>
             </div>
           ))}
         </div>
-        <p className="text-xs text-[#9CA3AF] text-center mt-4">※ グッデイの実績は公開情報に基づく数値です。チラシコスト削減余地は業界の一般的な目安です。導入効果は企業規模・既存システム・施策設計によって異なります。</p>
+        <p className="text-xs text-muted-foreground text-center mt-4">※ グッデイの実績は公開情報に基づく数値です。チラシコスト削減余地は業界の一般的な目安です。導入効果は企業規模・既存システム・施策設計によって異なります。</p>
       </Section>
 
       {/* ============================================================ */}
       {/* Key Takeaways（AIO §A — 結論先出し）                            */}
       {/* ============================================================ */}
-      <Section spacing="sm" container="default" background="white">
-        <div className="max-w-[800px] mx-auto">
-          <h2 className="text-xl sm:text-2xl font-bold text-[#1F2937] mb-6">
+      <Section spacing="sm" container="wide" background="white">
+        <div className="mb-10 md:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-8">
             3行でわかる、食品スーパー×LINEミニアプリで何が変わるか
           </h2>
           <ol className="space-y-4">
             {KEY_TAKEAWAYS.map((item, i) => (
-              <li key={i} className="flex items-start gap-4 p-4 bg-[#F0FDF4] rounded-xl border border-[#BBF7D0]">
-                <span className="w-8 h-8 rounded-full bg-[#06C755] text-white font-bold text-sm flex items-center justify-center shrink-0">{i + 1}</span>
-                <p className="text-sm sm:text-base text-[#1F2937] leading-relaxed font-medium">{item}</p>
+              <li key={i} className="flex gap-4 items-start">
+                <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">{String(i + 1).padStart(2, '0')}</span>
+                <p className="text-base text-foreground leading-relaxed pt-1">{item}</p>
               </li>
             ))}
           </ol>
@@ -742,20 +724,17 @@ export default function SupermarketPage() {
       {/* 課題セクション（§7-4、スーパー PROBLEMS 3点）                      */}
       {/* ============================================================ */}
       <Section id="problems" spacing="sm" container="wide" background="muted">
-        <div className="max-w-[720px] mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">
-            CHALLENGES
-          </div>
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             チラシコスト・シニア離脱・スタンプ運用—紙DXで解くべき3つの壁。
           </h2>
-          <p className="text-base text-[#4B5563]">折込チラシの費用対効果低下を出発点に、シニア含む全顧客のデジタル移行と販促デジタル化を実現します。</p>
+          <p className="text-base text-muted-foreground">折込チラシの費用対効果低下を出発点に、シニア含む全顧客のデジタル移行と販促デジタル化を実現します。</p>
         </div>
         <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
           {PROBLEMS.map((p) => (
-            <Card key={p.title} padding="md" className="border-l-4 border-l-[#06C755]">
-              <h3 className="text-base sm:text-lg font-bold text-[#1F2937] mb-2">{p.title}</h3>
-              <p className="text-sm sm:text-base text-[#4B5563] leading-relaxed">{p.body}</p>
+            <Card key={p.title} padding="md">
+              <h3 className="text-base sm:text-lg font-bold text-foreground mb-2">{p.title}</h3>
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{p.body}</p>
             </Card>
           ))}
         </div>
@@ -765,20 +744,17 @@ export default function SupermarketPage() {
       {/* 構造課題セクション（主旨外 2点）                                   */}
       {/* ============================================================ */}
       <Section id="structural-issues" spacing="sm" container="wide" background="white">
-        <div className="max-w-[720px] mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#9CA3AF] mb-3">
-            STRUCTURAL ISSUES
-          </div>
-          <h3 className="text-xl sm:text-2xl font-semibold text-[#374151] mb-3">
+        <div className="mb-10 md:mb-12">
+          <h3 className="text-xl sm:text-2xl font-semibold text-gray-700 mb-3">
             業界全体の構造課題
           </h3>
-          <p className="text-base text-[#4B5563]">あわせて解決できる構造的な課題</p>
+          <p className="text-base text-muted-foreground">あわせて解決できる構造的な課題</p>
         </div>
         <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
           {STRUCTURAL_ISSUES.map((p) => (
-            <Card key={p.title} padding="md" className="border-l-4 border-l-[#9CA3AF]">
-              <h3 className="text-base sm:text-lg font-bold text-[#1F2937] mb-2">{p.title}</h3>
-              <p className="text-sm sm:text-base text-[#4B5563] leading-relaxed">{p.body}</p>
+            <Card key={p.title} padding="md">
+              <h3 className="text-base sm:text-lg font-bold text-foreground mb-2">{p.title}</h3>
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{p.body}</p>
             </Card>
           ))}
         </div>
@@ -793,31 +769,25 @@ export default function SupermarketPage() {
       {/* 訴求セクション（SM・HC固有 3ステップ訴求）                          */}
       {/* ============================================================ */}
       <Section id="appeal" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">
-            HOW IT WORKS
-          </div>
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             3つのステップで、既存会員基盤を収益に変える。
           </h2>
-          <p className="text-base text-[#4B5563]">新規導入ではなく、今すでに持っている会員基盤を活性化するアプローチです。会員証のデジタル移行から始め、チラシをLINEに置き換え、購買データで施策を精緻化する。</p>
+          <p className="text-base text-muted-foreground">新規導入ではなく、今すでに持っている会員基盤を活性化するアプローチです。会員証のデジタル移行から始め、チラシをLINEに置き換え、購買データで施策を精緻化する。</p>
         </div>
         <ol className="grid md:grid-cols-3 gap-4 md:gap-5 list-none">
           {APPEAL_STEPS.map((s, i) => (
             <li key={s.step}>
               <Card variant="elevated" padding="lg" rounded="xl" className="relative h-full">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-full bg-[#05A847] text-white font-bold flex items-center justify-center text-sm shrink-0">
-                    {i + 1}
-                  </div>
-                  <div>
-                    <div className="text-xs text-[#9CA3AF] font-semibold uppercase tracking-wider">{s.step}</div>
-                    <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{s.title}</h3>
-                  </div>
+                <div className="flex items-start gap-4 mb-3">
+                  <span className="shrink-0 text-3xl font-bold text-line-green leading-none tabular-nums pt-0.5">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <h3 className="text-base sm:text-lg font-bold text-foreground pt-1">{s.title}</h3>
                 </div>
-                <p className="text-[11px] font-semibold text-[#05A847] mb-2">{s.duration}</p>
-                <p className="text-sm text-[#4B5563] leading-relaxed">{s.description}</p>
-                <p className="text-xs text-[#6B7280] mt-3 pt-3 border-t border-[#E5E7EB]">{s.completion}</p>
+                <p className="text-[11px] font-semibold text-line-green-dark mb-2">{s.duration}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{s.description}</p>
+                <p className="text-xs text-muted-foreground mt-3 pt-3 border-t border-border">{s.completion}</p>
               </Card>
             </li>
           ))}
@@ -828,50 +798,47 @@ export default function SupermarketPage() {
       {/* ポジショニング（§7-5）                                          */}
       {/* ============================================================ */}
       <Section id="positioning" spacing="md" container="wide" background="muted">
-        <div className="max-w-[720px] mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">
-            WHY GROWTHPACK
-          </div>
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             SaaSとスクラッチ、その中間に。
           </h2>
-          <p className="text-base text-[#4B5563]">SaaSは既存POSや会員DBとの連携で詰まり、フルスクラッチは期間とコストが膨らむ。グロースパックは<span className="font-bold text-[#1F2937]">速さ・柔軟性・既存システム連携</span>を同時に提供するハーフスクラッチ開発です。</p>
+          <p className="text-base text-muted-foreground">SaaSは既存POSや会員DBとの連携で詰まり、フルスクラッチは期間とコストが膨らむ。グロースパックは<span className="font-bold text-foreground">速さ・柔軟性・既存システム連携</span>を同時に提供するハーフスクラッチ開発です。</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-4 md:gap-5">
           {/* SaaS */}
           <Card variant="outline" padding="md">
-            <div className="text-xs font-semibold text-[#9CA3AF] uppercase tracking-wider mb-3">Option A</div>
-            <h3 className="text-base font-bold mb-4">SaaS<br /><span className="text-sm font-normal text-[#6B7280]">パッケージ型</span></h3>
-            <ul className="text-sm text-[#6B7280] space-y-2">
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />初期コスト: 低</li>
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />POS連携: △</li>
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />拡張性: △</li>
+            <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">Option A</div>
+            <h3 className="text-base font-bold mb-4">SaaS<br /><span className="text-sm font-normal text-muted-foreground">パッケージ型</span></h3>
+            <ul className="text-sm text-muted-foreground space-y-2">
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />初期コスト: 低</li>
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-accent-yellow shrink-0" />POS連携: △</li>
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-accent-yellow shrink-0" />拡張性: △</li>
             </ul>
           </Card>
 
           {/* Growthpack */}
-          <Card variant="accent" padding="md" className="ring-2 ring-[#06C755] shadow-lg relative">
-            <div className="absolute -top-3 left-4 px-2 py-0.5 bg-[#05A847] text-white text-xs font-bold rounded-sm">
+          <Card variant="accent" padding="md" className="ring-2 ring-line-green shadow-lg relative">
+            <div className="absolute -top-3 left-4 px-2 py-0.5 bg-line-green-dark text-white text-xs font-bold rounded-sm">
               RECOMMENDED
             </div>
-            <div className="text-xs font-semibold text-[#05A847] uppercase tracking-wider mb-3">グロースパック</div>
-            <h3 className="text-base font-bold mb-4">ハーフスクラッチ<br /><span className="text-sm font-normal text-[#05A847]">開発</span></h3>
-            <ul className="text-sm text-[#1F2937] space-y-2 font-medium">
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />初期コスト: 中</li>
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />POS連携: ◎</li>
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />拡張性: ○ / サポート: ○</li>
+            <div className="text-xs font-semibold text-line-green-dark uppercase tracking-wider mb-3">グロースパック</div>
+            <h3 className="text-base font-bold mb-4">ハーフスクラッチ<br /><span className="text-sm font-normal text-line-green-dark">開発</span></h3>
+            <ul className="text-sm text-foreground space-y-2 font-medium">
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-accent-yellow shrink-0" />初期コスト: 中</li>
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />POS連携: ◎</li>
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />拡張性: ○ / サポート: ○</li>
             </ul>
           </Card>
 
           {/* スクラッチ */}
           <Card variant="outline" padding="md">
-            <div className="text-xs font-semibold text-[#9CA3AF] uppercase tracking-wider mb-3">Option C</div>
-            <h3 className="text-base font-bold mb-4">スクラッチ<br /><span className="text-sm font-normal text-[#6B7280]">開発</span></h3>
-            <ul className="text-sm text-[#6B7280] space-y-2">
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#EF4444] shrink-0" />初期コスト: 高</li>
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />POS連携: ◎</li>
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />拡張性: ◎</li>
+            <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">Option C</div>
+            <h3 className="text-base font-bold mb-4">スクラッチ<br /><span className="text-sm font-normal text-muted-foreground">開発</span></h3>
+            <ul className="text-sm text-muted-foreground space-y-2">
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-red-500 shrink-0" />初期コスト: 高</li>
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />POS連携: ◎</li>
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />拡張性: ◎</li>
             </ul>
           </Card>
         </div>
@@ -880,14 +847,14 @@ export default function SupermarketPage() {
         <div className="mt-10 overflow-x-auto">
           <table className="w-full text-sm border-collapse rounded-xl overflow-hidden shadow-sm">
             <thead>
-              <tr className="bg-[#1F2937] text-white">
+              <tr className="bg-foreground text-white">
                 <th className="px-4 py-3 text-left font-semibold">比較項目</th>
                 <th className="px-4 py-3 text-center font-semibold">SaaS（パッケージ型）</th>
-                <th className="px-4 py-3 text-center font-semibold bg-[#05A847]">グロースパック for LINE</th>
+                <th className="px-4 py-3 text-center font-semibold bg-line-green-dark">グロースパック for LINE</th>
                 <th className="px-4 py-3 text-center font-semibold">フルスクラッチ開発</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#E5E7EB]">
+            <tbody className="divide-y divide-border">
               {[
                 ['初期費用', '低', '中', '高'],
                 ['月額費用', '低〜中', '中', '中〜高'],
@@ -896,21 +863,21 @@ export default function SupermarketPage() {
                 ['立ち上げ期間', '1〜2ヶ月', '最短3ヶ月', '6ヶ月〜'],
                 ['運用負荷', '低', '低〜中', '高'],
               ].map(([label, saas, gp, scratch], idx) => (
-                <tr key={label} className={idx % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}>
-                  <td className="px-4 py-3 font-medium text-[#1F2937]">{label}</td>
-                  <td className="px-4 py-3 text-center text-[#6B7280]">{saas}</td>
-                  <td className="px-4 py-3 text-center font-semibold text-[#05A847] bg-[#F0FDF4]">{gp}</td>
-                  <td className="px-4 py-3 text-center text-[#6B7280]">{scratch}</td>
+                <tr key={label} className={idx % 2 === 0 ? 'bg-white' : 'bg-secondary'}>
+                  <td className="px-4 py-3 font-medium text-foreground">{label}</td>
+                  <td className="px-4 py-3 text-center text-muted-foreground">{saas}</td>
+                  <td className="px-4 py-3 text-center font-semibold text-line-green-dark bg-line-green-pale">{gp}</td>
+                  <td className="px-4 py-3 text-center text-muted-foreground">{scratch}</td>
                 </tr>
               ))}
             </tbody>
           </table>
-          <p className="text-xs text-[#9CA3AF] mt-2">※ 費用感は「低／中／高」の目安表記です。詳細はヒアリング後にご提示します。</p>
+          <p className="text-xs text-muted-foreground mt-2">※ 費用感は「低／中／高」の目安表記です。詳細はヒアリング後にご提示します。</p>
         </div>
       </Section>
 
       {/* 中盤CTA帯 */}
-      <div className="bg-[#05A847] py-8">
+      <div className="bg-line-green-dark py-8">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
@@ -922,7 +889,7 @@ export default function SupermarketPage() {
                 variant="secondary"
                 size="lg"
                 asChild
-                className="bg-white text-[#05A847] hover:bg-white/90 font-bold"
+                className="bg-white text-line-green-dark hover:bg-white/90 font-bold"
               >
                 <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/?utm_source=organic&utm_medium=lp&utm_campaign=hypothesis-v1&utm_content=supermarket-flyer#iframe-form" location="midband" destination="contact">
                   無料で相談する
@@ -938,46 +905,53 @@ export default function SupermarketPage() {
       {/* 機能グリッド（§7-6、SM・HC向けタグライン）                          */}
       {/* ============================================================ */}
       <Section id="features" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">
-            FEATURES
-          </div>
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             10の機能アセットから、SM・HC向けに選んで組み合わせる。
           </h2>
-          <p className="text-base text-[#4B5563]">SM・HC業界で特に効く6機能。予約・チケット・1to1は業態に合わないため除外し、会員活性化とチラシ移行に特化した構成にしています。</p>
+          <p className="text-base text-muted-foreground">SM・HC業界で特に効く6機能。予約・チケット・1to1は業態に合わないため除外し、会員活性化とチラシ移行に特化した構成にしています。</p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {FEATURES.map((f) => {
             const phaseColor =
               f.phase === 'Step 1'
-                ? 'bg-[#E8F8F0] text-[#05A847]'
+                ? 'bg-line-green-extra-light text-line-green-dark'
                 : f.phase === 'Step 2'
-                ? 'bg-[#FEF3C7] text-[#B45309]'
-                : 'bg-[#EDE9FE] text-[#6D28D9]';
+                ? 'bg-amber-100 text-amber-700'
+                : 'bg-violet-100 text-violet-700';
             const phaseLabel =
               f.phase === 'Step 1'
                 ? '顧客接点の創出'
                 : f.phase === 'Step 2'
                 ? 'エンゲージメント強化'
                 : '関係性の深化';
+            const pricing = getPricingEntry(f.url.slice(1) as FeatureKey);
             return (
-              <Link key={f.id} href={f.url} target="_blank" rel="noopener noreferrer" className="block hover:shadow-lg transition-shadow rounded-xl">
-                <Card padding="md">
+              <Link key={f.id} href={f.url} target="_blank" rel="noopener noreferrer" className="group block h-full rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-link focus-visible:ring-offset-2">
+                <Card padding="md" className="h-full flex flex-col border-2 border-border group-hover:border-line-green transition-colors">
+                  <span className={`inline-block self-start text-sm font-semibold px-2.5 py-1 rounded-full mb-3 whitespace-nowrap ${phaseColor}`}>
+                    {phaseLabel}
+                  </span>
                   <div className="flex items-start gap-4 mb-3">
                     <div className="shrink-0 relative w-11 h-11">
-                      <Image src={f.image} alt={f.name} fill className="object-contain" />
+                      <Image src={f.image} alt={f.name} fill sizes="44px" className="object-contain" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{f.name}</h3>
-                      <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full mt-1 ${phaseColor}`}>
-                        {phaseLabel}
-                      </span>
+                      <h3 className="text-base sm:text-lg font-bold text-foreground">{f.name}</h3>
                     </div>
                   </div>
-                  <p className="text-sm text-[#4B5563] leading-relaxed">{f.tagline}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">{f.tagline}</p>
+                  {pricing && (
+                    <div className="mt-auto pt-3 border-t border-border flex items-baseline justify-between">
+                      <span className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">初期費用</span>
+                      <span className="text-sm font-bold text-foreground">
+                        {pricing.price}
+                        <span className="text-xs font-normal text-muted-foreground ml-1">（税抜）</span>
+                      </span>
+                    </div>
+                  )}
                   <div className="mt-2 text-right">
-                    <span className="text-xs font-semibold text-[#06C755]">
+                    <span className="text-sm font-semibold text-link underline underline-offset-4 decoration-link/40 group-hover:text-link-hover group-hover:decoration-link-hover transition-colors">
                       詳細を見る →
                     </span>
                   </div>
@@ -992,34 +966,31 @@ export default function SupermarketPage() {
       {/* 事例セクション（グッデイ公開事例のみ）                              */}
       {/* ============================================================ */}
       <Section id="case-studies" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">
-            CASE STUDY
-          </div>
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             導入事例
           </h2>
-          <p className="text-base text-[#4B5563]">HC業界でのLINEミニアプリ導入実績です。</p>
+          <p className="text-base text-muted-foreground">HC業界でのLINEミニアプリ導入実績です。</p>
         </div>
         <div className="grid md:grid-cols-1 gap-6 max-w-[900px]">
           {caseStudies.map((c) => (
             <Card key={c.company} variant="elevated" padding="lg" rounded="xl">
               <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-start">
                 <div className="md:w-1/3">
-                  <div className="text-xs text-[#9CA3AF] font-semibold uppercase tracking-wider mb-1">COMPANY</div>
-                  <h3 className="text-xl font-bold text-[#1F2937] mb-1">{c.company}</h3>
-                  <p className="text-sm text-[#6B7280]">{c.industry}</p>
+                  <div className="text-xs text-muted-foreground font-semibold uppercase tracking-wider mb-1">COMPANY</div>
+                  <h3 className="text-xl font-bold text-foreground mb-1">{c.company}</h3>
+                  <p className="text-sm text-muted-foreground">{c.industry}</p>
                 </div>
                 <div className="md:w-2/3">
                   <div className="grid grid-cols-3 gap-4 mb-5">
                     {c.metrics.map((m) => (
                       <div key={m.label} className="text-center">
-                        <div className="text-2xl sm:text-3xl font-bold text-[#05A847]">{m.value}</div>
-                        <div className="text-xs text-[#6B7280] mt-1 leading-tight">{m.label}</div>
+                        <div className="text-2xl sm:text-3xl font-bold text-line-green-dark">{m.value}</div>
+                        <div className="text-xs text-muted-foreground mt-1 leading-tight">{m.label}</div>
                       </div>
                     ))}
                   </div>
-                  <p className="text-sm text-[#4B5563] leading-relaxed">{c.summary}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{c.summary}</p>
                 </div>
               </div>
             </Card>
@@ -1034,10 +1005,10 @@ export default function SupermarketPage() {
       {/* WP（ホワイトペーパー）ダウンロード                                   */}
       {/* ============================================================ */}
       <Section id="wp-download" spacing="sm" container="default" background="muted">
-        <div className="bg-white rounded-2xl overflow-hidden border border-[#E5E7EB] shadow-sm">
+        <div className="bg-white rounded-2xl overflow-hidden border border-border shadow-sm">
           <div className="flex flex-col md:flex-row">
             <div className="bg-[#0a0a0a] text-white p-6 sm:p-8 md:p-10 flex flex-col justify-center md:w-2/5">
-              <span className="text-xs tracking-[0.15em] uppercase font-semibold text-[#06C755] mb-3">
+              <span className="text-xs tracking-[0.15em] uppercase font-semibold text-line-green mb-3">
                 無料ダウンロード
               </span>
               <h3 className="text-lg sm:text-xl md:text-2xl font-bold leading-tight mb-3">
@@ -1046,17 +1017,17 @@ export default function SupermarketPage() {
               <p className="text-sm text-white/60 leading-relaxed">紙チラシ依存からの脱却。買回りデータでつくる客単価向上。</p>
             </div>
             <div className="p-6 sm:p-8 md:p-10 flex flex-col justify-center md:w-3/5">
-              <ul className="text-sm text-[#4B5563] space-y-2 mb-6">
+              <ul className="text-sm text-muted-foreground space-y-2 mb-6">
                 <li className="flex items-start gap-2">
-                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
+                  <span className="text-line-green mt-0.5 font-bold">✓</span>
                   紙チラシからLINEへ切り替える時の離脱要因
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
+                  <span className="text-line-green mt-0.5 font-bold">✓</span>
                   購買データをセグメント設計に落とす方法
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
+                  <span className="text-line-green mt-0.5 font-bold">✓</span>
                   食品スーパーとホームセンターで違う設計勘所
                 </li>
               </ul>
@@ -1066,11 +1037,8 @@ export default function SupermarketPage() {
         </div>
       </Section>
 
-      <Section id="faq" spacing="md" container="default" background="white">
+      <Section id="faq" spacing="md" container="wide" background="white">
         <div className="mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">
-            FAQ
-          </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             よくあるご質問
           </h2>
@@ -1078,11 +1046,11 @@ export default function SupermarketPage() {
         <div className="space-y-4">
           {FAQS.map((f) => (
             <Card key={f.q} padding="md">
-              <h3 className="text-base sm:text-lg font-bold text-[#1F2937] mb-2 flex items-start gap-2">
-                <span className="text-[#06C755] shrink-0 font-bold">Q.</span>
+              <h3 className="text-base sm:text-lg font-bold text-foreground mb-2 flex items-start gap-2">
+                <span className="text-line-green shrink-0 font-bold">Q.</span>
                 {f.q}
               </h3>
-              <p className="text-sm sm:text-base text-[#4B5563] leading-relaxed pl-6">{f.a}</p>
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed pl-6">{f.a}</p>
             </Card>
           ))}
         </div>
@@ -1093,14 +1061,14 @@ export default function SupermarketPage() {
       {/* ============================================================ */}
       <Section id="contact" spacing="lg" container="default" background="dark">
         <div className="text-center space-y-6 md:space-y-8">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#06C755] mb-2">
+          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green mb-2">
             CONTACT
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
             SM・HCの会員活性化とチラシDXについて、<br />
-            <span className="text-[#06C755]">一度ご相談ください。</span>
+            <span className="text-line-green">一度ご相談ください。</span>
           </h2>
-          <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">店舗数・現行会員DB・POSシステムをお聞きして、最適な構成をご提案します。初回相談は無料です。</p>
+          <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">店舗数・現行会員DB・POSシステムをお聞きして、最適な構成をご提案します。<span className="font-bold text-white">初回相談は無料です。</span></p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4">
             <Button variant="primary" size="lg" asChild>
               <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/?utm_source=organic&utm_medium=lp&utm_campaign=hypothesis-v1&utm_content=supermarket-flyer#iframe-form" location="final_primary" destination="contact">
@@ -1128,47 +1096,22 @@ export default function SupermarketPage() {
       {/* ============================================================ */}
       {/* Footer（§7-11）                                               */}
       {/* ============================================================ */}
-      <footer className="bg-[#0a0a0a] text-white/80 py-10 md:py-14">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6">
-          <div className="grid md:grid-cols-4 gap-8 md:gap-10 mb-10">
-            {/* ブランド */}
-            <div className="md:col-span-1">
-              <div className="flex items-center gap-2 mb-4">
-                <Image
-                  src="/logo_classmethod_white.png"
-                  alt="クラスメソッド"
-                  width={120}
-                  height={38}
-                  className="hidden md:block h-7 w-auto object-contain"
-                />
-                <Image
-                  src="/icon-light-32x32.png"
-                  alt="クラスメソッド"
-                  width={32}
-                  height={32}
-                  className="md:hidden h-7 w-7 object-contain"
-                />
-                <div className="flex items-center gap-1">
-                  <span className="text-base font-bold text-white">グロースパック</span>
-                  <span className="text-sm text-white/50"> for </span>
-                  <span className="text-base font-bold text-[#06C755]">LINE</span>
-                </div>
-              </div>
-              <p className="text-xs text-white/50 leading-relaxed">クラスメソッド株式会社が提供する LINE ミニアプリ開発サービス。SM・HC業界の既存会員活性化と紙チラシのLINE移行に対応します。</p>
-            </div>
-
-            {/* サービス */}
-            <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">SERVICE</div>
-              <ul className="space-y-2 text-sm text-white/60">
-                <li><a href="#features" className="hover:text-white transition-colors">機能一覧</a></li>                <li><a href="#positioning" className="hover:text-white transition-colors">ハーフスクラッチとは</a></li>
-              </ul>
-            </div>
-
-            {/* リソース */}
-            <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">RESOURCES</div>
-              <ul className="space-y-2 text-sm text-white/60">
+      <LpFooter
+        description="クラスメソッド株式会社が提供する LINE ミニアプリ開発サービス。SM・HC業界の既存会員活性化と紙チラシのLINE移行に対応します。"
+        columns={[
+          {
+            heading: 'SERVICE',
+            links: (
+              <>
+                <li><a href="#features" className="hover:text-white transition-colors">機能一覧</a></li>
+                <li><a href="#positioning" className="hover:text-white transition-colors">ハーフスクラッチとは</a></li>
+              </>
+            ),
+          },
+          {
+            heading: 'RESOURCES',
+            links: (
+              <>
                 <li><a href="#problems" className="hover:text-white transition-colors">SM・HC業界の課題</a></li>
                 <li><a href="#case-studies" className="hover:text-white transition-colors">導入事例</a></li>
                 <li><a href="#faq" className="hover:text-white transition-colors">よくあるご質問</a></li>
@@ -1182,13 +1125,13 @@ export default function SupermarketPage() {
                     技術ブログ
                   </a>
                 </li>
-              </ul>
-            </div>
-
-            {/* お問い合わせ */}
-            <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">CONTACT</div>
-              <ul className="space-y-2 text-sm text-white/60">
+              </>
+            ),
+          },
+          {
+            heading: 'CONTACT',
+            links: (
+              <>
                 <li>
                   <a
                     href="https://classmethod.jp/services/line/line-apps/#iframe-form"
@@ -1209,33 +1152,11 @@ export default function SupermarketPage() {
                     資料ダウンロード
                   </a>
                 </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
-            <p>© Classmethod, Inc.</p>
-            <div className="flex items-center gap-4">
-              <a
-                href="https://classmethod.jp/privacy/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white/70 transition-colors"
-              >
-                プライバシーポリシー
-              </a>
-              <a
-                href="https://classmethod.jp/services/line/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white/70 transition-colors"
-              >
-                LINE総合支援サービス
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
+              </>
+            ),
+          },
+        ]}
+      />
     </main>
   );
 }
