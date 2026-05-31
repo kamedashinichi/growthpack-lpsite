@@ -317,22 +317,21 @@ export default function TicketPage() {
       />
 
       {/* Hero */}
-      <div className="relative min-h-[480px] md:min-h-[560px] flex items-center bg-[#0a0a0a] overflow-hidden">
-        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 80% 60% at 80% 100%, rgba(6,199,85,0.22), transparent 70%), linear-gradient(135deg, #0a0a0a 0%, #1a1d21 60%, #0a0a0a 100%)' }} />
-        <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
+      <div className="relative min-h-[480px] md:min-h-[560px] flex items-center bg-[#f5f5f5] overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: 'radial-gradient(circle, #1F2937 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
         <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 py-20 sm:py-24 md:py-28">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
             <div className="flex-1 max-w-[600px] space-y-6 md:space-y-7">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-line-green/20 border border-line-green/50 rounded-full text-xs sm:text-sm font-semibold text-line-green">
-                <span className="w-1.5 h-1.5 rounded-full bg-line-green shrink-0" />
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-line-green-extra-light border border-line-green/40 rounded-full text-xs sm:text-sm font-semibold text-line-green-dark">
+                <span className="w-1.5 h-1.5 rounded-full bg-line-green-dark shrink-0" />
                 チケット・パス機能
               </div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.15] tracking-tight text-white">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.15] tracking-tight text-foreground">
                 並ばなくていい、偽造されない、<br />
                 そして終わった後も<br />
-                <span className="text-line-green">つながれる。</span>
+                <span className="text-line-green-dark">つながれる。</span>
               </h1>
-              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">デジタルチケット発行と同時に会員ID取得。QR入場チェック・転売防止・時間枠管理で、紙整理券を完全に置き換えます。</p>
+              <p className="text-base sm:text-lg text-foreground/80 leading-relaxed max-w-[600px]">デジタルチケット発行と同時に会員ID取得。QR入場チェック・転売防止・時間枠管理で、紙整理券を完全に置き換えます。</p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
                 <Button variant="primary" size="lg" asChild>
                   <TrackedExternalLink
@@ -344,12 +343,7 @@ export default function TicketPage() {
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </TrackedExternalLink>
                 </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  asChild
-                  className="border-white/60 text-white hover:bg-white/10 hover:border-white"
-                >
+                <Button variant="outline" size="lg" asChild>
                   <TrackedExternalLink
                     href="https://prototype-ticket-function.vercel.app/demo/list"
                     location="hero"
@@ -358,10 +352,10 @@ export default function TicketPage() {
                     デモを試す</TrackedExternalLink>
                 </Button>
               </div>
-              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-muted-foreground">
                 {['転売・偽造防止', '入場と同時に会員化', '事後コミュニケーション'].map((t) => (
                   <div key={t} className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-line-green" />
+                    <Check className="w-4 h-4 text-line-green-dark" />
                     {t}
                   </div>
                 ))}
