@@ -517,13 +517,11 @@ export default function MembersCardPage() {
                   const Icon = f.icon;
                   return (
                     <Card key={f.name} padding="md">
-                      <div className="flex items-start gap-3 mb-3">
-                        <div className="shrink-0 w-10 h-10 rounded-lg bg-line-green-extra-light flex items-center justify-center">
-                          <Icon className="w-5 h-5 text-line-green-dark" />
-                        </div>
-                        <h3 className="text-base sm:text-lg font-bold text-foreground leading-snug pt-1">{f.name}</h3>
+                      <div className="flex items-start gap-4 mb-3">
+                        <Icon className="shrink-0 w-6 h-6 text-line-green-dark mt-0.5" />
+                        <h3 className="text-base sm:text-lg font-bold text-foreground">{f.name}</h3>
                       </div>
-                      <p className="text-sm text-muted-foreground mb-2">「{f.challenge}」</p>
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-2">「{f.challenge}」</p>
                       <p className="text-sm text-muted-foreground leading-relaxed">{f.solution}</p>
                       {f.demo_url && (
                         <TrackedExternalLink
@@ -558,10 +556,8 @@ export default function MembersCardPage() {
             const Icon = c.icon;
             return (
               <Card key={c.name} variant="elevated" padding="lg" rounded="xl">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="shrink-0 w-10 h-10 rounded-lg bg-line-green-extra-light flex items-center justify-center">
-                    <Icon className="w-5 h-5 text-line-green-dark" />
-                  </div>
+                <div className="flex items-center gap-4 mb-4">
+                  <Icon className="shrink-0 w-6 h-6 text-line-green-dark" />
                   <h3 className="text-base sm:text-lg font-bold text-foreground">{c.name}</h3>
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-4">{c.description}</p>
