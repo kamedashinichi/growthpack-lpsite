@@ -60,6 +60,8 @@ import {
 import { Button } from '@/components/shared/ui/button';
 import { Section } from '@/components/shared/ui/section';
 import { Card } from '@/components/shared/ui/card';
+import { LpHeader } from '@/components/shared/lp-header';
+import { LpFooter } from '@/components/shared/lp-footer';
 import { TrackedExternalLink } from './tracking';
 import { ScrollTracker } from './scroll-tracker';
 import { WPDownloadButton } from './wp-download-button';
@@ -388,43 +390,20 @@ export default function EcPage() {
       {/* ============================================================ */}
       {/* Header                                                         */}
       {/* ============================================================ */}
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-[#E5E7EB]">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 h-16 md:h-20 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 md:gap-3">
-            <Image
-              src="/logo_classmethod_black.png"
-              alt="クラスメソッド"
-              width={120}
-              height={38}
-              className="hidden md:block h-[34px] w-auto object-contain"
-              priority
-            />
-            <Image
-              src="/logo_classmethod_mobile.png"
-              alt="クラスメソッド"
-              width={32}
-              height={32}
-              className="md:hidden h-7 w-7 object-contain"
-              priority
-            />
-            <div className="flex items-center gap-1">
-              <span className="text-base md:text-lg font-bold text-[#1F2937]">グロースパック</span>
-              <span className="text-sm md:text-base text-[#6B7280]"> for </span>
-              <span className="text-base md:text-lg font-bold text-[#06C755]">LINE</span>
-            </div>
-          </Link>
-          <nav className="hidden md:flex items-center gap-6 text-sm font-semibold text-[#1F2937]">
-            <a href="#problems" className="hover:text-[#05A847] transition-colors">課題</a>
-            <a href="#appeal" className="hover:text-[#05A847] transition-colors">訴求</a>
-            <a href="#features" className="hover:text-[#05A847] transition-colors">機能</a>
-            <a href="#wp-download" className="hover:text-[#05A847] transition-colors">調査レポート</a>
-            <a href="#faq" className="hover:text-[#05A847] transition-colors">FAQ</a>
-          </nav>
+      <LpHeader
+        navItems={[
+          { href: '#problems', label: '課題' },
+          { href: '#appeal', label: '訴求' },
+          { href: '#features', label: '機能' },
+          { href: '#wp-download', label: '調査レポート' },
+          { href: '#faq', label: 'FAQ' },
+        ]}
+        cta={
           <Button variant="primary" size="sm" asChild>
             <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="header" destination="contact">お問い合わせ</TrackedExternalLink>
           </Button>
-        </div>
-      </header>
+        }
+      />
 
       {/* ============================================================ */}
       {/* Hero — 写真背景バリエーション（§7-1b、ec-hero.png あり）          */}
@@ -1058,47 +1037,22 @@ export default function EcPage() {
       {/* ============================================================ */}
       {/* Footer（§7-11）                                               */}
       {/* ============================================================ */}
-      <footer className="bg-[#0a0a0a] text-white/80 py-10 md:py-14">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6">
-          <div className="grid md:grid-cols-4 gap-8 md:gap-10 mb-10">
-            {/* ブランド */}
-            <div className="md:col-span-1">
-              <div className="flex items-center gap-2 mb-4">
-                <Image
-                  src="/logo_classmethod_white.png"
-                  alt="クラスメソッド"
-                  width={120}
-                  height={38}
-                  className="hidden md:block h-7 w-auto object-contain"
-                />
-                <Image
-                  src="/icon-light-32x32.png"
-                  alt="クラスメソッド"
-                  width={32}
-                  height={32}
-                  className="md:hidden h-7 w-7 object-contain"
-                />
-                <div className="flex items-center gap-1">
-                  <span className="text-base font-bold text-white">グロースパック</span>
-                  <span className="text-sm text-white/50"> for </span>
-                  <span className="text-base font-bold text-[#06C755]">LINE</span>
-                </div>
-              </div>
-              <p className="text-xs text-white/50 leading-relaxed">クラスメソッド株式会社が提供するLINEミニアプリ開発サービス。EC・D2C業界のLINE ID連携・カゴ落ち対策・ソーシャルギフト施策に対応します。</p>
-            </div>
-
-            {/* サービス */}
-            <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">SERVICE</div>
-              <ul className="space-y-2 text-sm text-white/60">
-                <li><a href="#features" className="hover:text-white transition-colors">機能一覧</a></li>                <li><a href="#positioning" className="hover:text-white transition-colors">ハーフスクラッチとは</a></li>
-              </ul>
-            </div>
-
-            {/* リソース */}
-            <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">RESOURCES</div>
-              <ul className="space-y-2 text-sm text-white/60">
+      <LpFooter
+        description="クラスメソッド株式会社が提供するLINEミニアプリ開発サービス。EC・D2C業界のLINE ID連携・カゴ落ち対策・ソーシャルギフト施策に対応します。"
+        columns={[
+          {
+            heading: 'SERVICE',
+            links: (
+              <>
+                <li><a href="#features" className="hover:text-white transition-colors">機能一覧</a></li>
+                <li><a href="#positioning" className="hover:text-white transition-colors">ハーフスクラッチとは</a></li>
+              </>
+            ),
+          },
+          {
+            heading: 'RESOURCES',
+            links: (
+              <>
                 <li><a href="#problems" className="hover:text-white transition-colors">EC業界の課題</a></li>
                 <li><a href="#faq" className="hover:text-white transition-colors">よくあるご質問</a></li>
                 <li>
@@ -1111,13 +1065,13 @@ export default function EcPage() {
                     技術ブログ
                   </a>
                 </li>
-              </ul>
-            </div>
-
-            {/* お問い合わせ */}
-            <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">CONTACT</div>
-              <ul className="space-y-2 text-sm text-white/60">
+              </>
+            ),
+          },
+          {
+            heading: 'CONTACT',
+            links: (
+              <>
                 <li>
                   <a
                     href="https://classmethod.jp/services/line/line-apps/#iframe-form"
@@ -1138,33 +1092,11 @@ export default function EcPage() {
                     資料ダウンロード
                   </a>
                 </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
-            <p>© Classmethod, Inc.</p>
-            <div className="flex items-center gap-4">
-              <a
-                href="https://classmethod.jp/privacy/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white/70 transition-colors"
-              >
-                プライバシーポリシー
-              </a>
-              <a
-                href="https://classmethod.jp/services/line/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white/70 transition-colors"
-              >
-                LINE総合支援サービス
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
+              </>
+            ),
+          },
+        ]}
+      />
     </main>
   );
 }

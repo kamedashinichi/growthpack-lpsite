@@ -59,6 +59,8 @@ import {
 import { Button } from '@/components/shared/ui/button';
 import { Section } from '@/components/shared/ui/section';
 import { Card } from '@/components/shared/ui/card';
+import { LpHeader } from '@/components/shared/lp-header';
+import { LpFooter } from '@/components/shared/lp-footer';
 import { FeatureScrollTracker } from '@/components/shared/feature-page/scroll-tracker';
 import { TrackedExternalLink } from '@/components/shared/feature-page/tracking';
 import { PriceSection } from '@/components/shared/feature-page/price-section';
@@ -302,42 +304,24 @@ export default function ReservationPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
 
       <FeatureScrollTracker page="reservation" />
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-[#E5E7EB]">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 h-16 md:h-20 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 md:gap-3">
-            <Image
-              src="/logo_classmethod_black.png"
-              alt="クラスメソッド"
-              width={120}
-              height={38}
-              className="hidden md:block h-[34px] w-auto object-contain"
-              priority
-            />
-            <Image
-              src="/logo_classmethod_mobile.png"
-              alt="クラスメソッド"
-              width={32}
-              height={32}
-              className="md:hidden h-7 w-7 object-contain"
-              priority
-            />
-            <div className="flex items-center gap-1">
-              <span className="text-base md:text-lg font-bold text-[#1F2937]">グロースパック</span>
-              <span className="text-sm md:text-base text-[#6B7280]"> for </span>
-              <span className="text-base md:text-lg font-bold text-[#06C755]">LINE</span>
-            </div>
-          </Link>
-          <nav className="hidden md:flex items-center gap-6 text-sm font-semibold text-[#1F2937]">
-            <a href="#features" className="hover:text-[#05A847] transition-colors">できること</a>
-            <a href="#combinations" className="hover:text-[#05A847] transition-colors">組み合わせ</a>
-            <a href="#steps" className="hover:text-[#05A847] transition-colors">導入ステップ</a>
-          </nav>
+      <LpHeader
+        navItems={[
+          { href: '#features', label: 'できること' },
+          { href: '#combinations', label: '組み合わせ' },
+          { href: '#steps', label: '導入ステップ' },
+        ]}
+        cta={
           <Button variant="primary" size="sm" asChild>
-            <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="reservation_header" destination="contact">お問い合わせ</TrackedExternalLink>
+            <TrackedExternalLink
+              href="https://classmethod.jp/services/line/line-apps/#iframe-form"
+              location="reservation_header"
+              destination="contact"
+            >
+              お問い合わせ
+            </TrackedExternalLink>
           </Button>
-        </div>
-      </header>
+        }
+      />
 
       {/* Hero */}
       <div className="relative min-h-[480px] md:min-h-[560px] flex items-center bg-[#0a0a0a] overflow-hidden">
@@ -696,65 +680,38 @@ export default function ReservationPage() {
         </div>
       </Section>
 
-      {/* Footer */}
-      <footer className="bg-[#0a0a0a] text-white/80 py-10 md:py-14">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6">
-          <div className="grid md:grid-cols-4 gap-8 md:gap-10 mb-10">
-            <div className="md:col-span-1">
-              <div className="flex items-center gap-2 mb-4">
-                <Image
-                  src="/logo_classmethod_white.png"
-                  alt="クラスメソッド"
-                  width={120}
-                  height={38}
-                  className="hidden md:block h-7 w-auto object-contain"
-                />
-                <Image
-                  src="/icon-light-32x32.png"
-                  alt="クラスメソッド"
-                  width={32}
-                  height={32}
-                  className="md:hidden h-7 w-7 object-contain"
-                />
-                <div className="flex items-center gap-1">
-                  <span className="text-base font-bold text-white">グロースパック</span>
-                  <span className="text-sm text-white/50"> for </span>
-                  <span className="text-base font-bold text-[#06C755]">LINE</span>
-                </div>
-              </div>
-              <p className="text-xs text-white/50 leading-relaxed">クラスメソッド株式会社が提供するLINEミニアプリ開発サービス。予約を顧客データ基盤の起点にします。</p>
-            </div>
-            <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">SERVICE</div>
-              <ul className="space-y-2 text-sm text-white/60">
+      <LpFooter
+        description="クラスメソッド株式会社が提供するLINEミニアプリ開発サービス。予約を顧客データ基盤の起点にします。"
+        columns={[
+          {
+            heading: 'SERVICE',
+            links: (
+              <>
                 <li><a href="#features" className="hover:text-white transition-colors">できること</a></li>
                 <li><a href="#combinations" className="hover:text-white transition-colors">他機能との組み合わせ</a></li>
-              </ul>
-            </div>
-            <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">RESOURCES</div>
-              <ul className="space-y-2 text-sm text-white/60">
+              </>
+            ),
+          },
+          {
+            heading: 'RESOURCES',
+            links: (
+              <>
                 <li><a href="#steps" className="hover:text-white transition-colors">導入ステップ</a></li>
                 <li><a href="https://dev.classmethod.jp/tags/line/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">技術ブログ</a></li>
-              </ul>
-            </div>
-            <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">CONTACT</div>
-              <ul className="space-y-2 text-sm text-white/60">
+              </>
+            ),
+          },
+          {
+            heading: 'CONTACT',
+            links: (
+              <>
                 <li><TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="reservation_footer_contact" destination="contact" className="hover:text-white transition-colors">お問い合わせ</TrackedExternalLink></li>
                 <li><TrackedExternalLink href="https://classmethod.jp/download/line-mini-app/" location="reservation_footer_download" destination="download" className="hover:text-white transition-colors">資料ダウンロード</TrackedExternalLink></li>
-              </ul>
-            </div>
-          </div>
-          <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
-            <p>&copy; Classmethod, Inc.</p>
-            <div className="flex items-center gap-4">
-              <a href="https://classmethod.jp/privacy/" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors">プライバシーポリシー</a>
-              <a href="https://classmethod.jp/services/line/" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors">LINE総合支援サービス</a>
-            </div>
-          </div>
-        </div>
-      </footer>
+              </>
+            ),
+          },
+        ]}
+      />
     </main>
   );
 }
