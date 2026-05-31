@@ -60,6 +60,7 @@ import {
 import { Button } from '@/components/shared/ui/button';
 import { Section } from '@/components/shared/ui/section';
 import { Card } from '@/components/shared/ui/card';
+import { getPricingEntry, type FeatureKey } from '@/lib/pricing';
 import { LpHeader } from '@/components/shared/lp-header';
 import { LpFooter } from '@/components/shared/lp-footer';
 import { TrackedExternalLink } from './tracking';
@@ -870,23 +871,33 @@ export default function FoodPage() {
                 : f.phase === 'Step 2'
                 ? 'エンゲージメント強化'
                 : '関係性の深化';
+            const pricing = getPricingEntry(f.url.slice(1) as FeatureKey);
             return (
-              <Link key={f.id} href={f.url} target="_blank" rel="noopener noreferrer" className="block hover:shadow-lg transition-shadow rounded-xl">
-                <Card padding="md">
+              <Link key={f.id} href={f.url} target="_blank" rel="noopener noreferrer" className="group block h-full rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-link focus-visible:ring-offset-2">
+                <Card padding="md" className="h-full flex flex-col border-2 border-border group-hover:border-line-green transition-colors">
+                  <span className={`inline-block self-start text-sm font-semibold px-2.5 py-1 rounded-full mb-3 whitespace-nowrap ${phaseColor}`}>
+                    {phaseLabel}
+                  </span>
                   <div className="flex items-start gap-4 mb-3">
                     <div className="shrink-0 relative w-11 h-11">
-                      <Image src={f.image} alt={f.name} fill className="object-contain" />
+                      <Image src={f.image} alt={f.name} fill sizes="44px" className="object-contain" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="text-base sm:text-lg font-bold text-foreground">{f.name}</h3>
-                      <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full mt-1 ${phaseColor}`}>
-                        {phaseLabel}
-                      </span>
                     </div>
                   </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{f.tagline}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">{f.tagline}</p>
+                  {pricing && (
+                    <div className="mt-auto pt-3 border-t border-border flex items-baseline justify-between">
+                      <span className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">初期費用</span>
+                      <span className="text-sm font-bold text-foreground">
+                        {pricing.price}
+                        <span className="text-xs font-normal text-muted-foreground ml-1">（税抜）</span>
+                      </span>
+                    </div>
+                  )}
                   <div className="mt-2 text-right">
-                    <span className="text-xs font-semibold text-link underline underline-offset-4 decoration-link/40">
+                    <span className="text-sm font-semibold text-link underline underline-offset-4 decoration-link/40 group-hover:text-link-hover group-hover:decoration-link-hover transition-colors">
                       詳細を見る →
                     </span>
                   </div>
