@@ -452,7 +452,7 @@ export default function GiftPage() {
 
       {/* できること */}
       <Section id="features" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">ギフトでできること</h2>
           <p className="text-base text-muted-foreground">「贈りたいのに購入をためらわれる」「受取人との接点が一度きり」という2つの機会損失を解消します。</p>
         </div>
@@ -500,7 +500,7 @@ export default function GiftPage() {
 
       {/* 組み合わせ */}
       <Section id="combinations" spacing="md" container="wide" background="muted">
-        <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">他の機能と組み合わせる</h2>
           <p className="text-base text-muted-foreground">ギフトで獲得した新規顧客を会員証・1to1・抽選と連携することで、一度きりの接点をリピート来店につなげます。</p>
         </div>
@@ -528,7 +528,7 @@ export default function GiftPage() {
 
       {/* 導入ステップ */}
       <Section id="steps" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">導入ステップ</h2>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
@@ -548,7 +548,7 @@ export default function GiftPage() {
 
       {/* よくある質問 */}
       <Section id="faq" spacing="md" container="wide" background="muted">
-        <div className="max-w-[720px] mb-8 sm:mb-12">
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">よくある質問</h2>
         </div>
         <div className="space-y-4">

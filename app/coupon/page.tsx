@@ -459,7 +459,7 @@ export default function CouponPage() {
 
       {/* できること */}
       <Section id="features" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">クーポン配信でできること</h2>
           <p className="text-base text-muted-foreground">「クーポンのデジタル化」ではなく、配布→来店転換→効果測定のサイクル全体を自動化します。</p>
         </div>
@@ -507,7 +507,7 @@ export default function CouponPage() {
 
       {/* 組み合わせ */}
       <Section id="combinations" spacing="md" container="wide" background="muted">
-        <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">他の機能と組み合わせる</h2>
           <p className="text-base text-muted-foreground">クーポンはスタンプ・抽選・配信など他機能の「成果を来店に変換する最終ピース」として機能します。</p>
         </div>
@@ -535,7 +535,7 @@ export default function CouponPage() {
 
       {/* 導入ステップ */}
       <Section id="steps" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">導入ステップ</h2>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
@@ -555,7 +555,7 @@ export default function CouponPage() {
 
       {/* よくある質問 */}
       <Section id="faq" spacing="md" container="wide" background="muted">
-        <div className="max-w-[720px] mb-8 sm:mb-12">
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">よくある質問</h2>
         </div>
         <div className="space-y-4">

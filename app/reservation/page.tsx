@@ -460,7 +460,7 @@ export default function ReservationPage() {
 
       {/* できること */}
       <Section id="features" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">予約でできること</h2>
           <p className="text-base text-muted-foreground">「予約のデジタル化」ではなく、予約を起点とした顧客データ基盤の構築と来店LTV向上を支援します。</p>
         </div>
@@ -508,7 +508,7 @@ export default function ReservationPage() {
 
       {/* 組み合わせ */}
       <Section id="combinations" spacing="md" container="wide" background="muted">
-        <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">他の機能と組み合わせる</h2>
           <p className="text-base text-muted-foreground">予約データを他機能と連携させることで、来店サイクルの自動維持と顧客LTVの向上が実現します。</p>
         </div>
@@ -536,7 +536,7 @@ export default function ReservationPage() {
 
       {/* 導入ステップ */}
       <Section id="steps" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">導入ステップ</h2>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
@@ -556,7 +556,7 @@ export default function ReservationPage() {
 
       {/* よくある質問 */}
       <Section id="faq" spacing="md" container="wide" background="muted">
-        <div className="max-w-[720px] mb-8 sm:mb-12">
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">よくある質問</h2>
         </div>
         <div className="space-y-4">

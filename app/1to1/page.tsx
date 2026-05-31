@@ -557,7 +557,7 @@ export default function OneToOnePage() {
       {/* できること — 課題→解決カード一覧                                  */}
       {/* ============================================================ */}
       <Section id="features" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             1to1コミュニケーションでできること
           </h2>
@@ -609,7 +609,7 @@ export default function OneToOnePage() {
       {/* 他機能との組み合わせ                                             */}
       {/* ============================================================ */}
       <Section id="combinations" spacing="md" container="wide" background="muted">
-        <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             他の機能と組み合わせる
           </h2>
@@ -644,7 +644,7 @@ export default function OneToOnePage() {
       {/* 導入ステップ                                                    */}
       {/* ============================================================ */}
       <Section id="steps" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             導入ステップ
           </h2>
@@ -668,7 +668,7 @@ export default function OneToOnePage() {
       {/* よくある質問                                                    */}
       {/* ============================================================ */}
       <Section id="faq" spacing="md" container="wide" background="muted">
-        <div className="max-w-[720px] mb-8 sm:mb-12">
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">よくある質問</h2>
         </div>
         <div className="space-y-4">

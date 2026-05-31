@@ -466,7 +466,7 @@ export default function StampCardPage() {
 
       {/* できること */}
       <Section id="features" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">スタンプカードでできること</h2>
           <p className="text-base text-muted-foreground">「スタンプカードのデジタル化」ではなく、来店データを起点としたリピート率向上の仕組みを構築します。</p>
         </div>
@@ -514,7 +514,7 @@ export default function StampCardPage() {
 
       {/* 組み合わせ */}
       <Section id="combinations" spacing="md" container="wide" background="muted">
-        <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">他の機能と組み合わせる</h2>
           <p className="text-base text-muted-foreground">スタンプカードで蓄積した来店データを他機能と連携することで、リテンション施策の自動化範囲が広がります。</p>
         </div>
@@ -542,7 +542,7 @@ export default function StampCardPage() {
 
       {/* 導入ステップ */}
       <Section id="steps" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">導入ステップ</h2>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
@@ -562,7 +562,7 @@ export default function StampCardPage() {
 
       {/* よくある質問 */}
       <Section id="faq" spacing="md" container="wide" background="muted">
-        <div className="max-w-[720px] mb-8 sm:mb-12">
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">よくある質問</h2>
         </div>
         <div className="space-y-4">

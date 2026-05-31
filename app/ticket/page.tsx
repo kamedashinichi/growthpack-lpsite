@@ -453,7 +453,7 @@ export default function TicketPage() {
 
       {/* できること */}
       <Section id="features" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">チケット・パスでできること</h2>
           <p className="text-base text-muted-foreground">紙整理券の転売・偽造・事後リーチ不可という3つの限界を解消し、チケット発行を顧客獲得の起点に変えます。</p>
         </div>
@@ -501,7 +501,7 @@ export default function TicketPage() {
 
       {/* 組み合わせ */}
       <Section id="combinations" spacing="md" container="wide" background="muted">
-        <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">他の機能と組み合わせる</h2>
           <p className="text-base text-muted-foreground">チケット発行を起点に、会員証・抽選・クーポンと連携して「イベント起点のLTV向上」サイクルを構築できます。</p>
         </div>
@@ -529,7 +529,7 @@ export default function TicketPage() {
 
       {/* 導入ステップ */}
       <Section id="steps" spacing="md" container="wide" background="white">
-        <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">導入ステップ</h2>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
@@ -549,7 +549,7 @@ export default function TicketPage() {
 
       {/* よくある質問 */}
       <Section id="faq" spacing="md" container="wide" background="muted">
-        <div className="max-w-[720px] mb-8 sm:mb-12">
+        <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">よくある質問</h2>
         </div>
         <div className="space-y-4">
