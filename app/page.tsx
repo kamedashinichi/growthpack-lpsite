@@ -1173,7 +1173,7 @@ export default function V2TopPage() {
           <div className="grid md:grid-cols-4 gap-8 md:gap-10 mb-10">
             {/* ブランド */}
             <div className="md:col-span-1">
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-2 mb-4">
+              <div className="mb-4">
                 {/* デスクトップ: クラスメソッドロゴ / スマホ: アイコン（レイアウト崩れ防止） */}
                 <Image
                   src="/logo_classmethod_white.png"
@@ -1189,7 +1189,7 @@ export default function V2TopPage() {
                   height={32}
                   className="md:hidden h-7 w-7 object-contain shrink-0"
                 />
-                <div className="flex items-center gap-1 whitespace-nowrap">
+                <div className="flex items-center gap-1 mt-2 whitespace-nowrap">
                   <span className="text-base font-bold text-white">グロースパック</span>
                   <span className="text-sm text-white/50"> for </span>
                   <span className="text-base font-bold text-line-green">LINE</span>

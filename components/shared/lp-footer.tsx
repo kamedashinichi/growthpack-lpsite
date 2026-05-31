@@ -28,7 +28,7 @@ export function LpFooter({ description, columns }: LpFooterProps) {
       <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6">
         <div className="grid md:grid-cols-4 gap-8 md:gap-10 mb-10">
           <div className="md:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
+            <div className="mb-4">
               <Image
                 src="/logo_classmethod_white.png"
                 alt="クラスメソッド"
@@ -43,7 +43,7 @@ export function LpFooter({ description, columns }: LpFooterProps) {
                 height={32}
                 className="md:hidden h-7 w-7 object-contain"
               />
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1 mt-2 whitespace-nowrap">
                 <span className="text-base font-bold text-white">グロースパック</span>
                 <span className="text-sm text-white/50"> for </span>
                 <span className="text-base font-bold text-line-green">LINE</span>
