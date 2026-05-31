@@ -301,7 +301,7 @@ const articleJsonLd = {
 
 export default function StampCardPage() {
   return (
-    <main className="min-h-screen bg-white text-[#1F2937]">
+    <main className="min-h-screen bg-white text-foreground">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
@@ -336,14 +336,14 @@ export default function StampCardPage() {
         <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 py-20 sm:py-24 md:py-28">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
             <div className="flex-1 max-w-[600px] space-y-6 md:space-y-7">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#06C755]/20 border border-[#06C755]/50 rounded-full text-xs sm:text-sm font-semibold text-[#06C755]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#06C755] shrink-0" />
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-line-green/20 border border-line-green/50 rounded-full text-xs sm:text-sm font-semibold text-line-green">
+                <span className="w-1.5 h-1.5 rounded-full bg-line-green shrink-0" />
                 スタンプカード機能
               </div>
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.15] tracking-tight text-white">
                 離脱しそうなお客様に、<br />
                 ちょうどいいタイミングで<br />
-                <span className="text-[#06C755]">「また来る理由」</span>を届ける。
+                <span className="text-line-green">「また来る理由」</span>を届ける。
               </h1>
               <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">デジタルスタンプで来店回数を可視化。ゴール接近通知・離脱予兆検知・クーポン自動配布で、リピート率を仕組みで高めます。</p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
@@ -374,7 +374,7 @@ export default function StampCardPage() {
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
                 {['離脱の事前検知', 'ゴール接近通知', '全店舗一元管理'].map((t) => (
                   <div key={t} className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#06C755]" />
+                    <Check className="w-4 h-4 text-line-green" />
                     {t}
                   </div>
                 ))}
@@ -395,7 +395,7 @@ export default function StampCardPage() {
       </div>
 
       {/* 信頼バッジ帯 */}
-      <div className="bg-white border-b border-[#E5E7EB]">
+      <div className="bg-white border-b border-border">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 py-6">
           {/* 信頼帯 上段: LINEヤフー パートナー認定 */}
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-5 sm:gap-8 md:gap-12">
@@ -408,8 +408,8 @@ export default function StampCardPage() {
                 className="h-20 sm:h-24 w-auto object-contain shrink-0"
               />
               <div className="text-left">
-                <div className="text-xs text-[#6B7280]">LINEヤフー</div>
-                <div className="text-sm font-semibold text-[#1F2937] leading-snug">
+                <div className="text-xs text-muted-foreground">LINEヤフー</div>
+                <div className="text-sm font-semibold text-foreground leading-snug">
                   2026年度 Technology Partner
                   <br />
                   Communication部門
@@ -425,8 +425,8 @@ export default function StampCardPage() {
                 className="h-20 sm:h-24 w-auto object-contain shrink-0"
               />
               <div className="text-left">
-                <div className="text-xs text-[#6B7280]">LINEヤフー</div>
-                <div className="text-sm font-semibold text-[#1F2937] leading-snug">
+                <div className="text-xs text-muted-foreground">LINEヤフー</div>
+                <div className="text-sm font-semibold text-foreground leading-snug">
                   2026年度 Technology Partner
                   <br />
                   LINEミニアプリ部門
@@ -435,12 +435,12 @@ export default function StampCardPage() {
             </div>
           </div>
           {/* 信頼帯 下段: その他の認定・実績 */}
-          <div className="mt-5 pt-5 border-t border-[#E5E7EB] flex flex-wrap items-center justify-center gap-6 md:gap-10">
+          <div className="mt-5 pt-5 border-t border-border flex flex-wrap items-center justify-center gap-6 md:gap-10">
             {[
               { icon: Award, label: 'AWS Premier Tier Services Partner', color: '#FF9900' },
               { icon: ShieldCheck, label: 'ISO 27001 取得（クラスメソッド）', color: '#3B82F6' },
             ].map(({ icon: Icon, label, color }) => (
-              <div key={label} className="flex items-center gap-2 text-sm font-semibold text-[#1F2937] whitespace-nowrap">
+              <div key={label} className="flex items-center gap-2 text-sm font-semibold text-foreground whitespace-nowrap">
                 <Icon className="w-4 h-4 shrink-0" style={{ color }} />
                 {label}
               </div>
@@ -455,16 +455,16 @@ export default function StampCardPage() {
           <h2 className="text-2xl sm:text-3xl font-bold mb-6">3行でわかる、LINEスタンプカードで何ができるか</h2>
           <ol className="space-y-4">
             <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-[#06C755] text-white font-bold flex items-center justify-center text-sm">1</span>
-              <p className="text-base text-[#1F2937] leading-relaxed pt-1">紙のスタンプカードをLINE上でデジタル化し、QRスキャンで来店スタンプを自動付与できる</p>
+              <span className="shrink-0 w-8 h-8 rounded-full bg-line-green text-white font-bold flex items-center justify-center text-sm">1</span>
+              <p className="text-base text-foreground leading-relaxed pt-1">紙のスタンプカードをLINE上でデジタル化し、QRスキャンで来店スタンプを自動付与できる</p>
             </li>
             <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-[#06C755] text-white font-bold flex items-center justify-center text-sm">2</span>
-              <p className="text-base text-[#1F2937] leading-relaxed pt-1">来店履歴・購買金額に応じたランク設定や特典管理が可能で、常連顧客への優遇施策を自動化できる</p>
+              <span className="shrink-0 w-8 h-8 rounded-full bg-line-green text-white font-bold flex items-center justify-center text-sm">2</span>
+              <p className="text-base text-foreground leading-relaxed pt-1">来店履歴・購買金額に応じたランク設定や特典管理が可能で、常連顧客への優遇施策を自動化できる</p>
             </li>
             <li className="flex gap-4 items-start">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-[#06C755] text-white font-bold flex items-center justify-center text-sm">3</span>
-              <p className="text-base text-[#1F2937] leading-relaxed pt-1">POS・会員ID連携で「いつ・誰が・何回来たか」を可視化し、離脱予兆の早期検知とリテンション施策に活用できる</p>
+              <span className="shrink-0 w-8 h-8 rounded-full bg-line-green text-white font-bold flex items-center justify-center text-sm">3</span>
+              <p className="text-base text-foreground leading-relaxed pt-1">POS・会員ID連携で「いつ・誰が・何回来たか」を可視化し、離脱予兆の早期検知とリテンション施策に活用できる</p>
             </li>
           </ol>
         </div>
@@ -473,16 +473,16 @@ export default function StampCardPage() {
       {/* できること */}
       <Section id="features" spacing="md" container="wide" background="white">
         <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">FEATURES</div>
+          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green-dark mb-3">FEATURES</div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">スタンプカードでできること</h2>
-          <p className="text-base text-[#4B5563]">「スタンプカードのデジタル化」ではなく、来店データを起点としたリピート率向上の仕組みを構築します。</p>
+          <p className="text-base text-muted-foreground">「スタンプカードのデジタル化」ではなく、来店データを起点としたリピート率向上の仕組みを構築します。</p>
         </div>
         <div className="space-y-12 md:space-y-16">
           {FEATURE_GROUPS.map((group) => (
             <div key={group.label}>
               <div className="mb-6">
-                <h3 className="text-xl sm:text-2xl font-bold text-[#1F2937] mb-1">{group.label}</h3>
-                <p className="text-sm text-[#6B7280]">{group.subtitle}</p>
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-1">{group.label}</h3>
+                <p className="text-sm text-muted-foreground">{group.subtitle}</p>
               </div>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 {group.cards.map((f) => {
@@ -490,19 +490,19 @@ export default function StampCardPage() {
                   return (
                     <Card key={f.name} padding="md">
                       <div className="flex items-start gap-3 mb-3">
-                        <div className="shrink-0 w-10 h-10 rounded-lg bg-[#E8F8F0] flex items-center justify-center">
-                          <Icon className="w-5 h-5 text-[#05A847]" />
+                        <div className="shrink-0 w-10 h-10 rounded-lg bg-line-green-extra-light flex items-center justify-center">
+                          <Icon className="w-5 h-5 text-line-green-dark" />
                         </div>
-                        <h3 className="text-base sm:text-lg font-bold text-[#1F2937] leading-snug pt-1">{f.name}</h3>
+                        <h3 className="text-base sm:text-lg font-bold text-foreground leading-snug pt-1">{f.name}</h3>
                       </div>
-                      <p className="text-sm text-[#9CA3AF] mb-2">「{f.challenge}」</p>
-                      <p className="text-sm text-[#4B5563] leading-relaxed">{f.solution}</p>
+                      <p className="text-sm text-muted-foreground mb-2">「{f.challenge}」</p>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{f.solution}</p>
                       {f.demo_url && (
                         <TrackedExternalLink
                           href={f.demo_url}
                           location={`stampcard_card_demo_${f.name}`}
                           destination="demo"
-                          className="inline-flex items-center gap-1 text-sm font-semibold text-[#05A847] mt-3 hover:text-[#048838] transition-colors"
+                          className="inline-flex items-center gap-1 text-sm font-semibold text-link underline underline-offset-4 decoration-link/40 mt-3 hover:text-link-hover hover:decoration-link-hover transition-colors"
                         >
                           デモを試す
                           <ArrowRight className="w-4 h-4" />
@@ -522,9 +522,9 @@ export default function StampCardPage() {
       {/* 組み合わせ */}
       <Section id="combinations" spacing="md" container="wide" background="muted">
         <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">INTEGRATIONS</div>
+          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green-dark mb-3">INTEGRATIONS</div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">他の機能と組み合わせる</h2>
-          <p className="text-base text-[#4B5563]">スタンプカードで蓄積した来店データを他機能と連携することで、リテンション施策の自動化範囲が広がります。</p>
+          <p className="text-base text-muted-foreground">スタンプカードで蓄積した来店データを他機能と連携することで、リテンション施策の自動化範囲が広がります。</p>
         </div>
         <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
           {COMBINATIONS.map((c) => {
@@ -532,13 +532,13 @@ export default function StampCardPage() {
             return (
               <Card key={c.name} variant="elevated" padding="lg" rounded="xl">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="shrink-0 w-10 h-10 rounded-lg bg-[#E8F8F0] flex items-center justify-center">
-                    <Icon className="w-5 h-5 text-[#05A847]" />
+                  <div className="shrink-0 w-10 h-10 rounded-lg bg-line-green-extra-light flex items-center justify-center">
+                    <Icon className="w-5 h-5 text-line-green-dark" />
                   </div>
-                  <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{c.name}</h3>
+                  <h3 className="text-base sm:text-lg font-bold text-foreground">{c.name}</h3>
                 </div>
-                <p className="text-sm text-[#4B5563] leading-relaxed mb-4">{c.description}</p>
-                <Link href={c.href} className="inline-flex items-center gap-1 text-sm font-semibold text-[#05A847] hover:text-[#048838] transition-colors">
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">{c.description}</p>
+                <Link href={c.href} className="inline-flex items-center gap-1 text-sm font-semibold text-link underline underline-offset-4 decoration-link/40 hover:text-link-hover hover:decoration-link-hover transition-colors">
                   詳しく見る
                   <ArrowRight className="w-4 h-4" />
                 </Link>
@@ -551,20 +551,20 @@ export default function StampCardPage() {
       {/* 導入ステップ */}
       <Section id="steps" spacing="md" container="wide" background="white">
         <div className="max-w-[720px] mb-8 sm:mb-12 md:mb-16">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">GETTING STARTED</div>
+          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green-dark mb-3">GETTING STARTED</div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">導入ステップ</h2>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
           {STEPS.map((s, i) => (
             <Card key={s.step} variant="elevated" padding="md" rounded="xl">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-[#05A847] text-white font-bold flex items-center justify-center text-sm shrink-0">{i + 1}</div>
+                <div className="w-10 h-10 rounded-full bg-line-green-dark text-white font-bold flex items-center justify-center text-sm shrink-0">{i + 1}</div>
                 <div>
-                  <div className="text-xs text-[#9CA3AF] font-semibold uppercase tracking-wider">{s.step}</div>
-                  <h3 className="text-base font-bold text-[#1F2937]">{s.title}</h3>
+                  <div className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">{s.step}</div>
+                  <h3 className="text-base font-bold text-foreground">{s.title}</h3>
                 </div>
               </div>
-              <p className="text-sm text-[#4B5563] leading-relaxed">{s.description}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">{s.description}</p>
             </Card>
           ))}
         </div>
@@ -573,17 +573,17 @@ export default function StampCardPage() {
       {/* よくある質問 */}
       <Section id="faq" spacing="md" container="wide" background="muted">
         <div className="max-w-[720px] mb-8 sm:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">FAQ</div>
+          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green-dark mb-3">FAQ</div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">よくある質問</h2>
         </div>
         <div className="max-w-[800px] space-y-4">
           {FAQS.map((f) => (
-            <details key={f.q} className="bg-white rounded-xl border border-[#E5E7EB] p-5 group">
-              <summary className="cursor-pointer font-semibold text-[#1F2937] text-base leading-snug list-none flex justify-between items-start gap-4">
+            <details key={f.q} className="bg-white rounded-xl border border-border p-5 group">
+              <summary className="cursor-pointer font-semibold text-foreground text-base leading-snug list-none flex justify-between items-start gap-4">
                 <span>{f.q}</span>
-                <span className="shrink-0 text-[#05A847] mt-0.5">+</span>
+                <span className="shrink-0 text-line-green-dark mt-0.5">+</span>
               </summary>
-              <p className="mt-3 text-sm text-[#4B5563] leading-relaxed">{f.a}</p>
+              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{f.a}</p>
             </details>
           ))}
         </div>
@@ -592,21 +592,21 @@ export default function StampCardPage() {
       {/* 3ステップ導入フロー */}
       <Section id="how-to" spacing="md" container="wide" background="white">
         <div className="max-w-[720px] mb-8 sm:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">HOW TO START</div>
+          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green-dark mb-3">HOW TO START</div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">3ステップで導入できます</h2>
         </div>
         <ol className="max-w-[800px] space-y-4">
-          <li className="bg-[#F9FAFB] rounded-xl border border-[#E5E7EB] p-6">
-            <h3 className="text-lg font-bold text-[#1F2937] mb-2">1. 要件ヒアリング・見積（〜2週間）</h3>
-            <p className="text-sm text-[#4B5563] leading-relaxed">スタンプ付与条件・ランク設計・既存POSとの連携要否をお聞きし、概算費用と工期をご提示します。</p>
+          <li className="bg-secondary rounded-xl border border-border p-6">
+            <h3 className="text-lg font-bold text-foreground mb-2">1. 要件ヒアリング・見積（〜2週間）</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">スタンプ付与条件・ランク設計・既存POSとの連携要否をお聞きし、概算費用と工期をご提示します。</p>
           </li>
-          <li className="bg-[#F9FAFB] rounded-xl border border-[#E5E7EB] p-6">
-            <h3 className="text-lg font-bold text-[#1F2937] mb-2">2. 設計・実装（1〜2ヶ月）</h3>
-            <p className="text-sm text-[#4B5563] leading-relaxed">QRスタンプ付与・ゴール接近通知・クーポン自動配布・離脱予兆検知の設計と実装を行います。</p>
+          <li className="bg-secondary rounded-xl border border-border p-6">
+            <h3 className="text-lg font-bold text-foreground mb-2">2. 設計・実装（1〜2ヶ月）</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">QRスタンプ付与・ゴール接近通知・クーポン自動配布・離脱予兆検知の設計と実装を行います。</p>
           </li>
-          <li className="bg-[#F9FAFB] rounded-xl border border-[#E5E7EB] p-6">
-            <h3 className="text-lg font-bold text-[#1F2937] mb-2">3. テスト・本番リリース（1ヶ月）</h3>
-            <p className="text-sm text-[#4B5563] leading-relaxed">受入テスト・LINEヤフー審査・本番リリースまで伴走します。リリース後の運用フォローも対応可能です。</p>
+          <li className="bg-secondary rounded-xl border border-border p-6">
+            <h3 className="text-lg font-bold text-foreground mb-2">3. テスト・本番リリース（1ヶ月）</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">受入テスト・LINEヤフー審査・本番リリースまで伴走します。リリース後の運用フォローも対応可能です。</p>
           </li>
         </ol>
       </Section>
@@ -614,9 +614,9 @@ export default function StampCardPage() {
       {/* 同じステップの他の機能 */}
       <Section id="related-features" spacing="md" container="wide" background="muted">
         <div className="max-w-[720px] mb-8">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">RELATED FEATURES</div>
+          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green-dark mb-3">RELATED FEATURES</div>
           <h2 className="text-2xl sm:text-3xl font-bold mb-2">同じステップの他の機能</h2>
-          <p className="text-base text-[#4B5563]">スタンプカードと同じ「エンゲージメント強化」ステップの機能です。組み合わせることでリピート施策の精度が高まります。</p>
+          <p className="text-base text-muted-foreground">スタンプカードと同じ「エンゲージメント強化」ステップの機能です。組み合わせることでリピート施策の精度が高まります。</p>
         </div>
         <div className="grid sm:grid-cols-3 gap-4 md:gap-6">
           {[
@@ -627,11 +627,11 @@ export default function StampCardPage() {
             <Link
               key={f.name}
               href={f.url}
-              className="block bg-white rounded-xl border border-[#E5E7EB] p-5 hover:border-[#05A847] hover:shadow-md transition-all group"
+              className="block bg-white rounded-xl border border-border p-5 hover:border-line-green-dark hover:shadow-md transition-all group"
             >
-              <h3 className="text-base font-bold text-[#1F2937] mb-2 group-hover:text-[#05A847] transition-colors">{f.name}</h3>
-              <p className="text-sm text-[#6B7280] leading-relaxed mb-3">{f.tagline}</p>
-              <span className="inline-flex items-center gap-1 text-sm font-semibold text-[#05A847]">
+              <h3 className="text-base font-bold text-foreground mb-2 group-hover:text-line-green-dark transition-colors">{f.name}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-3">{f.tagline}</p>
+              <span className="inline-flex items-center gap-1 text-sm font-semibold text-line-green-dark">
                 詳しく見る
                 <ArrowRight className="w-4 h-4" />
               </span>
@@ -643,10 +643,10 @@ export default function StampCardPage() {
       {/* CTA */}
       <Section id="contact" spacing="lg" container="default" background="dark">
         <div className="text-center space-y-6 md:space-y-8">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#06C755] mb-2">CONTACT</div>
+          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green mb-2">CONTACT</div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
             スタンプカードの導入について、<br />
-            <span className="text-[#06C755]">一度ご相談ください。</span>
+            <span className="text-line-green">一度ご相談ください。</span>
           </h2>
           <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">スタンプ付与条件・ランク設計・複数店舗の管理要件をお聞きして、最適な構成をご提案します。初回相談は無料です。</p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4">

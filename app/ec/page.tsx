@@ -363,7 +363,7 @@ const articleJsonLd = {
 
 export default function EcPage() {
   return (
-    <main className="min-h-screen bg-white text-[#1F2937]">
+    <main className="min-h-screen bg-white text-foreground">
       {/* 構造化データ */}
       <script
         type="application/ld+json"
@@ -435,14 +435,14 @@ export default function EcPage() {
             {/* 左カラム */}
             <div className="lg:col-span-7 space-y-6 md:space-y-7">
               {/* 認定バッジ pill */}
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#06C755]/20 border border-[#06C755]/50 rounded-full text-xs sm:text-sm font-semibold text-[#06C755]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#06C755] shrink-0" />
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-line-green/20 border border-line-green/50 rounded-full text-xs sm:text-sm font-semibold text-line-green">
+                <span className="w-1.5 h-1.5 rounded-full bg-line-green shrink-0" />
                 LINEヤフー Technology Partner × EC・D2C業界向け
               </div>
 
               <h1 className="text-4xl md:text-5xl font-bold leading-[1.2] tracking-tight text-white">
                 ECのカゴ落ちと<br />
-                離脱を、<span className="text-[#06C755]">LINEで止める。</span>
+                離脱を、<span className="text-line-green">LINEで止める。</span>
               </h1>
 
               <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">LINE ID連携で友だちとEC会員を統合。カゴ落ちレスキュー・セグメント配信・ソーシャルギフトで、リピートと新規獲得を同時に最大化します。<span className="font-bold text-white">最短3ヶ月</span>で立ち上げ。</p>
@@ -471,7 +471,7 @@ export default function EcPage() {
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-white/70">
                 {['LINE ID連携対応', 'カゴ落ち自動フォロー'].map((t) => (
                   <div key={t} className="flex items-center gap-3">
-                    <Check className="w-4 h-4 text-[#06C755]" />
+                    <Check className="w-4 h-4 text-line-green" />
                     {t}
                   </div>
                 ))}
@@ -521,15 +521,15 @@ export default function EcPage() {
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px]">
                   <div className="bg-[#111] rounded-[28px] p-1.5 shadow-[0_20px_60px_rgba(6,199,85,0.25)] border border-white/10">
                     <div className="bg-white rounded-[22px] overflow-hidden">
-                      <div className="h-10 bg-[#06C755] flex items-center px-4 gap-2">
+                      <div className="h-10 bg-line-green flex items-center px-4 gap-2">
                         <div className="w-6 h-6 rounded-md bg-white/20 flex items-center justify-center text-white font-bold text-[10px]">G</div>
                         <span className="text-white text-xs font-bold">グロースパック</span>
                       </div>
-                      <div className="p-3 space-y-2.5 bg-[#F8F9FA]">
-                        <div className="bg-white rounded-lg p-3 border border-[#E5E7EB] shadow-sm">
-                          <div className="text-[9px] text-[#05A847] font-bold mb-1 uppercase tracking-wider">EC MEMBER</div>
-                          <div className="font-bold text-[#1F2937] text-xs mb-2">LINE ID連携会員証</div>
-                          <div className="h-10 bg-white rounded border border-[#E5E7EB] flex flex-col items-center justify-center gap-0.5 px-2">
+                      <div className="p-3 space-y-2.5 bg-secondary">
+                        <div className="bg-white rounded-lg p-3 border border-border shadow-sm">
+                          <div className="text-[9px] text-line-green-dark font-bold mb-1 uppercase tracking-wider">EC MEMBER</div>
+                          <div className="font-bold text-foreground text-xs mb-2">LINE ID連携会員証</div>
+                          <div className="h-10 bg-white rounded border border-border flex flex-col items-center justify-center gap-0.5 px-2">
                             <svg
                               viewBox="0 0 100 20"
                               className="w-full h-5"
@@ -546,12 +546,12 @@ export default function EcPage() {
                                 ) : null;
                               })}
                             </svg>
-                            <div className="text-[7px] tracking-[0.15em] text-[#6B7280] font-mono">4901234 567890</div>
+                            <div className="text-[7px] tracking-[0.15em] text-muted-foreground font-mono">4901234 567890</div>
                           </div>
                         </div>
-                        <div className="bg-[#E8F8F0] rounded-md px-2 py-1.5 border border-[#06C755]/20">
-                          <div className="text-[9px] text-[#05A847] font-bold">カゴ落ちアラート</div>
-                          <div className="text-[10px] text-[#1F2937]">カートに商品が残っています</div>
+                        <div className="bg-line-green-extra-light rounded-md px-2 py-1.5 border border-line-green/20">
+                          <div className="text-[9px] text-line-green-dark font-bold">カゴ落ちアラート</div>
+                          <div className="text-[10px] text-foreground">カートに商品が残っています</div>
                         </div>
                       </div>
                     </div>
@@ -580,12 +580,12 @@ export default function EcPage() {
                     <div className="relative w-8 h-8">
                       <Image src={card.image} alt={card.label} fill className="object-contain" />
                     </div>
-                    <div className="text-[11px] font-bold text-[#1F2937]">{card.label}</div>
+                    <div className="text-[11px] font-bold text-foreground">{card.label}</div>
                   </div>
                 ))}
 
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[#06C755] rounded-full opacity-10 blur-3xl pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-24 h-24 bg-[#06C755] rounded-full opacity-10 blur-3xl pointer-events-none" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-line-green rounded-full opacity-10 blur-3xl pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-24 h-24 bg-line-green rounded-full opacity-10 blur-3xl pointer-events-none" />
               </div>
             </div>
           </div>
@@ -595,7 +595,7 @@ export default function EcPage() {
       {/* ============================================================ */}
       {/* 信頼バッジ帯（§7-2）                                            */}
       {/* ============================================================ */}
-      <div className="bg-white border-b border-[#E5E7EB]">
+      <div className="bg-white border-b border-border">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6 py-6">
           {/* 信頼帯 上段: LINEヤフー パートナー認定 */}
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-5 sm:gap-8 md:gap-12">
@@ -608,8 +608,8 @@ export default function EcPage() {
                 className="h-20 sm:h-24 w-auto object-contain shrink-0"
               />
               <div className="text-left">
-                <div className="text-xs text-[#6B7280]">LINEヤフー</div>
-                <div className="text-sm font-semibold text-[#1F2937] leading-snug">
+                <div className="text-xs text-muted-foreground">LINEヤフー</div>
+                <div className="text-sm font-semibold text-foreground leading-snug">
                   2026年度 Technology Partner
                   <br />
                   Communication部門
@@ -625,8 +625,8 @@ export default function EcPage() {
                 className="h-20 sm:h-24 w-auto object-contain shrink-0"
               />
               <div className="text-left">
-                <div className="text-xs text-[#6B7280]">LINEヤフー</div>
-                <div className="text-sm font-semibold text-[#1F2937] leading-snug">
+                <div className="text-xs text-muted-foreground">LINEヤフー</div>
+                <div className="text-sm font-semibold text-foreground leading-snug">
                   2026年度 Technology Partner
                   <br />
                   LINEミニアプリ部門
@@ -635,13 +635,13 @@ export default function EcPage() {
             </div>
           </div>
           {/* 信頼帯 下段: その他の認定・実績 */}
-          <div className="mt-5 pt-5 border-t border-[#E5E7EB] flex flex-wrap items-center justify-center gap-6 md:gap-10">
+          <div className="mt-5 pt-5 border-t border-border flex flex-wrap items-center justify-center gap-6 md:gap-10">
             {[
               { icon: Award, label: 'AWS Premier Tier Services Partner', color: '#FF9900' },
               { icon: ShieldCheck, label: 'ISO 27001 取得（クラスメソッド）', color: '#3B82F6' },
               { icon: Users, label: 'EC業界 複数社 導入実績', color: '#05A847' },
             ].map(({ icon: Icon, label, color }) => (
-              <div key={label} className="flex items-center gap-2 text-sm font-semibold text-[#1F2937] whitespace-nowrap">
+              <div key={label} className="flex items-center gap-2 text-sm font-semibold text-foreground whitespace-nowrap">
                 <Icon className="w-4 h-4 shrink-0" style={{ color }} />
                 {label}
               </div>
@@ -654,14 +654,14 @@ export default function EcPage() {
       {/* 実績数字セクション（§7-3、EC特化）                                */}
       {/* ============================================================ */}
       <Section spacing="sm" container="wide" background="white">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E7EB] border border-[#E5E7EB] rounded-xl overflow-hidden">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E7EB] border border-border rounded-xl overflow-hidden">
           {STATS.map(({ value, unit, label, sub }) => (
             <div key={label} className="px-6 py-8 text-center bg-white">
-              <div className="text-4xl sm:text-5xl font-bold text-[#1F2937] leading-none mb-1 whitespace-nowrap">
-                {value}<span className="text-2xl sm:text-3xl text-[#05A847] ml-1">{unit}</span>
+              <div className="text-4xl sm:text-5xl font-bold text-foreground leading-none mb-1 whitespace-nowrap">
+                {value}<span className="text-2xl sm:text-3xl text-line-green-dark ml-1">{unit}</span>
               </div>
-              <div className="text-sm font-semibold text-[#1F2937] mt-3 mb-1">{label}</div>
-              <div className="text-xs text-[#6B7280] leading-relaxed">{sub}</div>
+              <div className="text-sm font-semibold text-foreground mt-3 mb-1">{label}</div>
+              <div className="text-xs text-muted-foreground leading-relaxed">{sub}</div>
             </div>
           ))}
         </div>
@@ -672,14 +672,14 @@ export default function EcPage() {
       {/* ============================================================ */}
       <Section spacing="sm" container="default" background="white">
         <div className="max-w-[800px] mx-auto">
-          <h2 className="text-xl sm:text-2xl font-bold text-[#1F2937] mb-6">
+          <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-6">
             3行でわかる、EC×LINEミニアプリで何が変わるか
           </h2>
           <ol className="space-y-4">
             {KEY_TAKEAWAYS.map((item, i) => (
-              <li key={i} className="flex items-start gap-4 p-4 bg-[#F0FDF4] rounded-xl border border-[#BBF7D0]">
-                <span className="w-8 h-8 rounded-full bg-[#06C755] text-white font-bold text-sm flex items-center justify-center shrink-0">{i + 1}</span>
-                <p className="text-sm sm:text-base text-[#1F2937] leading-relaxed font-medium">{item}</p>
+              <li key={i} className="flex items-start gap-4 p-4 bg-line-green-pale rounded-xl border border-green-200">
+                <span className="w-8 h-8 rounded-full bg-line-green text-white font-bold text-sm flex items-center justify-center shrink-0">{i + 1}</span>
+                <p className="text-sm sm:text-base text-foreground leading-relaxed font-medium">{item}</p>
               </li>
             ))}
           </ol>
@@ -691,19 +691,19 @@ export default function EcPage() {
       {/* ============================================================ */}
       <Section id="problems" spacing="sm" container="wide" background="muted">
         <div className="max-w-[720px] mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">
+          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green-dark mb-3">
             CHALLENGES
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             ID分断・ブロック増加・CAC高騰—LINE×EC連携で解くべき3つの壁。
           </h2>
-          <p className="text-base text-[#4B5563]">LINE⇄EC ID連携を起点に、セグメント配信とソーシャルギフトで顧客獲得コストの上昇に対抗します。</p>
+          <p className="text-base text-muted-foreground">LINE⇄EC ID連携を起点に、セグメント配信とソーシャルギフトで顧客獲得コストの上昇に対抗します。</p>
         </div>
         <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
           {PROBLEMS.map((p) => (
             <Card key={p.title} padding="md" className="border-l-4 border-l-[#06C755]">
-              <h3 className="text-base sm:text-lg font-bold text-[#1F2937] mb-2">{p.title}</h3>
-              <p className="text-sm sm:text-base text-[#4B5563] leading-relaxed">{p.body}</p>
+              <h3 className="text-base sm:text-lg font-bold text-foreground mb-2">{p.title}</h3>
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{p.body}</p>
             </Card>
           ))}
         </div>
@@ -714,19 +714,19 @@ export default function EcPage() {
       {/* ============================================================ */}
       <Section id="structural-issues" spacing="sm" container="wide" background="white">
         <div className="max-w-[720px] mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#9CA3AF] mb-3">
+          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">
             STRUCTURAL ISSUES
           </div>
-          <h3 className="text-xl sm:text-2xl font-semibold text-[#374151] mb-3">
+          <h3 className="text-xl sm:text-2xl font-semibold text-gray-700 mb-3">
             業界全体の構造課題
           </h3>
-          <p className="text-base text-[#4B5563]">あわせて解決できる構造的な課題</p>
+          <p className="text-base text-muted-foreground">あわせて解決できる構造的な課題</p>
         </div>
         <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
           {STRUCTURAL_ISSUES.map((p) => (
             <Card key={p.title} padding="md" className="border-l-4 border-l-[#9CA3AF]">
-              <h3 className="text-base sm:text-lg font-bold text-[#1F2937] mb-2">{p.title}</h3>
-              <p className="text-sm sm:text-base text-[#4B5563] leading-relaxed">{p.body}</p>
+              <h3 className="text-base sm:text-lg font-bold text-foreground mb-2">{p.title}</h3>
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{p.body}</p>
             </Card>
           ))}
         </div>
@@ -742,30 +742,30 @@ export default function EcPage() {
       {/* ============================================================ */}
       <Section id="appeal" spacing="md" container="wide" background="white">
         <div className="max-w-[720px] mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">
+          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green-dark mb-3">
             HOW IT WORKS
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             3つのステップで、ECのLTVを積み上げる。
           </h2>
-          <p className="text-base text-[#4B5563]">LINE ID連携で入口を作り、セグメント配信でリピートを育て、ソーシャルギフトで新規獲得へ。ECのフルファネルをLINEで完結させます。</p>
+          <p className="text-base text-muted-foreground">LINE ID連携で入口を作り、セグメント配信でリピートを育て、ソーシャルギフトで新規獲得へ。ECのフルファネルをLINEで完結させます。</p>
         </div>
         <ol className="grid md:grid-cols-3 gap-4 md:gap-5 list-none">
           {APPEAL_STEPS.map((s, i) => (
             <li key={s.step}>
               <Card variant="elevated" padding="lg" rounded="xl" className="relative h-full">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-full bg-[#05A847] text-white font-bold flex items-center justify-center text-sm shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-line-green-dark text-white font-bold flex items-center justify-center text-sm shrink-0">
                     {i + 1}
                   </div>
                   <div>
-                    <div className="text-xs text-[#9CA3AF] font-semibold uppercase tracking-wider">{s.step}</div>
-                    <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{s.title}</h3>
+                    <div className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">{s.step}</div>
+                    <h3 className="text-base sm:text-lg font-bold text-foreground">{s.title}</h3>
                   </div>
                 </div>
-                <p className="text-[11px] font-semibold text-[#05A847] mb-2">{s.duration}</p>
-                <p className="text-sm text-[#4B5563] leading-relaxed">{s.description}</p>
-                <p className="text-xs text-[#6B7280] mt-3 pt-3 border-t border-[#E5E7EB]">{s.completion}</p>
+                <p className="text-[11px] font-semibold text-line-green-dark mb-2">{s.duration}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{s.description}</p>
+                <p className="text-xs text-muted-foreground mt-3 pt-3 border-t border-border">{s.completion}</p>
               </Card>
             </li>
           ))}
@@ -777,49 +777,49 @@ export default function EcPage() {
       {/* ============================================================ */}
       <Section id="positioning" spacing="md" container="wide" background="muted">
         <div className="max-w-[720px] mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">
+          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green-dark mb-3">
             WHY GROWTHPACK
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             SaaSとスクラッチ、その中間に。
           </h2>
-          <p className="text-base text-[#4B5563]">SaaSは既存EC基盤との連携で詰まり、フルスクラッチは期間とコストが膨らむ。グロースパックは<span className="font-bold text-[#1F2937]">速さ・柔軟性・既存基盤への適応力</span>を同時に提供するハーフスクラッチ開発です。</p>
+          <p className="text-base text-muted-foreground">SaaSは既存EC基盤との連携で詰まり、フルスクラッチは期間とコストが膨らむ。グロースパックは<span className="font-bold text-foreground">速さ・柔軟性・既存基盤への適応力</span>を同時に提供するハーフスクラッチ開発です。</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-4 md:gap-5">
           {/* SaaS */}
           <Card variant="outline" padding="md">
-            <div className="text-xs font-semibold text-[#9CA3AF] uppercase tracking-wider mb-3">Option A</div>
-            <h3 className="text-base font-bold mb-4">SaaS<br /><span className="text-sm font-normal text-[#6B7280]">パッケージ型</span></h3>
-            <ul className="text-sm text-[#6B7280] space-y-2">
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />初期コスト: 低</li>
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />EC連携柔軟性: △</li>
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />拡張性: △</li>
+            <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">Option A</div>
+            <h3 className="text-base font-bold mb-4">SaaS<br /><span className="text-sm font-normal text-muted-foreground">パッケージ型</span></h3>
+            <ul className="text-sm text-muted-foreground space-y-2">
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />初期コスト: 低</li>
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-accent-yellow shrink-0" />EC連携柔軟性: △</li>
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-accent-yellow shrink-0" />拡張性: △</li>
             </ul>
           </Card>
 
           {/* Growthpack */}
           <Card variant="accent" padding="md" className="ring-2 ring-[#06C755] shadow-lg relative">
-            <div className="absolute -top-3 left-4 px-2 py-0.5 bg-[#05A847] text-white text-xs font-bold rounded-sm">
+            <div className="absolute -top-3 left-4 px-2 py-0.5 bg-line-green-dark text-white text-xs font-bold rounded-sm">
               RECOMMENDED
             </div>
-            <div className="text-xs font-semibold text-[#05A847] uppercase tracking-wider mb-3">グロースパック</div>
-            <h3 className="text-base font-bold mb-4">ハーフスクラッチ<br /><span className="text-sm font-normal text-[#05A847]">開発</span></h3>
-            <ul className="text-sm text-[#1F2937] space-y-2 font-medium">
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#FCD34D] shrink-0" />初期コスト: 中</li>
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />EC連携柔軟性: ◎</li>
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />拡張性: ○ / サポート: ○</li>
+            <div className="text-xs font-semibold text-line-green-dark uppercase tracking-wider mb-3">グロースパック</div>
+            <h3 className="text-base font-bold mb-4">ハーフスクラッチ<br /><span className="text-sm font-normal text-line-green-dark">開発</span></h3>
+            <ul className="text-sm text-foreground space-y-2 font-medium">
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-accent-yellow shrink-0" />初期コスト: 中</li>
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />EC連携柔軟性: ◎</li>
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />拡張性: ○ / サポート: ○</li>
             </ul>
           </Card>
 
           {/* スクラッチ */}
           <Card variant="outline" padding="md">
-            <div className="text-xs font-semibold text-[#9CA3AF] uppercase tracking-wider mb-3">Option C</div>
-            <h3 className="text-base font-bold mb-4">スクラッチ<br /><span className="text-sm font-normal text-[#6B7280]">開発</span></h3>
-            <ul className="text-sm text-[#6B7280] space-y-2">
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#EF4444] shrink-0" />初期コスト: 高</li>
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />EC連携柔軟性: ◎</li>
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-[#06C755] shrink-0" />拡張性: ◎</li>
+            <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">Option C</div>
+            <h3 className="text-base font-bold mb-4">スクラッチ<br /><span className="text-sm font-normal text-muted-foreground">開発</span></h3>
+            <ul className="text-sm text-muted-foreground space-y-2">
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-red-500 shrink-0" />初期コスト: 高</li>
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />EC連携柔軟性: ◎</li>
+              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />拡張性: ◎</li>
             </ul>
           </Card>
         </div>
@@ -828,10 +828,10 @@ export default function EcPage() {
         <div className="mt-10 overflow-x-auto">
           <table className="w-full text-sm border-collapse rounded-xl overflow-hidden shadow-sm">
             <thead>
-              <tr className="bg-[#1F2937] text-white">
+              <tr className="bg-foreground text-white">
                 <th className="px-4 py-3 text-left font-semibold">比較項目</th>
                 <th className="px-4 py-3 text-center font-semibold">SaaS（パッケージ型）</th>
-                <th className="px-4 py-3 text-center font-semibold bg-[#05A847]">グロースパック for LINE</th>
+                <th className="px-4 py-3 text-center font-semibold bg-line-green-dark">グロースパック for LINE</th>
                 <th className="px-4 py-3 text-center font-semibold">フルスクラッチ開発</th>
               </tr>
             </thead>
@@ -844,21 +844,21 @@ export default function EcPage() {
                 ['立ち上げ期間', '1〜2ヶ月', '最短3ヶ月', '6ヶ月〜'],
                 ['運用負荷', '低', '低〜中', '高'],
               ].map(([label, saas, gp, scratch], idx) => (
-                <tr key={label} className={idx % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}>
-                  <td className="px-4 py-3 font-medium text-[#1F2937]">{label}</td>
-                  <td className="px-4 py-3 text-center text-[#6B7280]">{saas}</td>
-                  <td className="px-4 py-3 text-center font-semibold text-[#05A847] bg-[#F0FDF4]">{gp}</td>
-                  <td className="px-4 py-3 text-center text-[#6B7280]">{scratch}</td>
+                <tr key={label} className={idx % 2 === 0 ? 'bg-white' : 'bg-secondary'}>
+                  <td className="px-4 py-3 font-medium text-foreground">{label}</td>
+                  <td className="px-4 py-3 text-center text-muted-foreground">{saas}</td>
+                  <td className="px-4 py-3 text-center font-semibold text-line-green-dark bg-line-green-pale">{gp}</td>
+                  <td className="px-4 py-3 text-center text-muted-foreground">{scratch}</td>
                 </tr>
               ))}
             </tbody>
           </table>
-          <p className="text-xs text-[#9CA3AF] mt-2">※ 費用感は「低／中／高」の目安表記です。詳細はヒアリング後にご提示します。</p>
+          <p className="text-xs text-muted-foreground mt-2">※ 費用感は「低／中／高」の目安表記です。詳細はヒアリング後にご提示します。</p>
         </div>
       </Section>
 
       {/* 中盤CTA帯 */}
-      <div className="bg-[#05A847] py-8">
+      <div className="bg-line-green-dark py-8">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-5 md:px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
@@ -870,7 +870,7 @@ export default function EcPage() {
                 variant="secondary"
                 size="lg"
                 asChild
-                className="bg-white text-[#05A847] hover:bg-white/90 font-bold"
+                className="bg-white text-line-green-dark hover:bg-white/90 font-bold"
               >
                 <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/?utm_source=organic&utm_medium=lp&utm_campaign=hypothesis-v1&utm_content=ec-idlink#iframe-form" location="midband" destination="contact">
                   無料で相談する
@@ -887,22 +887,22 @@ export default function EcPage() {
       {/* ============================================================ */}
       <Section id="features" spacing="md" container="wide" background="white">
         <div className="max-w-[720px] mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">
+          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green-dark mb-3">
             FEATURES
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             EC事業に効く5機能を、必要な順番で導入する。
           </h2>
-          <p className="text-base text-[#4B5563]">予約・順番待ち・抽選は除外。EC固有の課題に直結する機能だけを選んで組み合わせます。</p>
+          <p className="text-base text-muted-foreground">予約・順番待ち・抽選は除外。EC固有の課題に直結する機能だけを選んで組み合わせます。</p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {FEATURES.map((f) => {
             const phaseColor =
               f.phase === 'Step 1'
-                ? 'bg-[#E8F8F0] text-[#05A847]'
+                ? 'bg-line-green-extra-light text-line-green-dark'
                 : f.phase === 'Step 2'
-                ? 'bg-[#FEF3C7] text-[#B45309]'
-                : 'bg-[#EDE9FE] text-[#6D28D9]';
+                ? 'bg-amber-100 text-amber-700'
+                : 'bg-violet-100 text-violet-700';
             const phaseLabel =
               f.phase === 'Step 1'
                 ? '顧客接点の創出'
@@ -917,15 +917,15 @@ export default function EcPage() {
                       <Image src={f.image} alt={f.name} fill className="object-contain" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-base sm:text-lg font-bold text-[#1F2937]">{f.name}</h3>
+                      <h3 className="text-base sm:text-lg font-bold text-foreground">{f.name}</h3>
                       <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full mt-1 ${phaseColor}`}>
                         {phaseLabel}
                       </span>
                     </div>
                   </div>
-                  <p className="text-sm text-[#4B5563] leading-relaxed">{f.tagline}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{f.tagline}</p>
                   <div className="mt-2 text-right">
-                    <span className="text-xs font-semibold text-[#06C755]">
+                    <span className="text-xs font-semibold text-line-green">
                       詳細を見る →
                     </span>
                   </div>
@@ -943,10 +943,10 @@ export default function EcPage() {
       {/* WP（ホワイトペーパー）ダウンロード                                   */}
       {/* ============================================================ */}
       <Section id="wp-download" spacing="sm" container="default" background="muted">
-        <div className="bg-white rounded-2xl overflow-hidden border border-[#E5E7EB] shadow-sm">
+        <div className="bg-white rounded-2xl overflow-hidden border border-border shadow-sm">
           <div className="flex flex-col md:flex-row">
             <div className="bg-[#0a0a0a] text-white p-6 sm:p-8 md:p-10 flex flex-col justify-center md:w-2/5">
-              <span className="text-xs tracking-[0.15em] uppercase font-semibold text-[#06C755] mb-3">
+              <span className="text-xs tracking-[0.15em] uppercase font-semibold text-line-green mb-3">
                 無料ダウンロード
               </span>
               <h3 className="text-lg sm:text-xl md:text-2xl font-bold leading-tight mb-3">
@@ -955,17 +955,17 @@ export default function EcPage() {
               <p className="text-sm text-white/60 leading-relaxed">LINEログイン・配送通知・LINE再購入で、転換率を底上げする。</p>
             </div>
             <div className="p-6 sm:p-8 md:p-10 flex flex-col justify-center md:w-3/5">
-              <ul className="text-sm text-[#4B5563] space-y-2 mb-6">
+              <ul className="text-sm text-muted-foreground space-y-2 mb-6">
                 <li className="flex items-start gap-2">
-                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
+                  <span className="text-line-green mt-0.5 font-bold">✓</span>
                   LINEログインで上がる購入転換の実数感
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
+                  <span className="text-line-green mt-0.5 font-bold">✓</span>
                   配送通知の開封率と再購入の関係
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-[#06C755] mt-0.5 font-bold">✓</span>
+                  <span className="text-line-green mt-0.5 font-bold">✓</span>
                   LINEとEC会員IDを統合する実装ポイント
                 </li>
               </ul>
@@ -977,7 +977,7 @@ export default function EcPage() {
 
       <Section id="faq" spacing="md" container="default" background="white">
         <div className="mb-10 md:mb-12">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#05A847] mb-3">
+          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green-dark mb-3">
             FAQ
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
@@ -987,11 +987,11 @@ export default function EcPage() {
         <div className="space-y-4">
           {FAQS.map((f) => (
             <Card key={f.q} padding="md">
-              <h3 className="text-base sm:text-lg font-bold text-[#1F2937] mb-2 flex items-start gap-2">
-                <span className="text-[#06C755] shrink-0 font-bold">Q.</span>
+              <h3 className="text-base sm:text-lg font-bold text-foreground mb-2 flex items-start gap-2">
+                <span className="text-line-green shrink-0 font-bold">Q.</span>
                 {f.q}
               </h3>
-              <p className="text-sm sm:text-base text-[#4B5563] leading-relaxed pl-6">{f.a}</p>
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed pl-6">{f.a}</p>
             </Card>
           ))}
         </div>
@@ -1002,12 +1002,12 @@ export default function EcPage() {
       {/* ============================================================ */}
       <Section id="contact" spacing="lg" container="default" background="dark">
         <div className="text-center space-y-6 md:space-y-8">
-          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#06C755] mb-2">
+          <div className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-line-green mb-2">
             CONTACT
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
             ECのカゴ落ちとLTV課題について、<br />
-            <span className="text-[#06C755]">一度ご相談ください。</span>
+            <span className="text-line-green">一度ご相談ください。</span>
           </h2>
           <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">既存EC基盤・会員データの状態・目指すKPIをお聞きして、最適な構成をご提案します。初回相談は無料です。</p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4">
