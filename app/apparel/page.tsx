@@ -723,7 +723,7 @@ export default function ApparelPage() {
         </div>
         <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
           {STRUCTURAL_ISSUES.map((p) => (
-            <Card key={p.title} padding="md" className="border-l-4 border-l-[#9CA3AF]">
+            <Card key={p.title} padding="md">
               <h3 className="text-base sm:text-lg font-bold text-foreground mb-2">{p.title}</h3>
               <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{p.body}</p>
             </Card>
