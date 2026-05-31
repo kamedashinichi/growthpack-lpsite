@@ -541,7 +541,6 @@ export default function TicketPage() {
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-full bg-line-green-dark text-white font-bold flex items-center justify-center text-sm shrink-0">{i + 1}</div>
                 <div>
-                  <div className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">{s.step}</div>
                   <h3 className="text-base font-bold text-foreground">{s.title}</h3>
                 </div>
               </div>
@@ -629,7 +628,7 @@ export default function TicketPage() {
             チケット・パスの導入について、<br />
             <span className="text-line-green">一度ご相談ください。</span>
           </h2>
-          <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">イベント規模・時間枠管理の要件・予約との統合要否をお聞きして、最適な構成をご提案します。初回相談は無料です。</p>
+          <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">イベント規模・時間枠管理の要件・予約との統合要否をお聞きして、最適な構成をご提案します。<span className="font-bold text-white">初回相談は無料です。</span></p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4">
             <Button variant="primary" size="lg" asChild>
               <TrackedExternalLink

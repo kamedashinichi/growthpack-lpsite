@@ -767,7 +767,6 @@ export default function SportsPage() {
                     {i + 1}
                   </div>
                   <div>
-                    <div className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">{s.step}</div>
                     <h3 className="text-base sm:text-lg font-bold text-foreground">{s.title}</h3>
                   </div>
                 </div>
@@ -1015,7 +1014,7 @@ export default function SportsPage() {
             ライト層育成の仕組みについて、<br />
             <span className="text-line-green">一度ご相談ください。</span>
           </h2>
-          <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">業態・会員構成・既存システムをお聞きして、最適な構成をご提案します。初回相談は無料です。</p>
+          <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">業態・会員構成・既存システムをお聞きして、最適な構成をご提案します。<span className="font-bold text-white">初回相談は無料です。</span></p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4">
             <Button variant="primary" size="lg" asChild>
               <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/?utm_source=organic&utm_medium=lp&utm_campaign=hypothesis-v1&utm_content=sports-light#iframe-form" location="final_primary" destination="contact">
