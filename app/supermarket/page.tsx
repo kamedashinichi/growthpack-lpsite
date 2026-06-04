@@ -67,9 +67,9 @@ import { Card } from '@/components/shared/ui/card';
 import { getPricingEntry, type FeatureKey } from '@/lib/pricing';
 import { LpHeader } from '@/components/shared/lp-header';
 import { LpFooter } from '@/components/shared/lp-footer';
-import { TrackedExternalLink } from './tracking';
-import { ScrollTracker } from './scroll-tracker';
-import { WPDownloadButton } from './wp-download-button';
+import { TrackedExternalLink } from '@/components/shared/industry-page/tracking';
+import { ScrollTracker } from '@/components/shared/industry-page/scroll-tracker';
+import { WPDownloadButton } from '@/components/shared/industry-page/wp-download-button';
 import { TargetAudienceNotice } from '@/components/shared/ui/target-audience-notice';
 
 /* ------------------------------------------------------------------ */
@@ -414,7 +414,7 @@ export default function SupermarketPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
-      <ScrollTracker />
+      <ScrollTracker sections={['problems', 'appeal', 'features', 'case-studies', 'faq', 'contact']} />
 
       {/* ============================================================ */}
       {/* Header                                                         */}
@@ -430,7 +430,7 @@ export default function SupermarketPage() {
         ]}
         cta={
           <Button variant="primary" size="sm" asChild>
-            <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="header" destination="contact">
+            <TrackedExternalLink page="v2_supermarket" href="https://classmethod.jp/services/line/line-apps/#iframe-form" location="header" destination="contact">
               お問い合わせ
             </TrackedExternalLink>
           </Button>
@@ -483,7 +483,7 @@ export default function SupermarketPage() {
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
                 <Button variant="primary" size="lg" asChild>
-                  <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/?utm_source=organic&utm_medium=lp&utm_campaign=hypothesis-v1&utm_content=supermarket-flyer#iframe-form" location="hero_primary" destination="contact">
+                  <TrackedExternalLink page="v2_supermarket" href="https://classmethod.jp/services/line/line-apps/?utm_source=organic&utm_medium=lp&utm_campaign=hypothesis-v1&utm_content=supermarket-flyer#iframe-form" location="hero_primary" destination="contact">
                     無料で相談する
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </TrackedExternalLink>
@@ -494,7 +494,7 @@ export default function SupermarketPage() {
                   asChild
                   className="border-white/60 text-white hover:bg-white/10 hover:border-white"
                 >
-                  <TrackedExternalLink href="https://classmethod.jp/download/line-mini-app/" location="hero_secondary" destination="download">
+                  <TrackedExternalLink page="v2_supermarket" href="https://classmethod.jp/download/line-mini-app/" location="hero_secondary" destination="download">
                     資料をダウンロード
                   </TrackedExternalLink>
                 </Button>
@@ -891,7 +891,7 @@ export default function SupermarketPage() {
                 asChild
                 className="bg-white text-line-green-dark hover:bg-white/90 font-bold"
               >
-                <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/?utm_source=organic&utm_medium=lp&utm_campaign=hypothesis-v1&utm_content=supermarket-flyer#iframe-form" location="midband" destination="contact">
+                <TrackedExternalLink page="v2_supermarket" href="https://classmethod.jp/services/line/line-apps/?utm_source=organic&utm_medium=lp&utm_campaign=hypothesis-v1&utm_content=supermarket-flyer#iframe-form" location="midband" destination="contact">
                   無料で相談する
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </TrackedExternalLink>
@@ -1031,7 +1031,7 @@ export default function SupermarketPage() {
                   食品スーパーとホームセンターで違う設計勘所
                 </li>
               </ul>
-              <WPDownloadButton />
+              <WPDownloadButton industry="supermarket" />
             </div>
           </div>
         </div>
@@ -1071,7 +1071,7 @@ export default function SupermarketPage() {
           <p className="text-base sm:text-lg text-white/80 max-w-[640px] mx-auto leading-relaxed">店舗数・現行会員DB・POSシステムをお聞きして、最適な構成をご提案します。<span className="font-bold text-white">初回相談は無料です。</span></p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4">
             <Button variant="primary" size="lg" asChild>
-              <TrackedExternalLink href="https://classmethod.jp/services/line/line-apps/?utm_source=organic&utm_medium=lp&utm_campaign=hypothesis-v1&utm_content=supermarket-flyer#iframe-form" location="final_primary" destination="contact">
+              <TrackedExternalLink page="v2_supermarket" href="https://classmethod.jp/services/line/line-apps/?utm_source=organic&utm_medium=lp&utm_campaign=hypothesis-v1&utm_content=supermarket-flyer#iframe-form" location="final_primary" destination="contact">
                 無料で相談する
                 <ArrowRight className="w-5 h-5 ml-2" />
               </TrackedExternalLink>
@@ -1082,7 +1082,7 @@ export default function SupermarketPage() {
               asChild
               className="border-white/50 text-white hover:bg-white/10 hover:border-white"
             >
-              <TrackedExternalLink href="https://classmethod.jp/download/line-mini-app/" location="final_secondary" destination="download">
+              <TrackedExternalLink page="v2_supermarket" href="https://classmethod.jp/download/line-mini-app/" location="final_secondary" destination="download">
                 資料をダウンロード
               </TrackedExternalLink>
             </Button>

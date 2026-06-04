@@ -5,12 +5,15 @@ import { track } from '@vercel/analytics';
 import { trackGA4 } from '@/lib/ga4';
 import { getUTMParams } from '@/lib/utm';
 
-const PDF_PATH = '/downloads/whitepaper-food-2026.pdf';
-const DOC_ID = 'food-2026';
-const PDF_AVAILABLE = true;
+interface WPDownloadButtonProps {
+  /** 業種スラッグ。PDFパス・ドキュメントID・計測 location を導出する（例: 'apparel'） */
+  industry: string;
+  /** PDF 未公開時は「近日公開」の無効ボタンを表示する */
+  available?: boolean;
+}
 
-export function WPDownloadButton() {
-  if (!PDF_AVAILABLE) {
+export function WPDownloadButton({ industry, available = true }: WPDownloadButtonProps) {
+  if (!available) {
     return (
       <button
         disabled
@@ -23,12 +26,15 @@ export function WPDownloadButton() {
     );
   }
 
+  const pdfPath = `/downloads/whitepaper-${industry}-2026.pdf`;
+  const docId = `${industry}-2026`;
+
   return (
     <a
-      href={PDF_PATH}
+      href={pdfPath}
       download
       onClick={() => {
-        const payload = { location: 'v2_food_lp', document: DOC_ID, ...getUTMParams() };
+        const payload = { location: `v2_${industry}_lp`, document: docId, ...getUTMParams() };
         track('wp_download', payload);
         trackGA4('wp_download', payload);
       }}
