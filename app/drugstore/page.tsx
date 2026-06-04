@@ -66,9 +66,9 @@ import { Card } from '@/components/shared/ui/card';
 import { getPricingEntry, type FeatureKey } from '@/lib/pricing';
 import { LpHeader } from '@/components/shared/lp-header';
 import { LpFooter } from '@/components/shared/lp-footer';
-import { TrackedExternalLink } from './tracking';
-import { ScrollTracker } from './scroll-tracker';
-import { WPDownloadButton } from './wp-download-button';
+import { TrackedExternalLink } from '@/components/shared/industry-page/tracking';
+import { ScrollTracker } from '@/components/shared/industry-page/scroll-tracker';
+import { WPDownloadButton } from '@/components/shared/industry-page/wp-download-button';
 import { TargetAudienceNotice } from '@/components/shared/ui/target-audience-notice';
 
 /* ------------------------------------------------------------------ */
@@ -961,7 +961,7 @@ export default function DrugstorePage() {
                   薬機法とLINE発信ガイドラインの線引き
                 </li>
               </ul>
-              <WPDownloadButton />
+              <WPDownloadButton industry="drugstore" />
             </div>
           </div>
         </div>

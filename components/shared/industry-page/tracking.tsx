@@ -13,6 +13,8 @@ interface TrackedExternalLinkProps {
   className?: string;
   target?: string;
   rel?: string;
+  /** 一部業種で cta_click payload に付与する page 識別子（例: 'v2_supermarket'） */
+  page?: string;
 }
 
 /**
@@ -27,6 +29,7 @@ export function TrackedExternalLink({
   className,
   target = '_blank',
   rel = 'noopener noreferrer',
+  page,
 }: TrackedExternalLinkProps) {
   return (
     <a
@@ -35,8 +38,10 @@ export function TrackedExternalLink({
       rel={rel}
       className={className}
       onClick={() => {
-        track('cta_click', { location, destination });
-        trackGA4('cta_click', { location, destination });
+        const payload: Record<string, string> = { location, destination };
+        if (page) payload.page = page;
+        track('cta_click', payload);
+        trackGA4('cta_click', payload);
       }}
     >
       {children}

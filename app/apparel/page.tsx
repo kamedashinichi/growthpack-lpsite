@@ -63,9 +63,9 @@ import { Card } from '@/components/shared/ui/card';
 import { getPricingEntry, type FeatureKey } from '@/lib/pricing';
 import { LpHeader } from '@/components/shared/lp-header';
 import { LpFooter } from '@/components/shared/lp-footer';
-import { WPDownloadButton } from './wp-download-button';
-import { TrackedExternalLink } from './tracking';
-import { ScrollTracker } from './scroll-tracker';
+import { WPDownloadButton } from '@/components/shared/industry-page/wp-download-button';
+import { TrackedExternalLink } from '@/components/shared/industry-page/tracking';
+import { ScrollTracker } from '@/components/shared/industry-page/scroll-tracker';
 import { TargetAudienceNotice } from '@/components/shared/ui/target-audience-notice';
 
 /* ------------------------------------------------------------------ */
@@ -392,7 +392,7 @@ export default function ApparelPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
-      <ScrollTracker />
+      <ScrollTracker sections={['problems', 'appeal', 'features', 'phases', 'wp-download', 'faq', 'contact']} />
 
       {/* ============================================================ */}
       {/* Header                                                         */}
@@ -926,7 +926,7 @@ export default function ApparelPage() {
                   既存EC・会員DBと無理なくつなぐ実装の論点
                 </li>
               </ul>
-              <WPDownloadButton />
+              <WPDownloadButton industry="apparel" />
             </div>
           </div>
         </div>
