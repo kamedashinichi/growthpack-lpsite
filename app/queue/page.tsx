@@ -59,6 +59,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/shared/ui/button';
 import { Section } from '@/components/shared/ui/section';
+import { FaqSection } from '@/components/shared/sections/faq-section';
 import { Card } from '@/components/shared/ui/card';
 import { LpHeader } from '@/components/shared/lp-header';
 import { LpFooter } from '@/components/shared/lp-footer';
@@ -555,22 +556,7 @@ export default function QueuePage() {
       </Section>
 
       {/* よくある質問 */}
-      <Section id="faq" spacing="md" container="wide" background="muted">
-        <div className="mb-10 md:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">よくある質問</h2>
-        </div>
-        <div className="space-y-4">
-          {FAQS.map((f) => (
-            <Card key={f.q} padding="md">
-              <h3 className="text-base sm:text-lg font-bold text-foreground mb-2 flex items-start gap-2">
-                <span className="text-line-green shrink-0 font-bold">Q.</span>
-                {f.q}
-              </h3>
-              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed pl-6">{f.a}</p>
-            </Card>
-          ))}
-        </div>
-      </Section>
+      <FaqSection faqs={FAQS} />
 
 
 
