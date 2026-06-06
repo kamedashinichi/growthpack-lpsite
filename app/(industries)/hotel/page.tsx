@@ -11,7 +11,7 @@
  * - 和文段落は1行にまとめる（§12 和文改行禁止）
  * - 機能アイコンは /public/images/<機能名>.png を <Image> で表示
  * - CTA リンクは §10 正規 URL
- * - GP事例ゼロのため caseStudies は空。STATS は「業界水準」として提示
+ * - GP事例ゼロのため caseStudies は空
  * - RET-166 は本 LP 非掲載
  */
 import type { Metadata } from "next"
@@ -140,33 +140,6 @@ const APPEAL_STEPS = [
   },
 ];
 
-
-const STATS = [
-  {
-    value: '5',
-    unit: '秒',
-    label: '会員登録完了時間',
-    sub: 'QRコードから友だち追加と会員化が同時完了',
-  },
-  {
-    value: '0',
-    unit: '件',
-    label: 'スタッフの手作業（予約リマインド）',
-    sub: '予約前日のリマインドから季節配信まで全自動',
-  },
-  {
-    value: 'DL不要',
-    unit: '',
-    label: 'LINEだけで会員化が完結',
-    sub: 'インストール不要。友だち追加と同時に会員化',
-  },
-  {
-    value: '最短',
-    unit: '3ヶ月',
-    label: 'フェーズ1の立ち上げ期間',
-    sub: '直予約基盤（予約+会員証）の標準構成',
-  },
-];
 
 const FAQS = [
   {
@@ -604,23 +577,6 @@ export default function HotelPage() {
           </div>
         </div>
       </div>
-
-      {/* ============================================================ */}
-      {/* 実績数字セクション（§7-3、ホテル特化）                              */}
-      {/* ============================================================ */}
-      <Section spacing="sm" container="wide" background="white">
-        <div className="grid grid-cols-1 sm:grid-cols-2 border border-border rounded-xl overflow-hidden">
-          {STATS.map(({ value, unit, label, sub }) => (
-            <div key={label} className="px-6 py-10 sm:py-12 text-center bg-white border-b border-border last:border-b-0 sm:odd:border-r sm:[&:nth-child(3)]:border-b-0">
-              <div className="text-4xl sm:text-5xl font-bold text-foreground leading-none mb-1 whitespace-nowrap">
-                {value}<span className="text-2xl sm:text-3xl text-line-green-dark ml-1">{unit}</span>
-              </div>
-              <div className="text-sm font-semibold text-foreground mt-3 mb-1">{label}</div>
-              <div className="text-xs text-muted-foreground leading-relaxed">{sub}</div>
-            </div>
-          ))}
-        </div>
-      </Section>
 
       {/* ============================================================ */}
       {/* Key Takeaways（AIO §A — 結論先出し）                            */}
