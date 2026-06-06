@@ -726,46 +726,8 @@ export default function HotelPage() {
           <p className="text-base text-muted-foreground">SaaSはPMS連携や宿泊施設固有の要件で詰まり、フルスクラッチは期間とコストが膨らむ。グロースパックは<span className="font-bold text-foreground">速さ・柔軟性・既存PMS対応</span>を同時に提供するハーフスクラッチ開発です。</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-4 md:gap-5">
-          {/* SaaS */}
-          <Card variant="outline" padding="md">
-            <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">Option A</div>
-            <h3 className="text-base font-bold mb-4">SaaS<br /><span className="text-sm font-normal text-muted-foreground">パッケージ型</span></h3>
-            <ul className="text-sm text-muted-foreground space-y-2">
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />初期コスト: 低</li>
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-accent-yellow shrink-0" />PMS連携: △</li>
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-accent-yellow shrink-0" />拡張性: △</li>
-            </ul>
-          </Card>
-
-          {/* Growthpack */}
-          <Card variant="accent" padding="md" className="ring-2 ring-line-green shadow-lg relative">
-            <div className="absolute -top-3 left-4 px-2 py-0.5 bg-line-green-dark text-white text-xs font-bold rounded-sm">
-              RECOMMENDED
-            </div>
-            <div className="text-xs font-semibold text-line-green-dark uppercase tracking-wider mb-3">グロースパック</div>
-            <h3 className="text-base font-bold mb-4">ハーフスクラッチ<br /><span className="text-sm font-normal text-line-green-dark">開発</span></h3>
-            <ul className="text-sm text-foreground space-y-2 font-medium">
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-accent-yellow shrink-0" />初期コスト: 中</li>
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />PMS連携: ◎</li>
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />拡張性: ○ / サポート: ○</li>
-            </ul>
-          </Card>
-
-          {/* スクラッチ */}
-          <Card variant="outline" padding="md">
-            <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">Option C</div>
-            <h3 className="text-base font-bold mb-4">スクラッチ<br /><span className="text-sm font-normal text-muted-foreground">開発</span></h3>
-            <ul className="text-sm text-muted-foreground space-y-2">
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-red-500 shrink-0" />初期コスト: 高</li>
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />PMS連携: ◎</li>
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />拡張性: ◎</li>
-            </ul>
-          </Card>
-        </div>
-
         {/* 比較表（AIO §B — AI抽出最適化） */}
-        <div className="mt-10 overflow-x-auto">
+        <div className="mt-8 overflow-x-auto">
           <table className="w-full text-sm border-collapse rounded-xl overflow-hidden shadow-sm">
             <thead>
               <tr className="bg-foreground text-white">
