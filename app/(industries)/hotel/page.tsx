@@ -67,7 +67,6 @@ import { LpFooter } from '@/components/shared/lp-footer';
 import { TrackedExternalLink } from '@/components/shared/industry-page/tracking';
 import { ScrollTracker } from '@/components/shared/industry-page/scroll-tracker';
 import { WPDownloadButton } from '@/components/shared/industry-page/wp-download-button';
-import { TargetAudienceNotice } from '@/components/shared/ui/target-audience-notice';
 
 /* ------------------------------------------------------------------ */
 /* DATA                                                                  */
@@ -636,11 +635,6 @@ export default function HotelPage() {
           ))}
         </div>
       </Section>
-
-      {/* ============================================================ */}
-      {/* 対象明示（Issue #223）                                           */}
-      {/* ============================================================ */}
-      <TargetAudienceNotice />
 
       {/* ============================================================ */}
       {/* 訴求セクション（ホテル固有 2ステップ、経営層訴求の骨格）              */}
