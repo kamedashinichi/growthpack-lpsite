@@ -1,0 +1,35 @@
+# グロースパック for LINE
+
+> クラスメソッド株式会社が提供する、LINEミニアプリのハーフスクラッチ開発サービス。SaaSパッケージの制約とフルスクラッチ開発のコスト・期間の中間に位置し、デジタル会員証・予約・1to1コミュニケーションなどの機能アセットを組み合わせて、最短3ヶ月で小売・サービス業の顧客接点をLINE上に構築する。対象はLINEミニアプリの自社導入を検討する事業会社（代理店・受託開発の再委託は対象外）。
+
+このサイトは「業界別ソリューションページ」と「機能別ページ」で構成される。業界ページは各業界の経営課題と解決アプローチを、機能ページは各機能アセットの仕様・価格・連携要件を扱う。価格は機能別の初期費用レンジ（税抜）と運用保守月額で提示する。
+
+## 業界別ソリューション
+
+- [アパレル・ファッション](https://lp.growthpackforline.classmethod.net/apparel): デジタル会員証による会員化・来店促進・スタッフの手作業削減
+- [ホテル・旅館](https://lp.growthpackforline.classmethod.net/hotel): OTA手数料に依存した予約をLINE直予約に置き換え、リピーターを取り戻す
+- [百貨店・ショッピングモール](https://lp.growthpackforline.classmethod.net/department): テナント横断の顧客接点統合とデジタル会員化
+- [食品スーパー・ホームセンター](https://lp.growthpackforline.classmethod.net/supermarket): 来店頻度の高い日用品購買のデジタル会員証・クーポン活用
+- [飲食チェーン](https://lp.growthpackforline.classmethod.net/food): モバイルオーダー・会員証・クーポンによる来店頻度向上
+- [ドラッグストア](https://lp.growthpackforline.classmethod.net/drugstore): 処方箋事前送信・会員証による待ち時間削減とリピート促進
+- [スポーツ・エンタメ](https://lp.growthpackforline.classmethod.net/sports): ファンクラブ会員証・QRチケット・抽選キャンペーンの運用効率化
+- [EC・通販](https://lp.growthpackforline.classmethod.net/ec): LINE ID連携による会員データ統合と購買後フォロー
+
+## 機能アセット
+
+- [デジタル会員証](https://lp.growthpackforline.classmethod.net/memberscard): アプリDL不要・友だち追加と同時に5秒で会員化。再来訪時の本人特定を容易にする
+- [予約](https://lp.growthpackforline.classmethod.net/reservation): LINE上で予約を受け付け、OTA経由を直予約に巻き取る。ホテル・サロン形式対応
+- [スタンプカード](https://lp.growthpackforline.classmethod.net/stampcard): 来店ごとのスタンプ付与と特典管理。紙のスタンプカードをLINEに置き換える
+- [クーポン配信](https://lp.growthpackforline.classmethod.net/coupon): 来店促進・購買促進のクーポンをLINEで配信
+- [順番待ち](https://lp.growthpackforline.classmethod.net/queue): 店頭の順番待ちをLINEで受付・呼び出し。CSV出力対応
+- [チケット・パス発行](https://lp.growthpackforline.classmethod.net/ticket): QRチケット・パスの発行と入場管理。外部システムAPI連携前提
+- [抽選](https://lp.growthpackforline.classmethod.net/lottery): キャンペーン抽選の自動化。特典管理込み
+- [セグメント配信](https://lp.growthpackforline.classmethod.net/segment): 購買履歴・属性で配信を出し分け。PMS非連携でもCSV取込で対応
+- [1to1コミュニケーション](https://lp.growthpackforline.classmethod.net/1to1): 個別応対をLINEに集約し、要望・好みを蓄積して次回接点に引き継ぐ
+- [ギフト](https://lp.growthpackforline.classmethod.net/gift): 紹介・贈答利用の促進による新規顧客獲得
+
+## 提供形態・お問い合わせ
+
+- [トップページ](https://lp.growthpackforline.classmethod.net/): サービス全体像・提供形態（ハーフスクラッチ開発）・導入の流れ
+- お問い合わせ・資料請求は各ページのフォーム、またはクラスメソッドのサービスサイト（https://classmethod.jp/services/line/line-apps/）から受け付ける
+- 提供主体: クラスメソッド株式会社（LINEヤフー Technology Partner）
