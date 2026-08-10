@@ -11,14 +11,14 @@
  * - 和文段落は1行にまとめる（§12 和文改行禁止）
  * - 機能アイコンは /public/images/<機能名>.png を <Image> で表示
  * - CTA リンクは §10 正規 URL
- * - GP事例ゼロのため caseStudies は空。STATS は「業界水準」として提示
+ * - GP事例ゼロのため caseStudies は空
  * - RET-166 は本 LP 非掲載
  */
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: 'ホテル向けLINEミニアプリ開発｜OTA手数料削減・直予約・館内消費を伸ばす｜グロースパック for LINE',
-  description: 'OTA手数料の高さ、直予約率の低さ、館内消費の取りこぼし。ホテル・旅館の経営課題をLINEミニアプリで解消。ハーフスクラッチ開発で最短3ヶ月、事業会社向けグロースパック for LINEが直予約率向上を支援。',
+  title: 'ホテル向けLINEミニアプリ開発｜OTA手数料削減・直予約率向上｜グロースパック for LINE',
+  description: 'OTA手数料の高さ、直予約率の低さ、退館後のリピーター離脱。ホテル・旅館の経営課題をLINEミニアプリで解消。ハーフスクラッチ開発で最短3ヶ月、事業会社向けグロースパック for LINEが直予約率向上を支援。',
   keywords: ['ホテル', 'LINEミニアプリ', 'OTA', '直予約', 'リピーター', '旅館', 'LINEミニアプリ開発'],
   alternates: {
     canonical: '/hotel',
@@ -27,8 +27,8 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'ja_JP',
     url: '/hotel',
-    title: 'ホテル向けLINEミニアプリ開発｜OTA手数料削減・直予約・館内消費を伸ばす｜グロースパック for LINE',
-    description: 'OTA手数料の高さ、直予約率の低さ、館内消費の取りこぼし。ホテル・旅館の課題をLINEミニアプリで解消。ハーフスクラッチ開発で最短3ヶ月。グロースパック for LINE。',
+    title: 'ホテル向けLINEミニアプリ開発｜OTA手数料削減・直予約率向上｜グロースパック for LINE',
+    description: 'OTA手数料の高さ、直予約率の低さ、退館後のリピーター離脱。ホテル・旅館の課題をLINEミニアプリで解消。ハーフスクラッチ開発で最短3ヶ月。グロースパック for LINE。',
     siteName: 'グロースパック for LINE',
     images: [
       {
@@ -41,8 +41,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ホテル向けLINEミニアプリ開発｜OTA手数料削減・直予約・館内消費を伸ばす｜グロースパック for LINE',
-    description: 'OTA手数料の高さ、直予約率の低さ、館内消費の取りこぼし。ホテル・旅館の課題をLINEミニアプリで解消。ハーフスクラッチ開発で最短3ヶ月。',
+    title: 'ホテル向けLINEミニアプリ開発｜OTA手数料削減・直予約率向上｜グロースパック for LINE',
+    description: 'OTA手数料の高さ、直予約率の低さ、退館後のリピーター離脱。ホテル・旅館の課題をLINEミニアプリで解消。ハーフスクラッチ開発で最短3ヶ月。',
     images: ['/images/ogp-v2.jpg'],
   },
 }
@@ -67,65 +67,34 @@ import { LpFooter } from '@/components/shared/lp-footer';
 import { TrackedExternalLink } from '@/components/shared/industry-page/tracking';
 import { ScrollTracker } from '@/components/shared/industry-page/scroll-tracker';
 import { WPDownloadButton } from '@/components/shared/industry-page/wp-download-button';
-import { TargetAudienceNotice } from '@/components/shared/ui/target-audience-notice';
 
 /* ------------------------------------------------------------------ */
 /* DATA                                                                  */
 /* ------------------------------------------------------------------ */
 
-// ホテル・旅館業界で効く6機能に絞り込み
+// ホテル・旅館業界向け：直予約を主役に、会員証・1to1の3機能へ絞り込み
 // 除外: 順番待ち / チケット・パス / 抽選 / スタンプカード（他業種向け）
-const FEATURES = [
-  // Phase 1
-  {
-    image: '/images/予約.png',
-    name: '予約',
-    tagline: 'LINE上で宿泊予約を受け、OTA経由を直予約に巻き取る。予約完了後の会員登録も自動化します。',
-    phase: 'Step 1',
-    id: 'reservation',
-    url: '/reservation',
-  },
+// 主役機能：予約（直予約化の起点）
+const FEATURE_MAIN = {
+  image: '/images/予約.png',
+  name: '予約',
+  tagline: 'LINE上で宿泊予約を受け、OTA経由を直予約に巻き取る。予約完了と同時に会員登録まで自動化し、OTA手数料の発生点そのものを減らします。',
+  url: '/reservation',
+};
+
+// 補助機能：予約を支える2機能（会員証・1to1）
+const FEATURES_SUPPORT = [
   {
     image: '/images/会員証.png',
     name: 'デジタル会員証',
-    tagline: '友だち追加と同時に会員化。アプリDL不要、5秒で会員登録。再来訪時の本人特定も容易に。',
-    phase: 'Step 1',
-    id: 'membership',
+    tagline: '予約と同時に会員化。アプリDL不要、5秒で登録。再来訪時の本人特定を容易にし、直予約のリピートにつなげます。',
     url: '/memberscard',
-  },
-  // Phase 2
-  {
-    image: '/images/クーポン.png',
-    name: 'クーポン配信',
-    tagline: '館内レストラン・スパ・売店・次回宿泊のクーポンをLINEで配信。チェックイン後の消費を引き上げます。',
-    phase: 'Step 2',
-    id: 'coupon',
-    url: '/coupon',
   },
   {
     image: '/images/1to1.png',
     name: '1to1コミュニケーション',
-    tagline: 'コンシェルジュ的な個別応対をLINEに集約。要望・アレルギー・好みを蓄積して次回滞在へ引き継ぎます。',
-    phase: 'Step 2',
-    id: 'one-to-one',
+    tagline: '退館後もLINEで個別に接点を維持。要望・好みを次回滞在へ引き継ぎ、OTAを介さない再予約を促します。',
     url: '/1to1',
-  },
-  // Phase 3
-  {
-    image: '/images/セグメント配信.png',
-    name: 'セグメント配信',
-    tagline: '宿泊履歴・季節・プランタイプで配信を出し分け。半年未来訪ゲストの呼び戻しに。PMS連携なしでもCSV取込で対応可能です。',
-    phase: 'Step 3',
-    id: 'segment-delivery',
-    url: '/segment',
-  },
-  {
-    image: '/images/ギフト.png',
-    name: 'ギフト',
-    tagline: 'ロイヤル顧客経由の紹介・贈答利用を促進。広告費をかけない新規獲得の仕組みを作ります。',
-    phase: 'Step 3',
-    id: 'gift',
-    url: '/gift',
   },
 ];
 
@@ -137,10 +106,6 @@ const PROBLEMS = [
   {
     title: 'リピーターの取りこぼし：直予約転換が進まない',
     body: '宿泊後の接点が消え、次回もOTA経由の予約になる。退館後にLINEで接点を維持し、次回の直予約へ誘導する仕組みが必要です。',
-  },
-  {
-    title: '館内消費の未取り込み',
-    body: 'レストラン・スパ・売店の利用促進がフロントの声かけだけに依存。LINEミニアプリで館内サービスをプッシュ通知し、付帯収益を組織的に伸ばせます。',
   },
 ];
 
@@ -166,49 +131,14 @@ const APPEAL_STEPS = [
   },
   {
     step: 'Step 2',
-    title: '滞在中の館内消費を拾う',
-    description: 'クーポンと1to1でチェックイン後の接点を維持し、レストラン・スパ・売店の付帯収益を引き上げます。',
-    icon: '🍽',
-    duration: '1〜2ヶ月目',
-    completion: '館内消費データが蓄積され次回滞在の提案精度が上がる',
-  },
-  {
-    step: 'Step 3',
-    title: '退館後にリピートを設計する',
-    description: 'セグメント配信で半年未来訪・季節・プラン別に呼び戻し。紙DMからLINEへ置き換え、直予約の継続ループを作ります。',
+    title: '退館後の再予約を直予約で取り戻す',
+    description: '1to1で退館後もLINE接点を維持し、要望・好みを次回滞在へ引き継ぎ。OTAを介さない再予約のループを作ります。',
     icon: '🔁',
-    duration: '3ヶ月以降',
-    completion: '直予約の好循環ループが自動で回り始める',
+    duration: '2ヶ月目以降',
+    completion: '直予約のリピートが自動で回り始める',
   },
 ];
 
-
-const STATS = [
-  {
-    value: '5',
-    unit: '秒',
-    label: '会員登録完了時間',
-    sub: 'QRコードから友だち追加と会員化が同時完了',
-  },
-  {
-    value: '0',
-    unit: '件',
-    label: 'スタッフの手作業（予約リマインド）',
-    sub: '予約前日のリマインドから季節配信まで全自動',
-  },
-  {
-    value: 'DL不要',
-    unit: '',
-    label: 'LINEだけで会員化が完結',
-    sub: 'インストール不要。友だち追加と同時に会員化',
-  },
-  {
-    value: '最短',
-    unit: '3ヶ月',
-    label: 'フェーズ1の立ち上げ期間',
-    sub: '直予約基盤（予約+会員証）の標準構成',
-  },
-];
 
 const FAQS = [
   {
@@ -224,12 +154,8 @@ const FAQS = [
     a: '旅館業法の本人確認義務があり、フロント対面確認の代替要件は施設・自治体により異なります。法務確認の後に実装範囲を決める前提で進めます。本LPで主に提案しているのは、チェックインDXではなく直予約率向上と滞在中の顧客接点強化です。',
   },
   {
-    q: '会員データや宿泊履歴がまだPMSに集約されていませんが、セグメント配信は使えますか？',
-    a: '使えます。PMS連携なしでも、宿泊後のCSV取込でリピーター判定・再来訪セグメント作成が可能です。まずはCSV取込で始め、段階的にPMS連携へ移行することもできます。',
-  },
-  {
-    q: '国内旅行客向けとインバウンド向けで提案内容は変わりますか？',
-    a: '変わります。国内客は直予約率向上とリピーター育成、インバウンドは多言語配信と館内消費促進を主軸にします。ターゲット比率に応じて最適な構成をご提案します。',
+    q: '会員データや宿泊履歴がまだPMSに集約されていませんが、リピーター向けの再予約施策は使えますか？',
+    a: '使えます。PMS連携なしでも、宿泊後のCSV取込でリピーター判定が可能です。まずはCSV取込で始め、段階的にPMS連携へ移行することもできます。',
   },
   {
     q: '代理店・パートナーとして相談したいのですが、対象になりますか？',
@@ -242,9 +168,9 @@ const FAQS = [
 /* ------------------------------------------------------------------ */
 
 const KEY_TAKEAWAYS = [
-  'OTA手数料に依存していたリピーターを、LINE直予約に移行する設計（最短3ヶ月）',
-  '滞在中の館内消費（レストラン/スパ/物販）をLINE接点で取りこぼさない',
-  'ID連携で会員データを統合し、再来訪率を高めるセグメント配信に活かす',
+  'OTA手数料に依存していた予約を、LINE直予約に移行する設計（最短3ヶ月）',
+  '予約と同時に5秒で会員化し、アプリDLなしで再来訪時の本人特定を容易にする',
+  '退館後も1to1でLINE接点を維持し、OTAを介さない再予約のリピートを作る',
 ];
 
 /* ------------------------------------------------------------------ */
@@ -270,7 +196,7 @@ const serviceJsonLd = {
   serviceType: 'ホテル・旅館業界向けLINEミニアプリ開発サービス',
   name: 'グロースパック for LINE（ホテル・旅館業界向け）',
   description:
-    'OTA手数料削減・直予約率向上を軸に、宿泊施設の顧客接点をLINEで統合。会員証・セグメント配信・館内クーポンを最短3ヶ月で立ち上げます。',
+    'OTA手数料削減・直予約率向上を軸に、宿泊施設の予約をLINEで直販化。予約・デジタル会員証・1to1コミュニケーションを最短3ヶ月で立ち上げます。',
   provider: {
     '@type': 'Organization',
     name: 'クラスメソッド株式会社',
@@ -284,12 +210,9 @@ const serviceJsonLd = {
     '@type': 'OfferCatalog',
     name: 'グロースパック for LINE 機能アセット',
     itemListElement: [
-      'デジタル会員証',
       '予約',
-      'クーポン配信',
+      'デジタル会員証',
       '1to1コミュニケーション',
-      'セグメント配信',
-      'ギフト',
     ].map((name) => ({
       '@type': 'Offer',
       itemOffered: { '@type': 'Service', name },
@@ -320,7 +243,7 @@ const howToJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'HowTo',
   name: 'ホテル×LINEミニアプリの導入ステップ',
-  description: 'OTA手数料削減から館内消費最大化、リピート設計まで3ステップで段階導入する流れ',
+  description: 'OTA手数料削減から退館後の再予約まで2ステップで段階導入する流れ',
   totalTime: 'P3M',
   step: [
     {
@@ -332,14 +255,8 @@ const howToJsonLd = {
     {
       '@type': 'HowToStep',
       position: 2,
-      name: '滞在中の館内消費を拾う',
-      text: 'クーポンと1to1でチェックイン後の接点を維持し、レストラン・スパ・売店の付帯収益を引き上げます。',
-    },
-    {
-      '@type': 'HowToStep',
-      position: 3,
-      name: '退館後にリピートを設計する',
-      text: 'セグメント配信で半年未来訪・季節・プラン別に呼び戻し。紙DMからLINEへ置き換え、直予約の継続ループを作ります。',
+      name: '退館後の再予約を直予約で取り戻す',
+      text: '1to1で退館後もLINE接点を維持し、要望・好みを次回滞在へ引き継ぎ。OTAを介さない再予約のループを作ります。',
     },
   ],
 };
@@ -347,8 +264,8 @@ const howToJsonLd = {
 const articleJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'ホテル向けLINEミニアプリ開発｜OTA手数料削減・直予約・館内消費を伸ばす｜グロースパック for LINE',
-  description: 'OTA手数料の高さ、直予約率の低さ、館内消費の取りこぼし。ホテル・旅館の経営課題をLINEミニアプリで解消。ハーフスクラッチ開発で最短3ヶ月、事業会社向けグロースパック for LINEが直予約率向上を支援。',
+  headline: 'ホテル向けLINEミニアプリ開発｜OTA手数料削減・直予約率向上｜グロースパック for LINE',
+  description: 'OTA手数料の高さ、直予約率の低さ、退館後のリピーター離脱。ホテル・旅館の経営課題をLINEミニアプリで解消。ハーフスクラッチ開発で最短3ヶ月、事業会社向けグロースパック for LINEが直予約率向上を支援。',
   author: {
     '@type': 'Organization',
     name: 'クラスメソッド株式会社',
@@ -455,7 +372,7 @@ export default function HotelPage() {
                 直予約に<span className="text-line-green">置き換える。</span>
               </h1>
 
-              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">LINEで作る宿泊施設の直販チャネル。OTA依存の粗利圧迫・リピーターの取りこぼし・館内消費の未取り込み。3つの課題を、<span className="font-bold text-white">最短3ヶ月</span>で解きます。</p>
+              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-[600px]">LINEで作る宿泊施設の直販チャネル。OTA手数料に依存した予約を、<span className="font-bold text-white">最短3ヶ月</span>でLINE直予約に置き換えます。</p>
 
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
@@ -661,23 +578,6 @@ export default function HotelPage() {
       </div>
 
       {/* ============================================================ */}
-      {/* 実績数字セクション（§7-3、ホテル特化）                              */}
-      {/* ============================================================ */}
-      <Section spacing="sm" container="wide" background="white">
-        <div className="grid grid-cols-1 sm:grid-cols-2 border border-border rounded-xl overflow-hidden">
-          {STATS.map(({ value, unit, label, sub }) => (
-            <div key={label} className="px-6 py-10 sm:py-12 text-center bg-white border-b border-border last:border-b-0 sm:odd:border-r sm:[&:nth-child(3)]:border-b-0">
-              <div className="text-4xl sm:text-5xl font-bold text-foreground leading-none mb-1 whitespace-nowrap">
-                {value}<span className="text-2xl sm:text-3xl text-line-green-dark ml-1">{unit}</span>
-              </div>
-              <div className="text-sm font-semibold text-foreground mt-3 mb-1">{label}</div>
-              <div className="text-xs text-muted-foreground leading-relaxed">{sub}</div>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* ============================================================ */}
       {/* Key Takeaways（AIO §A — 結論先出し）                            */}
       {/* ============================================================ */}
       <Section spacing="sm" container="wide" background="white">
@@ -702,9 +602,9 @@ export default function HotelPage() {
       <Section id="problems" spacing="sm" container="wide" background="muted">
         <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            OTA手数料・リピーター離脱・館内機会損失—直予約化を阻む3つの壁。
+            OTA手数料とリピーター離脱、直予約化を阻む2つの壁。
           </h2>
-          <p className="text-base text-muted-foreground">粗利を削るOTA依存を出発点に、リピーター育成と館内消費の最大化を3段階で解消します。</p>
+          <p className="text-base text-muted-foreground">粗利を削るOTA依存を出発点に、退館後のリピーター離脱までを直予約で解消します。</p>
         </div>
         <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
           {PROBLEMS.map((p) => (
@@ -737,21 +637,16 @@ export default function HotelPage() {
       </Section>
 
       {/* ============================================================ */}
-      {/* 対象明示（Issue #223）                                           */}
-      {/* ============================================================ */}
-      <TargetAudienceNotice />
-
-      {/* ============================================================ */}
-      {/* 訴求セクション（ホテル固有 3ステップ、経営層訴求の骨格）              */}
+      {/* 訴求セクション（ホテル固有 2ステップ、経営層訴求の骨格）              */}
       {/* ============================================================ */}
       <Section id="appeal" spacing="md" container="wide" background="white">
         <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            3つのステップで、直予約の好循環を作る。
+            2つのステップで、直予約を回す。
           </h2>
-          <p className="text-base text-muted-foreground">直販チャネルを作り、館内消費を最大化し、退館後の再来訪を設計する。OTA依存を段階的に解消するロードマップです。</p>
+          <p className="text-base text-muted-foreground">まず直販チャネルを作り、退館後の再予約を直予約で取り戻す。OTA依存を段階的に解消するロードマップです。</p>
         </div>
-        <ol className="grid md:grid-cols-3 gap-4 md:gap-5 list-none">
+        <ol className="grid md:grid-cols-2 gap-4 md:gap-5 list-none">
           {APPEAL_STEPS.map((s, i) => (
             <li key={s.step}>
               <Card variant="elevated" padding="lg" rounded="xl" className="relative h-full">
@@ -781,46 +676,8 @@ export default function HotelPage() {
           <p className="text-base text-muted-foreground">SaaSはPMS連携や宿泊施設固有の要件で詰まり、フルスクラッチは期間とコストが膨らむ。グロースパックは<span className="font-bold text-foreground">速さ・柔軟性・既存PMS対応</span>を同時に提供するハーフスクラッチ開発です。</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-4 md:gap-5">
-          {/* SaaS */}
-          <Card variant="outline" padding="md">
-            <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">Option A</div>
-            <h3 className="text-base font-bold mb-4">SaaS<br /><span className="text-sm font-normal text-muted-foreground">パッケージ型</span></h3>
-            <ul className="text-sm text-muted-foreground space-y-2">
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />初期コスト: 低</li>
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-accent-yellow shrink-0" />PMS連携: △</li>
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-accent-yellow shrink-0" />拡張性: △</li>
-            </ul>
-          </Card>
-
-          {/* Growthpack */}
-          <Card variant="accent" padding="md" className="ring-2 ring-line-green shadow-lg relative">
-            <div className="absolute -top-3 left-4 px-2 py-0.5 bg-line-green-dark text-white text-xs font-bold rounded-sm">
-              RECOMMENDED
-            </div>
-            <div className="text-xs font-semibold text-line-green-dark uppercase tracking-wider mb-3">グロースパック</div>
-            <h3 className="text-base font-bold mb-4">ハーフスクラッチ<br /><span className="text-sm font-normal text-line-green-dark">開発</span></h3>
-            <ul className="text-sm text-foreground space-y-2 font-medium">
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-accent-yellow shrink-0" />初期コスト: 中</li>
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />PMS連携: ◎</li>
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />拡張性: ○ / サポート: ○</li>
-            </ul>
-          </Card>
-
-          {/* スクラッチ */}
-          <Card variant="outline" padding="md">
-            <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">Option C</div>
-            <h3 className="text-base font-bold mb-4">スクラッチ<br /><span className="text-sm font-normal text-muted-foreground">開発</span></h3>
-            <ul className="text-sm text-muted-foreground space-y-2">
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-red-500 shrink-0" />初期コスト: 高</li>
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />PMS連携: ◎</li>
-              <li className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-line-green shrink-0" />拡張性: ◎</li>
-            </ul>
-          </Card>
-        </div>
-
         {/* 比較表（AIO §B — AI抽出最適化） */}
-        <div className="mt-10 overflow-x-auto">
+        <div className="mt-8 overflow-x-auto">
           <table className="w-full text-sm border-collapse rounded-xl overflow-hidden shadow-sm">
             <thead>
               <tr className="bg-foreground text-white">
@@ -883,31 +740,48 @@ export default function HotelPage() {
       <Section id="features" spacing="md" container="wide" background="white">
         <div className="mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            10の機能アセットから、ホテル向けに選んで組み合わせる。
+            直予約を起点に、3つの機能で立ち上げる。
           </h2>
-          <p className="text-base text-muted-foreground">宿泊業界で特に効く6機能。必要なものだけを選び、フェーズを追って拡張できます。</p>
+          <p className="text-base text-muted-foreground">主役は<span className="font-bold text-foreground">予約</span>。デジタル会員証と1to1が直予約を支え、OTAに戻らないリピートを作ります。</p>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-          {FEATURES.map((f) => {
-            const phaseColor =
-              f.phase === 'Step 1'
-                ? 'bg-line-green-extra-light text-line-green-dark'
-                : f.phase === 'Step 2'
-                ? 'bg-amber-100 text-amber-700'
-                : 'bg-violet-100 text-violet-700';
-            const phaseLabel =
-              f.phase === 'Step 1'
-                ? '顧客接点の創出'
-                : f.phase === 'Step 2'
-                ? 'エンゲージメント強化'
-                : '関係性の深化';
+
+        {/* 主役機能：予約 */}
+        {(() => {
+          const f = FEATURE_MAIN;
+          const pricing = getPricingEntry(f.url.slice(1) as FeatureKey);
+          return (
+            <Link href={f.url} target="_blank" rel="noopener noreferrer" className="group block rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-link focus-visible:ring-offset-2 mb-4 md:mb-5">
+              <Card padding="lg" className="flex flex-col sm:flex-row sm:items-center gap-5 border-2 border-line-green bg-line-green-extra-light/40 group-hover:border-line-green-dark transition-colors">
+                <div className="shrink-0 relative w-14 h-14">
+                  <Image src={f.image} alt={f.name} fill sizes="56px" className="object-contain" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <span className="inline-block text-sm font-semibold px-2.5 py-1 rounded-full mb-2 bg-line-green text-white">主役機能</span>
+                  <h3 className="text-lg sm:text-xl font-bold text-foreground mb-1">{f.name}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{f.tagline}</p>
+                </div>
+                {pricing && (
+                  <div className="shrink-0 border-t sm:border-t-0 sm:border-l border-border pt-3 sm:pt-0 sm:pl-5 sm:text-right">
+                    <span className="block text-xs text-muted-foreground font-semibold uppercase tracking-wider">初期費用</span>
+                    <span className="text-base font-bold text-foreground">
+                      {pricing.price}
+                      <span className="text-xs font-normal text-muted-foreground ml-1">（税抜）</span>
+                    </span>
+                  </div>
+                )}
+              </Card>
+            </Link>
+          );
+        })()}
+
+        {/* 補助機能：会員証・1to1 */}
+        <p className="text-sm font-semibold text-muted-foreground mb-3">予約を支える機能</p>
+        <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
+          {FEATURES_SUPPORT.map((f) => {
             const pricing = getPricingEntry(f.url.slice(1) as FeatureKey);
             return (
-              <Link key={f.id} href={f.url} target="_blank" rel="noopener noreferrer" className="group block h-full rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-link focus-visible:ring-offset-2">
+              <Link key={f.url} href={f.url} target="_blank" rel="noopener noreferrer" className="group block h-full rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-link focus-visible:ring-offset-2">
                 <Card padding="md" className="h-full flex flex-col border-2 border-border group-hover:border-line-green transition-colors">
-                  <span className={`inline-block self-start text-sm font-semibold px-2.5 py-1 rounded-full mb-3 whitespace-nowrap ${phaseColor}`}>
-                    {phaseLabel}
-                  </span>
                   <div className="flex items-start gap-4 mb-3">
                     <div className="shrink-0 relative w-11 h-11">
                       <Image src={f.image} alt={f.name} fill sizes="44px" className="object-contain" />
@@ -936,6 +810,13 @@ export default function HotelPage() {
             );
           })}
         </div>
+
+        {/* 他の機能への退避リンク */}
+        <p className="mt-6 text-sm text-muted-foreground">
+          クーポン配信・セグメント配信・ギフトなど他の機能は{' '}
+          <Link href="/" className="font-semibold text-link underline underline-offset-4 hover:text-link-hover">トップページの機能一覧</Link>
+          {' '}をご覧ください。
+        </p>
       </Section>
 
       {/* ============================================================ */}
